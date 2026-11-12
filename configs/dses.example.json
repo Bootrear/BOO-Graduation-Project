@@ -1,0 +1,13 @@
+{
+  "max_items": 5,
+  "token_budget": 2048,
+  "weights": {
+    "relevance": 1.0,
+    "entity_match": 0.5,
+    "source_quality": 0.1,
+    "field_coverage": 0.5,
+    "redundancy": 0.3,
+    "length": 0.05
+  },
+  "notes": "示例配置；正式权重只能在开发集上选择，盲测集不得再次调参。"
+}

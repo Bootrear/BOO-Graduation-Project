@@ -1,0 +1,10 @@
+81113ba98afa2928f3dcff62022539f7ce30c315c32e14422f11ff95ce534352  data/raw/attack/enterprise-attack-20.0.json
+70279a2dff0cb0ad79e546adb07828335a704ad5210e047e09e986172fc9e34d  data/raw/capec/capec_v3.9.xml
+b6e27975f6635ecfc546fbd4fd6e444ba63a07ab2abc8876229d77fe083d357d  data/raw/cisa_kev/known_exploited_vulnerabilities_2026-10-20.json
+3976f599e5e5200219a3108bb896d06e2a88fbb293369e1883cb423a5e9d7d50  data/raw/cwe/cwec_v4.20.xml.zip
+db5f87087b74b5a39107d9cec51e8ced28de74882b9972470a6d9d77aebaa543  data/raw/nvd/nvdcve-2.0-2024.json.gz
+8f43e3259a1ef9aeed37da0e2a38b170c974e3be98e08cb5486f1098b98786a6  data/raw/nvd/nvdcve-2.0-2024.meta
+a7353de02d85e30b116e772aec9287efd35ac8eef55356ec9fddca9473993372  data/raw/nvd/nvdcve-2.0-2025.json.gz
+7f799a907e31d5ba22e746c9de5c55bde7a7cb22ab24bf0fd089f2df45dd71ad  data/raw/nvd/nvdcve-2.0-2025.meta
+90e879346442d8d90b4e947fa5b4f9aae8408a999620b4905e62d26e8756ed5c  data/raw/nvd/nvdcve-2.0-2026.json.gz
+d91fc9d9d193089e88d81d585ed911c4bbd3f14f43db7530c9d94bca31eabebc  data/raw/nvd/nvdcve-2.0-2026.meta

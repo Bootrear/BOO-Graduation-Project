@@ -1,0 +1,43 @@
+{
+  "status": "planning_only_not_executable",
+  "knowledge_base": {
+    "source": "CWE",
+    "language": "en",
+    "snapshot_manifest": null
+  },
+  "retrieval": {
+    "method": "dpr",
+    "candidate_count": 20,
+    "question_encoder": null,
+    "passage_encoder": null,
+    "max_input_tokens": null
+  },
+  "reader": {
+    "model": null,
+    "max_input_tokens": null,
+    "relevance_normalization": null
+  },
+  "selection": {
+    "method": "mmr",
+    "comparison": "reader_top5",
+    "max_passages": 5,
+    "lambda": null,
+    "redundancy": "passage_embedding_cosine",
+    "insufficient_evidence_rule": null
+  },
+  "answering": {
+    "modes": ["ordinary", "enhanced"],
+    "shared_evidence": true,
+    "generator": null,
+    "precision": null,
+    "prompt_version": null,
+    "decoding": null,
+    "context_window_tokens": null
+  },
+  "evaluation": {
+    "minimum_questions": 120,
+    "development_questions": 80,
+    "test_questions": 40,
+    "split_by": "source_record_id"
+  }
+}
