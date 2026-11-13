@@ -6,9 +6,9 @@
 
 - 当前任务分支：`baseline/cwe-dpr-reader-mmr`。
 - 远端：`origin` → `https://github.com/Bootrear/BOO-Graduation-Project.git`。
-- 本文件首次写入时 HEAD：`e02886629f045b3de2eb9b0005e4117487faa1dc`。
-- 最近已核验的 P00 阶段提交：尚未创建。
-- 推送状态：P00 尚未提交/推送；远端首次检查尚无该任务分支。
+- 本文件本次写入时 HEAD：`0766ce4bd693138b0523d371d64cd8f520287a09`（初始基准为 `e02886629f045b3de2eb9b0005e4117487faa1dc`）。
+- 最近已核验的 P00 阶段提交：`0766ce4bd693138b0523d371d64cd8f520287a09`。
+- 推送状态：P00 已推送，2026-11-13T14:36:06+08:00 经 fetch、rev-parse、ls-remote 核验本地和远端均为 `0766ce4bd693138b0523d371d64cd8f520287a09`；upstream 已建立。
 - 当前文档提交自身及最新 HEAD 的精确值：运行 `git rev-parse HEAD`。文件不能嵌入其自身哈希；上述“写入时 HEAD”是审计锚点，不冒称包含本文档的最新提交。
 
 恢复时执行：
@@ -51,15 +51,18 @@ P00：在工程实现前将完整规格、计划、进度和交接纳入 Git 并
 - 文档一致性 Python 检查：PASS；原文逐字一致、SHA-256 一致、本地链接存在、五类状态/六项交接字段/P00–P10 齐全。
 - `git diff --check`：退出 0（当时仅已跟踪导航文件）。暂存后默认检查报告 theprompt.md 的原始 CRLF 为行尾空白；保持源文件字节不变，改用 `git -c core.whitespace=trailing-space,space-before-tab,cr-at-eol diff --cached --check`，退出 0；仍检查真实行尾空格。
 
+- `git push -u origin baseline/cwe-dpr-reader-mmr`：成功新建远端任务分支并设置 upstream。
+- `git fetch origin baseline/cwe-dpr-reader-mmr`、两端 rev-parse 与 ls-remote：一致，`0766ce4bd693138b0523d371d64cd8f520287a09`。
+
 ## 当前失败或阻塞
 
 - pytest 缺失，已有 6 项测试未执行；真实数据/模型/索引缺失，真实基线未验证。
-- P00 无需这些资源即可完成文档验收。首次推送尚待执行，不提前宣称成功。
+- P00 文档验收和首次推送已完成；资源缺口留到 P01 及后续，不阻塞恢复机制。
 - 提交命令使用 `git -c user.name=Codex -c user.email=codex@localhost commit ...`；仅本次命令生效，不修改用户全局身份。
 
 ## 下一步应执行的唯一具体动作
 
-执行下方 `git add AGENTS.md docs/theprompt.md docs/BASELINE_SPEC.md docs/IMPLEMENTATION_PLAN.md docs/PROGRESS.md docs/HANDOFF.md docs/README.md`，暂存 P00 指定文件。随后检查暂存差异、提交并推送；远端核验前不要进入 P01。
+在仓库根目录执行 `python -m venv .venv`，创建 P01 独立环境。P00 已核验，不重做规格设计。
 
 ## 提交、推送及中断恢复命令
 
