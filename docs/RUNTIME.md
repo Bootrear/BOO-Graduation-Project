@@ -50,3 +50,5 @@ K=0 和不足 K 允许；N 必须为正整数；λ∈[0,1]。此阶段只实现�
 原始数据、权重、缓存和索引均不上传 Git。未来模型部署命令、索引和查询命令必须在真正实现后补充，不在此提供不存在的 CLI。
 
 P02 更新：CWE 4.20 已下载并真实解析，原始哈希与历史清单一致；详见 [CWE 契约](CWE_CONTRACT.md)。模型/tokenizer 获取及推理仍未执行。
+
+P03 更新：独立 .venv 已安装 transformers=4.57.1、tokenizers=0.22.2 等（完整版本见 requirements-tokenization.txt），通过带约束的 editable 安装与 pip check。三角色 tokenizer/固定 revision/输入布局、真实 CWE 分段与重载已验证，详见 CWE_CONTRACT.md 的 P03 节。模型权重与独立环境 torch 尚未安装。

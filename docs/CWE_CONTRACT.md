@@ -85,3 +85,35 @@ P02 已提供类型和 ID 工厂并通过合成契约测试；尚未生成完整
 | 缺 common_consequences / detection_methods / potential_mitigations | 25 / 470 / 298 |
 
 P03 最终知识段数待实际分段后记录。没有模型推理或端到端验收结论。
+
+
+## P03：真实 tokenizer 分段与可加载快照
+
+P03 已在真实 CWE 与真实 DPR tokenizer 上完成处理和重载验证，最终为 **5748 段**；此前 P02 的“尚未分段”描述是该阶段历史边界。
+
+- 实现：data/chunking.py、data/preprocess.py；入口 scripts/preprocess_cwe.py；资源检查 resources.py、获取脚本 scripts/fetch_dpr_resources.py。
+- 三个 single-nq-base 模型/tokenizer 的 40 位不可变 revision 固定在 configs/dpr-models.v1.json；依赖锁在 requirements-tokenization.txt。不把 tokenizer 可用等同于模型权重推理通过。
+- 三个词表均实测相同（30522 项），vocab.txt SHA-256 为 `07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3`。
+- 历史资源 metadata 都声明 QuestionEncoder tokenizer；AutoTokenizer 实测选错 Reader 类。现按角色显式使用 DPRQuestionEncoderTokenizerFast、DPRContextEncoderTokenizerFast、DPRReaderTokenizerFast，保留上游类型警告，并用真实序列测试确认布局。
+- Context 输入是 `[CLS] title [SEP] text [SEP]`；Reader 输入是 `[CLS] question [SEP] title [SEP] text`；均为 3 个特殊 token，模型位置上限 512。
+- 配置冻结 context=256、reader=512、question=64、title=64；知识段固定预算 min(256−64−3,512−64−64−3)=189。完整 title 保留在来源，推理标题超过 64 时仅截断输入 token ID 并记录；本快照最长标题 22 token，无标题需要截断。问题超过 64 token 的策略为明确拒绝并记录，不静默截断；实际查询入口将在 P06/P08 落地。
+- 先保持来源单元；过长文本优先在 token 上限后半区的句号/问号/感叹号/换行边界切分，否则按 token offset 切分；每段重新编码复核预算。无重叠，保留文本连续片段；对全部实际源单元检查未丢失任何非空白字符。
+- 输出 manifest.json、passages.jsonl、statistics.json；临时目录完整写入且校验后再改名，拒绝覆盖已有快照。重载检查文件 SHA-256、条数、知识段 ID/内容哈希/快照一致性。
+
+实测命令（output 目录必须不存在）：
+
+```bash
+.venv/bin/python -m pip install -e '.[dev,tokenization]' -c requirements-tokenization.txt
+.venv/bin/python scripts/fetch_dpr_resources.py
+.venv/bin/python scripts/preprocess_cwe.py --raw data/raw/cwe/cwec_v4.20.xml.zip --receipt data/raw/cwe/download_receipt.json --output data/processed/cwe-v1
+.venv/bin/python scripts/preprocess_cwe.py --raw data/raw/cwe/cwec_v4.20.xml.zip --receipt data/raw/cwe/download_receipt.json --output outputs/cwe-v1-repeat
+.venv/bin/python -m pytest -q
+```
+
+如果重新取得原始文件但没有可靠 receipt，可不传 --receipt，获取时间仍为 null/unknown，另记处理时登记时间；不要复用不匹配哈希的收据。
+
+结果：52 passed（包含实际 tokenizer 测试，缺分词依赖或本地资源时这些测试明确 skip，不代表通过）；完整真实处理两次约各 5.6 秒；两次 JSONL 字节、全部 passage 和 snapshot_id 相同。逐段检查 5748 段的实际 Context 输入≤256、64-token 问题下 Reader 输入≤512、正文≤189，全部通过。
+
+快照 ID：`cwe:88e4eab3cc54f16611040a0e528d7a128253426e90ee5054327fd28449fee393`。
+passages.jsonl SHA-256：`a20e52c87054121dcfe3dfbf78f5399df3deb2d5c638e747f145facc82c71525`。
+以上为数据与 tokenizer 验证；未下载模型权重、未生成向量索引、未做真实 DPR/Reader 推理。

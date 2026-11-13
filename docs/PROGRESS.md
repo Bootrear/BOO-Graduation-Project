@@ -1,7 +1,7 @@
 # 第一阶段基线进度
 
 总体状态：**未实现完整基线，未通过真实端到端验收**。
-当前阶段：P02 数据契约与真实 CWE 解析已验证，准备提交推送。功能推进顺序见 IMPLEMENTATION_PLAN。
+当前阶段：P03 真实分段与快照验证完成，准备提交推送。功能推进顺序见 IMPLEMENTATION_PLAN。
 时间使用 Asia/Shanghai（UTC+08:00）；未记录的历史执行时间不补造。
 
 ## 已完成且验证通过
@@ -21,20 +21,22 @@
 - P01 提交 `8496cf309b7fd768233f23d15f242c15b9e6285f` 已推送且经 ls-remote 核验。
 - P02：真实 CWE 4.20 ZIP 哈希与历史清单一致；969 个 Weakness → 5454 个来源单元，Category/View 排除，嵌套语义配对保留；两次解析完全一致；契约与原有测试共 **43 passed**。详见 CWE_CONTRACT.md。
 
+- P03：真实 tokenizer/固定 revision 与输入布局已核查，真实 CWE 生成 5748 段；两次构建字节一致；所有段落预算与来源内容覆盖检查通过；**52 passed**、pip check 无冲突。快照 `cwe:88e4eab3cc54f16611040a0e528d7a128253426e90ee5054327fd28449fee393`。
+
 ## 已实现但尚未真实验证
 
 - 原有 Evidence、DSES、指标、ID 提取现已通过原有单元测试；新基线模型与数据流程仍未实现。P00 的 pytest 缺失已在 P01 独立环境解决。
-- manifest/passage 数据类型与稳定 ID 工厂已实现且单元测试通过；真实 tokenizer 分段、正式 manifest、索引及模型推理尚未验证。DPR/Reader/MMR 主流程尚未实现。
+- 数据解析、真实 tokenizer 分段和正式 manifest/JSONL 已验证；模型权重、向量索引与 DPR/Reader/MMR 主流程尚未实现/验证。
 
 ## 正在进行
 
-- P02 收尾：审查 diff、提交和推送核验；下一阶段 P03。
+- P03 收尾：保存真实分段与重载验证记录，检查差异并提交推送。
 
 ## 待完成
 
 | 必须单列的主线工作 | 阶段 | 代码实现 | 单元验证 | 真实资源验证 |
 | --- | --- | --- | --- | --- |
-| CWE 字段契约与来源追溯 | P02–P03 | P02 已实现；P03 待做 | 通过 | 真实解析通过；分段待做 |
+| CWE 字段契约与来源追溯 | P02–P03 | 已实现 | 通过 | 真实解析/分段/重载通过 |
 | DPR 索引与召回 | P05 | 未开始 | 未开始 | 未开始 |
 | Reader 输出对齐 | P06 | 未开始 | 未开始 | 未开始 |
 | 统一尺度处理 | P04 | 未开始 | 未开始 | 不适用；后续接真实分数 |
@@ -45,7 +47,7 @@
 | 真实端到端验证 | P09 | 未开始 | 不能替代真实验收 | 未开始 |
 | 部署与复现说明 | P10 | 未开始 | 文档命令未重放 | 未开始 |
 
-- P03：获取并固定真实 tokenizer，落实输入预算和确定性分段。
+- P04：实现统一尺度、Reader Top-K 和逐轮 MMR 及参考等价性回归。
 - 后续另列：增强模式、自动更新、正式 120 题核验集、开发集参数调优、正式实验。
 
 ## 受阻
@@ -54,7 +56,7 @@
 | --- | --- | --- | --- |
 | pytest 缺失（已解除） | P01 的 `.venv/bin/python -m pytest -q` 26 passed | 已有测试现已执行 | 后续使用 .venv/bin/python |
 | 真实 CWE 缺失（已解除） | P02 已取得并解析 4.20，原始 SHA-256 匹配 | 真实解析已验证 | 继续 P03，下载时间未知状态保留，不以登记时间替代 |
-| 模型/tokenizer 缺失 | models 与 Hugging Face 缓存目录不存在；transformers 未安装 | 真实 DPR/Reader 与预算验证未开始 | P01/P05/P06 安装依赖并取得匹配且固定 revision 的模型 |
+| 模型权重缺失（tokenizer 已解决） | P03 已固定并验证三个 tokenizer；尚无 pytorch_model.bin | DPR/Reader 推理未开始 | P05/P06 获取真实权重并验证 |
 | 索引缺失 | data/processed 无真实索引 | 无法真实查询或重载验收 | P03/P05 生成并验证 |
 
 P01 已在宿主环境执行 torch CUDA 张量求和（3.0），但未做 DPR/Reader 推理；faiss 未安装，是否使用及版本仍待索引阶段确定。上述是当前能力缺口，不等于已发生下载失败。网络推送状态单独见 HANDOFF。
@@ -88,3 +90,7 @@ P00 未修改工程代码；P01 增加 src/cyber_qa/config.py（校验配置）�
 - 2026-11-13T14:39:48+08:00：P01 开发环境、26 项测试、旧示例、pip check、配置读取及宿主 CUDA 张量检查通过；P00 收尾提交 `b857f41c8a1628ec31c27772d674abe749b5f319` 已经 ls-remote 核验。P01 等待提交推送。
 
 - 2026-11-13T14:46:48+08:00：P02 真实归档下载、哈希核对、namespace/结构检查、两次真实解析及 43 项测试通过。新增 data/contracts.py（manifest/passage 校验与 ID）、data/cwe.py（语义解析）、tests/test_cwe_contracts.py（17 项契约回归）、docs/CWE_CONTRACT.md（规则与真实统计）；更新进度、交接、RUNTIME/文档导航。P02 待提交推送。
+
+- 2026-11-13T14:50:37+08:00：P02 `05b0b9e52fbfc1b64dcbe99db0c39617a4d9dceb` 已推送且远端核验一致。P03 安装 transformers 4.57.1，首次模型 API 请求 TLS EOF 后按既有代理配置重试成功，已记录三模型 revision，正在下载 tokenizer 资源。
+
+- 2026-11-13T14:57:20+08:00：P03 52 项测试通过；真实快照两次构建及全部 5748 段预算、来源覆盖检查通过。新增 chunking/preprocess/resources、资源获取与预处理脚本、模型 revision 配置、tokenization 依赖锁和测试；更新 pyproject 与文档。待本阶段提交推送。

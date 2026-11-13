@@ -12,6 +12,7 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10"]
+tokenization = ["transformers==4.57.1"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

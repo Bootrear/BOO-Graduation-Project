@@ -1,0 +1,14 @@
+{
+  "question": {
+    "model_id": "facebook/dpr-question_encoder-single-nq-base",
+    "revision": "d04a52f6d2f96c60117a925e8c24c4043a75f265"
+  },
+  "context": {
+    "model_id": "facebook/dpr-ctx_encoder-single-nq-base",
+    "revision": "bb21a3c2b1656d60c6a8e920283bc40dabddadb8"
+  },
+  "reader": {
+    "model_id": "facebook/dpr-reader-single-nq-base",
+    "revision": "38f47a4986084c53447ba92ab0a83076b58d86a8"
+  }
+}
