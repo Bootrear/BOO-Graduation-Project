@@ -1,64 +1,62 @@
 # 跨会话交接
 
-恢复顺序：AGENTS.md → BASELINE_SPEC.md → IMPLEMENTATION_PLAN.md → PROGRESS.md → 本文件，然后核对实际 Git 状态。
+恢复顺序：AGENTS.md → BASELINE_SPEC.md → IMPLEMENTATION_PLAN.md → PROGRESS.md → 本文件；再检查 git status/branch/log。不得重新设计冻结方案。
 
 ## 当前分支和提交
 
-- 分支：`baseline/cwe-dpr-reader-mmr`；远端 `origin`：`https://github.com/Bootrear/BOO-Graduation-Project.git`。
-- 本次写入时最新 HEAD：`b857f41c8a1628ec31c27772d674abe749b5f319`，P00 收尾提交，已经 `git ls-remote --heads origin baseline/cwe-dpr-reader-mmr` 核验与远端一致。
-- P00 规格主提交：`0766ce4bd693138b0523d371d64cd8f520287a09`，已推送核验。
-- P01 当前：实现及验证完成，待提交推送。当前文档提交自身哈希与最新 HEAD 用 `git rev-parse HEAD` 获取，不能自引用；上面是写入时审计锚点。
+- 分支 `baseline/cwe-dpr-reader-mmr`，远端 origin=`https://github.com/Bootrear/BOO-Graduation-Project.git`。
+- 写入时最新 HEAD：`8496cf309b7fd768233f23d15f242c15b9e6285f`（P01），已 push 且 ls-remote 一致。
+- P00 主提交 `0766ce4bd693138b0523d371d64cd8f520287a09` 与文档收尾 `b857f41c8a1628ec31c27772d674abe749b5f319` 均已核验。
+- P02 当前已验证，待提交推送。本文档自身最新提交哈希以 `git rev-parse HEAD` 为准，以上是写入时准确审计锚点。
 
 ## 本阶段目标
 
-P01：创建独立开发环境、执行已有测试、加入共享核心配置校验、冻结测试工具版本并保存资源与接口核验计划。尚未实现真实数据处理、DPR、Reader 或 MMR，不宣称基线验收。
+P02：核查实际 CWE 4.20 结构、实现来源语义解析及 manifest/passage 契约。已完成本阶段验证；P03 tokenizer 分段、正式快照及 P04–P10 尚未完成，整体未验收。
 
 ## 已修改文件
 
-- src/cyber_qa/config.py：共享且严格校验的 BaselineConfig。
-- configs/baseline.v1.json：N/K/λ、未调优状态、epsilon、尺度、同分与异常策略。
-- tests/test_config.py：20 项配置边界回归，含未知/重复键与非有限数。
-- requirements-dev.txt：本次测试工具精确版本。
-- docs/RUNTIME.md：实际开发环境、GPU 证据及后续真实资源检查计划。
-- configs/README.md：区分可读配置和旧规划草案。
-- docs/PROGRESS.md、docs/HANDOFF.md：本阶段记录。
-- .venv：本地忽略；install.sh 为原有未跟踪用户文件，不修改或提交。
+- src/cyber_qa/data/contracts.py：规范化、完整字段、时间/哈希检查和稳定 ID 工厂。
+- src/cyber_qa/data/cwe.py：4.20 XML/ZIP 语义单元、来源路径、重复和缺失统计。
+- tests/test_cwe_contracts.py：17 项数据契约测试。
+- docs/CWE_CONTRACT.md：实际格式、映射、ID、清洗规则、真实统计。
+- docs/RUNTIME.md、docs/README.md、docs/PROGRESS.md、docs/HANDOFF.md：环境进展/导航/交接。
+- 忽略的本地文件：data/raw/cwe/cwec_v4.20.xml.zip、download_receipt.json、outputs/cwe-p02-validation.json。
+- install.sh 原有未跟踪文件保持不动；未提交数据/权重/索引或敏感日志。
 
 ## 已运行命令及结果
 
-- `python -m venv .venv`：成功。
-- `.venv/bin/python -m pip install -e '.[dev]'`：成功；版本见 requirements-dev.txt。
-- `.venv/bin/python -m pytest -q`：**26 passed in 0.06s**（旧 6、新 20）。
-- `.venv/bin/python scripts/smoke_demo.py`：旧合成 DSES 成功，2 段/190 tokens。
-- `.venv/bin/python -m pip freeze --exclude-editable`：保存测试工具版本；`.venv/bin/python -m pip install -r requirements-dev.txt`：已满足；`pip check`：No broken requirements found。
-- `.venv/bin/python -c "from cyber_qa.config import BaselineConfig; print(BaselineConfig.load('configs/baseline.v1.json').to_dict())"`：输出冻结配置，成功。
-- 宿主 Python：torch 2.13.0+cu132/numpy 2.3.5，CUDA=True，张量 `[1,2]` 求和=3.0；不是 .venv 的包，不是模型验证。
-- `git ls-remote --heads origin baseline/cwe-dpr-reader-mmr`：P00 收尾哈希 `b857f41c8a1628ec31c27772d674abe749b5f319` 一致。
-- P00 完整原文/来源哈希/文档链接检查通过；原始提示词保留 CRLF，必要时以 `git -c core.whitespace=trailing-space,space-before-tab,cr-at-eol diff --cached --check` 检查。
+- P01：`.venv/bin/python -m pytest -q` 26 passed；旧 smoke_demo 成功；pip check 无冲突，见 RUNTIME。
+- `git ls-remote --heads origin baseline/cwe-dpr-reader-mmr`：P01 `8496cf309b7fd768233f23d15f242c15b9e6285f` 与远端一致。
+- `curl -fL --retry 2 --connect-timeout 15 --max-time 90 https://cwe.mitre.org/data/xml/cwec_v4.20.xml.zip -o data/raw/cwe/cwec_v4.20.xml.zip.part`：成功，校验后改名为 .zip。
+- Python hashlib/zipfile/ElementTree 检查：SHA-256=`3976f599e5e5200219a3108bb896d06e2a88fbb293369e1883cb423a5e9d7d50`，ZIP CRC 正常，唯一 XML member，4.20/cwe-7。
+- `.venv/bin/python -m pytest -q`：最终 **43 passed in 0.09s**。
+- `.venv/bin/python` 调用 parse_cwe 两次：969 个 Weakness、5454 个来源单元；422 Category/59 View 排除；两次结果完全相同；摘要写到 outputs/cwe-p02-validation.json。
+- `git diff --check`：通过。
 
 ## 当前失败或阻塞
 
-- P00 的 pytest 缺失已解决；仍缺真实 CWE、模型与索引，真实端到端未验收。
-- 开发 .venv 没有 torch/transformers；暂不把宿主可用 CUDA 当成模型部署完成。
-- 机器未配置 Git 身份；使用命令级 `-c user.name=Codex -c user.email=codex@localhost`，不改变全局配置。
+- 无 P02 验证失败；数据缺失与 pytest 缺失已解决。
+- 真实 tokenizer、DPR、Reader 权重尚未获取，独立 .venv 尚未安装模型依赖；预算和端到端未验证。
+- 本次 curl 完成时间未精确记录，获取时间保持 null/unknown，registered_at 单独登记。不要用 mtime 或登记时间伪造下载时间。
+- Git 身份使用命令级 `-c user.name=Codex -c user.email=codex@localhost`。
 
 ## 下一步应执行的唯一具体动作
 
-运行 `git diff --check` 开始 P01 提交前审查，按下方清单提交、推送并核验，然后推进 P02 的真实 CWE 文件获取及结构核查。
+执行 `git diff --check` 开始 P02 提交前检查；按下方列表提交、推送核验后，进入 P03 的真实 tokenizer 选择与预算检查。
 
-## 阶段提交与恢复
+## 提交与恢复命令
 
 ```bash
-git add src/cyber_qa/config.py configs/baseline.v1.json tests/test_config.py requirements-dev.txt docs/RUNTIME.md configs/README.md docs/PROGRESS.md docs/HANDOFF.md
+git add src/cyber_qa/data/contracts.py src/cyber_qa/data/cwe.py tests/test_cwe_contracts.py docs/CWE_CONTRACT.md docs/RUNTIME.md docs/README.md docs/PROGRESS.md docs/HANDOFF.md
 git diff --cached --check
 git diff --cached
-git -c user.name=Codex -c user.email=codex@localhost commit -m "chore(baseline): establish reproducible runtime and configuration"
+git -c user.name=Codex -c user.email=codex@localhost commit -m "feat(data): define traceable CWE records and semantic parsing"
 git push origin baseline/cwe-dpr-reader-mmr
 git fetch origin baseline/cwe-dpr-reader-mmr
 git rev-parse HEAD
 git rev-parse origin/baseline/cwe-dpr-reader-mmr
 ```
 
-推送失败则保留本地提交，记录真实哈希和错误，执行 checkpoint 文档提交；恢复 `git push origin baseline/cwe-dpr-reader-mmr` 前先 fetch 检查分叉，禁止强推。
+若推送失败，保留本地 commit，记录哈希/错误，提交 checkpoint 文档；恢复 `git push origin baseline/cwe-dpr-reader-mmr` 前 fetch 检查分叉，禁止强推。工程阶段不能完成时停止扩展，最小验证后保存 checkpoint。
 
-更新时间：2026-11-13T14:39:48+08:00。
+更新时间：2026-11-13T14:46:48+08:00。

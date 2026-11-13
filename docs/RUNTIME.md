@@ -1,6 +1,6 @@
 # 基线环境与资源记录
 
-记录日期：2026-11-13，Asia/Shanghai。当前只完成 P01 开发环境与配置验证，未完成模型部署。
+记录日期：2026-11-13，Asia/Shanghai。P01 开发环境与配置已验证；P02 真实数据进展见 CWE_CONTRACT.md，未完成模型部署。
 
 ## 已验证的开发环境
 
@@ -39,7 +39,7 @@ RTX 4090、24564 MiB 总显存、检查时 24109 MiB 空闲；约 64 GiB 内存�
 N=20、K=5、λ=0.5；λ 标记 untuned。min-max 范围是完整有效候选池，epsilon=1e-12；相似度约定为 max(0, clipped cosine)。固定同分规则与失败策略有版本约束，非法数值/未知键/重复键拒绝加载。
 K=0 和不足 K 允许；N 必须为正整数；λ∈[0,1]。此阶段只实现配置校验，评分算法将在 P04 实现。
 
-## 资源获取与接口核验计划（尚未执行）
+## 资源获取与接口核验计划（P01 制定，进展另行登记）
 
 1. CWE：先检查 [MITRE 官方下载页](https://cwe.mitre.org/data/downloads.html) 与 [历史发布](https://cwe.mitre.org/data/archive.html)，优先获取历史文档指向的 4.20；若实际文件不同，登记其真实版本和哈希，不能冒用旧 manifest。原始文件保留在忽略的 data/raw，记录下载完成时间与依据。
 2. DPR：核查 [Transformers DPR 官方文档](https://huggingface.co/docs/transformers/model_doc/dpr)。候选资源是同一训练系列的 `facebook/dpr-question_encoder-single-nq-base`、`facebook/dpr-ctx_encoder-single-nq-base` 与 `facebook/dpr-reader-single-nq-base`；目前只是待核查候选，不是已安装或已冻结的模型。
@@ -48,3 +48,5 @@ K=0 和不足 K 允许；N 必须为正整数；λ∈[0,1]。此阶段只实现�
 5. 若模型下载受阻，保留错误与恢复命令，先做独立契约与数学回归；不标记真实模型/端到端通过。
 
 原始数据、权重、缓存和索引均不上传 Git。未来模型部署命令、索引和查询命令必须在真正实现后补充，不在此提供不存在的 CLI。
+
+P02 更新：CWE 4.20 已下载并真实解析，原始哈希与历史清单一致；详见 [CWE 契约](CWE_CONTRACT.md)。模型/tokenizer 获取及推理仍未执行。
