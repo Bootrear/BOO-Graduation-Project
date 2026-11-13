@@ -1,82 +1,64 @@
 # 跨会话交接
 
-先读取 AGENTS、BASELINE_SPEC、IMPLEMENTATION_PLAN、PROGRESS，再读本文件；随后检查实际 Git 状态。
+恢复顺序：AGENTS.md → BASELINE_SPEC.md → IMPLEMENTATION_PLAN.md → PROGRESS.md → 本文件，然后核对实际 Git 状态。
 
 ## 当前分支和提交
 
-- 当前任务分支：`baseline/cwe-dpr-reader-mmr`。
-- 远端：`origin` → `https://github.com/Bootrear/BOO-Graduation-Project.git`。
-- 本文件本次写入时 HEAD：`0766ce4bd693138b0523d371d64cd8f520287a09`（初始基准为 `e02886629f045b3de2eb9b0005e4117487faa1dc`）。
-- 最近已核验的 P00 阶段提交：`0766ce4bd693138b0523d371d64cd8f520287a09`。
-- 推送状态：P00 已推送，2026-11-13T14:36:06+08:00 经 fetch、rev-parse、ls-remote 核验本地和远端均为 `0766ce4bd693138b0523d371d64cd8f520287a09`；upstream 已建立。
-- 当前文档提交自身及最新 HEAD 的精确值：运行 `git rev-parse HEAD`。文件不能嵌入其自身哈希；上述“写入时 HEAD”是审计锚点，不冒称包含本文档的最新提交。
-
-恢复时执行：
-
-```bash
-git status --short
-git branch -vv
-git log -1 --format=fuller
-git rev-parse HEAD
-git ls-remote --heads origin baseline/cwe-dpr-reader-mmr
-```
+- 分支：`baseline/cwe-dpr-reader-mmr`；远端 `origin`：`https://github.com/Bootrear/BOO-Graduation-Project.git`。
+- 本次写入时最新 HEAD：`b857f41c8a1628ec31c27772d674abe749b5f319`，P00 收尾提交，已经 `git ls-remote --heads origin baseline/cwe-dpr-reader-mmr` 核验与远端一致。
+- P00 规格主提交：`0766ce4bd693138b0523d371d64cd8f520287a09`，已推送核验。
+- P01 当前：实现及验证完成，待提交推送。当前文档提交自身哈希与最新 HEAD 用 `git rev-parse HEAD` 获取，不能自引用；上面是写入时审计锚点。
 
 ## 本阶段目标
 
-P00：在工程实现前将完整规格、计划、进度和交接纳入 Git 并推送、核验；无需聊天记录即可恢复。当前尚未开始基线工程代码，整体基线未验收。
+P01：创建独立开发环境、执行已有测试、加入共享核心配置校验、冻结测试工具版本并保存资源与接口核验计划。尚未实现真实数据处理、DPR、Reader 或 MMR，不宣称基线验收。
 
 ## 已修改文件
 
-新增 AGENTS.md、docs/BASELINE_SPEC.md、docs/IMPLEMENTATION_PLAN.md、docs/PROGRESS.md、docs/HANDOFF.md；版本化原有 docs/theprompt.md；更新 docs/README.md 导航。
-
-`install.sh` 为原有未跟踪用户文件，保持不动，不暂存。未修改 src、tests、配置或环境代理。
+- src/cyber_qa/config.py：共享且严格校验的 BaselineConfig。
+- configs/baseline.v1.json：N/K/λ、未调优状态、epsilon、尺度、同分与异常策略。
+- tests/test_config.py：20 项配置边界回归，含未知/重复键与非有限数。
+- requirements-dev.txt：本次测试工具精确版本。
+- docs/RUNTIME.md：实际开发环境、GPU 证据及后续真实资源检查计划。
+- configs/README.md：区分可读配置和旧规划草案。
+- docs/PROGRESS.md、docs/HANDOFF.md：本阶段记录。
+- .venv：本地忽略；install.sh 为原有未跟踪用户文件，不修改或提交。
 
 ## 已运行命令及结果
 
-| 命令/检查 | 实际结果 |
-| --- | --- |
-| `git status --short` / `git branch -vv` / `git log -1 --format='%H%n%s'` | 初始仅 theprompt.md 和 install.sh 未跟踪；任务分支已存在；初始 HEAD 见上 |
-| `git remote -v` / `git symbolic-ref refs/remotes/origin/HEAD` | origin 指向当前仓库；默认分支 main，当前已是任务分支 |
-| `git ls-remote --heads origin baseline/cwe-dpr-reader-mmr` | 退出 0、无匹配分支；证明读取可达，尚未证明可推送 |
-| 读取全部 463 行 theprompt 及现有代码/配置/测试/README | 需求已读；DSES 与要求的 MMR 不同；Reader 等仅职责文档 |
-| `python --version` | Python 3.12.11 |
-| `python -m pytest -q` | 失败：No module named pytest；没有测试通过结论 |
-| `PYTHONPATH=src python scripts/smoke_demo.py` | 通过；旧合成 DSES 选两段，190 tokens |
-| `python -m compileall -q src scripts tests` | 退出 0；语法检查通过 |
-| `df -h .` / `free -h` / `nvidia-smi --query-gpu=name,memory.total,memory.free --format=csv,noheader` | 约 48 GiB 磁盘可用、64 GiB 内存、RTX 4090 24564 MiB 显存 |
-| importlib.util.find_spec 检查 | torch/numpy 存在；pytest/transformers/faiss 缺失；未测试 CUDA 推理 |
-| 检查 data/raw、models、HF cache、data/processed | 当前没有真实 CWE、模型缓存或索引；不能沿用历史快照文档结论 |
-| `git config user.name` / `git config user.email` | 未配置提交身份；使用下方本次命令级自动化身份，不冒用历史作者 |
-
-- 文档一致性 Python 检查：PASS；原文逐字一致、SHA-256 一致、本地链接存在、五类状态/六项交接字段/P00–P10 齐全。
-- `git diff --check`：退出 0（当时仅已跟踪导航文件）。暂存后默认检查报告 theprompt.md 的原始 CRLF 为行尾空白；保持源文件字节不变，改用 `git -c core.whitespace=trailing-space,space-before-tab,cr-at-eol diff --cached --check`，退出 0；仍检查真实行尾空格。
-
-- `git push -u origin baseline/cwe-dpr-reader-mmr`：成功新建远端任务分支并设置 upstream。
-- `git fetch origin baseline/cwe-dpr-reader-mmr`、两端 rev-parse 与 ls-remote：一致，`0766ce4bd693138b0523d371d64cd8f520287a09`。
+- `python -m venv .venv`：成功。
+- `.venv/bin/python -m pip install -e '.[dev]'`：成功；版本见 requirements-dev.txt。
+- `.venv/bin/python -m pytest -q`：**26 passed in 0.06s**（旧 6、新 20）。
+- `.venv/bin/python scripts/smoke_demo.py`：旧合成 DSES 成功，2 段/190 tokens。
+- `.venv/bin/python -m pip freeze --exclude-editable`：保存测试工具版本；`.venv/bin/python -m pip install -r requirements-dev.txt`：已满足；`pip check`：No broken requirements found。
+- `.venv/bin/python -c "from cyber_qa.config import BaselineConfig; print(BaselineConfig.load('configs/baseline.v1.json').to_dict())"`：输出冻结配置，成功。
+- 宿主 Python：torch 2.13.0+cu132/numpy 2.3.5，CUDA=True，张量 `[1,2]` 求和=3.0；不是 .venv 的包，不是模型验证。
+- `git ls-remote --heads origin baseline/cwe-dpr-reader-mmr`：P00 收尾哈希 `b857f41c8a1628ec31c27772d674abe749b5f319` 一致。
+- P00 完整原文/来源哈希/文档链接检查通过；原始提示词保留 CRLF，必要时以 `git -c core.whitespace=trailing-space,space-before-tab,cr-at-eol diff --cached --check` 检查。
 
 ## 当前失败或阻塞
 
-- pytest 缺失，已有 6 项测试未执行；真实数据/模型/索引缺失，真实基线未验证。
-- P00 文档验收和首次推送已完成；资源缺口留到 P01 及后续，不阻塞恢复机制。
-- 提交命令使用 `git -c user.name=Codex -c user.email=codex@localhost commit ...`；仅本次命令生效，不修改用户全局身份。
+- P00 的 pytest 缺失已解决；仍缺真实 CWE、模型与索引，真实端到端未验收。
+- 开发 .venv 没有 torch/transformers；暂不把宿主可用 CUDA 当成模型部署完成。
+- 机器未配置 Git 身份；使用命令级 `-c user.name=Codex -c user.email=codex@localhost`，不改变全局配置。
 
 ## 下一步应执行的唯一具体动作
 
-在仓库根目录执行 `python -m venv .venv`，创建 P01 独立环境。P00 已核验，不重做规格设计。
+运行 `git diff --check` 开始 P01 提交前审查，按下方清单提交、推送并核验，然后推进 P02 的真实 CWE 文件获取及结构核查。
 
-## 提交、推送及中断恢复命令
-
-只暂存本阶段指定的 7 个文件；不得 `git add .` 带入 install.sh。
+## 阶段提交与恢复
 
 ```bash
-git add AGENTS.md docs/theprompt.md docs/BASELINE_SPEC.md docs/IMPLEMENTATION_PLAN.md docs/PROGRESS.md docs/HANDOFF.md docs/README.md
-git -c core.whitespace=trailing-space,space-before-tab,cr-at-eol diff --cached --check
+git add src/cyber_qa/config.py configs/baseline.v1.json tests/test_config.py requirements-dev.txt docs/RUNTIME.md configs/README.md docs/PROGRESS.md docs/HANDOFF.md
+git diff --cached --check
 git diff --cached
-git -c user.name=Codex -c user.email=codex@localhost commit -m "docs(baseline): freeze requirements and establish resumable workflow"
-git push -u origin baseline/cwe-dpr-reader-mmr
+git -c user.name=Codex -c user.email=codex@localhost commit -m "chore(baseline): establish reproducible runtime and configuration"
+git push origin baseline/cwe-dpr-reader-mmr
 git fetch origin baseline/cwe-dpr-reader-mmr
 git rev-parse HEAD
 git rev-parse origin/baseline/cwe-dpr-reader-mmr
 ```
 
-若推送失败，保留本地提交，将 `git rev-parse HEAD` 的哈希、错误摘要和未推送状态写入本文件，再创建本地 checkpoint 文档提交；恢复命令为 `git push -u origin baseline/cwe-dpr-reader-mmr`，先 fetch 并检查远端分叉，禁止强推。
+推送失败则保留本地提交，记录真实哈希和错误，执行 checkpoint 文档提交；恢复 `git push origin baseline/cwe-dpr-reader-mmr` 前先 fetch 检查分叉，禁止强推。
+
+更新时间：2026-11-13T14:39:48+08:00。

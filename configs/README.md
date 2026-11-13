@@ -1,5 +1,6 @@
 # 配置目录
 
+- [baseline.v1.json](baseline.v1.json)：P01 已实现读取与校验的普通模式核心配置，N=20/K=5/λ=0.5（未调优）；冻结尺度、同分与失败策略。读取器为 `cyber_qa.config.BaselineConfig`。它不表示真实模型、快照、索引或查询 CLI 已就绪，详见 [环境记录](../docs/RUNTIME.md)。
 - [baseline.example.json](baseline.example.json)：根据开题报告整理的配置草案，表达 CWE、DPR → Reader → MMR 与双模式的边界。**目前没有读取它的执行器，不能据此启动系统。**
 - [dses.example.json](dses.example.json)：早期 DSES 探索配置，保留原有内容，不作为当前主线参数。
 

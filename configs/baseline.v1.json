@@ -1,0 +1,12 @@
+{
+  "version": "baseline-v1",
+  "candidate_count": 20,
+  "max_passages": 5,
+  "lambda_weight": 0.5,
+  "parameter_status": "untuned",
+  "epsilon": 1e-12,
+  "relevance_normalization": "candidate_pool_minmax_once",
+  "similarity": "max_zero_clipped_cosine",
+  "tie_break": "reader_logit_desc_retrieval_rank_asc_passage_id_asc",
+  "invalid_score_policy": "fail_query"
+}
