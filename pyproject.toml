@@ -13,6 +13,7 @@ dependencies = []
 [project.optional-dependencies]
 dev = ["pytest>=8,<10"]
 tokenization = ["transformers==4.57.1"]
+inference = ["transformers==4.57.1", "torch==2.9.1", "numpy>=1.26,<3"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
