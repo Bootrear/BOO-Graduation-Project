@@ -5,9 +5,9 @@
 ## 当前分支和提交
 
 - 分支 `baseline/cwe-dpr-reader-mmr`；origin=`https://github.com/Bootrear/BOO-Graduation-Project.git`。
-- 写入时 HEAD / 最近远端核验提交：`0f9875a5eb2dc598d72f28526bbb5bc1a9875fb7`（P05 中途检查点），fetch/ls-remote 与本地一致。
-- 已核验阶段链：P00 0766ce4 / 收尾 b857f41 → P01 8496cf3 → P02 05b0b9e → P03 2acbff7 → P04 cd5c629 → P05 检查点 0f9875a。
-- P05 真实验收现在已完成；当前收尾改动待提交推送。包含本文档的最新提交使用 `git rev-parse HEAD` 获取，以上是写入时审计锚点，不是自引用。
+- 写入时 HEAD / 最近远端核验提交：`aa6f219e5c823653c58c632defcc459c2adf6adf`（P05 真实验收提交），fetch/ls-remote 与本地一致。
+- 已核验阶段链：P00 0766ce4 / 收尾 b857f41 → P01 8496cf3 → P02 05b0b9e → P03 2acbff7 → P04 cd5c629 → P05 检查点 0f9875a → P05 验收 aa6f219。
+- P05 真实验收已完成且验收提交已推送核验；本次仅补记同步结果。包含本文档的最新提交使用 `git rev-parse HEAD` 获取，以上是写入时审计锚点，不是自引用。
 
 ## 本阶段目标与结论
 
@@ -46,7 +46,7 @@ P05：匹配 DPR 双编码器、原始内积索引、映射、兼容性及持久
 
 ## 下一步应执行的唯一具体动作
 
-P05 收尾提交推送核验后，执行下列真实 Reader 输出形状核查，开始 P06（尚未执行，不代表 Reader 验收已通过）：
+执行下列真实 Reader 输出形状核查，开始 P06（尚未执行，不代表 Reader 验收已通过）：
 
 ```bash
 .venv/bin/python - <<'PY'
@@ -84,4 +84,4 @@ git ls-remote --heads origin baseline/cwe-dpr-reader-mmr
 
 仅提交本任务路径。推送失败保留本地提交，记录准确哈希/失败原因/恢复命令；远端变化先检查分叉，不强推。无法完成后续阶段则停止扩展，做最小验证并推送明确 incomplete 的 checkpoint。
 
-更新时间：2026-11-16T10:59:22+08:00。
+更新时间：2026-11-16T11:00:24+08:00。
