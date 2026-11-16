@@ -60,6 +60,7 @@ def build_index(snapshot_path, output_path, runtime: DPRRuntime, *, batch_size=3
         "context_token_type_ids": "all_zero",
         "model_provenance": runtime.provenance, "input_budget": runtime.budget.to_dict(),
         "context_weight_sha256": runtime.weight_hashes["context"],
+        "context_loading_info": runtime.loading_info["context"],
         "batch_size": batch_size, "device": runtime.device,
         "environment": {name: version(name) for name in ("torch", "transformers", "tokenizers", "numpy")},
         "created_at": datetime.now(timezone.utc).isoformat(),

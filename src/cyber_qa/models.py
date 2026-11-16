@@ -21,6 +21,19 @@ def file_sha256(path) -> str:
     return digest.hexdigest()
 
 
+def validate_loading_info(role, loading):
+    prefix = {"context": "ctx_encoder", "question": "question_encoder",
+              "reader": "span_predictor.encoder"}[role]
+    # DPREncoder uses BertModel(add_pooling_layer=False) and the raw CLS state.
+    # Original checkpoints also carry the unused BERT dense/tanh pooler.
+    allowed = {f"{prefix}.bert_model.pooler.dense.{name}" for name in ("weight", "bias")}
+    allowed.add(f"{prefix}.bert_model.embeddings.position_ids")
+    unexpected = set(loading.get("unexpected_keys", [])) - allowed
+    if (loading.get("missing_keys") or loading.get("mismatched_keys")
+            or loading.get("error_msgs") or unexpected):
+        raise ValueError(f"DPR checkpoint did not load completely: {role}: {loading}")
+
+
 class DPRRuntime:
     def __init__(self, *, model_config="configs/dpr-models.v1.json", model_root="models/dpr",
                  device="auto", budget: InputBudget | None = None):
@@ -39,6 +52,7 @@ class DPRRuntime:
         self.device = "cuda" if device == "auto" and torch.cuda.is_available() else ("cpu" if device == "auto" else device)
         self.models = {}
         self.weight_hashes = {}
+        self.loading_info = {}
         self.model_load_seconds = time.perf_counter() - started
         torch.backends.cuda.matmul.allow_tf32 = False
 
@@ -72,11 +86,8 @@ class DPRRuntime:
             actual = self.verify_weights(role)
             model, loading = classes[role].from_pretrained(
                 folder, local_files_only=True, use_safetensors=False, output_loading_info=True)
-            unexpected = [key for key in loading.get("unexpected_keys", [])
-                          if not key.endswith(".embeddings.position_ids")]
-            if (loading.get("missing_keys") or loading.get("mismatched_keys")
-                    or loading.get("error_msgs") or unexpected):
-                raise ValueError(f"DPR checkpoint did not load completely: {role}: {loading}")
+            validate_loading_info(role, loading)
+            self.loading_info[role] = loading
             model.eval().to(self.device)
             self.models[role] = model
             self.weight_hashes[role] = actual

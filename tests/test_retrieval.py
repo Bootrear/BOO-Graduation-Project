@@ -35,7 +35,7 @@ def corpus(tmp_path, monkeypatch):
     vectors = np.zeros((3, 768), dtype=np.float32)
     vectors[:, :2] = [[10, 1], [2, 0], [2, 0]]
     runtime = SimpleNamespace(budget=budget, provenance={}, weight_hashes={"context": "a" * 64},
-        model_load_seconds=0, device="fixture", verify_weights=lambda role: "a" * 64,
+        model_load_seconds=0, device="fixture", loading_info={"context": {}}, verify_weights=lambda role: "a" * 64,
         assert_snapshot_compatible=lambda m: None, encode_context=lambda *a, **kw: vectors.copy())
     monkeypatch.setattr(dpr, "version", lambda name: "fixture")
     output = tmp_path / "index"
@@ -143,3 +143,14 @@ def test_runtime_verifies_cached_weight_size_and_hash(tmp_path):
     weight.write_bytes(b"broken")
     with pytest.raises(ValueError, match="size/checksum"):
         runtime.verify_weights("context")
+
+
+def test_checkpoint_only_ignores_confirmed_unused_parameters():
+    from cyber_qa.models import validate_loading_info
+    allowed = ['ctx_encoder.bert_model.pooler.dense.weight', 'ctx_encoder.bert_model.pooler.dense.bias']
+    validate_loading_info('context', {'unexpected_keys': allowed})
+    for bad in ({'unexpected_keys': ['ctx_encoder.bert_model.encoder.layer.0.unknown']},
+                {'missing_keys': ['ctx_encoder.bert_model.encoder.layer.0.attention.self.query.weight']},
+                {'mismatched_keys': ['anything']}, {'error_msgs': ['failed']}):
+        with pytest.raises(ValueError, match='did not load completely'):
+            validate_loading_info('context', bad)
