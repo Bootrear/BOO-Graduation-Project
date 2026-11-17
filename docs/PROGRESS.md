@@ -116,4 +116,4 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 
 - 2026-11-17T10:19:47+08:00：P10 `402abef6e87a50a775b17b9cb14d095b4b69f3c1` 已推送，fetch/远端跟踪分支/ls-remote与本地完全一致。本次补记同步结果；包含本条记录的收尾文档提交自身哈希以git rev-parse HEAD获取，提交后再次推送并核验。工作区仅保留受保护install.sh。
 
-- 2026-11-17T14:54:51+08:00：按用户要求清理与当前基线无关的早期选择器兼容层，删除实现、测试、配置、合成脚本和旧数据类导出，更新主线导出与文档引用；`.venv/bin/python -m pytest -q` 结果为 `135 passed in 130.10s`，compileall 与 `git diff --check` 通过。清理提交 `9a055b2` 已创建；首次推送因 `gnutls_handshake() failed: The TLS connection was non-properly terminated` 失败，待重试并核验远端。
+- 2026-11-17T14:54:51+08:00：按用户要求清理与当前基线无关的早期选择器兼容层，删除实现、测试、配置、合成脚本和旧数据类导出，更新主线导出与文档引用；`.venv/bin/python -m pytest -q` 结果为 `135 passed in 130.10s`，compileall 与 `git diff --check` 通过。清理提交 `9a055b2` 已创建；首次推送因 `gnutls_handshake() failed: The TLS connection was non-properly terminated` 失败，随后重试成功，`e01a59375bcc125e88c5358cc089aac929a0dee2` 已完成远端核验。
