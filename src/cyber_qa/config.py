@@ -89,3 +89,14 @@ class ReaderConfig:
 
     def to_dict(self):
         return asdict(self)
+
+
+@dataclass(frozen=True)
+class AnswerConfig:
+    version: str = "ordinary-answer-v1"
+    answer_order: str = "reader_logit_desc_retrieval_rank_asc_passage_id_asc"
+    fallback_policy: str = "no_valid_span_related_text_no_selection_insufficient"
+    calibration_status: str = "uncalibrated_structural_rules_only"
+
+    def to_dict(self):
+        return asdict(self)
