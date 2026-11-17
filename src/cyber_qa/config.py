@@ -69,3 +69,23 @@ class BaselineConfig:
 
     def to_dict(self) -> dict:
         return asdict(self)
+
+
+@dataclass(frozen=True)
+class ReaderConfig:
+    """P06 span rules; scores remain uncalibrated logits, never probabilities."""
+
+    version: str = "reader-v1"
+    max_answer_tokens: int = 64
+    span_score: str = "start_logit_plus_end_logit"
+    span_tie_break: str = "start_token_asc_end_token_asc"
+
+    def __post_init__(self):
+        expected = {"version": "reader-v1", "max_answer_tokens": 64,
+                    "span_score": "start_logit_plus_end_logit",
+                    "span_tie_break": "start_token_asc_end_token_asc"}
+        if type(self.max_answer_tokens) is not int or asdict(self) != expected:
+            raise ValueError("Reader v1 span rules are frozen")
+
+    def to_dict(self):
+        return asdict(self)

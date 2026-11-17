@@ -45,6 +45,9 @@ class ScoredPassage(RetrievedPassage):
     answer_span: AnswerSpan | None = None
     reader_relevance_normalized: float | None = None
     title_truncated: bool = False
+    reader_start_logits: tuple[float, ...] = ()
+    reader_end_logits: tuple[float, ...] = ()
+    answer_span_reason: str | None = None
 
     def __post_init__(self):
         if self.answer_span is not None:

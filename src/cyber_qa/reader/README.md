@@ -1,11 +1,5 @@
-# DPR Reader（待接入）
+# DPR Reader
 
-本目录目前仅定义职责，不包含可运行实现。
+`dpr.py` 已实现分批相关性评分、正文答案跨度与原文位置回查；输入完整 RetrievedPassage，输出 ReaderResult。详细规则、真实验证和限制见 [READER.md](../../../docs/READER.md)。
 
-- 输入问题与 DPR 召回的有序候选知识段，保留知识段 ID 和快照。
-- 输出每段相关性分数、答案起止位置及答案评分，并维护与原始知识段的对应关系。
-- 将相关性按开发阶段确定的统一尺度交给 MMR；保留原始分数用于运行记录。
-- 普通模式复用本阶段结果，不为切换回答模式再次召回或改变证据。
-- 接入时验证分词、截断及答案位置到原文的映射，冻结模型和分词器 revision。
-
-Reader 负责阅读评分与答案位置预测，DPR 双编码器负责候选召回。
+调用一次 `DPRReaderScorer(runtime).score(question, candidates)`，再以 `prepare_pool(result.candidates)` 准备完整池并供 `reader_topk` / `select_mmr` 共用。普通回答应复用已选候选上的 answer_span，不再次运行 Reader。
