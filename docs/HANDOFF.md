@@ -7,7 +7,7 @@
 - 分支 `baseline/cwe-dpr-reader-mmr`；origin=`https://github.com/Bootrear/BOO-Graduation-Project.git`。
 - 写入时 HEAD / 最近远端核验提交：`402abef6e87a50a775b17b9cb14d095b4b69f3c1`（P10），fetch/ls-remote一致。
 - 本轮已核验：P06 `86e5ed400759bd198822c8cc2eb8e5339251a4ae`；P07 `7ec81b5250e71cb0f59a8e6e388857d820826b0b`；P08 `b28b783ac1686a9cbae4c2d7f849b99c84ae4786`；P09 `dff54ee097884a9112b9e2e40bfc6f6c219ea774`；P10如上。
-- P10验收提交已推送核验；本次清理修改写入时 HEAD 为 `b78a9970f21c9b8479ef134caa3ea8d41096ce8d`，清理提交完成后以 `git rev-parse HEAD` 获取最新自身哈希并再次推送核验。
+- P10验收提交已推送核验；本次清理修改写入时 HEAD 为 `b78a9970f21c9b8479ef134caa3ea8d41096ce8d`。清理提交为 `9a055b2`（完整哈希以 `git rev-parse HEAD` 获取）；首次推送于清理提交后因 `gnutls_handshake() failed: The TLS connection was non-properly terminated` 失败，远端尚未核验包含该提交。
 
 ## 本阶段目标与结论
 
@@ -38,7 +38,7 @@ install.sh保持未跟踪且未改动；docs/theprompt.md原始字节保留。da
 
 ## 下一步应执行的唯一具体动作
 
-本次清理已完成本地验证。下次恢复的唯一动作是核对清理提交的 `git rev-parse HEAD` 与远端分支包含关系；没有未完成工程阶段需要继续。不自动扩展正式调参/增强模式/自动更新；阅读 ACCEPTANCE.md 的质量问题后，按用户新指定的后续范围行动。
+本次清理已完成本地验证。清理提交 `9a055b2` 尚未完成远端同步；恢复命令为 `git fetch origin` → 检查 `git log --oneline --left-right HEAD...origin/baseline/cwe-dpr-reader-mmr` → `git push -u origin baseline/cwe-dpr-reader-mmr` → 核对 `git ls-remote --heads origin baseline/cwe-dpr-reader-mmr`。没有未完成工程阶段需要继续。不自动扩展正式调参/增强模式/自动更新；阅读 ACCEPTANCE.md 的质量问题后，按用户新指定的后续范围行动。
 
 ## 提交与恢复
 
@@ -52,4 +52,4 @@ git ls-remote --heads origin baseline/cwe-dpr-reader-mmr
 
 首次P06提交因本机Git身份缺失失败，已沿用历史Codex/codex@localhost，以单次 `git -c user.name=Codex -c user.email=codex@localhost commit ...` 解决，未修改全局配置。推送失败保留本地提交并记录准确哈希/原因/恢复命令，不强推。
 
-更新时间：2026-11-17T14:54:51+08:00。
+更新时间：2026-11-17T15:09:52+08:00。
