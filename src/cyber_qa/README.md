@@ -4,7 +4,7 @@
 
 | 路径 | 已实现职责 |
 | --- | --- |
-| data/ | CWE 解析、完整来源契约、确定性分段/快照；保留早期 Evidence |
+| data/ | CWE 解析、完整来源契约、确定性分段/快照 |
 | models.py、resources.py | 固定 revision 本地资源/权重校验与 DPR 加载 |
 | retrieval/dpr.py | 原始内积索引、持久化与召回；id_router.py 保留旧接口 |
 | reader/dpr.py | Reader 相关性/起止 logits、批次对齐、原文跨度 |
@@ -14,4 +14,4 @@
 | __main__.py | preprocess/build-index/query CLI |
 | evaluation/ | 早期证据指标，非本次正式实验结果 |
 
-selection 包级旧导出仍为 DSES；主线明确从 selection.mmr 导入。增强模式、Web 界面、自动更新与正式评估未实现。所有正常回答的语义充分性仍为 not_assessed。
+主线筛选实现位于 `selection.mmr`。增强模式、Web 界面、自动更新与正式评估未实现。所有正常回答的语义充分性仍为 not_assessed。

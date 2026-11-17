@@ -1,5 +1,25 @@
-"""Evidence selection algorithms."""
+"""Evidence selection algorithms used by the baseline pipeline."""
 
-from .dses import Candidate, DSESConfig, SelectionResult, select_evidence
+from .mmr import (
+    MMRStep,
+    PreparedPool,
+    SelectionResult,
+    normalize_relevance,
+    prepare_pool,
+    reader_topk,
+    select_mmr,
+    select_mmr_reference,
+    similarity_matrix,
+)
 
-__all__ = ["Candidate", "DSESConfig", "SelectionResult", "select_evidence"]
+__all__ = [
+    "MMRStep",
+    "PreparedPool",
+    "SelectionResult",
+    "normalize_relevance",
+    "prepare_pool",
+    "reader_topk",
+    "select_mmr",
+    "select_mmr_reference",
+    "similarity_matrix",
+]

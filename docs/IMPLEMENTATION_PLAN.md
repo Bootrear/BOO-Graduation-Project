@@ -27,8 +27,8 @@
 
 - 依赖：P00 已推送且核验。
 - 产物：独立环境与最小依赖声明/版本记录；环境与资源核查记录；正式 baseline 配置骨架（不得把未确认 revision 标成已固定）。
-- 首个动作：`python -m venv .venv`。随后 `.venv/bin/python -m pip install -e '.[dev]'`，运行 `.venv/bin/python -m pytest -q` 与旧 smoke_demo。
-- 验收：已有 6 项测试实际执行、旧示例可运行；GPU/内存/磁盘与版本证据登记；N=20、K=5、λ=0.5/未调优、epsilon 与尺度在配置中集中表达并验证；列出数据/模型获取与兼容性检查方案。
+- 首个动作：`python -m venv .venv`。随后 `.venv/bin/python -m pip install -e '.[dev]'`，运行 `.venv/bin/python -m pytest -q`。
+- 验收：已有测试实际执行；GPU/内存/磁盘与版本证据登记；N=20、K=5、λ=0.5/未调优、epsilon 与尺度在配置中集中表达并验证；列出数据/模型获取与兼容性检查方案。
 - 提交建议：`chore(baseline): establish reproducible runtime and configuration`。
 - 资源缺失只阻塞真实验收，不阻塞可独立的契约或数学单元测试。
 

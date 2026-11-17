@@ -70,7 +70,7 @@ P10 复现结果与最终审计见本文件下方实测登记及 PROGRESS。单�
 
 - 原独立环境按第3节命令逐个启动干净进程重建：预处理7.674s；建库编码/写入8.882s、模型加载3.213s；5748×768原始向量。数据 JSONL、向量和 ID 映射 SHA-256 均与 P03/P05 完全一致。
 - 重放 hard-coded credentials 查询的完整候选/分数/选择/答案与 P09 smoke-12 完全相同；两策略输出 password/CWE-798，仍是部分答案。
-- 新建第二个隔离环境 `outputs/p10-venv`，未继承 site-packages；按锁安装 requirements-inference.txt 和 editable 项目（--no-deps）成功，pip check 无冲突。新环境全套 **137 passed in 4.74s**、无 skip；新环境12题真实冒烟与其启动的新进程 CLI 重载再次通过，质量统计未改变。
+- 新建第二个隔离环境 `outputs/p10-venv`，未继承 site-packages；按锁安装 requirements-inference.txt 和 editable 项目（--no-deps）成功，pip check 无冲突。历史 P10 新环境全套 **137 passed in 4.74s**、无 skip；清理旧兼容层后当前回归为 135 passed；12题真实冒烟与其启动的新进程 CLI 重载结果未改变。
 - 新环境安装复用本机 pip 下载缓存、共享已校验的本地模型/原始数据；不是无缓存外网全量下载或跨机器/跨平台验证。未修改宿主包或网络配置。
 - 详细产物与安装日志仅在忽略的 outputs/p10-*。原始提示词字节 SHA-256 和冻结规格原文一致；保护项 install.sh 未修改/未提交。
 

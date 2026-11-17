@@ -15,7 +15,7 @@
 | --- | --- | --- |
 | DPR 编码、DPR Reader 评分、MMR 基线 | 前期 `QORE-VLM` 项目；具体文件、作者与提交版本待接入时核对 | 拟复用接口；当前仓库尚未接入 |
 | 历史通用问答实验 | 前期项目文档及实验记录 | 用于方法与复现参考，不作为本项目实验结果 |
-| QORE/QUBO 与早期 DSES 方向 | 前期研究与当前早期探索代码 | 本轮不作为主方法或必需对照 |
+| QORE/QUBO 方向 | 前期研究 | 本轮不作为主方法或必需对照 |
 
 不能仅凭 Git 用户名推断前期项目中每个模块的作者。正式复用时记录原始文件、提交版本、许可、适配改动及验证结果。
 
@@ -23,9 +23,7 @@
 
 | 工作项 | 路径／证据 | 状态 |
 | --- | --- | --- |
-| Evidence 数据结构 | [schema.py](src/cyber_qa/data/schema.py) | 已有最小结构；正式 ETL 和获取时间记录待补齐 |
 | 安全 ID 解析 | [id_router.py](src/cyber_qa/retrieval/id_router.py) | 早期工具，不等同于已实现 DPR 检索 |
-| DSES | [dses.py](src/cyber_qa/selection/dses.py) | 早期探索，保留代码及测试 |
 | 数据来源、起始快照与校验 | [数据说明](data/SOURCES.md)、[校验脚本](scripts/validate_raw_data.py) | 本地已有原始快照；尚未冻结正式实验知识库 |
 | CWE 解析分段、更新与索引 | `src/cyber_qa/data/`、`retrieval/` | 待实现 |
 | Reader、MMR 与 Top-5 对照 | `src/cyber_qa/reader/`、`selection/` | 待接入或实现 |

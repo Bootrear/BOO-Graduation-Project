@@ -45,6 +45,6 @@ python -m venv .venv
 
 问题最多 64 token，超长明确拒绝；标题输入保留前 64 token并记录，原始标题不变；正文预算 189 token。非有限模型输出、零范数向量或索引不兼容使查询失败。Reader 分数不是概率，有跨度也不代表证据充分。
 
-早期 DSES、ID 路由、Evidence 和合成示例保留；DSES 不等于本基线 MMR。`scripts/smoke_demo.py` 只演示旧 DSES。当前没有 Web/API 服务。增强模式、自动更新、正式 120 题（开发 80/测试 40）、开发集调优、独立人工质量复核和正式实验属于后续范围。
+当前没有 Web/API 服务。增强模式、自动更新、正式 120 题（开发 80/测试 40）、开发集调优、独立人工质量复核和正式实验属于后续范围。
 
 [文档导航](docs/README.md) · [部署](docs/DEPLOYMENT.md) · [验收](docs/ACCEPTANCE.md) · [进度与时间线](docs/PROGRESS.md) · [开题报告](docs/开题报告_整理版.md) · [贡献边界](CONTRIBUTIONS.md)

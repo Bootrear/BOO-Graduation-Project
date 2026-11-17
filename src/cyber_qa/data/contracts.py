@@ -1,4 +1,4 @@
-"""Traceable baseline records; independent of the earlier Evidence/DSES API."""
+"""Traceable baseline records for the CWE pipeline."""
 
 from __future__ import annotations
 

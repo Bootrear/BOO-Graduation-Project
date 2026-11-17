@@ -30,6 +30,6 @@ P06 根据已安装 transformers 4.57.1 的 DPR tokenizer `_get_best_spans`/`dec
 - 全部 20 条跨度切片/有效位置/长度验证通过，两策略共用完整池，真实分数 MMR 与参考实现相等，原始向量未改变。
 - 本次 Reader 处理 0.0641s，Reader 加载 0.8378s，仅一次样本；验收脚本额外 forward 是对齐比较，不是线上每策略重复评分。
 - 首位 Reader 记录来自 CWE-564 potential_mitigations，跨度 `non-SQL style database`，字符 `[35,57)`，token `[20,24]`，span_score 2.794670820236206。它不是 SQL injection 的定义；此验收证明对齐与追溯，不证明语义正确或校准。P07/P09 必须如实保留该质量限制。
-- pip check、compileall、脚本 help、旧 DSES 示例及原始输入哈希通过。完整日志/产物在忽略路径 outputs/p06-reader.*，不上传权重/数据/索引。
+- pip check、compileall、脚本 help 及原始输入哈希通过。完整日志/产物在忽略路径 outputs/p06-reader.*，不上传权重/数据/索引。
 
 P06 真实 Reader 推理已通过；后续普通回答/完整 CLI/P09 验收见 ANSWERING.md、CLI.md、ACCEPTANCE.md。

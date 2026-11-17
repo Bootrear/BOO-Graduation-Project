@@ -507,8 +507,6 @@ CLI、API、测试和实验脚本共用核心实现，避免产生多套评分�
 
 ## 已检查的旧实现差异与处理边界
 
-- `selection/dses.py` 是多权重 DSES，包含覆盖收益、长度惩罚与非正分提前停止；不是本规格的逐轮 MMR。保留其旧接口及测试，新增主线共用实现，不将旧示例冒充新基线。
-- `data/schema.py` 的 Evidence 没有完整 snapshot、source_locator、source_text 等契约。P02 增加正式数据契约，不能仅换字段名字就宣称符合要求。
 - `configs/baseline.example.json` 是 planning_only_not_executable 草案，含增强模式与 120 题后续规划；不能直接当成本阶段可执行配置。P01 另行明确可执行配置及版本。
 - Reader、pipeline、answering 目录目前只有职责说明；不存在可直接复用的真实 DPR/Reader API、张量或索引。P05/P06 需基于实际依赖及模型输出验证。
 - README/data/SOURCES.md 所述历史快照不等于当前文件存在；P00 现场仅发现 data/raw/.gitkeep。不得声称已冻结或验收 CWE 4.20。

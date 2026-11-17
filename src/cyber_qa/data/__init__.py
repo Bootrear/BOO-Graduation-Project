@@ -1,5 +1,3 @@
-"""Data schemas and ingestion helpers."""
+"""Data contracts and ingestion helpers for the baseline pipeline."""
 
-from .schema import Evidence
-
-__all__ = ["Evidence"]
+__all__ = []

@@ -8,7 +8,7 @@
 - 独立环境 `.venv` 由 `python -m venv .venv` 建立，没有继承宿主 site-packages。
 - `.venv/bin/python -m pip install -e '.[dev]'` 安装成功；测试工具精确版本见根 `requirements-dev.txt`。
 - `.venv/bin/python -m pytest -q`：P01 时共 26 passed（原有 6 项 + 配置 20 项）。
-- `.venv/bin/python scripts/smoke_demo.py`：旧 DSES 合成示例通过；`.venv/bin/python -m pip check` 无依赖冲突。
+- `.venv/bin/python -m pip check` 无依赖冲突。
 
 重建同一开发工具环境：
 
@@ -17,7 +17,6 @@ python -m venv .venv
 .venv/bin/python -m pip install -r requirements-dev.txt
 .venv/bin/python -m pip install -e .
 .venv/bin/python -m pytest -q
-.venv/bin/python scripts/smoke_demo.py
 ```
 
 上述重建步骤组合未从第二个全新环境重放；各安装/测试命令已在当前环境执行。不要把本节当成完整问答部署说明。
