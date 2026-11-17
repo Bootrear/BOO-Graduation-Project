@@ -5,9 +5,9 @@
 ## 当前分支和提交
 
 - 分支 `baseline/cwe-dpr-reader-mmr`；origin=`https://github.com/Bootrear/BOO-Graduation-Project.git`。
-- 写入时 HEAD / 最近远端核验提交：`dff54ee097884a9112b9e2e40bfc6f6c219ea774`（P09），fetch/ls-remote一致。
-- 本轮已核验：P06 `86e5ed400759bd198822c8cc2eb8e5339251a4ae`；P07 `7ec81b5250e71cb0f59a8e6e388857d820826b0b`；P08 `b28b783ac1686a9cbae4c2d7f849b99c84ae4786`；P09如上。
-- P10技术验收通过，准备最后文档提交推送。包含本文件的最新提交自身哈希用 `git rev-parse HEAD` 获取；上面的写入锚点不冒充自引用。
+- 写入时 HEAD / 最近远端核验提交：`402abef6e87a50a775b17b9cb14d095b4b69f3c1`（P10），fetch/ls-remote一致。
+- 本轮已核验：P06 `86e5ed400759bd198822c8cc2eb8e5339251a4ae`；P07 `7ec81b5250e71cb0f59a8e6e388857d820826b0b`；P08 `b28b783ac1686a9cbae4c2d7f849b99c84ae4786`；P09 `dff54ee097884a9112b9e2e40bfc6f6c219ea774`；P10如上。
+- P10验收提交已推送核验，本次仅补记同步结果；该收尾文档也提交推送并核验。包含本文件的最新提交自身哈希用 `git rev-parse HEAD` 获取；上面的写入锚点不冒充自引用。
 
 ## 本阶段目标与结论
 
@@ -38,7 +38,7 @@ install.sh保持未跟踪且未改动；docs/theprompt.md原始字节保留。da
 
 ## 下一步应执行的唯一具体动作
 
-完成P10最终文档提交推送核验。之后P00–P10无未完成工程阶段，不自动扩展正式调参/增强模式/自动更新。若后续会话恢复，先核对 `git rev-parse HEAD` 与远端分支，阅读 ACCEPTANCE.md 的质量问题，再按用户新指定的后续范围行动。
+本轮P00–P10已完成。下次恢复的唯一动作是核对 `git rev-parse HEAD` 与远端分支包含关系，确认收尾文档提交已同步；没有未完成工程阶段需要继续。不自动扩展正式调参/增强模式/自动更新；阅读 ACCEPTANCE.md 的质量问题后，按用户新指定的后续范围行动。
 
 ## 提交与恢复
 
@@ -52,4 +52,4 @@ git ls-remote --heads origin baseline/cwe-dpr-reader-mmr
 
 首次P06提交因本机Git身份缺失失败，已沿用历史Codex/codex@localhost，以单次 `git -c user.name=Codex -c user.email=codex@localhost commit ...` 解决，未修改全局配置。推送失败保留本地提交并记录准确哈希/原因/恢复命令，不强推。
 
-更新时间：2026-11-17T10:18:10+08:00。
+更新时间：2026-11-17T10:19:47+08:00。
