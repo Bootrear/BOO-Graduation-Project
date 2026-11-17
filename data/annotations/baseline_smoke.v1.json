@@ -1,0 +1,227 @@
+{
+  "version": "baseline-smoke-v1",
+  "purpose": "technical_smoke_not_formal_dev_or_test",
+  "snapshot_id": "cwe:88e4eab3cc54f16611040a0e528d7a128253426e90ee5054327fd28449fee393",
+  "dataset_version": "4.20",
+  "reviewer": "Codex",
+  "review_status": "source_text_checked_no_independent_human_review",
+  "parameter_tuning": false,
+  "questions": [
+    {
+      "question_id": "smoke-01",
+      "question": "What input is not neutralized before a web page is served to other users in cross-site scripting?",
+      "language": "en",
+      "intent": "description_comprehension",
+      "answer_type": "single_span",
+      "support": {
+        "passage_id": "cwe-passage:3fdb96ee4a164e4b30314f02a2d7017b4437bfd43d21a84387fdcec0c38de400",
+        "cwe_id": "CWE-79",
+        "field_name": "description",
+        "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='79']/Description[1]",
+        "source_url": "https://cwe.mitre.org/data/definitions/79.html",
+        "quote": "user-controllable input",
+        "start_char": 59,
+        "end_char": 82,
+        "content_sha256": "a981f81e1a4716164abe74a90f309552dee50e83ef638811f83e6220d7da1bc8"
+      }
+    },
+    {
+      "question_id": "smoke-02",
+      "question": "What can user-controllable inputs be interpreted as in SQL injection?",
+      "language": "en",
+      "intent": "description_comprehension",
+      "answer_type": "single_span",
+      "support": {
+        "passage_id": "cwe-passage:8ff28e34bc88e6f34e8571317f9fe3fe56d4c308816a8ae1bd73db58228c4d38",
+        "cwe_id": "CWE-89",
+        "field_name": "description",
+        "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='89']/Description[1]",
+        "source_url": "https://cwe.mitre.org/data/definitions/89.html",
+        "quote": "SQL instead of ordinary user data",
+        "start_char": 421,
+        "end_char": 454,
+        "content_sha256": "00cd58344e8e578aaa3182b06edc06064e17041d87c66e6de89602f32b55eb56"
+      }
+    },
+    {
+      "question_id": "smoke-03",
+      "question": "Where can a pathname resolve to in a path traversal weakness?",
+      "language": "en",
+      "intent": "description_comprehension",
+      "answer_type": "single_span",
+      "support": {
+        "passage_id": "cwe-passage:32a4b2dae4c17d85f3f3b51710218a474e40428fce4b091e46f6ae03272bed33",
+        "cwe_id": "CWE-22",
+        "field_name": "description",
+        "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='22']/Description[1]",
+        "source_url": "https://cwe.mitre.org/data/definitions/22.html",
+        "quote": "outside of the restricted directory",
+        "start_char": 306,
+        "end_char": 341,
+        "content_sha256": "b521ac159a7ec83507243a34fe44808e4d5b9532faa5dacca45473b456057e1f"
+      }
+    },
+    {
+      "question_id": "smoke-04",
+      "question": "What command is constructed using externally-influenced input in OS command injection?",
+      "language": "en",
+      "intent": "description_comprehension",
+      "answer_type": "single_span",
+      "support": {
+        "passage_id": "cwe-passage:546887a58548bd2b4da1e1b3765e3b77438245e45590cdf7ff60dcd31d98f69f",
+        "cwe_id": "CWE-78",
+        "field_name": "description",
+        "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='78']/Description[1]",
+        "source_url": "https://cwe.mitre.org/data/definitions/78.html",
+        "quote": "an OS command",
+        "start_char": 38,
+        "end_char": 51,
+        "content_sha256": "5d641f1f29e4a6da47848e0a477a15db0fe2fc584b4546bd5f3e997eb08d096b"
+      }
+    },
+    {
+      "question_id": "smoke-05",
+      "question": "What size check is missing in a classic buffer overflow when copying an input buffer?",
+      "language": "en",
+      "intent": "description_comprehension",
+      "answer_type": "single_span",
+      "support": {
+        "passage_id": "cwe-passage:894748aed5482d49c8ba4e33c26a600e0c0c04a4916b874149ef68358d5b4bd2",
+        "cwe_id": "CWE-120",
+        "field_name": "description",
+        "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='120']/Description[1]",
+        "source_url": "https://cwe.mitre.org/data/definitions/120.html",
+        "quote": "the size of the input buffer is less than the size of the output buffer",
+        "start_char": 78,
+        "end_char": 149,
+        "content_sha256": "c8aebb0a70a0c2e439f3b46839babeb180d4e90a0c3033c8d01f31670d05b696"
+      }
+    },
+    {
+      "question_id": "smoke-06",
+      "question": "Who receives sensitive information in an exposure of sensitive information weakness?",
+      "language": "en",
+      "intent": "description_comprehension",
+      "answer_type": "single_span",
+      "support": {
+        "passage_id": "cwe-passage:baf0f03ca20bd83fee03259eb48dfb32fd0ef1f38f25ffea9557783708812098",
+        "cwe_id": "CWE-200",
+        "field_name": "description",
+        "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='200']/Description[1]",
+        "source_url": "https://cwe.mitre.org/data/definitions/200.html",
+        "quote": "an actor that is not explicitly authorized to have access to that information",
+        "start_char": 45,
+        "end_char": 122,
+        "content_sha256": "b6e5be7fb04731e90a5ed9b9f0fe6ac1043b34b12c0bef485c3b6fc5a21c0b4f"
+      }
+    },
+    {
+      "question_id": "smoke-07",
+      "question": "What claim does the product fail to prove in improper authentication?",
+      "language": "en",
+      "intent": "description_comprehension",
+      "answer_type": "single_span",
+      "support": {
+        "passage_id": "cwe-passage:3d3cb366655ca472ede39c32566d3f114684d1787eb6faf99676748391d7dc73",
+        "cwe_id": "CWE-287",
+        "field_name": "description",
+        "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='287']/Description[1]",
+        "source_url": "https://cwe.mitre.org/data/definitions/287.html",
+        "quote": "have a given identity",
+        "start_char": 24,
+        "end_char": 45,
+        "content_sha256": "ab0181a9dc0de31271913ec43d7dc1a4340ac4efea03f30d1083427d9004f247"
+      }
+    },
+    {
+      "question_id": "smoke-08",
+      "question": "What does the product fail to perform for a critical function requiring a provable user identity?",
+      "language": "en",
+      "intent": "description_comprehension",
+      "answer_type": "single_span",
+      "support": {
+        "passage_id": "cwe-passage:d3f7840577bc0a987b637ea9b26b096fbf304c95e7f2765640e9609e05a16f05",
+        "cwe_id": "CWE-306",
+        "field_name": "description",
+        "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='306']/Description[1]",
+        "source_url": "https://cwe.mitre.org/data/definitions/306.html",
+        "quote": "authentication",
+        "start_char": 33,
+        "end_char": 47,
+        "content_sha256": "3c4296aaaddf3bf74d51f78e16b90e5c0323c8d6a332daa3e924dd8229c0f8c2"
+      }
+    },
+    {
+      "question_id": "smoke-09",
+      "question": "What kind of cryptographic algorithm or protocol does CWE-327 use?",
+      "language": "en",
+      "intent": "description_comprehension",
+      "answer_type": "single_span",
+      "support": {
+        "passage_id": "cwe-passage:95143305433cd9d6e752fca2a3db91413cdffe1cea1100fe1ed40484b8620481",
+        "cwe_id": "CWE-327",
+        "field_name": "description",
+        "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='327']/Description[1]",
+        "source_url": "https://cwe.mitre.org/data/definitions/327.html",
+        "quote": "a broken or risky cryptographic algorithm or protocol",
+        "start_char": 17,
+        "end_char": 70,
+        "content_sha256": "fe6f2a3778c9cc2bf985d1d07ef59dc34820a4d604ce5953b93490111841e08b"
+      }
+    },
+    {
+      "question_id": "smoke-10",
+      "question": "What does a web application fail to verify in cross-site request forgery?",
+      "language": "en",
+      "intent": "description_comprehension",
+      "answer_type": "single_span",
+      "support": {
+        "passage_id": "cwe-passage:def440c8e00d5254db625456f3bbed67b0fb98901e68edeabdb85de7fc306b53",
+        "cwe_id": "CWE-352",
+        "field_name": "description",
+        "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='352']/Description[1]",
+        "source_url": "https://cwe.mitre.org/data/definitions/352.html",
+        "quote": "whether a request was intentionally provided by the user who sent the request",
+        "start_char": 61,
+        "end_char": 138,
+        "content_sha256": "6495cf843ced4e0dc17ff404b284bf85d3e7debd64446460b7f6e3e512e55902"
+      }
+    },
+    {
+      "question_id": "smoke-11",
+      "question": "What file types can be uploaded in an unrestricted upload of file with dangerous type weakness?",
+      "language": "en",
+      "intent": "description_comprehension",
+      "answer_type": "single_span",
+      "support": {
+        "passage_id": "cwe-passage:6b050786da5ca3e134fb093b6d13c89948958e1bc763c6b3a1aff3730ccba0b5",
+        "cwe_id": "CWE-434",
+        "field_name": "description",
+        "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='434']/Description[1]",
+        "source_url": "https://cwe.mitre.org/data/definitions/434.html",
+        "quote": "dangerous file types",
+        "start_char": 45,
+        "end_char": 65,
+        "content_sha256": "80e237880161e5a29ab706255bfbaf8738c9b9157daa4dbe3a16d6fd2be1a547"
+      }
+    },
+    {
+      "question_id": "smoke-12",
+      "question": "What are examples of hard-coded credentials?",
+      "language": "en",
+      "intent": "description_comprehension",
+      "answer_type": "single_span",
+      "support": {
+        "passage_id": "cwe-passage:db097d768ae977c0dc4fb99358d92c221d0ae3417e31df287707f83d02fad82d",
+        "cwe_id": "CWE-798",
+        "field_name": "description",
+        "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='798']/Description[1]",
+        "source_url": "https://cwe.mitre.org/data/definitions/798.html",
+        "quote": "a password or cryptographic key",
+        "start_char": 53,
+        "end_char": 84,
+        "content_sha256": "89296c23afdc29fd17e4ce01478f6670df526784035a664416990a38333cf7ec"
+      }
+    }
+  ]
+}
