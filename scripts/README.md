@@ -1,12 +1,16 @@
 # 脚本入口
 
-在仓库根目录的 Python >= 3.10 独立环境中执行，安装步骤见[主 README](../README.md)。
+统一用户入口为 `python -m cyber_qa`，见 [部署指南](../docs/DEPLOYMENT.md)。脚本和 CLI 复用同一核心实现。
 
-| 脚本 | 实际能力与前提 |
+| 脚本 | 用途 |
 | --- | --- |
-| [smoke_demo.py](smoke_demo.py) | 运行早期 DSES 合成数据示例；需先安装本项目，不下载模型、不执行真实问答 |
-| [validate_raw_data.py](validate_raw_data.py) | 使用标准库校验本地完整起始快照：NVD metadata／哈希、CWE ZIP／XML、CAPEC XML、ATT&CK STIX、KEV JSON，并输出文件 SHA-256 |
+| fetch_dpr_resources.py | 固定 revision tokenizer/权重下载、上游 LFS 校验、续传恢复 |
+| preprocess_cwe.py | 固定 CWE 快照处理；同 CLI preprocess |
+| build_dpr_index.py | DPR 原始向量索引；同 CLI build-index |
+| check_dpr_retrieval.py | 真实双编码器、保存向量、重载召回校验 |
+| check_dpr_reader.py | 单条/分批/反序对齐、原文跨度与真实选择校验 |
+| check_baseline_smoke.py | 12 题真实普通问答、双策略、独立新进程重载 |
+| smoke_demo.py | 早期 DSES 合成示例，不能代替 DPR/MMR 验收 |
+| validate_raw_data.py | 旧完整起始快照校验（含 NVD/CAPEC/ATT&CK/KEV），不属于本基线必需资源 |
 
-数据校验脚本要求 [SOURCES.md](../data/SOURCES.md) 列出的所有原始文件存在，包括 NVD `.meta`；它不是下载器，也不校验知识段或向量索引。Git 克隆不含原始数据，缺文件时不能直接运行该脚本。
-
-CWE ETL、索引构建、知识库更新、双模式问答及正式实验入口尚未实现，后续按实际交付补充，不提供占位启动命令。
+真实验收脚本需要本地模型/数据/索引，缺失不能用合成结果代替。完整日志和 JSON 存 outputs/，不上传原始数据、权重或大索引。

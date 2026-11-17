@@ -1,6 +1,6 @@
 # 基线环境与资源记录
 
-记录日期：2026-11-13，Asia/Shanghai。P01 开发环境与配置已验证；P02 真实数据进展见 CWE_CONTRACT.md，未完成模型部署。
+本文件保留 P01–P05 历史环境与状态；其中“待实现/未推理”均指对应阶段当时。最新 P06–P10 推理/部署结果见 DEPLOYMENT.md、ACCEPTANCE.md 和 PROGRESS.md。
 
 ## 已验证的开发环境
 
@@ -58,3 +58,7 @@ P03 更新：独立 .venv 已安装 transformers=4.57.1、tokenizers=0.22.2 等�
 独立 `.venv` 已安装 torch=2.9.1+cu128、CUDA runtime=12.8；RTX 4090 真实 DPR 双编码器推理及完整建库通过。三模型权重均按固定 revision 的上游 LFS 大小/SHA-256 校验。NumPy float32 精确原始内积索引已选定，不需要 FAISS。锁定环境见根 `requirements-inference.txt`，详细命令、产物哈希、加载参数差异与验收见 [RETRIEVAL.md](RETRIEVAL.md)。
 
 首次安装实际命令：`.venv/bin/python -m pip install -e '.[inference]' -c requirements-tokenization.txt`。`pip check` 无冲突，最终全套 99 passed。宿主环境未改写、未作为模型运行依赖复用；网络配置未修改。完整新环境重建仍待 P10，Reader 推理仍待 P06。
+
+## P10 当前验证（2026-11-17T10:16:03+08:00）
+
+P06 Reader 与 P09 真正端到端已执行。第二个独立环境 outputs/p10-venv 按 requirements-inference.txt 安装成功，pip check 无冲突，137 项测试无 skip，12 题真实问答与新进程重载通过。P10 全量快照/索引/查询重放和边界详见 DEPLOYMENT.md；本文件前面的“待P06/P10”是历史状态。

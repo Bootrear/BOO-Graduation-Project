@@ -14,3 +14,5 @@
 `.venv/bin/python -m pytest -q`：**125 passed in 4.49s**，新增 6 项回答回归，覆盖未选 B 不得取代 MMR 已选 A/C、排序与 span_score 分离、同分规则、三类回退、候选不足与充分性分离、异常输入。
 
 复用本地 P06 保存的真实评分/选择结果完成回答装配，两策略返回 `non-SQL style database` 且 evidence_id 属于各自选择集合，语义充分性为 not_assessed。此次仅是已有真实结果的装配检查（重建对象的向量占位未用于任何筛选/推理），不代替 P09 新进程真实全流程验收。SQL injection 示例的定义回答质量问题保留。
+
+后续 P09 已完成新的真实全流程/跨进程验收，见 ACCEPTANCE.md；上述装配检查仅描述 P07 当时的验证边界。

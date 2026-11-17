@@ -1,84 +1,63 @@
 # 第一阶段基线进度
 
-总体状态：**P09 技术端到端已通过；答案语义质量不足，P10 部署审计尚待完成**。
-当前阶段：P09 12 题真实冒烟/跨进程重载通过，准备提交推送；下一阶段 P10。功能推进顺序见 IMPLEMENTATION_PLAN。
-时间使用 Asia/Shanghai（UTC+08:00）；未记录的历史执行时间不补造。
+总体状态：**P00–P10 代码与技术验收完成；答案质量不足、尚未校准。**
+当前阶段：P10 部署重放/文档审计通过，准备提交推送；最后文档同步记录见 HANDOFF。
+时间使用 Asia/Shanghai（UTC+08:00）；历史时间不补造。下方时间线中的“未实现/待验证”为该阶段当时状态。
 
 ## 已完成且验证通过
 
-- 已完整读取 `docs/theprompt.md` 的全部要求，以及 README、配置、现有 schema/DSES/ID 路由/指标和 6 项测试代码。
-- 工作区检查：任务分支为 `baseline/cwe-dpr-reader-mmr`，初始 HEAD 为 `e02886629f045b3de2eb9b0005e4117487faa1dc`；origin 为当前 GitHub 仓库；任务分支在初始检查时未存在于远端、没有 upstream。
-- 旧示例：`PYTHONPATH=src python scripts/smoke_demo.py` 成功，选中 description/mitigation 两段，used_tokens=190。**仅合成 DSES 示例，不是 DPR/MMR 验收。**
-- `python -m compileall -q src scripts tests` 成功；只证明语法可编译，不证明单元测试或模型正确性。
-- 资源现场核查：Python 3.12.11；RTX 4090，24564 MiB 总显存、约 24109 MiB 空闲；约 48 GiB 磁盘可用；内存约 64 GiB。数值为本次采样，非长期保证。
+| 主线工作 | 阶段 | 代码实现 | 单元验证 | 真实资源验证 |
+| --- | --- | --- | --- | --- |
+| 恢复机制/冻结规格/环境 | P00–P01 | 已完成 | 文档/配置校验通过 | 原始输入字节保留，独立环境通过 |
+| CWE 字段契约与来源追溯 | P02–P03 | 已实现 | 数据契约/分段通过 | 969条/5454来源单元/5748段；重建字节一致 |
+| DPR 索引与召回 | P05 | 已实现 | 26项资源/索引回归通过 | 5748×768真实建库/新进程重载通过 |
+| Reader 输出对齐 | P06 | 已实现 | 20项Reader回归通过 | 单条/分批/反序/跨度回查通过 |
+| 统一尺度处理 | P04 | 已实现 | 冻结尺度边界通过 | P06完整真实池通过 |
+| 逐轮 MMR | P04 | 已实现 | 指定A/B/C、80组随机参考等价等通过 | 真实分数参考等价和P09流程通过 |
+| Reader Top-K | P04 | 已实现 | 确定性/边界通过 | P09与MMR共用Reader结果 |
+| 普通回答 | P07 | 已实现 | 6项回答回归通过 | 真实答案/证据可回查，语义充分性未评估 |
+| CLI 与共享运行记录 | P08 | 已实现 | 12项编排/CLI回归通过 | 真实成功/失败JSON；一次Reader供两策略 |
+| 真实端到端验证 | P09 | 已实现 | 单元不能替代真实验收 | 12题全流程+新进程重载通过 |
+| 部署与复现说明 | P10 | 已完成 | 全套137 passed，无skip | 第二个独立环境安装/测试/真实12题通过；干净进程重建通过 |
 
-- P00 文档一致性校验通过：规格完整原文区与源文件逐字一致（换行归一化）；原始字节 SHA-256 一致；本地文档链接存在；五类进度、六项交接字段及 P00–P10 计划齐全。
-
-- P00 已完成：完整规格和恢复机制提交 `0766ce4bd693138b0523d371d64cd8f520287a09` 已推送，远端分支与本地哈希一致。
-
-- P01：独立 .venv 安装成功；原有 6 项与新增 20 项配置测试共 **26 passed**；旧示例通过；pip check 无冲突；baseline.v1 配置读取校验通过。宿主 CUDA 张量运算通过，未做模型推理。
-
-- P01 提交 `8496cf309b7fd768233f23d15f242c15b9e6285f` 已推送且经 ls-remote 核验。
-- P02：真实 CWE 4.20 ZIP 哈希与历史清单一致；969 个 Weakness → 5454 个来源单元，Category/View 排除，嵌套语义配对保留；两次解析完全一致；契约与原有测试共 **43 passed**。详见 CWE_CONTRACT.md。
-
-- P03：真实 tokenizer/固定 revision 与输入布局已核查，真实 CWE 生成 5748 段；两次构建字节一致；所有段落预算与来源内容覆盖检查通过；**52 passed**、pip check 无冲突。快照 `cwe:88e4eab3cc54f16611040a0e528d7a128253426e90ee5054327fd28449fee393`。
-
-- P03 `2acbff7e3874638d04d7e7e69767d3402b4cced1` 已推送并核验。
-- P04：完整池统一尺度、Reader Top-K、逐轮增量 MMR 与直接参考实现已通过 21 项针对性回归（包括指定 A/B/C 和 80 组随机等价性），全套 **73 passed**。详见 SELECTION.md。
-
-- P05：三角色权重完整性、独立 CUDA 运行环境、5748×768 原始 DPR 索引及真实查询/跨进程重载通过；全套 **99 passed**，无 skip。旧不完整权重误验问题已修复，详见 RETRIEVAL.md。
+- P10 数据JSONL、向量、ID映射哈希与P03/P05相同，重放查询候选/分数/答案完全一致。详见 DEPLOYMENT.md。
+- P09 指定支持段落仅4/12被召回，两策略均3/12被选中；12题实际答案及问题详见 ACCEPTANCE.md。**技术成功不等于语义正确、已校准或达到可用准确率。**
+- 原有6项测试、DSES/ID路由/指标和示例保留；DSES不等于MMR。
 
 ## 已实现但尚未真实验证
 
-- 原有 Evidence、DSES、指标、ID 提取现已通过原有单元测试；主线 Reader 已完成，普通回答已实现，完整端到端待 P09。P00 的 pytest 缺失已在 P01 独立环境解决。
-- 数据解析、真实 tokenizer 分段和正式 manifest/JSONL 已验证；P05 DPR 编码/索引已通过真实推理、建库与跨进程重载验收；Reader 主流程已通过 P06 真实推理与对齐。MMR/Top-K 已接真实分数，普通回答/端到端仍待后续阶段。
+- CPU/其他GPU/Windows/macOS部署与性能未验收；本次为Linux x86_64、Python3.12、RTX4090。
+- 抽取/原文回退只检查结构有效性，不判断语义充分性；正常输出显式not_assessed。未建立正确概率、稳定性能基准或跨环境数值保证。
 
 ## 正在进行
 
-- P09 技术验收通过，准备提交推送；P10 部署重放尚未展开。
+- P10最后文档提交、推送与远端核验。完成后本轮P00–P10无剩余工程阶段；准确锚点与恢复方式见HANDOFF。
 
-## 待完成
+## 待完成（后续范围，不冒称本轮完成）
 
-| 必须单列的主线工作 | 阶段 | 代码实现 | 单元验证 | 真实资源验证 |
-| --- | --- | --- | --- | --- |
-| CWE 字段契约与来源追溯 | P02–P03 | 已实现 | 通过 | 真实解析/分段/重载通过 |
-| DPR 索引与召回 | P05 | 已实现 | 26 项资源/索引回归通过 | 真实双编码器/5748 段索引/跨进程重载通过 |
-| Reader 输出对齐 | P06 | 已实现 | 20 项回归通过 | 真实单条/分批/重排/跨度通过 |
-| 统一尺度处理 | P04 | 已实现 | 通过 | P06 真实完整池通过 |
-| 逐轮 MMR | P04 | 已实现 | 通过 | P06 真实分数/参考等价通过，完整流程待 P09 |
-| Reader Top-K | P04 | 已实现 | 通过 | P06 真实分数通过，完整流程待 P09 |
-| 普通回答 | P07 | 已实现 | 6 项回归通过 | P06 已有真实结果装配通过；完整流程待 P09 |
-| CLI 与共享运行记录 | P08 | 已实现 | 12 项回归通过 | 单条真实 CLI 通过，正式冒烟/跨进程待 P09 |
-| 真实端到端验证 | P09 | 已实现 | 137 项回归，不能替代真实验收 | 12 题真实流程/新进程重载通过；质量不足 |
-| 部署与复现说明 | P10 | 未开始 | 文档命令未重放 | 未开始 |
-
-- P07：实现普通回答的选定证据复用、排序和显式回退。
-- 后续另列：增强模式、自动更新、正式 120 题核验集、开发集参数调优、正式实验。
+- 12题的独立人工复核、正式120题（开发80/冻结测试40）构建、综合问题/答案质量评估。
+- 仅开发集参数调优、回退校准、正式实验；变更尺度须升级配置并重评λ。
+- 增强模式、自动数据更新、Web界面；本轮不自动扩展这些工作。
 
 ## 受阻
 
-| 条件 | 证据 | 影响 | 恢复动作 |
-| --- | --- | --- | --- |
-| pytest 缺失（已解除） | P01 的 `.venv/bin/python -m pytest -q` 26 passed | 已有测试现已执行 | 后续使用 .venv/bin/python |
-| 真实 CWE 缺失（已解除） | P02 已取得并解析 4.20，原始 SHA-256 匹配 | 真实解析已验证 | 继续 P03，下载时间未知状态保留，不以登记时间替代 |
-| 模型资源缺失（已解除） | P05 三权重均通过上游 LFS 校验；独立 torch 已安装 | DPR 已真实验证；Reader 已在 P06 真实验证 | 复用固定资源，不重新设计预算/公式 |
-| 索引缺失（已解除） | data/processed/dpr-index-v1，5748×768 | DPR 召回/重载已通过 | 进入 P07 普通回答 |
+无未解决的本轮资源或技术验证阻塞；历史缺pytest/CWE/完整权重/独立torch问题均已解除。质量不足已公开记账，不以技术验收掩盖，也不私自调参。推送状态见HANDOFF。
 
-P01 的宿主 CUDA 检查仅是历史证据。P05 已使用独立 torch 2.9.1+cu128 实际执行 DPR 双编码器；选择 NumPy 精确原始内积，不依赖 FAISS。当前无 P05 资源阻塞，普通回答已实现，完整 CLI 已实现，整体端到端未验收。网络推送状态单独见 HANDOFF。
-
-## 本阶段文件变更记录
+## 本轮文件变更记录
 
 | 文件 | 用途 |
 | --- | --- |
-| AGENTS.md | 强制后续会话恢复顺序、阶段提交与状态真实性规则 |
-| docs/theprompt.md | 原始任务输入纳入版本控制，保持原字节 |
-| docs/BASELINE_SPEC.md | 完整保留技术要求、来源哈希、约束索引和恢复协议 |
-| docs/IMPLEMENTATION_PLAN.md | P00–P10 小阶段依赖、产物、验证与提交边界 |
-| docs/PROGRESS.md | 五类状态、证据、文件清单与实际时间线 |
-| docs/HANDOFF.md | 分支/提交、命令结果、阻塞及唯一下一步 |
-| docs/README.md | 增加恢复文档导航 |
+| src/cyber_qa/reader/dpr.py、__init__.py、README.md | P06输入布局/批次对齐/正文跨度/异常 |
+| src/cyber_qa/config.py、data/candidates.py | Reader/回答集中规则，保存起止logits和空跨度原因 |
+| scripts/check_dpr_reader.py、tests/test_reader.py | 真实Reader验收与20项合成回归 |
+| src/cyber_qa/answering/ordinary.py、__init__.py、README.md；tests/test_answering.py | P07已选证据内普通回答与6项回归 |
+| src/cyber_qa/pipeline/ordinary.py、__init__.py、README.md；__main__.py；tests/test_pipeline_cli.py | P08共享编排/CLI/运行产物与12项回归 |
+| data/annotations/baseline_smoke.v1.json、README.md；scripts/check_baseline_smoke.py | P09固定12题/支持原文/真实全流程与独立进程重载 |
+| docs/READER.md、ANSWERING.md、CLI.md、ACCEPTANCE.md、DEPLOYMENT.md | 各阶段规则、实测证据、质量限制与部署 |
+| README.md、src/cyber_qa/README.md、scripts/README.md、configs/README.md、docs/README.md | 最新入口和模块导航，替换过时规划状态 |
+| docs/RETRIEVAL.md、RUNTIME.md、PROGRESS.md、HANDOFF.md | 区分历史状态与最终状态、北京时间时间线与恢复 |
 
-P00 未修改工程代码；P01 增加 src/cyber_qa/config.py（校验配置）、configs/baseline.v1.json（冻结常量）、tests/test_config.py（配置回归）、requirements-dev.txt（测试工具版本）、docs/RUNTIME.md（环境与资源计划），并更新 configs/README.md。进入任务前的 install.sh 保持不动。
+install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5ae3c7c81886b0551caabc9fc2c61ac2b3093ad596533735。原始数据、模型、大索引、环境与日志全部忽略。早期P00–P05文件及用途见各阶段Git历史/文档。
 
 ## 实际时间线
 
@@ -127,3 +106,9 @@ P00 未修改工程代码；P01 增加 src/cyber_qa/config.py（校验配置）�
 - 2026-11-17T10:07:50+08:00：P08 `b28b783ac1686a9cbae4c2d7f849b99c84ae4786` 已推送、fetch 核验一致；开始 P09，12 道题及支持原文由 Codex 逐条核对，未声称独立人工复核。
 
 - 2026-11-17T10:09:39+08:00：P09 新增 data/annotations/baseline_smoke.v1.json、scripts/check_baseline_smoke.py、docs/ACCEPTANCE.md；更新标注说明/导航/恢复文档。12 题真实全流程与独立新进程重载均通过；支持段召回 4/12，两策略选中均为 3/12；明确记录语义质量不足、未独立人工复核、未调参。全套 137 项回归与 compileall 通过。准备提交推送。
+
+- 2026-11-17T10:10:33+08:00：P09 提交已推送、fetch 核验一致；开始 P10 独立进程重放与文档审计，准确哈希见 HANDOFF。
+
+- 2026-11-17T10:16:59+08:00：P10 原环境全量预处理/建库/查询重放通过，JSONL/向量/映射哈希完全一致；新建 outputs/p10-venv 按锁安装成功，pip check无冲突，137 passed in 4.74s，无skip；新环境12题真实全流程和独立子进程重载再次通过。重写README/核心/脚本导航，新增DEPLOYMENT与验收映射，历史文档显式标记阶段边界；准备最终提交推送。
+
+- 2026-11-17T10:18:10+08:00：第二个隔离环境另行全量预处理/建库/查询完成，JSONL/向量/映射哈希和完整查询结果精确一致；文档本地链接、git diff --check、原始输入/冻结规格校验通过。所有P00–P10技术验收完成，待最后提交推送核验。

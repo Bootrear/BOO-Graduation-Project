@@ -9,7 +9,7 @@
 .venv/bin/python -m cyber_qa query --question 'What is SQL injection?' --strategy both --device cuda --output outputs/query.json
 ```
 
-原始文件位置应以实际下载目录为准；P10 将重放并统一完整部署命令。数据/索引产物目录必须不存在；查询 JSON 原子写入指定路径。策略可选 reader_topk/mmr/both；默认 mmr；配置默认 configs/baseline.v1.json，问题 token 超过 64 拒绝。--help/参数错误无需加载模型。
+上述原始文件路径已核对；完整部署与 P10 重放见 DEPLOYMENT.md。数据/索引产物目录必须不存在；查询 JSON 原子写入指定路径。策略可选 reader_topk/mmr/both；默认 mmr；配置默认 configs/baseline.v1.json，问题 token 超过 64 拒绝。--help/参数错误无需加载模型。
 
 `QAPipeline.load(index, snapshot, ...)` 核验已有索引后，`query(question, strategy='both')` 在一次问题编码/召回/Reader 评分/完整池准备后调用两个筛选器。每种策略只装配自己选定证据的答案；不会重新推理或重新归一化。Reader 只按候选批次调用一次，测试用计数器覆盖此约束。默认 N=20/K=5/λ=.5 未调优；MMR 非负裁剪余弦及全部同分规则不变。
 
@@ -24,4 +24,4 @@ JSON 保存：问题、带时区运行时间、配置及稳定哈希、输入预
 - `.venv/bin/python -m pytest -q`：137 passed in 4.64s，无 skip；新增 12 项编排/CLI 回归。
 - 上述 query 命令实际执行成功，20 候选、两策略各 5 段、结构化 outputs/p08-query.json；首位答案仍有 P06 已记录的语义质量限制。
 - `query --index outputs/does-not-exist ...`：退出 1，outputs/p08-missing-index.json 保存 query_initialization / FileNotFoundError。
-- CLI 实际单条全链路已运行；正式 10–20 题及跨进程重载的 P09 验收尚未完成，整体暂不标完成。
+- 本节是 P08 的实测记录；后续 P09 的 12 题/跨进程验收见 ACCEPTANCE.md，P10 重放见 DEPLOYMENT.md。
