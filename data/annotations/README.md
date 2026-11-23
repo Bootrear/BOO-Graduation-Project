@@ -31,8 +31,9 @@
 MMR 能否赢 Reader Top-K"，再决定是否值得投入正式 120 题。它 `split` 为 `probe`，
 **不属于**开发集 80 / 冻结测试集 40，不参与调参记账。
 
-骨架已填条目、题型模板、`answer_type` 与候选段落 ID；`question` 与 `gold_facts`
-由人工填写。生成方式与标注要求见该目录 README。
+骨架已填条目、题型模板、`answer_type` 与候选段落 ID；问句与 `gold_facts` 目前是
+**机器起草、待人工复核**的草稿（`qa.v1.jsonl`，`status=auto_drafted_needs_human_review`，
+`reviewer=null`）。生成方式、复核标准与管线命令见该目录 README。
 
 ## 本次技术冒烟题
 

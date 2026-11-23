@@ -13,9 +13,13 @@
 
 ## 本阶段目标与结论
 
-**STEP1（进行中）**：解决"原 12 题冒烟集无法分辨 MMR 与 Reader Top-K"的评测集缺陷。
-已交付 40 题探针骨架 `data/annotations/probe-v1/`（模板 A12/B8/C8/D4/E8，40 个不同 CWE，
-219 个候选段落索引）；`question` 与 `gold_facts` 为空，**尚未标注、未跑模型、无任何有效性结论**。
+**STEP1（进行中，卡在人工复核）**：解决"原 12 题冒烟集无法分辨 MMR 与 Reader Top-K"的评测集缺陷。
+已交付 `data/annotations/probe-v1/`：40 题骨架 + 机器起草的 `qa.v1.jsonl`
+（模板 A12/B8/C8/D4/E8，40 个不同 CWE，72 条 gold fact，8 条单段题带 `answer_span`）。
+标注人 `deepseek-auto-draft`、`status=auto_drafted_needs_human_review`、`reviewer=null`。
+**未经人工复核，未跑模型，无任何有效性结论。**
+
+每次提交的时间、任务名称与主要内容记入 `docs/COMMIT_LOG.md`，新提交在表末追加一行。
 
 P00–P10普通问答基线代码、单元、真实模型、真实端到端和部署复现均已完成技术验收。随后已清理与当前基线无关的早期选择器兼容层；清理后的回归套件为135项，12题全流程、独立新进程重载、全量预处理/建库/查询结果保持不变。
 
@@ -44,11 +48,17 @@ install.sh保持未跟踪且未改动；docs/theprompt.md原始字节保留。da
 
 ## 下一步应执行的唯一具体动作
 
-按 `data/annotations/probe-v1/README.md` 填写 `data/annotations/probe-v1/skeleton.jsonl` 的 40 题：
-每题的 `question`、`required_evidence_ids`（2–3 个）、可选 `optional_evidence_ids`、
-`gold_facts`（A/B/C 模板 2–3 条且每条覆盖不同证据），删掉 `scaffold` 字段并把 `status`
-改为 `source_text_checked`。标完冻结文件哈希写入 `manifest.json`，再跑门禁三指标
-（Evidence Recall@5、池内平均两两余弦、两策略 selected_order 差异题数）。
+人工复核 `data/annotations/probe-v1/draft.v1.json` 的 40 题：问句是否确实需要所选证据、
+每条 `gold_facts[].text` 是否在 `supported_by` 所指段落里有直接依据、多段题两段证据语义是否
+过分类似。复核后把 `draft.v1.json` 的 `review_status` 与
+`scripts/apply_probe_annotations.py` 的 `STATUS`/`ANNOTATOR`/`reviewer` 一起改掉并重跑：
+
+```bash
+py scripts/apply_probe_annotations.py
+```
+
+校验必须 0 失败；核对 `git diff data/annotations/probe-v1/manifest.json` 的哈希已刷新，
+再跑门禁三指标（Evidence Recall@5、池内平均两两余弦、两策略 selected_order 差异题数）。
 
 环境侧前置：本机尚无 `models/`、`data/processed/` 与索引，需先按 `docs/DEPLOYMENT.md`
 经本地代理下载 DPR 三模型并重建 5748 段索引；首次预处理后运行

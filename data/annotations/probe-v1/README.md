@@ -10,21 +10,42 @@
 
 - `split` 一律为 `probe`，**不属于**正式开发集 80 / 冻结测试集 40，不参与调参记账。
 - 全部 40 题取自 **40 个不同 CWE 条目**，避免跨题泄漏。
-- 生成的 `skeleton.jsonl` 不含问题文本与 gold facts —— 这两项是标注的核心判断，必须人工填写。
+- `skeleton.jsonl` 只有机器生成的条目、模板与候选段落 ID；问句与 gold facts 由
+  `draft.v1.json` 提供并合并为 `qa.v1.jsonl`。当前这批是**机器起草、待人工复核**的草稿，
+  复核责任见下文“当前状态”。
 
 ## 文件
 
 | 文件 | 内容 | 需要手改吗 |
 | --- | --- | --- |
-| `skeleton.jsonl` | 40 条骨架：条目、模板、answer_type、候选段落 ID | **是**（填 question / required / optional / gold_facts） |
+| `skeleton.jsonl` | 40 条机器骨架：条目、模板、answer_type、候选段落 ID | 否（生成物） |
 | `passage_index.json` | 200 个候选段落的可读索引（字段、定位器、词数、原文预览、内容哈希） | 否 |
-| `manifest.json` | 生成清单：快照、条目列表、文件哈希 | 否 |
+| `draft.v1.json` | 机器起草的 `question` / 必选与补充证据 / `gold_facts` / 单段题 quote | **是（复核后改这里）** |
+| `qa.v1.jsonl` | 合并校验后的 40 题标注数据集（无 `scaffold`），评测读取此文件 | 否（由脚本生成） |
+| `manifest.json` | 生成清单：快照、条目列表、文件哈希、标注状态 | 否 |
 
-重新生成（确定性，同一输入产生逐字节相同的 `skeleton.jsonl`）：
+管线与命令：
 
 ```bash
-py scripts/make_probe_skeleton.py --out data/annotations/probe-v1
+py scripts/make_probe_skeleton.py --out data/annotations/probe-v1   # 生成骨架（确定性）
+py scripts/apply_probe_annotations.py                               # draft + 骨架 -> qa.v1.jsonl
+py scripts/verify_probe_ids.py --passages data/processed/cwe-v1/passages.jsonl
 ```
+
+## 当前状态（2026-11-23）
+
+`qa.v1.jsonl` 已由**机器起草**并由脚本严格校验：
+
+- 40 条记录、40 个不同 CWE；`multi_passage` 32 条、`single_span` 8 条；`gold_facts` 合计 72 条。
+- 校验项全部通过：必选/补充证据均在候选池内、每条 fact 的 `supported_by` 属于必选或补充、
+  多段题的 fact 覆盖全部必选证据、8 个 `answer_span` 与原文逐字符一致（含跨行 quote）。
+- `annotator` = `deepseek-auto-draft`，`status` = `auto_drafted_needs_human_review`，
+  `reviewer` = `null`。
+
+**未经人工复核。** 复核人必须逐条确认：问句确实需要那些证据、每条 fact 都在所引段落中
+有直接依据、两段必选证据语义不过分相似。复核完成后把 `draft.v1.json` 的
+`review_status` 与 `scripts/apply_probe_annotations.py` 的 `STATUS` 一起改为
+`human_reviewed`，填入 `reviewer`，重跑脚本并冻结 `manifest.json` 哈希。
 
 ## 40 题构成
 
@@ -225,12 +246,13 @@ py scripts/verify_probe_ids.py --passages data/processed/cwe-v1/passages.jsonl
 
 ---
 
-# 五、标完之后
+# 五、复核完之后
 
-1. 把 40 题的 `status` 从 `skeleton` 改成 `reviewed`（未请他人复核则写 `source_text_checked`，
-   不要虚构独立复核）。
-2. `annotator` 填真实姓名；`reviewer` 未复核就保持 `null`。
-3. 冻结文件哈希，写进 `manifest.json`。
+1. 在 `draft.v1.json` 里修正有问题的问句、证据或 fact；**不要手改 `qa.v1.jsonl`**，
+   它是脚本产物，改了会在下次重跑时丢失。
+2. 把 `draft.v1.json` 的 `review_status` 与 `scripts/apply_probe_annotations.py` 的 `STATUS`
+   一起改为 `human_reviewed`，并在脚本里把 `ANNOTATOR` 改成真实姓名、`reviewer` 填复核人。
+3. `py scripts/apply_probe_annotations.py` 重跑，校验必须 0 失败，`manifest.json` 自动刷新哈希。
 4. 跑门禁三指标（需环境就绪）：
 
 | 指标 | 判读 |

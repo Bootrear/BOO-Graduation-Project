@@ -1,0 +1,544 @@
+{
+  "version": "probe-qa-draft-v1",
+  "drafted_by": "DeepSeek Harness agent (deepseek-flash)",
+  "review_status": "auto_drafted_needs_human_review",
+  "note": "机器起草，未经人工复核。所有 fact 文本均来自固定 CWE 4.20 原文；answer_quote 由 apply 脚本按空白归一化匹配回原文并计算字符区间。",
+  "questions": {
+    "probe-001": {
+      "question": "How can user-controlled file names affect a filesystem operation, and what can happen if the name points to an executable file?",
+      "required": [
+        "cwe-passage:98cf3050d16a5f21dc5223c9b303baaa0693a219ab225d28be72dc153f995b98",
+        "cwe-passage:ad8f31df2f186bdae09b3da9a162a7d2e6e1086baf547c9dfa9ba9091a29c092"
+      ],
+      "optional": [
+        "cwe-passage:3cd3f67be9856155b2d6e942fed0898182707b40c0d8e03d436513d07a0c0719"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the product allows user input to control or influence paths or file names used in filesystem operations", "support": ["cwe-passage:98cf3050d16a5f21dc5223c9b303baaa0693a219ab225d28be72dc153f995b98"]},
+        {"id": "f2", "text": "if the file name is for a program or other form of executable code, integrity and availability can be violated and unauthorized code or commands may execute", "support": ["cwe-passage:ad8f31df2f186bdae09b3da9a162a7d2e6e1086baf547c9dfa9ba9091a29c092"]}
+      ]
+    },
+    "probe-002": {
+      "question": "Why is the intended structure of a message not preserved, and what integrity consequence can incorrect encoding cause?",
+      "required": [
+        "cwe-passage:355e5f4b8e9b51dd2d1f1fa44256feead0c99e2bd817fe185c2b7b3c8675cbff",
+        "cwe-passage:7cf6f9457e58ffb64afa51940cd63e27e8302a887975722fe419c7dbae8f5b07"
+      ],
+      "optional": [
+        "cwe-passage:49b664aa6150cff2e2d744ecf6e3e389fb26636918f5841d190312b34ba77ea5"
+      ],
+      "facts": [
+        {"id": "f1", "text": "encoding or escaping of the data is missing or done incorrectly, so the intended structure of the message is not preserved", "support": ["cwe-passage:355e5f4b8e9b51dd2d1f1fa44256feead0c99e2bd817fe185c2b7b3c8675cbff"]},
+        {"id": "f2", "text": "application data can be modified, unexpected commands can be executed, and incoming data can be misinterpreted", "support": ["cwe-passage:7cf6f9457e58ffb64afa51940cd63e27e8302a887975722fe419c7dbae8f5b07"]}
+      ]
+    },
+    "probe-003": {
+      "question": "Why is an unvalidated array index dangerous, and what can an attacker achieve by controlling the memory that index reaches?",
+      "required": [
+        "cwe-passage:badfd607994e529c7095a47bdb5cff302cec20f3ba5bbd972c5eddfaf7ee80ca",
+        "cwe-passage:8e9144fdeeef5f9f728217065516750e9826352ef53f37f93d6a4c20eefc00cd"
+      ],
+      "optional": [
+        "cwe-passage:5bf688346e1eaf8ef9563453821b10346fb341bf5e17a817ba98f31f66980a25"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the product uses untrusted input as an array index but does not validate that the index references a valid position within the array", "support": ["cwe-passage:badfd607994e529c7095a47bdb5cff302cec20f3ba5bbd972c5eddfaf7ee80ca"]},
+        {"id": "f2", "text": "if the memory accessible by the attacker is effectively controlled, arbitrary code may be executed even without large inputs when a precise index can be controlled", "support": ["cwe-passage:8e9144fdeeef5f9f728217065516750e9826352ef53f37f93d6a4c20eefc00cd"]}
+      ]
+    },
+    "probe-004": {
+      "question": "Why is an externally controlled format string dangerous, and what can an attacker do with it beyond reading memory?",
+      "required": [
+        "cwe-passage:3a66ddca88623cd4c9ff8fa0542f27d0b92cbdaae5308115c2aab4855b721565",
+        "cwe-passage:24bce5d75722b16edda08e019e73fca41bc3ada178f576e12a4f4dae1a1eb08a"
+      ],
+      "optional": [
+        "cwe-passage:c1d2a261665c4a7816eebe464aa34c124dd1a154accd233448c08f3410ebf6e6"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the product uses a function that accepts a format string as an argument, but the format string originates from an external source", "support": ["cwe-passage:3a66ddca88623cd4c9ff8fa0542f27d0b92cbdaae5308115c2aab4855b721565"]},
+        {"id": "f2", "text": "format string problems can result in the execution of arbitrary code, buffer overflows, denial of service, or incorrect data representation", "support": ["cwe-passage:24bce5d75722b16edda08e019e73fca41bc3ada178f576e12a4f4dae1a1eb08a"]}
+      ]
+    },
+    "probe-005": {
+      "question": "Why is omitting encryption a risk, and what can an attacker do to data in transit besides reading it?",
+      "required": [
+        "cwe-passage:88c1cc7dbbd27abe62347191027726746658554b51d3bcf00192b990deaf5467",
+        "cwe-passage:fc872b513e9a98fbcd3ebdfcb25e8168147013916f5b832b6137aab85bffefd5"
+      ],
+      "optional": [
+        "cwe-passage:772567aa0103f061e4af6c8c2962490511a3880f97f73a863c108edac15a36bf"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the product does not encrypt sensitive or critical information before storage or transmission", "support": ["cwe-passage:88c1cc7dbbd27abe62347191027726746658554b51d3bcf00192b990deaf5467"]},
+        {"id": "f2", "text": "omitting encryption allows injection of data into a stream of communication with no means for the victims to separate valid data from invalid", "support": ["cwe-passage:fc872b513e9a98fbcd3ebdfcb25e8168147013916f5b832b6137aab85bffefd5"]}
+      ]
+    },
+    "probe-006": {
+      "question": "Why can a check-then-use flaw be exploited, and what non-repudiation problem can it cause?",
+      "required": [
+        "cwe-passage:f28726fa493ffbe21cf59eb9b0ec474bc1a6ba2cea78abe49182ac9635276ce0",
+        "cwe-passage:a7fa8e517384ad5596c33e982009ad7640f27ad6a761eff720cdf4696f9583fd"
+      ],
+      "optional": [
+        "cwe-passage:37c11af964dd65ddf5c2712071a3bde0eeb6b7d63be298ccf4222125957c2065"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the product checks the state of a resource before using it, but the state can change between the check and the use in a way that invalidates the check", "support": ["cwe-passage:f28726fa493ffbe21cf59eb9b0ec474bc1a6ba2cea78abe49182ac9635276ce0"]},
+        {"id": "f2", "text": "if a file or other resource is written in this way rather than in a valid way, logging of the activity may not occur", "support": ["cwe-passage:a7fa8e517384ad5596c33e982009ad7640f27ad6a761eff720cdf4696f9583fd"]}
+      ]
+    },
+    "probe-007": {
+      "question": "How does an open redirect work, and how can it be used to steal user credentials?",
+      "required": [
+        "cwe-passage:6150f0e93c85a8d5efee0744e54feaf58eafa3650096412c8ab1948b69250547",
+        "cwe-passage:9b0662e9a67b8b3a30c83c0c3eb6d52a9e080ad5ba2ab38eb09b6c043d241a27"
+      ],
+      "optional": [
+        "cwe-passage:157faf5b9fec6e3306ee20025007b1e3d9076214d673283baeb0744be6dd0185"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the web application accepts user-controlled input that specifies a link to an external site and uses that link in a redirect", "support": ["cwe-passage:6150f0e93c85a8d5efee0744e54feaf58eafa3650096412c8ab1948b69250547"]},
+        {"id": "f2", "text": "by modifying the URL value to a malicious site an attacker may launch a phishing scam and steal the user's credentials", "support": ["cwe-passage:9b0662e9a67b8b3a30c83c0c3eb6d52a9e080ad5ba2ab38eb09b6c043d241a27"]}
+      ]
+    },
+    "probe-008": {
+      "question": "How can improper initialization expose data, and why can it also cause a crash?",
+      "required": [
+        "cwe-passage:10eee00c29dcdf48b9b726460980cb5b21eda14517ba86e651379de7883b68de",
+        "cwe-passage:0ba20d8ecb50f29fee1e56cbc90cdfbd01d84d1eb5924be3da950257fa8486f9"
+      ],
+      "optional": [
+        "cwe-passage:4f7a24f7f8bcf797b3c2d9f2a5aa39a84541f9b92daeba130405d25a98ce4031"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the product does not initialize or incorrectly initializes a resource, leaving it in an unexpected state when accessed or used", "support": ["cwe-passage:10eee00c29dcdf48b9b726460980cb5b21eda14517ba86e651379de7883b68de"]},
+        {"id": "f2", "text": "an uninitialized variable used as an array index in C may produce an index outside the range of the array and cause a crash or exit", "support": ["cwe-passage:0ba20d8ecb50f29fee1e56cbc90cdfbd01d84d1eb5924be3da950257fa8486f9"]}
+      ]
+    },
+    "probe-009": {
+      "question": "Why can an incorrect calculation be a security problem, and how can it let an attacker gain privileges?",
+      "required": [
+        "cwe-passage:8c4865ecdea5828e863383b65bc0f2f17ec0ec161f04258cb549ca9da5e7e76e",
+        "cwe-passage:dee18c17d00e7e94167c3407c0d2aba2efbc1c5503362429a691a7743a89f801"
+      ],
+      "optional": [
+        "cwe-passage:2339b838c61adc1ca5f8d5fd3beac9c2df4172058a71ebb44d08cc6b3010817e"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the product performs a calculation that generates incorrect or unintended results later used in security-critical decisions or resource management", "support": ["cwe-passage:8c4865ecdea5828e863383b65bc0f2f17ec0ec161f04258cb549ca9da5e7e76e"]},
+        {"id": "f2", "text": "in the context of privilege or permissions assignment, an incorrect calculation can provide an attacker with access to sensitive resources", "support": ["cwe-passage:dee18c17d00e7e94167c3407c0d2aba2efbc1c5503362429a691a7743a89f801"]}
+      ]
+    },
+    "probe-010": {
+      "question": "How can an incorrect length value lead to memory corruption, and what availability impact does it typically have?",
+      "required": [
+        "cwe-passage:2c0adaacb7b458bb763c11fc01ec4e47cb9e25f2a234a174dab68d1d940990ee",
+        "cwe-passage:f77d8073ad4c6be4bca55f71074365658fff4b10fd8c6cdf7fcd571eb331ed35"
+      ],
+      "optional": [
+        "cwe-passage:4a02c7f4fc510a4fbb1f3cc14b2f3b3d52407f82f4ee2848f912b918fd84789b"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the product uses a sequential operation to read or write a buffer but uses an incorrect length value that accesses memory outside the bounds of the buffer", "support": ["cwe-passage:2c0adaacb7b458bb763c11fc01ec4e47cb9e25f2a234a174dab68d1d940990ee"]},
+        {"id": "f2", "text": "buffer overflows generally lead to crashes, and other attacks can include putting the program into an infinite loop", "support": ["cwe-passage:f77d8073ad4c6be4bca55f71074365658fff4b10fd8c6cdf7fcd571eb331ed35"]}
+      ]
+    },
+    "probe-011": {
+      "question": "Why is automated recognition vulnerable to crafted inputs, and how can this expose data used in training?",
+      "required": [
+        "cwe-passage:9d3b6c6b3ae20dee75b88b1b3f2fd9b23aa75d7fbc19ed51e4fc36012e6d3259",
+        "cwe-passage:252e3fa7bf3731a337c8e35f7f48ef9b265153ee0ab8b1e9860760a462646206"
+      ],
+      "optional": [
+        "cwe-passage:7fd90c7d7d64fd00df3bce56ecfc14cf62e4992f88f7b700d0ef43417fa08fa0"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the product does not properly detect or handle inputs that were modified so that the mechanism detects a different, incorrect concept", "support": ["cwe-passage:9d3b6c6b3ae20dee75b88b1b3f2fd9b23aa75d7fbc19ed51e4fc36012e6d3259"]},
+        {"id": "f2", "text": "this weakness could breach data privacy by exposing features of the training data through membership inference attacks or prompt injection attacks", "support": ["cwe-passage:252e3fa7bf3731a337c8e35f7f48ef9b265153ee0ab8b1e9860760a462646206"]}
+      ]
+    },
+    "probe-012": {
+      "question": "Why can an LLM fail to separate user input from system directives, and what can happen if its output reaches a code interpreter?",
+      "required": [
+        "cwe-passage:c53cdf4ceef7414d750ebdcb7b2eda4a2ddbb18e51b7c446f4bfbd973e5a5ce6",
+        "cwe-passage:4d68bfa32f1886e04a2e2fadc2fb33bb79f2164b2625e63fcdde55591c5f42cc"
+      ],
+      "optional": [
+        "cwe-passage:84e755d3cb71ddcfc2cca74b4b560df14414e42470b7c7354b1bfc3d40e17e55"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the way the prompts are constructed causes the LLM to fail to distinguish between user-supplied inputs and developer provided system directives", "support": ["cwe-passage:c53cdf4ceef7414d750ebdcb7b2eda4a2ddbb18e51b7c446f4bfbd973e5a5ce6"]},
+        {"id": "f2", "text": "if the output is attached to a code interpreter, remote code execution could result", "support": ["cwe-passage:4d68bfa32f1886e04a2e2fadc2fb33bb79f2164b2625e63fcdde55591c5f42cc"]}
+      ]
+    },
+    "probe-013": {
+      "question": "What can an attacker achieve by supplying unexpected input, and how can fuzzing reveal the problem?",
+      "required": [
+        "cwe-passage:d419818840934b2e61f48102963bca07b07f32ddf2cceb1d366e062936d49a37",
+        "cwe-passage:535f7441fea90abccda2310dc853486695bbf40b9891b5d999c452f7ab019a9d"
+      ],
+      "optional": [
+        "cwe-passage:d6a3b6831c4a880d1fd4b588014311460bd134a238f496344d3bef4b0be53ebc"
+      ],
+      "facts": [
+        {"id": "f1", "text": "an attacker could use malicious input to modify data or alter control flow in unexpected ways, including arbitrary command execution", "support": ["cwe-passage:d419818840934b2e61f48102963bca07b07f32ddf2cceb1d366e062936d49a37"]},
+        {"id": "f2", "text": "fuzzing detects input validation errors because the software should not crash and should generate application-controlled error messages rather than interpreter-generated ones", "support": ["cwe-passage:535f7441fea90abccda2310dc853486695bbf40b9891b5d999c452f7ab019a9d"]}
+      ]
+    },
+    "probe-014": {
+      "question": "What critical files can a path traversal attacker overwrite, and which analysis technique can find the flaw?",
+      "required": [
+        "cwe-passage:6d44949c977a66f3467bc1b94ac105cbe027b6b5d71730032e828e4037762786",
+        "cwe-passage:cd3b8e6928788309c0868d9e165aafc40f5f0e8eea77b7becbbd4a9889bfc748"
+      ],
+      "optional": [
+        "cwe-passage:be7ff094399c35bd0107bc06620e81884bb1222e5c11115737213b0500e4183e"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the attacker may be able to create or overwrite critical files used to execute code, such as programs or libraries", "support": ["cwe-passage:6d44949c977a66f3467bc1b94ac105cbe027b6b5d71730032e828e4037762786"]},
+        {"id": "f2", "text": "automated static analysis techniques can find areas where path traversal weaknesses exist, though tuning may be required to remove privileged-path false positives", "support": ["cwe-passage:cd3b8e6928788309c0868d9e165aafc40f5f0e8eea77b7becbbd4a9889bfc748"]}
+      ]
+    },
+    "probe-015": {
+      "question": "How can SQL injection affect authentication, and how can dynamic testing detect it?",
+      "required": [
+        "cwe-passage:bcd8984640053b67248ff12ce537b5666e7924ab683d1c25c14b9083690d8398",
+        "cwe-passage:6194e5f8504fdec28e4c73e541cd1c2f57156bf9ac169ed9fe717c11c1b94a3a"
+      ],
+      "optional": [
+        "cwe-passage:ad3fd47ec30db8381f478745d41a553fd81e02cc1ede50e973256f1718b815f0"
+      ],
+      "facts": [
+        {"id": "f1", "text": "if poor SQL commands are used to check user names and passwords, it may be possible to connect as another user with no previous knowledge of the password", "support": ["cwe-passage:bcd8984640053b67248ff12ce537b5666e7924ab683d1c25c14b9083690d8398"]},
+        {"id": "f2", "text": "the weakness can be detected using dynamic tools and techniques with large test suites of diverse inputs, such as fuzz testing, robustness testing, and fault injection", "support": ["cwe-passage:6194e5f8504fdec28e4c73e541cd1c2f57156bf9ac169ed9fe717c11c1b94a3a"]}
+      ]
+    },
+    "probe-016": {
+      "question": "What can a classic buffer overflow be used for, and which source-code analysis detects it?",
+      "required": [
+        "cwe-passage:0993504d46843422605ad9f2b155ca7e86d3a7bad38ffc5043f6e59187d4463d",
+        "cwe-passage:ce026c7285c7c8c34ca95c60f91dcdd882115764a8efbd9d47803dd2bcbbd027"
+      ],
+      "optional": [
+        "cwe-passage:cd6feab6cc63e09d8a096b7aa00a6bffb757bca21fe16734fa7bffb45ad9eab3"
+      ],
+      "facts": [
+        {"id": "f1", "text": "buffer overflows often can be used to execute arbitrary code, which can subvert any other security service", "support": ["cwe-passage:0993504d46843422605ad9f2b155ca7e86d3a7bad38ffc5043f6e59187d4463d"]},
+        {"id": "f2", "text": "source code weakness analyzers, including context-configured analyzers, are a highly cost-effective automated static analysis technique for this weakness", "support": ["cwe-passage:ce026c7285c7c8c34ca95c60f91dcdd882115764a8efbd9d47803dd2bcbbd027"]}
+      ]
+    },
+    "probe-017": {
+      "question": "How can an integer overflow lead to code execution, and which manual technique evaluates the allocation calculation?",
+      "required": [
+        "cwe-passage:fa22eefcf39941807260ed5cf09b34b4d29a0603f9f02d4d5f556f44311e5c6c",
+        "cwe-passage:6a6e86bbb98cb2df0db6cd7272c3d880a21200357c4b39bc52bedea841e816ec"
+      ],
+      "optional": [
+        "cwe-passage:8457deeaf80929b8b5beaf437857c7ac67988555c67406833b40554e3e340005"
+      ],
+      "facts": [
+        {"id": "f1", "text": "this weakness can sometimes trigger buffer overflows, which can be used to execute arbitrary code", "support": ["cwe-passage:fa22eefcf39941807260ed5cf09b34b4d29a0603f9f02d4d5f556f44311e5c6c"]},
+        {"id": "f2", "text": "manual static analysis is useful for evaluating the correctness of allocation calculations and detecting overflow conditions", "support": ["cwe-passage:6a6e86bbb98cb2df0db6cd7272c3d880a21200357c4b39bc52bedea841e816ec"]}
+      ]
+    },
+    "probe-018": {
+      "question": "What can happen when multiple control flows access a resource at once, and how can a stress test expose the race?",
+      "required": [
+        "cwe-passage:39b18d89a8617a15744b732164ea4b8c401f3bcbc8e8ad86c80c10c01fccbc0e",
+        "cwe-passage:a249021c9ff47ebe04f1f13337eaeee97f3de7a551fc93b3d1c5a03e41ab0bfc"
+      ],
+      "optional": [
+        "cwe-passage:4b792af23a6c06e77e5a02cac3353516944241eedaa50da9fb25d25198c31cae"
+      ],
+      "facts": [
+        {"id": "f1", "text": "when a race condition allows multiple control flows to access a resource simultaneously, the product may enter unexpected states and possibly crash", "support": ["cwe-passage:39b18d89a8617a15744b732164ea4b8c401f3bcbc8e8ad86c80c10c01fccbc0e"]},
+        {"id": "f2", "text": "race conditions may be detected with a stress test that calls the software simultaneously from a large number of threads or processes", "support": ["cwe-passage:a249021c9ff47ebe04f1f13337eaeee97f3de7a551fc93b3d1c5a03e41ab0bfc"]}
+      ]
+    },
+    "probe-019": {
+      "question": "How can overly permissive access let an attacker gain privileges, and which manual review finds it?",
+      "required": [
+        "cwe-passage:0e3a52ebdb1d371ca03b596f8cd02cd58f64ba552d7338746a34362d99490db7",
+        "cwe-passage:686b204193d097d5a4d2a4dff228efc52b775d25fdafa32cf5718aa1944ac54d"
+      ],
+      "optional": [
+        "cwe-passage:4f9a909f638f22684329a22bbbff2e8be3c47bb878ca471325b0c6a3f71bcab6"
+      ],
+      "facts": [
+        {"id": "f1", "text": "an attacker may be able to modify critical properties of the resource to gain privileges, such as replacing a world-writable executable with a Trojan horse", "support": ["cwe-passage:0e3a52ebdb1d371ca03b596f8cd02cd58f64ba552d7338746a34362d99490db7"]},
+        {"id": "f2", "text": "manual source code review is a highly cost-effective detection technique, supplemented by focused manual spotchecks", "support": ["cwe-passage:686b204193d097d5a4d2a4dff228efc52b775d25fdafa32cf5718aa1944ac54d"]}
+      ]
+    },
+    "probe-020": {
+      "question": "What can an attacker gain by bypassing access restrictions, and why is manual analysis needed to find it?",
+      "required": [
+        "cwe-passage:98066f3c8487f7f75be539890a3b15ee9bbce0bb530b9f05dc30ced9ab28f50e",
+        "cwe-passage:bbab8e30b955e3e3b072bf961c7228818dcf074f90ea102e9c85c3a74fbb6066"
+      ],
+      "optional": [
+        "cwe-passage:7771fedd3b59121076eb7251fb1d56d4f71b0f6956f6f3089f9fb9057e84ba0f"
+      ],
+      "facts": [
+        {"id": "f1", "text": "an attacker could bypass intended access restrictions to gain privileges by modifying or reading critical data or by accessing privileged functionality", "support": ["cwe-passage:98066f3c8487f7f75be539890a3b15ee9bbce0bb530b9f05dc30ced9ab28f50e"]},
+        {"id": "f2", "text": "manual static analysis is useful for evaluating the correctness of custom authorization mechanisms", "support": ["cwe-passage:bbab8e30b955e3e3b072bf961c7228818dcf074f90ea102e9c85c3a74fbb6066"]}
+      ]
+    },
+    "probe-021": {
+      "question": "How can OS command injection be detected by dynamic testing, and how can taint propagation prevent it?",
+      "required": [
+        "cwe-passage:0bac0b70bd2514bda4c2b9735a5d4b6c1225fe6eafe4361d131e28986497f416",
+        "cwe-passage:8ab0076622384416c3522a6e670c2ca54869799b000e43289faa8cbaa8daa121"
+      ],
+      "optional": [
+        "cwe-passage:d125f51d9d82e56b6b23c661931425d9dabc311a274cd05cd6be8c678c763da4"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the weakness can be detected using dynamic tools with large test suites of diverse inputs, such as fuzzing, robustness testing, and fault injection", "support": ["cwe-passage:0bac0b70bd2514bda4c2b9735a5d4b6c1225fe6eafe4361d131e28986497f416"]},
+        {"id": "f2", "text": "running the code in an environment that performs automatic taint propagation and prevents command execution using tainted variables is an operation-phase mitigation", "support": ["cwe-passage:8ab0076622384416c3522a6e670c2ca54869799b000e43289faa8cbaa8daa121"]}
+      ]
+    },
+    "probe-022": {
+      "question": "Which automated analysis finds out-of-bounds memory operations, and which compiler mechanism adds canary-based detection?",
+      "required": [
+        "cwe-passage:5d1f165ea73fcbf9b532e936d1b0e1cc791e55954bb5834e7f509c018c2948aa",
+        "cwe-passage:63eb7d6a7d5f23b7eeb14e04a595d2519f252b0ab90ad956327d28f009699ac6"
+      ],
+      "optional": [
+        "cwe-passage:b3c8ea34cbba4e34dca630cdbbbb64e5a65268910b88fa12069c405b22807cd4"
+      ],
+      "facts": [
+        {"id": "f1", "text": "automated static analysis tools using data flow analysis or constraint-based techniques can often detect this weakness", "support": ["cwe-passage:5d1f165ea73fcbf9b532e936d1b0e1cc791e55954bb5834e7f509c018c2948aa"]},
+        {"id": "f2", "text": "automatic buffer overflow detection mechanisms such as the Visual Studio /GS flag, FORTIFY_SOURCE, StackGuard and ProPolice provide canary-based detection and range/index checking", "support": ["cwe-passage:63eb7d6a7d5f23b7eeb14e04a595d2519f252b0ab90ad956327d28f009699ac6"]}
+      ]
+    },
+    "probe-023": {
+      "question": "How is an incorrect buffer size calculation detected dynamically, and what library-based mitigation is recommended?",
+      "required": [
+        "cwe-passage:0bf5f3efd5b5521d588e8bed90f01e941e0b5f1ffb80287c5cb5a30982b12cd3",
+        "cwe-passage:d87b61aec5f513939cf911b7e9ce3c023bad213dca79d8c53b6bdbfd8d37f57f"
+      ],
+      "optional": [
+        "cwe-passage:9ef098047d8300a18a12ca0a0b43642ae980ccaa7b40847602fb00d3af5d832c"
+      ],
+      "facts": [
+        {"id": "f1", "text": "the weakness can be detected using dynamic tools with large test suites of diverse inputs, such as fuzzing, robustness testing, and fault injection", "support": ["cwe-passage:0bf5f3efd5b5521d588e8bed90f01e941e0b5f1ffb80287c5cb5a30982b12cd3"]},
+        {"id": "f2", "text": "vetted libraries that handle numbers without unexpected consequences or track buffer size, such as SafeInt and IntegerLib, are recommended", "support": ["cwe-passage:d87b61aec5f513939cf911b7e9ce3c023bad213dca79d8c53b6bdbfd8d37f57f"]}
+      ]
+    },
+    "probe-024": {
+      "question": "How can unnecessary privileges be detected in a binary, and what does the least-privilege mitigation require?",
+      "required": [
+        "cwe-passage:bdf8cf89a3ed86e84d79e2402a95ad6c2e63552800970737a9c7f49126ef85e9",
+        "cwe-passage:ab6a24f8b2ac105a1c555e54fe2c196070b4e6d097811b7f09f1d9a373082bca"
+      ],
+      "optional": [
+        "cwe-passage:ac9dab7c871b5d309f1ac68b13194cd56f1420dec797da0945d683f21d33ec5c"
+      ],
+      "facts": [
+        {"id": "f1", "text": "comparing binary or bytecode to the application permission manifest is a highly cost-effective detection technique", "support": ["cwe-passage:bdf8cf89a3ed86e84d79e2402a95ad6c2e63552800970737a9c7f49126ef85e9"]},
+        {"id": "f2", "text": "code should run with the lowest privileges required, using isolated accounts with limited privileges, so a successful attack does not give access to the rest of the environment", "support": ["cwe-passage:ab6a24f8b2ac105a1c555e54fe2c196070b4e6d097811b7f09f1d9a373082bca"]}
+      ]
+    },
+    "probe-025": {
+      "question": "What can automated static analysis find about authorization, and how does role-based access control reduce the attack surface?",
+      "required": [
+        "cwe-passage:327797e01b9ce111e33cf904bc848dece6498e32b575d9d994b7d11d65427152",
+        "cwe-passage:e512971538a68580dc33370533af12ba73f090a77cdc386102b45620fcf69325"
+      ],
+      "optional": [
+        "cwe-passage:df209ffddf5ec788b28e4783f8b114260378f5aa1079d365581ef6d32aa8cc41"
+      ],
+      "facts": [
+        {"id": "f1", "text": "automated static analysis is useful for detecting commonly-used authorization idioms, including related configuration files and authorization libraries, but has difficulty with custom schemes", "support": ["cwe-passage:327797e01b9ce111e33cf904bc848dece6498e32b575d9d994b7d11d65427152"]},
+        {"id": "f2", "text": "dividing the product into anonymous, normal, privileged and administrative areas and enforcing the roles with role-based access control reduces the attack surface", "support": ["cwe-passage:e512971538a68580dc33370533af12ba73f090a77cdc386102b45620fcf69325"]}
+      ]
+    },
+    "probe-026": {
+      "question": "How can obsolete cryptography be found automatically, and why should the algorithm be replaceable?",
+      "required": [
+        "cwe-passage:3ecfca1ec64b52fae58261818774d7e6c20546d90c036da03416e58095464d47",
+        "cwe-passage:b37ac41b5f53a34ff0867e1bff842e5dc8d00866150602c132c0c62f7cd3c597"
+      ],
+      "optional": [
+        "cwe-passage:328d0ab2152be98f8aee6fe4e5d32106a9bc673b92e5f41c7c65e5112824d759"
+      ],
+      "facts": [
+        {"id": "f1", "text": "automated methods may be useful for recognizing commonly-used libraries or features that have become obsolete", "support": ["cwe-passage:3ecfca1ec64b52fae58261818774d7e6c20546d90c036da03416e58095464d47"]},
+        {"id": "f2", "text": "the design should allow one cryptographic algorithm to be replaced with another, using wrappers to make the interfaces uniform", "support": ["cwe-passage:b37ac41b5f53a34ff0867e1bff842e5dc8d00866150602c132c0c62f7cd3c597"]}
+      ]
+    },
+    "probe-027": {
+      "question": "How can hard-coded credentials in configuration files be found, and where should such credentials be stored instead?",
+      "required": [
+        "cwe-passage:53c143a6912c76226233c0a0297efd1971abcb8b1df41ee53979e3218552c1e9",
+        "cwe-passage:56f73090dfa91e5e8bb85f704b1649b512a5f0fc07e5aa5c430816370a9d66e0"
+      ],
+      "optional": [
+        "cwe-passage:52de9ae9e82d892eab4ca74d3d343c174a8d45a1f8884df7c4ba18d2f752d1d1"
+      ],
+      "facts": [
+        {"id": "f1", "text": "credential storage in configuration files is findable using black box methods", "support": ["cwe-passage:53c143a6912c76226233c0a0297efd1971abcb8b1df41ee53979e3218552c1e9"]},
+        {"id": "f2", "text": "passwords, keys and other credentials should be stored outside of the code in a strongly-protected encrypted configuration file or database", "support": ["cwe-passage:56f73090dfa91e5e8bb85f704b1649b512a5f0fc07e5aa5c430816370a9d66e0"]}
+      ]
+    },
+    "probe-028": {
+      "question": "How can missing authorization checks be found dynamically, and what mitigation enforces roles at boundaries?",
+      "required": [
+        "cwe-passage:738b5ba1580311047e04abd7f9285ce47891d0546b002ee336c4f260ab7f2e76",
+        "cwe-passage:fa0fb4ad5ac3930a862bfd72a2a3b1ec4e52f6ed59d30a63475e2181bddb755a"
+      ],
+      "optional": [
+        "cwe-passage:bb1f2eff5e99b0a1a6e2c183c8df5098379881fe129ea40b38b12974b308292e"
+      ],
+      "facts": [
+        {"id": "f1", "text": "automated dynamic analysis may find interfaces that require no authorization, but manual analysis is needed to decide whether that violates business logic", "support": ["cwe-passage:738b5ba1580311047e04abd7f9285ce47891d0546b002ee336c4f260ab7f2e76"]},
+        {"id": "f2", "text": "dividing the product into areas and enforcing roles with role-based access control at appropriate boundaries mitigates missing authorization", "support": ["cwe-passage:fa0fb4ad5ac3930a862bfd72a2a3b1ec4e52f6ed59d30a63475e2181bddb755a"]}
+      ]
+    },
+    "probe-029": {
+      "question": "Which CSRF defenses belong to architecture and design, and which applies during implementation?",
+      "required": [
+        "cwe-passage:4a5fa6ec15c237ec129ce5d44daa7027a5cc4fcdfae3e1ca489c398dfca32659",
+        "cwe-passage:91f1dd643c6f0177a390d8cfdc5e3859c6e477e1c5cc544e7f0ee9730c00cd60"
+      ],
+      "optional": [
+        "cwe-passage:cd9f8de2b215213146c2a37633f8e618bb313f753b7a109e1e18d2f226a72480"
+      ],
+      "facts": [
+        {"id": "f1", "text": "generating a unique nonce for each form and verifying it on receipt is an architecture-and-design mitigation", "support": ["cwe-passage:4a5fa6ec15c237ec129ce5d44daa7027a5cc4fcdfae3e1ca489c398dfca32659"]},
+        {"id": "f2", "text": "ensuring the application is free of cross-site scripting issues is an implementation-phase mitigation", "support": ["cwe-passage:91f1dd643c6f0177a390d8cfdc5e3859c6e477e1c5cc544e7f0ee9730c00cd60"]}
+      ]
+    },
+    "probe-030": {
+      "question": "What should be done at design time about uploaded file names, and what must be checked during implementation?",
+      "required": [
+        "cwe-passage:d7dba847f10ec6b9ecb07d68a988f26a2c9a12a7454dbe403e948c8d131b2b1b",
+        "cwe-passage:56a46052b277ee73c7b429bde315790b7594092dceb52b2e501d63fa74bedfd8"
+      ],
+      "optional": [
+        "cwe-passage:1170c04cc6d73d240b896a57481d92baedafcb40c5c827d442e8d3950dbb827c"
+      ],
+      "facts": [
+        {"id": "f1", "text": "generating a new unique filename for an uploaded file instead of using the user-supplied filename means no external input is used at all", "support": ["cwe-passage:d7dba847f10ec6b9ecb07d68a988f26a2c9a12a7454dbe403e948c8d131b2b1b"]},
+        {"id": "f2", "text": "at implementation time the MIME content type and filename attribute should not be relied on exclusively, and matching MIME to extension is only a partial solution", "support": ["cwe-passage:56a46052b277ee73c7b429bde315790b7594092dceb52b2e501d63fa74bedfd8"]}
+      ]
+    },
+    "probe-031": {
+      "question": "What do requirements and design require for cryptographic strength?",
+      "required": [
+        "cwe-passage:e886351dfb441240b051b5297dd698d6a693b3082028daa89c3a34a2a219e298",
+        "cwe-passage:f377df1483978603ec64651133ac8b51413b7622386a567d04acd746dbf17ba5"
+      ],
+      "optional": [
+        "cwe-passage:5d45e2ee818e7155cd0ab03e3ca8f335f67a9a10506af3df81aee5c8f38c3d82"
+      ],
+      "facts": [
+        {"id": "f1", "text": "requirements should demand compliance with the strongest-available recommendations from trusted parties and keep that compliance up to date, for example FIPS 140-3", "support": ["cwe-passage:e886351dfb441240b051b5297dd698d6a693b3082028daa89c3a34a2a219e298"]},
+        {"id": "f2", "text": "custom or private cryptographic algorithms should not be developed, because they will likely be exposed to attacks well understood by cryptographers", "support": ["cwe-passage:f377df1483978603ec64651133ac8b51413b7622386a567d04acd746dbf17ba5"]}
+      ]
+    },
+    "probe-032": {
+      "question": "Which mitigations belong to hardware architecture and design, and which are system configuration measures?",
+      "required": [
+        "cwe-passage:beaaedf4977ffdcbd6886ff705353218acc25a17bcf52ed3dcae7a7dd53833ac",
+        "cwe-passage:1cdc4a37208d96d600f0731644dca348522e45d07dc4785f70592292c1e18b74"
+      ],
+      "optional": [
+        "cwe-passage:e881ef3697d483d63a30390798ebf5fb602090d9c43187bff69aa4a71afe928c"
+      ],
+      "facts": [
+        {"id": "f1", "text": "hardware designers may engineer the processor pipeline to prevent architecturally restricted data from being used by operations that execute transiently", "support": ["cwe-passage:beaaedf4977ffdcbd6886ff705353218acc25a17bcf52ed3dcae7a7dd53833ac"]},
+        {"id": "f2", "text": "some systems may allow the user to disable microarchitectural features in the BIOS that allow transient access to architecturally restricted data", "support": ["cwe-passage:1cdc4a37208d96d600f0731644dca348522e45d07dc4785f70592292c1e18b74"]}
+      ]
+    },
+    "probe-033": {
+      "question": "Which libraries does CWE-79 recommend for generating properly encoded output?",
+      "required": [
+        "cwe-passage:9c96cb644f5b0abb590b30a60a8ebe49a1f738113c69c1688ef0752597e178c7"
+      ],
+      "optional": [],
+      "answer_quote": "Microsoft's Anti-XSS library, the OWASP ESAPI Encoding module, and Apache Wicket",
+      "facts": [
+        {"id": "f1", "text": "Microsoft's Anti-XSS library, the OWASP ESAPI Encoding module and Apache Wicket make it easier to generate properly encoded output", "support": ["cwe-passage:9c96cb644f5b0abb590b30a60a8ebe49a1f738113c69c1688ef0752597e178c7"]}
+      ]
+    },
+    "probe-034": {
+      "question": "What should be done with exceptions so that error messages do not leak sensitive information?",
+      "required": [
+        "cwe-passage:057c35158921d01dc999e3c4d0d5a1400666cef9a35d0df277e11f176e03bfdb"
+      ],
+      "optional": [],
+      "answer_quote": "Handle exceptions internally and do not display errors containing potentially sensitive information to a user.",
+      "facts": [
+        {"id": "f1", "text": "exceptions should be handled internally and errors containing potentially sensitive information must not be displayed to a user", "support": ["cwe-passage:057c35158921d01dc999e3c4d0d5a1400666cef9a35d0df277e11f176e03bfdb"]}
+      ]
+    },
+    "probe-035": {
+      "question": "Which manual technique is recommended for evaluating custom authentication mechanisms?",
+      "required": [
+        "cwe-passage:9d24bcf64080ca5ef4fce4c2defe4152655a1ee84373e5e92e9d844bc7d1a3d3"
+      ],
+      "optional": [],
+      "answer_quote": "manual static analysis is useful for evaluating the correctness of custom authentication mechanisms",
+      "facts": [
+        {"id": "f1", "text": "manual static analysis is useful for evaluating the correctness of custom authentication mechanisms", "support": ["cwe-passage:9d24bcf64080ca5ef4fce4c2defe4152655a1ee84373e5e92e9d844bc7d1a3d3"]}
+      ]
+    },
+    "probe-036": {
+      "question": "Which source code review technique is highly cost effective for detecting weak randomness?",
+      "required": [
+        "cwe-passage:e0ad5b434e053f8a6c7ddb86f538b597666a58d9a65571fe4dae8662b736bfd6"
+      ],
+      "optional": [],
+      "answer_quote": "Focused Manual Spotcheck - Focused manual analysis of source",
+      "facts": [
+        {"id": "f1", "text": "focused manual spotcheck and manual source code review are highly cost-effective detection techniques", "support": ["cwe-passage:e0ad5b434e053f8a6c7ddb86f538b597666a58d9a65571fe4dae8662b736bfd6"]}
+      ]
+    },
+    "probe-037": {
+      "question": "Why is manual white box analysis effective for this weakness?",
+      "required": [
+        "cwe-passage:b3ace403c135a993fc61a6f5152605c8dd8c2ba4ae452ea1d87fcc141ac81ce4"
+      ],
+      "optional": [],
+      "answer_quote": "manual white box techniques may be able to provide sufficient code coverage and reduction of false positives",
+      "facts": [
+        {"id": "f1", "text": "manual white box techniques can provide sufficient code coverage and reduce false positives if all potentially-vulnerable operations can be assessed within limited time constraints", "support": ["cwe-passage:b3ace403c135a993fc61a6f5152605c8dd8c2ba4ae452ea1d87fcc141ac81ce4"]}
+      ]
+    },
+    "probe-038": {
+      "question": "Which detection technique runs potentially malicious code in a sandbox to observe suspicious behavior?",
+      "required": [
+        "cwe-passage:37f4ea7235169af7255a26ba5884742611dcebfc699136423baede44bcba3087"
+      ],
+      "optional": [],
+      "answer_quote": "Monitored Virtual Environment - run potentially malicious code in sandbox / wrapper / virtual machine, see if it does anything suspicious",
+      "facts": [
+        {"id": "f1", "text": "a monitored virtual environment runs potentially malicious code in a sandbox, wrapper or virtual machine to see whether it does anything suspicious", "support": ["cwe-passage:37f4ea7235169af7255a26ba5884742611dcebfc699136423baede44bcba3087"]}
+      ]
+    },
+    "probe-039": {
+      "question": "What does this entry recommend for documenting transient execution behavior?",
+      "required": [
+        "cwe-passage:0952d44e79c1b6a726d339588141cc29133791719e7d8640a160fd0ce6cff902"
+      ],
+      "optional": [],
+      "answer_quote": "the hardware designer may opt to disclose this behavior in architecture documentation",
+      "facts": [
+        {"id": "f1", "text": "if a hardware feature allows incorrect operations to execute transiently, the designer may disclose the behavior in architecture documentation", "support": ["cwe-passage:0952d44e79c1b6a726d339588141cc29133791719e7d8640a160fd0ce6cff902"]}
+      ]
+    },
+    "probe-040": {
+      "question": "Which requirements-phase mitigation restricts access to high-resolution timers?",
+      "required": [
+        "cwe-passage:f8ce153ad17ad9e598c9181a469ea738665baf659507132f068ab540e757fc8d"
+      ],
+      "optional": [],
+      "answer_quote": "restrict the ability of unprivileged software to access to high-resolution timers that are commonly used to monitor covert channels",
+      "facts": [
+        {"id": "f1", "text": "restricting unprivileged software access to high-resolution timers is a requirements-phase mitigation", "support": ["cwe-passage:f8ce153ad17ad9e598c9181a469ea738665baf659507132f068ab540e757fc8d"]}
+      ]
+    }
+  }
+}

@@ -11,6 +11,7 @@
 | check_dpr_reader.py | 单条/分批/反序对齐、原文跨度与真实选择校验 |
 | check_baseline_smoke.py | 12 题真实普通问答、双策略、独立新进程重载 |
 | make_probe_skeleton.py | 生成 probe-v1 的 40 题标注骨架与候选段落索引（确定性，仅标准库 + 项目解析器） |
+| apply_probe_annotations.py | 把 `draft.v1.json` 合并进骨架，严格校验后写出 `qa.v1.jsonl` 并刷新清单哈希 |
 | verify_probe_ids.py | 首次预处理后用真实 `passages.jsonl` 核对 probe-v1 的 `passage_id` |
 | validate_raw_data.py | 旧完整起始快照校验（含 NVD/CAPEC/ATT&CK/KEV），不属于本基线必需资源 |
 

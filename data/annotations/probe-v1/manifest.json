@@ -19,11 +19,15 @@
   },
   "files": {
     "skeleton": "skeleton.jsonl",
-    "passage_index": "passage_index.json"
+    "passage_index": "passage_index.json",
+    "draft": "draft.v1.json",
+    "annotated": "qa.v1.jsonl"
   },
   "file_sha256": {
     "skeleton.jsonl": "856fbaf1b6b56d568c703b276ed577459d27cf76659117e4a72982a1a133ec43",
-    "passage_index.json": "b4d888f76d641b500c27eaf88fcae7531f7566988974acd8391468d6baa4bc54"
+    "passage_index.json": "b4d888f76d641b500c27eaf88fcae7531f7566988974acd8391468d6baa4bc54",
+    "draft.v1.json": "52da31c3c4716bf8de6563ca47216325a9b4d013dfcdf351d839e978d32e02d9",
+    "qa.v1.jsonl": "bdc2999481cf8680ecfa5cc2ba621947f41bade931e7e23057d54ec3ceca7ebf"
   },
   "entries": [
     {
@@ -227,5 +231,13 @@
       "template": "E"
     }
   ],
-  "generated_at_utc": "2026-11-23T06:26:14+00:00"
+  "generated_at_utc": "2026-11-23T06:26:14+00:00",
+  "annotations": {
+    "version": "probe-qa-v1",
+    "count": 40,
+    "drafted_by": "DeepSeek Harness agent (deepseek-flash)",
+    "review_status": "auto_drafted_needs_human_review",
+    "independent_human_review": false,
+    "note": "机器起草，未经人工复核；question 与 gold_facts 必须由人工逐条核对后才能用于门禁统计。"
+  }
 }

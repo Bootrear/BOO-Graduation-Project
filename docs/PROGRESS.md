@@ -75,13 +75,16 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 | CWE 字段覆盖诊断 | 已完成 | 969 条目全部解析：Description 969、Common_Consequences 944、Potential_Mitigations 671、Extended_Description 579、Detection_Methods 499；含 Description + 至少 1 个其它字段的条目 946 个（97.6%） |
 | `passage_id` 公式离线复算 | 已完成（12/12） | 按 `contracts.py` 冻结公式复算 `baseline_smoke.v1.json` 全部 12 条标注的 `passage_id` 与 `content_sha256`，逐字节一致 |
 | 可出多段题的条目筛选 | 已完成 | 满足"≥3 字段 + 某字段 ≥4 兄弟段 + ≥2 段 ≤120 词"的条目 176 个；生成时按 ≤120 词放宽后可用 966 个 |
-| 40 题骨架生成 | 已完成 | `data/annotations/probe-v1/`：skeleton.jsonl 40 条（40 个不同 CWE）、passage_index.json 219 段、manifest.json |
+| 40 题骨架生成 | 已完成 | `data/annotations/probe-v1/`：skeleton.jsonl 40 条（40 个不同 CWE）、passage_index.json 200 段、manifest.json |
+| 40 题问句与 gold_facts 起草 | 已完成（机器起草，待人工复核） | `draft.v1.json` → `qa.v1.jsonl`：40 条记录、72 条 gold fact、32 条多段题、8 条单段题；8 个 `answer_span` 与原文逐字符一致；40 条的 fact 均覆盖各自必选证据；`annotator=deepseek-auto-draft`、`status=auto_drafted_needs_human_review`、`reviewer=null` |
 
-**尚未完成（不得冒称）**：`question` 与 `gold_facts` 全部为空，40 题尚未标注；
+**尚未完成（不得冒称）**：40 题的 `question` 与 `gold_facts` **只有机器草稿，未经人工复核**；
 未运行任何模型；无 Evidence Recall@5、无池内冗余度、无策略差异统计。
 因此本轮**没有任何关于 MMR 有效性的结论**。
 
-**下一步**：按 `data/annotations/probe-v1/README.md` 完成 40 题标注，冻结后跑门禁三指标。
+**下一步**：人工逐条复核 `draft.v1.json` 的问句、必选证据与 fact 依据（标准见
+`data/annotations/probe-v1/README.md`），复核后重跑 `scripts/apply_probe_annotations.py`
+并冻结哈希；随后跑门禁三指标。
 
 ## 实际时间线
 
@@ -142,3 +145,5 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 - 2026-11-17T14:54:51+08:00：按用户要求清理与当前基线无关的早期选择器兼容层，删除实现、测试、配置、合成脚本和旧数据类导出，更新主线导出与文档引用；`.venv/bin/python -m pytest -q` 结果为 `135 passed in 130.10s`，compileall 与 `git diff --check` 通过。清理提交 `9a055b2` 已创建；首次推送因 `gnutls_handshake() failed: The TLS connection was non-properly terminated` 失败，随后重试成功，`e01a59375bcc125e88c5358cc089aac929a0dee2` 已完成远端核验。
 
 - 2026-11-23T14:21:33+08:00：新增 STEP1 探针集数据集优化分支 `step1/dataset-optimization`（基于 `ebd1f48`）。本次为纯数据分析与标注脚手架，未下载权重、未建索引、未跑模型：完成 CWE 字段覆盖诊断（969 条目，946 个可用单段以上多字段条目）、`passage_id` 公式离线复算（对既有 12 条冒烟标注 12/12 逐字节一致）、多段题候选筛选（176 个条目满足竞争度条件），并生成 `data/annotations/probe-v1/` 的 40 题骨架（模板 A12/B8/C8/D4/E8，40 个不同 CWE，219 个候选段落索引）。`question` 与 `gold_facts` 留空待人工标注。同日修复工作区 Windows 权限缺陷（补当前用户完整控制权限，备份见工作区外 acl-recovery 目录），并通过本地代理 `127.0.0.1:7877` 完成远端 fetch 与基线分支落地。
+
+- 2026-11-23T14:37:57+08:00：为 STEP1 的 40 题补齐 `question` 与 `gold_facts` 机器草稿。新增 `draft.v1.json` 与合并校验脚本 `apply_probe_annotations.py`，产出 `qa.v1.jsonl`：40 条记录、72 条 gold fact、32 条多段题、8 条单段题带 `answer_span`；脚本严格校验必选/补充证据均在候选池、fact 的 `supported_by` 合法、多段题 fact 覆盖全部必选证据、单段题 quote 与原文逐字符一致（含跨行匹配），全部通过。标注人记为 `deepseek-auto-draft`、状态 `auto_drafted_needs_human_review`、`reviewer=null`，**未经人工复核**。同时新增 `docs/COMMIT_LOG.md` 提交记录表（记录时间、任务名称、主要内容），并修正候选池按字段设限的缺陷（此前模板 C 的 8 道题候选池全为 `detection_methods`）。
