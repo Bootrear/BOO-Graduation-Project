@@ -17,7 +17,7 @@
 | 文件 | 内容 | 需要手改吗 |
 | --- | --- | --- |
 | `skeleton.jsonl` | 40 条骨架：条目、模板、answer_type、候选段落 ID | **是**（填 question / required / optional / gold_facts） |
-| `passage_index.json` | 219 个候选段落的可读索引（字段、定位器、词数、原文预览、内容哈希） | 否 |
+| `passage_index.json` | 200 个候选段落的可读索引（字段、定位器、词数、原文预览、内容哈希） | 否 |
 | `manifest.json` | 生成清单：快照、条目列表、文件哈希 | 否 |
 
 重新生成（确定性，同一输入产生逐字节相同的 `skeleton.jsonl`）：
@@ -41,6 +41,10 @@ py scripts/make_probe_skeleton.py --out data/annotations/probe-v1
 1. 至少 3 个不同字段 —— 才有可能出跨字段题。
 2. 竞争字段至少 2 个兄弟段 —— 让 Top-K 的 5 个名额有被同类段占满的风险。
 3. 每个候选段 ≤ 120 词 —— 保证单块成段，`passage_id` 可离线算准。
+
+`candidate_pool` 按字段分别设上限（A: description 1 + common_consequences ≤4；
+B/C: 两个字段各 ≤3；D: potential_mitigations ≤6；E: 单个非 description 字段 ≤4），
+**不是全局 6 条**——否则某个字段段数多会把配对字段挤光，跨字段题就没有跨字段证据了。
 
 ---
 

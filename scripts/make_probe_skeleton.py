@@ -135,11 +135,28 @@ def eligible(entry_fields, template_id):
 
 
 def build_pool(entry_fields, template_id):
-    spec = TEMPLATE[template_id]
+    """Per-field caps, so a rich field cannot crowd out its partner field.
+
+    A total cap alone is not enough: for template C a 6-unit detection_methods
+    list would consume the whole pool and leave potential_mitigations empty,
+    silently destroying the cross-field condition the template exists to test.
+    """
+    if template_id == "E":
+        # Control questions: one non-description field only, so the answer needs
+        # exactly one passage and Top-K should win.
+        rich = [f for f in NON_DESC if entry_fields.get(f)]
+        chosen = max(rich, key=lambda f: (len(entry_fields[f]), f))
+        return entry_fields[chosen][:4]
+    caps = {
+        "A": [("description", 1), ("common_consequences", 4)],
+        "B": [("common_consequences", 3), ("detection_methods", 3)],
+        "C": [("detection_methods", 3), ("potential_mitigations", 3)],
+        "D": [("potential_mitigations", 6)],
+    }[template_id]
     pool = []
-    for field_name in spec["fields"]:
-        pool.extend(entry_fields.get(field_name, []))
-    return pool[:6]
+    for field_name, cap in caps:
+        pool.extend(entry_fields.get(field_name, [])[:cap])
+    return pool
 
 
 def assign(entries):
