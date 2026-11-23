@@ -4,12 +4,18 @@
 
 ## 当前分支和提交
 
-- 分支 `baseline/cwe-dpr-reader-mmr`；origin=`https://github.com/Bootrear/BOO-Graduation-Project.git`。
+- **当前分支**：`step1/dataset-optimization`（基于 `baseline/cwe-dpr-reader-mmr` 的 `ebd1f48` 新建，用于探针集数据集优化）。
+- 上游基线分支：`baseline/cwe-dpr-reader-mmr`；origin=`https://github.com/Bootrear/BOO-Graduation-Project.git`。
+- 本分支首次提交的自身哈希在提交后以 `git rev-parse HEAD` 获取，不预先填写。
 - 写入时 HEAD / 最近远端核验提交：`402abef6e87a50a775b17b9cb14d095b4b69f3c1`（P10），fetch/ls-remote一致。
 - 本轮已核验：P06 `86e5ed400759bd198822c8cc2eb8e5339251a4ae`；P07 `7ec81b5250e71cb0f59a8e6e388857d820826b0b`；P08 `b28b783ac1686a9cbae4c2d7f849b99c84ae4786`；P09 `dff54ee097884a9112b9e2e40bfc6f6c219ea774`；P10如上。
 - P10验收提交已推送核验；本次清理修改写入时 HEAD 为 `b78a9970f21c9b8479ef134caa3ea8d41096ce8d`。清理提交为 `9a055b2`；其后的失败记录提交为 `e01a59375bcc125e88c5358cc089aac929a0dee2`。首次推送因 `gnutls_handshake() failed: The TLS connection was non-properly terminated` 失败；随后重试成功，远端已核验包含 `e01a59375bcc125e88c5358cc089aac929a0dee2`。
 
 ## 本阶段目标与结论
+
+**STEP1（进行中）**：解决"原 12 题冒烟集无法分辨 MMR 与 Reader Top-K"的评测集缺陷。
+已交付 40 题探针骨架 `data/annotations/probe-v1/`（模板 A12/B8/C8/D4/E8，40 个不同 CWE，
+219 个候选段落索引）；`question` 与 `gold_facts` 为空，**尚未标注、未跑模型、无任何有效性结论**。
 
 P00–P10普通问答基线代码、单元、真实模型、真实端到端和部署复现均已完成技术验收。随后已清理与当前基线无关的早期选择器兼容层；清理后的回归套件为135项，12题全流程、独立新进程重载、全量预处理/建库/查询结果保持不变。
 
@@ -38,7 +44,16 @@ install.sh保持未跟踪且未改动；docs/theprompt.md原始字节保留。da
 
 ## 下一步应执行的唯一具体动作
 
-本次清理已完成本地验证和远端同步；写入时 HEAD/远端核验为 `e01a59375bcc125e88c5358cc089aac929a0dee2`。本文件本次更新提交自身哈希在提交后以 `git rev-parse HEAD` 获取并再次核验。没有未完成工程阶段需要继续。不自动扩展正式调参/增强模式/自动更新；阅读 ACCEPTANCE.md 的质量问题后，按用户新指定的后续范围行动。
+按 `data/annotations/probe-v1/README.md` 填写 `data/annotations/probe-v1/skeleton.jsonl` 的 40 题：
+每题的 `question`、`required_evidence_ids`（2–3 个）、可选 `optional_evidence_ids`、
+`gold_facts`（A/B/C 模板 2–3 条且每条覆盖不同证据），删掉 `scaffold` 字段并把 `status`
+改为 `source_text_checked`。标完冻结文件哈希写入 `manifest.json`，再跑门禁三指标
+（Evidence Recall@5、池内平均两两余弦、两策略 selected_order 差异题数）。
+
+环境侧前置：本机尚无 `models/`、`data/processed/` 与索引，需先按 `docs/DEPLOYMENT.md`
+经本地代理下载 DPR 三模型并重建 5748 段索引；首次预处理后运行
+`py scripts/verify_probe_ids.py --passages data/processed/cwe-v1/passages.jsonl`
+核对骨架里的 `passage_id`。
 
 ## 提交与恢复
 

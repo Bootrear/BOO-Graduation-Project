@@ -1,0 +1,1978 @@
+{
+  "snapshot_id": "cwe:88e4eab3cc54f16611040a0e528d7a128253426e90ee5054327fd28449fee393",
+  "chunk_index_assumption": 0,
+  "max_words": 120,
+  "passages": {
+    "cwe-passage:004143e41d4d8f2d609bfb58ec91b3dd2d86df1afc743485e7e51a09282eb3de": {
+      "cwe_id": "CWE-362",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='362']/Common_Consequences/Consequence[4]",
+      "chunk_index": 0,
+      "words": 54,
+      "content_sha256": "c65f17f8eaa73e579433c676afd416b3a927e8accacf08fce86a0735467c8584",
+      "preview": "Scope: Access Control Impact: Execute Unauthorized Code or Commands Impact: Gain Privileges or Assume Identity Impact: Bypass Protection Mechanism Note: This can have security implications when the ex"
+    },
+    "cwe-passage:0224a6f4656528a0b8cd9cadaa86831ed0070906bd0ed132e4d594c118db644b": {
+      "cwe_id": "CWE-1422",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1422']/Potential_Mitigations/Mitigation[10]",
+      "chunk_index": 0,
+      "words": 44,
+      "content_sha256": "050e315cad727eba8fc256649973f9f8b702780a495f13bdbf699f0e5c8b0a71",
+      "preview": "Phase: Documentation Description: If a hardware feature can allow incorrect or stale data to be forwarded to transient operations, the hardware designer may opt to disclose this behavior in architectu"
+    },
+    "cwe-passage:03c279c3c110af7c889850c6131f25c47ffdd95b164529d1547b299a940956c2": {
+      "cwe_id": "CWE-1427",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1427']/Common_Consequences/Consequence[4]",
+      "chunk_index": 0,
+      "words": 35,
+      "content_sha256": "b14169293318f0f44055651b8183a7136aac246e3576af854f996490770d08c5",
+      "preview": "Scope: Access Control Impact: Read Application Data Impact: Modify Application Data Impact: Gain Privileges or Assume Identity Note: The extent to which access control can be impacted is dependent on "
+    },
+    "cwe-passage:047a7c9a4ef15482d6a3a65b005bee9f4a85c97433fb1d81cdff9b58df0f2850": {
+      "cwe_id": "CWE-863",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='863']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 90,
+      "content_sha256": "193dd5a769e98cb3a23871fc84878b9d553fb772614770eeedbc079e6a8e5458",
+      "preview": "Method: Automated Static Analysis Description: Automated static analysis is useful for detecting commonly-used idioms for authorization. A tool may be able to analyze related configuration files, such"
+    },
+    "cwe-passage:0952d44e79c1b6a726d339588141cc29133791719e7d8640a160fd0ce6cff902": {
+      "cwe_id": "CWE-1420",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1420']/Potential_Mitigations/Mitigation[11]",
+      "chunk_index": 0,
+      "words": 45,
+      "content_sha256": "81b4eb85c559544ddc66842affbb902110d2c4e71a3b735f6f4d3580a2b91bc7",
+      "preview": "Phase: Documentation Description: If a hardware feature can allow incorrect operations (or correct operations with incorrect data) to execute transiently, the hardware designer may opt to disclose thi"
+    },
+    "cwe-passage:0993504d46843422605ad9f2b155ca7e86d3a7bad38ffc5043f6e59187d4463d": {
+      "cwe_id": "CWE-120",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='120']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 49,
+      "content_sha256": "f03e0a4e16aeb96006a61cc1fecaa997e414daa6f1a341d15db3eea17aefa6c4",
+      "preview": "Scope: Integrity Scope: Confidentiality Scope: Availability Impact: Modify Memory Impact: Execute Unauthorized Code or Commands Note: Buffer overflows often can be used to execute arbitrary code, whic"
+    },
+    "cwe-passage:09d2ca43319914d03d24f67fbcaf4247dc47c7e927cd31156ac8ae75e8673bec": {
+      "cwe_id": "CWE-1420",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1420']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 119,
+      "content_sha256": "142c76ffe8d871dcc5afa5f461144dec2d1eb30f3da863d19c0e537da738589b",
+      "preview": "Method: Manual Analysis Description: This weakness can be detected in hardware by manually inspecting processor specifications. Features that exhibit this weakness may include microarchitectural predi"
+    },
+    "cwe-passage:0ba20d8ecb50f29fee1e56cbc90cdfbd01d84d1eb5924be3da950257fa8486f9": {
+      "cwe_id": "CWE-665",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='665']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 69,
+      "content_sha256": "8ae001e445a991315df0317f2006f17f5ba33804ec0c41aaaae6d2f05b86ed65",
+      "preview": "Scope: Availability Impact: DoS: Crash, Exit, or Restart Note: The uninitialized data may contain values that cause program flow to change in ways that the programmer did not intend. For example, if a"
+    },
+    "cwe-passage:0bac0b70bd2514bda4c2b9735a5d4b6c1225fe6eafe4361d131e28986497f416": {
+      "cwe_id": "CWE-78",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='78']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 57,
+      "content_sha256": "c93044188b2c6efedd34edc35b7129758e8e030d4c1ec507732a16f17cf90cfc",
+      "preview": "Method: Automated Dynamic Analysis Description: This weakness can be detected using dynamic tools and techniques that interact with the product using large test suites with many diverse inputs, such a"
+    },
+    "cwe-passage:0bf5f3efd5b5521d588e8bed90f01e941e0b5f1ffb80287c5cb5a30982b12cd3": {
+      "cwe_id": "CWE-131",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='131']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 86,
+      "content_sha256": "d35240b2b6486be77500b0ccb5c8df6df3a2b0eefdcabbaf65627cbd2a029713",
+      "preview": "Method: Automated Dynamic Analysis Description: This weakness can be detected using dynamic tools and techniques that interact with the software using large test suites with many diverse inputs, such "
+    },
+    "cwe-passage:0d77efb6357918b075007cf8df276c46a46744445b7b79c5dd792718caaf6a03": {
+      "cwe_id": "CWE-209",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='209']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 35,
+      "content_sha256": "2877368d215eac54e960366c2fbd204da658d40379208602b3f946111de5fae9",
+      "preview": "Method: Automated Analysis Description: Automated methods may be able to detect certain idioms automatically, such as exposed stack traces or pathnames, but violation of business rules or privacy requ"
+    },
+    "cwe-passage:0e3a52ebdb1d371ca03b596f8cd02cd58f64ba552d7338746a34362d99490db7": {
+      "cwe_id": "CWE-732",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='732']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 36,
+      "content_sha256": "24e7e4bcb8f14cc5a370e9ef0e1f73795f84b3a74e836ddb7241b87da035089d",
+      "preview": "Scope: Access Control Impact: Gain Privileges or Assume Identity Note: An attacker may be able to modify critical properties of the associated resource to gain privileges, such as replacing a world-wr"
+    },
+    "cwe-passage:0f411b50778892d3cf4d5ab79b2c7489b56321f6039cda010e2c74bdb522876a": {
+      "cwe_id": "CWE-119",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='119']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 55,
+      "content_sha256": "93817bb8647e6ed2e96743a87af8655d0687f7392b5887f8e87a3b40b06f2dbf",
+      "preview": "Method: Automated Dynamic Analysis Description: This weakness can be detected using dynamic tools and techniques that interact with the software using large test suites with many diverse inputs, such "
+    },
+    "cwe-passage:10eee00c29dcdf48b9b726460980cb5b21eda14517ba86e651379de7883b68de": {
+      "cwe_id": "CWE-665",
+      "field_name": "description",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='665']/Description[1]",
+      "chunk_index": 0,
+      "words": 25,
+      "content_sha256": "2c1b8de5e05c470b379975d81e8186bf406a936b4944a53f2864331dce8761e7",
+      "preview": "The product does not initialize or incorrectly initializes a resource, which might leave the resource in an unexpected state when it is accessed or used."
+    },
+    "cwe-passage:1170c04cc6d73d240b896a57481d92baedafcb40c5c827d442e8d3950dbb827c": {
+      "cwe_id": "CWE-434",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='434']/Potential_Mitigations/Mitigation[3]",
+      "chunk_index": 0,
+      "words": 27,
+      "content_sha256": "7d34297d93403eab6b4c3ca0a991a58af98bf07e570a45b5d5a254750d154c1e",
+      "preview": "Phase: Architecture and Design Description: Consider storing the uploaded files outside of the web document root entirely. Then, use other mechanisms to deliver the files dynamically. [REF-423]"
+    },
+    "cwe-passage:129bbc20a9fe66e7f31cca5cf657307df6d35fb97399d74dc94ed09d4196457c": {
+      "cwe_id": "CWE-682",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='682']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 70,
+      "content_sha256": "9cdd48d164ad450cf594a25bc4b3487a83728c59978564401baff24fd5685b4f",
+      "preview": "Scope: Integrity Scope: Confidentiality Scope: Availability Impact: DoS: Crash, Exit, or Restart Impact: DoS: Resource Consumption (Other) Impact: Execute Unauthorized Code or Commands Note: If the in"
+    },
+    "cwe-passage:147c1a9c1c4e4524f2478bdf3453b8cb8b8e262ad3ea2e8920023cf5d1d299ef": {
+      "cwe_id": "CWE-89",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='89']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 35,
+      "content_sha256": "bdebc75a958ba2873c7fe91a4eda9bddc27040a3b7cde08294073f23d49b9a9c",
+      "preview": "Scope: Confidentiality Scope: Integrity Scope: Availability Impact: Execute Unauthorized Code or Commands Note: Adversaries could execute system commands, typically by changing the SQL statement to re"
+    },
+    "cwe-passage:157faf5b9fec6e3306ee20025007b1e3d9076214d673283baeb0744be6dd0185": {
+      "cwe_id": "CWE-601",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='601']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 113,
+      "content_sha256": "0b67210110a73ba6cd3c94836c4515fbf432da43a3d88e42e68d9836393e30d2",
+      "preview": "Scope: Access Control Impact: Bypass Protection Mechanism Impact: Gain Privileges or Assume Identity Note: The user may be redirected to an untrusted page that contains malware which may then compromi"
+    },
+    "cwe-passage:1cdc4a37208d96d600f0731644dca348522e45d07dc4785f70592292c1e18b74": {
+      "cwe_id": "CWE-1421",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1421']/Potential_Mitigations/Mitigation[10]",
+      "chunk_index": 0,
+      "words": 42,
+      "content_sha256": "27f7ca8480447faff8ae52d88579064c86c4ab740344c30463dc5741158e4738",
+      "preview": "Phase: System Configuration Description: Some systems may allow the user to disable (for example, in the BIOS) microarchitectural features that allow transient access to architecturally restricted dat"
+    },
+    "cwe-passage:2258b1c40bf9b0a87015e83b78828fcd1874f0337c0a807d1e4219704478709c": {
+      "cwe_id": "CWE-209",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='209']/Detection_Methods/Detection_Method[5]",
+      "chunk_index": 0,
+      "words": 79,
+      "content_sha256": "84e0ca5fc833b24b838cec004759ff78a9075af82d45b141488afd22978501c0",
+      "preview": "Method: Automated Static Analysis Description: Automated static analysis, commonly referred to as Static Application Security Testing (SAST), can find some instances of this weakness by analyzing sour"
+    },
+    "cwe-passage:2302f0f642ded80c2dabb0778cba75327341413414d67add323234961f8e319a": {
+      "cwe_id": "CWE-22",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='22']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 66,
+      "content_sha256": "fc744b1272085a5498bd4aea418ed19c5a1cb26b795b5a3599978c394a5daa31",
+      "preview": "Scope: Integrity Impact: Modify Files or Directories Note: The attacker may be able to overwrite or create critical files, such as programs, libraries, or important data. If the targeted file is used "
+    },
+    "cwe-passage:2339b838c61adc1ca5f8d5fd3beac9c2df4172058a71ebb44d08cc6b3010817e": {
+      "cwe_id": "CWE-682",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='682']/Common_Consequences/Consequence[4]",
+      "chunk_index": 0,
+      "words": 38,
+      "content_sha256": "52b44e804dc97a2466fa6cf4f9c70f4b4833b025f9279621c7a0a649f92a482e",
+      "preview": "Scope: Access Control Impact: Bypass Protection Mechanism Note: If the incorrect calculation leads to an insufficient comparison (CWE-697), it may compromise a protection mechanism such as a validatio"
+    },
+    "cwe-passage:23e5f4345fa8098bed5bc1b1da0150a52f2a8b6ee588c5f7194700d2930ec564": {
+      "cwe_id": "CWE-78",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='78']/Detection_Methods/Detection_Method[7]",
+      "chunk_index": 0,
+      "words": 46,
+      "content_sha256": "0000c4e4d5d85d84ccb334447f5f4d3a2e331227e5c801693ed3c2b4b8644d02",
+      "preview": "Method: Manual Static Analysis - Source Code Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Manual Source Code Review (not inspec"
+    },
+    "cwe-passage:24207b6994be5773faa5fac698af049dae234673e8e20d09d757bd848a4a6d41": {
+      "cwe_id": "CWE-306",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='306']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 89,
+      "content_sha256": "0b2f4955d2926321db32f132575ad8aaba31d3169a866634d63097e66cf15442",
+      "preview": "Method: Automated Static Analysis Description: Automated static analysis is useful for detecting commonly-used idioms for authentication. A tool may be able to analyze related configuration files, suc"
+    },
+    "cwe-passage:24bce5d75722b16edda08e019e73fca41bc3ada178f576e12a4f4dae1a1eb08a": {
+      "cwe_id": "CWE-134",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='134']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 36,
+      "content_sha256": "aa8e5079bb684d1cc3781f0eef1fadcb18ef9f339aab3ad631153f4d4d5d08d6",
+      "preview": "Scope: Integrity Scope: Confidentiality Scope: Availability Impact: Modify Memory Impact: Execute Unauthorized Code or Commands Note: Format string problems can result in the execution of arbitrary co"
+    },
+    "cwe-passage:252e3fa7bf3731a337c8e35f7f48ef9b265153ee0ab8b1e9860760a462646206": {
+      "cwe_id": "CWE-1039",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1039']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 33,
+      "content_sha256": "894958d661ce2e15d895e4f1e9efe54a77ae8e4caabcd47e16aef781d13c60a0",
+      "preview": "Scope: Confidentiality Impact: Read Application Data Note: This weakness could lead to breaches of data privacy through exposing features of the training data, e.g., by using membership inference atta"
+    },
+    "cwe-passage:262457a1503201d7c750ab11f30609b620871e0882c2e2ff3d8b34d1d7a6c3c7": {
+      "cwe_id": "CWE-352",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='352']/Potential_Mitigations/Mitigation[6]",
+      "chunk_index": 0,
+      "words": 19,
+      "content_sha256": "98b5ab5b6e0af40e46c9081a6068724c333958a645271b1f661279c0b9f7e689",
+      "preview": "Phase: Architecture and Design Description: Do not use the GET method for any request that triggers a state change."
+    },
+    "cwe-passage:264db8b7a138e427b7c77d4bee30d0c328c89e80aeb9097bad862e83c77bd245": {
+      "cwe_id": "CWE-22",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='22']/Common_Consequences/Consequence[4]",
+      "chunk_index": 0,
+      "words": 57,
+      "content_sha256": "b42cba30031a02ae7e144205ea65d464a1ed13deda400d2f26f61c21c5e2be43",
+      "preview": "Scope: Availability Impact: DoS: Crash, Exit, or Restart Note: The attacker may be able to overwrite, delete, or corrupt unexpected critical files such as programs, libraries, or important data. This "
+    },
+    "cwe-passage:27a988f69a5613ed7b879ebccf170e1ed353a02bdf51199139156532f1a632c3": {
+      "cwe_id": "CWE-129",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='129']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 24,
+      "content_sha256": "45405473a5602c0ce4188ffbe256b83c3d3f26a44a4bc20b9f80af14d037560f",
+      "preview": "Scope: Integrity Impact: Modify Memory Note: If the memory corrupted is data, rather than instructions, the system will continue to function with improper values."
+    },
+    "cwe-passage:298e2695aaeb639687205d0713252b6f17a4f7ae003338cdf7b34771963e5337": {
+      "cwe_id": "CWE-1420",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1420']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 60,
+      "content_sha256": "acbbf786fd8aaadf6e0e70f47a650f4610cdaf3662230e0fed752d0b1a41575f",
+      "preview": "Method: Fuzzing Description: Academic researchers have demonstrated that this weakness can be detected in software using software fuzzing tools ([REF-1429]). Effectiveness: Opportunistic Effectiveness"
+    },
+    "cwe-passage:2b2b5bc7492a7eceda782b88a31c6f2f6137a70e0cec2e493412ba0394d139d4": {
+      "cwe_id": "CWE-863",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='863']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 48,
+      "content_sha256": "16add826d173f9be127505e6ccdc7fdbb6b884fa2d7d24400aadd8b3c7d0b088",
+      "preview": "Scope: Integrity Impact: Modify Application Data Impact: Modify Files or Directories Note: An attacker could bypass intended access restrictions to modify sensitive data, either by writing the data di"
+    },
+    "cwe-passage:2b2f2dd050c964305b698b880bb00c0f9df74cc7543bec7d85b696136c229a8c": {
+      "cwe_id": "CWE-250",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='250']/Detection_Methods/Detection_Method[6]",
+      "chunk_index": 0,
+      "words": 32,
+      "content_sha256": "08defbefe3b35004861ba603d6de0eef8ca3342b115591bc297030f558e1bcfa",
+      "preview": "Method: Dynamic Analysis with Manual Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Host App"
+    },
+    "cwe-passage:2bb463faa2a755bd502f4e35c301d39b212da79d05dfed6517fd143b8b247710": {
+      "cwe_id": "CWE-807",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='807']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 52,
+      "content_sha256": "ebe78c4cb3ae6fdcceed0fcf5b8982b073cda8700092b31e4e528a18644aa97f",
+      "preview": "Method: Automated Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Bytecode Weak"
+    },
+    "cwe-passage:2c0adaacb7b458bb763c11fc01ec4e47cb9e25f2a234a174dab68d1d940990ee": {
+      "cwe_id": "CWE-805",
+      "field_name": "description",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='805']/Description[1]",
+      "chunk_index": 0,
+      "words": 34,
+      "content_sha256": "21af14a857dcb8d9a1357567928b019d315c76aca2bb8487631007f2a56446af",
+      "preview": "The product uses a sequential operation to read or write a buffer, but it uses an incorrect length value that causes it to access memory that is outside of the bounds of the buffer."
+    },
+    "cwe-passage:2c668d54585d85726e2f479f65773375426fa5393bcbff5ef4965bb2e0c26bfa": {
+      "cwe_id": "CWE-89",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='89']/Common_Consequences/Consequence[4]",
+      "chunk_index": 0,
+      "words": 34,
+      "content_sha256": "4dadb1f73347d6c42aa57ab19b5eef194f81de83d4cd0e1bf10fc21428f8a796",
+      "preview": "Scope: Access Control Impact: Bypass Protection Mechanism Note: If authorization information is held in a SQL database, it may be possible to change this information through the successful exploitatio"
+    },
+    "cwe-passage:2c91765d2880a9c631d117d866b5adb4fdbe72004aa9adb736ec117fb889f1b6": {
+      "cwe_id": "CWE-807",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='807']/Detection_Methods/Detection_Method[4]",
+      "chunk_index": 0,
+      "words": 38,
+      "content_sha256": "6171dd1ee4cccfcd08820f12682a43fe1d9c41e429d9fb7252fc8f27852735e4",
+      "preview": "Method: Dynamic Analysis with Automated Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Web A"
+    },
+    "cwe-passage:2ea56c2e2ad5bdb25c90163ea30f8ce9f58ad95c66f2ec405ac50ff9736c1087": {
+      "cwe_id": "CWE-829",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='829']/Detection_Methods/Detection_Method[4]",
+      "chunk_index": 0,
+      "words": 46,
+      "content_sha256": "0000c4e4d5d85d84ccb334447f5f4d3a2e331227e5c801693ed3c2b4b8644d02",
+      "preview": "Method: Manual Static Analysis - Source Code Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Manual Source Code Review (not inspec"
+    },
+    "cwe-passage:30f6874e6dbefab0566e33d102dbc4deb8038e6752de419036c1234cb267ba0f": {
+      "cwe_id": "CWE-20",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='20']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 25,
+      "content_sha256": "53d8a96d5aaaa5e011b509949ec3ff5bd845898570b17dac9384f2f940b32d76",
+      "preview": "Scope: Confidentiality Impact: Read Memory Impact: Read Files or Directories Note: An attacker could read confidential data if they are able to control resource references."
+    },
+    "cwe-passage:327797e01b9ce111e33cf904bc848dece6498e32b575d9d994b7d11d65427152": {
+      "cwe_id": "CWE-285",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='285']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 89,
+      "content_sha256": "3002ea4c7a00a6e8ed94dd3c2a9d5e2b142e24ffa3e1e669ae94ee5173fb77b2",
+      "preview": "Method: Automated Static Analysis Description: Automated static analysis is useful for detecting commonly-used idioms for authorization. A tool may be able to analyze related configuration files, such"
+    },
+    "cwe-passage:345f8eed89f0f1130f25aed7de5a0d7735ab0d1d9ad45a0eae61d56ed75a2f8a": {
+      "cwe_id": "CWE-732",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='732']/Detection_Methods/Detection_Method[10]",
+      "chunk_index": 0,
+      "words": 59,
+      "content_sha256": "533eba5c3eb8dc6ac612e9c3d6e244d6603ffe75d860ce9f30ec84faffe4df4d",
+      "preview": "Method: Dynamic Analysis with Automated Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Host-"
+    },
+    "cwe-passage:355e5f4b8e9b51dd2d1f1fa44256feead0c99e2bd817fe185c2b7b3c8675cbff": {
+      "cwe_id": "CWE-116",
+      "field_name": "description",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='116']/Description[1]",
+      "chunk_index": 0,
+      "words": 36,
+      "content_sha256": "96f59469e651b26de37c2358081e1c669be95a2fe7fa7a5046a7a8fd48d2cdd7",
+      "preview": "The product prepares a structured message for communication with another component, but encoding or escaping of the data is either missing or done incorrectly. As a result, the intended structure of t"
+    },
+    "cwe-passage:361043a9868e8cf43cb6c2db5e2997b9c6c832d5797e101fd2b77f70c8d9f827": {
+      "cwe_id": "CWE-190",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='190']/Common_Consequences/Consequence[5]",
+      "chunk_index": 0,
+      "words": 34,
+      "content_sha256": "bb3a75b983aa2013116bbce223cc5abb4f4f45c3d4f1b90d2eb43b3ae1fd4f2d",
+      "preview": "Scope: Access Control Impact: Bypass Protection Mechanism Note: If integer values are used in security-critical decisions, such as calculating quotas or allocation limits, integer overflows can be use"
+    },
+    "cwe-passage:36e0b8ceaeda3825740f9c31baae0816bd3a51e8a4912d2fa2d392e44b67303d": {
+      "cwe_id": "CWE-89",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='89']/Common_Consequences/Consequence[5]",
+      "chunk_index": 0,
+      "words": 33,
+      "content_sha256": "5b86dce54a16cfcf1e79349494eb33095ad4b3511269628b4abeacb4b06480d2",
+      "preview": "Scope: Integrity Impact: Modify Application Data Note: Just as it may be possible to read sensitive information, it is also possible to modify or even delete this information with a SQL injection atta"
+    },
+    "cwe-passage:37c11af964dd65ddf5c2712071a3bde0eeb6b7d63be298ccf4222125957c2065": {
+      "cwe_id": "CWE-367",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='367']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 48,
+      "content_sha256": "2f22855c96cb28ec325cf885f366235f1b5e892704d23267e8f3eecd36a77ba3",
+      "preview": "Scope: Integrity Scope: Other Impact: Modify Application Data Impact: Modify Files or Directories Impact: Modify Memory Impact: Other Note: Race conditions such as this kind may be employed to gain re"
+    },
+    "cwe-passage:37eca74d2df65005396bd971182e653e443a48c257c1f60ac8b4881c3b68b1d8": {
+      "cwe_id": "CWE-367",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='367']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 21,
+      "content_sha256": "50ff15fd43a6d6294610b9221a6952937a9d82ecfc50f541d6cca229a5f3993d",
+      "preview": "Scope: Integrity Scope: Other Impact: Alter Execution Logic Impact: Unexpected State Note: The attacker can gain access to otherwise unauthorized resources."
+    },
+    "cwe-passage:37f4ea7235169af7255a26ba5884742611dcebfc699136423baede44bcba3087": {
+      "cwe_id": "CWE-829",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='829']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 53,
+      "content_sha256": "55851106cefdf45d9d3ebf819a2c2612ffb7a3c6b038373f24813ba558a8b751",
+      "preview": "Method: Dynamic Analysis with Manual Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Forced P"
+    },
+    "cwe-passage:38d56d293534697ba71f7797194ff528488de3b9881ab2274fdfa0808a507e38": {
+      "cwe_id": "CWE-1240",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1240']/Potential_Mitigations/Mitigation[10]",
+      "chunk_index": 0,
+      "words": 35,
+      "content_sha256": "068a25a6509befb8be51be185954352340fc94695cf96ffc463971b70b75cf20",
+      "preview": "Phase: Architecture and Design Phase: Implementation Description: When using industry-approved techniques, use them correctly. Don't cut corners by skipping resource-intensive steps (CWE-325). These s"
+    },
+    "cwe-passage:39b18d89a8617a15744b732164ea4b8c401f3bcbc8e8ad86c80c10c01fccbc0e": {
+      "cwe_id": "CWE-362",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='362']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 38,
+      "content_sha256": "e9e388e11664a8f2ec0a5740dd23d772226aaa6efe90b553fdaaa233ebb0eb56",
+      "preview": "Scope: Availability Impact: DoS: Crash, Exit, or Restart Impact: DoS: Instability Note: When a race condition allows multiple control flows to access a resource simultaneously, it might lead the produ"
+    },
+    "cwe-passage:3a66ddca88623cd4c9ff8fa0542f27d0b92cbdaae5308115c2aab4855b721565": {
+      "cwe_id": "CWE-134",
+      "field_name": "description",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='134']/Description[1]",
+      "chunk_index": 0,
+      "words": 22,
+      "content_sha256": "0f41610eb3e88445ab7c9e8db9003c39af568d0f717c1840e869e2413debe177",
+      "preview": "The product uses a function that accepts a format string as an argument, but the format string originates from an external source."
+    },
+    "cwe-passage:3b138b064b5b7d56d06068470bda6e5688c7bcd6f0b676a3d441431ce8d895be": {
+      "cwe_id": "CWE-798",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='798']/Detection_Methods/Detection_Method[10]",
+      "chunk_index": 0,
+      "words": 27,
+      "content_sha256": "73a817f9295e3e25011272bea6f73f89dda4ea4455221f8ee31270596ed8dcc5",
+      "preview": "Method: Automated Static Analysis Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Configuration Checker Effectivenes"
+    },
+    "cwe-passage:3b79ded792242e5c7f868b7006596d62061915ef01ecb5490db2f555b18fee1b": {
+      "cwe_id": "CWE-129",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='129']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 56,
+      "content_sha256": "42b6ee1b3173f3a9190db8a6fd80a44b0581dd40bb5cfb9db7d25548d675558d",
+      "preview": "Scope: Confidentiality Scope: Integrity Impact: Modify Memory Impact: Read Memory Note: Use of an index that is outside the bounds of an array can also trigger out-of-bounds read or write operations, "
+    },
+    "cwe-passage:3c81deb658d97b2fd75f2e1eba38b617b02fffd9387ba04611c90bef053d29ea": {
+      "cwe_id": "CWE-798",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='798']/Detection_Methods/Detection_Method[11]",
+      "chunk_index": 0,
+      "words": 40,
+      "content_sha256": "cd90914f419c8cf8aef28df8a71843f77b58d7a3b8f4fc87789e3d8501c713dd",
+      "preview": "Method: Architecture or Design Review Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Inspection (IEEE 1028 standard) (can apply t"
+    },
+    "cwe-passage:3cd3f67be9856155b2d6e942fed0898182707b40c0d8e03d436513d07a0c0719": {
+      "cwe_id": "CWE-73",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='73']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 36,
+      "content_sha256": "9fb397bd6e3c06d3a4ac0ccfc03e2af51006b898c1bb9a085d32b9625ef9ab92",
+      "preview": "Scope: Integrity Scope: Confidentiality Impact: Read Files or Directories Impact: Modify Files or Directories Note: The application can operate on unexpected files. Confidentiality is violated when th"
+    },
+    "cwe-passage:3ecfca1ec64b52fae58261818774d7e6c20546d90c036da03416e58095464d47": {
+      "cwe_id": "CWE-327",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='327']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 45,
+      "content_sha256": "e9e4b24ae2edcaf87ab99d0ef5a2c31fae6e12ca4168616bd094dd410848537a",
+      "preview": "Method: Automated Analysis Description: Automated methods may be useful for recognizing commonly-used libraries or features that have become obsolete. Effectiveness: Moderate Effectiveness_Notes: Fals"
+    },
+    "cwe-passage:4128f949d882d017d45c69c85cd0fe3d3f53805f2e1d299ab702c62536dbaaba": {
+      "cwe_id": "CWE-190",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='190']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 63,
+      "content_sha256": "912b4f141ce0fae1f1ad33bc6d3be5b5cb6128b914bc02a765e91f0af16f8e73",
+      "preview": "Scope: Availability Impact: DoS: Crash, Exit, or Restart Impact: DoS: Resource Consumption (Memory) Impact: DoS: Instability Note: This weakness can generally lead to undefined behavior and therefore "
+    },
+    "cwe-passage:42e4f8a1863ff952e71ae6339dffb0192fffeae68fb0da9636db1409cdce4f8f": {
+      "cwe_id": "CWE-131",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='131']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 71,
+      "content_sha256": "1de89859ca18f95eb42b68ee315cb824308345e48bc3804afaa5073f80239df4",
+      "preview": "Method: Automated Dynamic Analysis Description: Use tools that are integrated during compilation to insert runtime error-checking mechanisms related to memory safety errors, such as AddressSanitizer ("
+    },
+    "cwe-passage:440ac593cb175bbda16e89e73137070c7dfbb3e67de2b4628f8b1df1ad55acb4": {
+      "cwe_id": "CWE-434",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='434']/Potential_Mitigations/Mitigation[2]",
+      "chunk_index": 0,
+      "words": 49,
+      "content_sha256": "6d5cb57407b2627e720af159f7447e3f85ced8eb89569fe2ed025b06ceb6c5f4",
+      "preview": "Phase: Architecture and Design Strategy: Enforcement by Conversion Description: When the set of acceptable objects, such as filenames or URLs, is limited or known, create a mapping from a set of fixed"
+    },
+    "cwe-passage:450049b1622d1eed6e1aef826f5cd8ef4718083f68f054835e4dd0c628c3d26f": {
+      "cwe_id": "CWE-1422",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1422']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 96,
+      "content_sha256": "021742559ed9fd313e674f726169b7282382ec6154ec812eb67669e091b6972b",
+      "preview": "Method: Manual Analysis Description: This weakness can be detected in hardware by manually inspecting processor specifications. Features that exhibit this weakness may include microarchitectural predi"
+    },
+    "cwe-passage:468081305968357b1e8091a5a964d2cb792aefe17239286ef34dc4aa754fe7b9": {
+      "cwe_id": "CWE-1421",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1421']/Potential_Mitigations/Mitigation[13]",
+      "chunk_index": 0,
+      "words": 58,
+      "content_sha256": "5b4370a98365be4b129697de6a1eb75ac90626844a8174d155db87290289bfbf",
+      "preview": "Phase: Requirements Description: Processor designers, system software vendors, or other agents may choose to restrict the ability of unprivileged software to access to high-resolution timers that are "
+    },
+    "cwe-passage:4709dd7807c69d6b35d50c79f052defd6252db527f2d973a98bc9f63377a6edf": {
+      "cwe_id": "CWE-250",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='250']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 63,
+      "content_sha256": "c66be8e5f258f51ff83ea1070cac0a76156ac9f792b7bbdd62ff95d5fdbb3550",
+      "preview": "Method: Manual Analysis Description: This weakness can be detected using tools and techniques that require manual (human) analysis, such as penetration testing, threat modeling, and interactive tools "
+    },
+    "cwe-passage:490cb5f0cc75c938b765f205734a53cecd39549a6bfc78fc70b4e4cc5e2492fe": {
+      "cwe_id": "CWE-330",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='330']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 52,
+      "content_sha256": "ebe78c4cb3ae6fdcceed0fcf5b8982b073cda8700092b31e4e528a18644aa97f",
+      "preview": "Method: Automated Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Bytecode Weak"
+    },
+    "cwe-passage:49b664aa6150cff2e2d744ecf6e3e389fb26636918f5841d190312b34ba77ea5": {
+      "cwe_id": "CWE-116",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='116']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 40,
+      "content_sha256": "174b91e23b320cd37b5718c3565f7a9db4f70c0e1cb8da76d62c088f15e1bdf9",
+      "preview": "Scope: Integrity Scope: Confidentiality Scope: Availability Scope: Access Control Impact: Execute Unauthorized Code or Commands Note: The communications between components can be modified in unexpecte"
+    },
+    "cwe-passage:4a02c7f4fc510a4fbb1f3cc14b2f3b3d52407f82f4ee2848f912b918fd84789b": {
+      "cwe_id": "CWE-805",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='805']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 52,
+      "content_sha256": "506c23eab17cc25e8542bccdaaaa2d0c5ca78257c3f6f2ca1b72d067160b6021",
+      "preview": "Scope: Integrity Scope: Confidentiality Scope: Availability Impact: Read Memory Impact: Modify Memory Impact: Execute Unauthorized Code or Commands Note: Buffer overflows often can be used to execute "
+    },
+    "cwe-passage:4a5fa6ec15c237ec129ce5d44daa7027a5cc4fcdfae3e1ca489c398dfca32659": {
+      "cwe_id": "CWE-352",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='352']/Potential_Mitigations/Mitigation[3]",
+      "chunk_index": 0,
+      "words": 47,
+      "content_sha256": "a198b4f4c89a49d98d1dd667969b62b5e3acbf914f0ab14c51082512a989b9f1",
+      "preview": "Phase: Architecture and Design Description: Generate a unique nonce for each form, place the nonce into the form, and verify the nonce upon receipt of the form. Be sure that the nonce is not predictab"
+    },
+    "cwe-passage:4ae4f6cecba76faff8ce0251a44128345dbd42797a1580193951c7cc982c65bc": {
+      "cwe_id": "CWE-250",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='250']/Detection_Methods/Detection_Method[10]",
+      "chunk_index": 0,
+      "words": 48,
+      "content_sha256": "64440cf84590c4d805f64232a6c801e23e6f322ba4dff577d3b7a84d1169f2f2",
+      "preview": "Method: Architecture or Design Review Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Inspection (IEEE 1028 standard) (can apply t"
+    },
+    "cwe-passage:4b368b15d06afaa7763be1f69f6126e1d5d1f6a1beeb95142b15c533aaed73c7": {
+      "cwe_id": "CWE-119",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='119']/Detection_Methods/Detection_Method[5]",
+      "chunk_index": 0,
+      "words": 42,
+      "content_sha256": "14ef8783f4a30a110c4c406c42b2ad0fa93121867eb7e83c52b21dfb908036f9",
+      "preview": "Method: Manual Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Binary / Bytecod"
+    },
+    "cwe-passage:4b43d7fd2b607812bd33f0b86db43141367fd28b3093aae2888c56bfb7786bb0": {
+      "cwe_id": "CWE-327",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='327']/Detection_Methods/Detection_Method[10]",
+      "chunk_index": 0,
+      "words": 45,
+      "content_sha256": "14ed865b55c08cc3a98de255c694e2485ebe76977e5099c60172a39f5c6fb77f",
+      "preview": "Method: Architecture or Design Review Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Formal Methods / Correct-By-Construction Cos"
+    },
+    "cwe-passage:4b792af23a6c06e77e5a02cac3353516944241eedaa50da9fb25d25198c31cae": {
+      "cwe_id": "CWE-362",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='362']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 42,
+      "content_sha256": "789aaed749c0bd012504f075a04e554dfc87e7a3c2f6b2860de3e8035f723c3b",
+      "preview": "Scope: Availability Impact: DoS: Resource Consumption (CPU) Impact: DoS: Resource Consumption (Memory) Impact: DoS: Resource Consumption (Other) Note: When a race condition makes it possible to bypass"
+    },
+    "cwe-passage:4d06da35011ef532ff3e7d22a939967499ef33752fefd5452a7f8e9ea13164c5": {
+      "cwe_id": "CWE-1420",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1420']/Detection_Methods/Detection_Method[4]",
+      "chunk_index": 0,
+      "words": 73,
+      "content_sha256": "158c3dc5895aeb7518a1c21329ca6fb65059985bda3ae1e2035e0b829f2f2d49",
+      "preview": "Method: Automated Static Analysis Description: A variety of automated static analysis tools can identify potentially exploitable code sequences in software. These tools may perform the analysis on sou"
+    },
+    "cwe-passage:4d2e99b3996bf6f3ab4a9c15f281654a2206f0ea4d64d35a916d79b05138bc6a": {
+      "cwe_id": "CWE-732",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='732']/Detection_Methods/Detection_Method[11]",
+      "chunk_index": 0,
+      "words": 48,
+      "content_sha256": "184105fa1eeee866e0e44bb0265923f0408d748a4074cc4927136d43a8009196",
+      "preview": "Method: Dynamic Analysis with Manual Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Host Application Inter"
+    },
+    "cwe-passage:4d68bfa32f1886e04a2e2fadc2fb33bb79f2164b2625e63fcdde55591c5f42cc": {
+      "cwe_id": "CWE-1427",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1427']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 73,
+      "content_sha256": "1c6e1cef4e9f01320cd4f45a852b498857d4e0e600bc07e8b98502ca5e20633a",
+      "preview": "Scope: Confidentiality Scope: Integrity Scope: Availability Impact: Execute Unauthorized Code or Commands Impact: Varies by Context Note: The consequences are entirely contextual, depending on the sys"
+    },
+    "cwe-passage:4e0647a096aec8fb4c1249dd174f8f7305f2171029db4534177213a2bb970d2f": {
+      "cwe_id": "CWE-209",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='209']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 86,
+      "content_sha256": "06ff600e632b73648e078443d16ca52d19efdf3f8a45773168a26d2907110b49",
+      "preview": "Method: Automated Dynamic Analysis Description: This weakness can be detected using dynamic tools and techniques that interact with the software using large test suites with many diverse inputs, such "
+    },
+    "cwe-passage:4f7a24f7f8bcf797b3c2d9f2a5aa39a84541f9b92daeba130405d25a98ce4031": {
+      "cwe_id": "CWE-665",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='665']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 39,
+      "content_sha256": "a37e7f860cc5eacb7ed692059ef69e0eb21032192f6bfb12a21471e66ed5ef98",
+      "preview": "Scope: Confidentiality Impact: Read Memory Impact: Read Application Data Note: When reusing a resource such as memory or a program variable, the original contents of that resource may not be cleared b"
+    },
+    "cwe-passage:4f9a909f638f22684329a22bbbff2e8be3c47bb878ca471325b0c6a3f71bcab6": {
+      "cwe_id": "CWE-732",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='732']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 35,
+      "content_sha256": "fd31a61d37fdc6e3fafb7af884380d5ecc2d9dab35fc8a8fd985bff75e199d96",
+      "preview": "Scope: Confidentiality Impact: Read Application Data Impact: Read Files or Directories Note: An attacker may be able to read sensitive information from the associated resource, such as credentials or "
+    },
+    "cwe-passage:50ef1a47627204ec9b4c7bbc0739d4b15534220c66d09c2815d3a7d814fbb167": {
+      "cwe_id": "CWE-79",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='79']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 52,
+      "content_sha256": "df7e9a64d106a711cafc3cf499f02596c86676be1ca1067c0a7b674bc5f514d8",
+      "preview": "Method: Automated Static Analysis Description: Use automated static analysis tools that target this type of weakness. Many modern techniques use data flow analysis to minimize the number of false posi"
+    },
+    "cwe-passage:535f7441fea90abccda2310dc853486695bbf40b9891b5d999c452f7ab019a9d": {
+      "cwe_id": "CWE-20",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='20']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 59,
+      "content_sha256": "3d7d8ee6bd13a6a12abbf4dfe4d1427f1c793f361daa5b0e5357fd800d17013a",
+      "preview": "Method: Fuzzing Description: Fuzzing techniques can be useful for detecting input validation errors. When unexpected inputs are provided to the software, the software should not crash or otherwise bec"
+    },
+    "cwe-passage:53c143a6912c76226233c0a0297efd1971abcb8b1df41ee53979e3218552c1e9": {
+      "cwe_id": "CWE-798",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='798']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 40,
+      "content_sha256": "c4d4d927a88214db81dd0cc24692c28cf68c84a721a6ddf7aa7ded6a08c1eca5",
+      "preview": "Method: Black Box Description: Credential storage in configuration files is findable using black box methods, but the use of hard-coded credentials for an incoming authentication routine typically inv"
+    },
+    "cwe-passage:54517581281ad99ec4beef1acb9d74a2d4732415a3423393c59f28041bb97fe6": {
+      "cwe_id": "CWE-330",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='330']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 57,
+      "content_sha256": "f1494631a6fc30e0471565c43e1656220decc2557b637269526aecc1c897c4b7",
+      "preview": "Scope: Access Control Impact: Bypass Protection Mechanism Impact: Gain Privileges or Assume Identity Note: When an authorization or authentication mechanism relies on random values to restrict access "
+    },
+    "cwe-passage:551ef4844214077fb33be55f3fae345711c3cbb06e16da929231baeccf70df74": {
+      "cwe_id": "CWE-829",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='829']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 76,
+      "content_sha256": "6c043f43bc9d3dd685a24ea92660e8e4e197ad93ca7ccd8101427c1e453ec788",
+      "preview": "Scope: Confidentiality Scope: Integrity Scope: Availability Impact: Execute Unauthorized Code or Commands Note: An attacker could insert malicious functionality into the program by causing the program"
+    },
+    "cwe-passage:5539d04dc732030abcb27d6c14f5088a524e2a36d4ee29accfbbac658d2d2adc": {
+      "cwe_id": "CWE-285",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='285']/Detection_Methods/Detection_Method[4]",
+      "chunk_index": 0,
+      "words": 42,
+      "content_sha256": "14ef8783f4a30a110c4c406c42b2ad0fa93121867eb7e83c52b21dfb908036f9",
+      "preview": "Method: Manual Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Binary / Bytecod"
+    },
+    "cwe-passage:56a46052b277ee73c7b429bde315790b7594092dceb52b2e501d63fa74bedfd8": {
+      "cwe_id": "CWE-434",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='434']/Potential_Mitigations/Mitigation[10]",
+      "chunk_index": 0,
+      "words": 39,
+      "content_sha256": "5a11cb3c18a11ea4243f8a5aab291efc17f47e8dd710ebf0b523a9683bb7c1f6",
+      "preview": "Phase: Implementation Description: Do not rely exclusively on the MIME content type or filename attribute when determining how to render a file. Validating the MIME content type and ensuring that it m"
+    },
+    "cwe-passage:5711d67d5fc6cce0ce6c835088d8bccbbdd675531bdfdae6d374d4f18202bd39": {
+      "cwe_id": "CWE-352",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='352']/Potential_Mitigations/Mitigation[4]",
+      "chunk_index": 0,
+      "words": 41,
+      "content_sha256": "4e5e5dade9489b9e6cb7bfd8125dbbc0cf6fb68dbe6c5d73570b6bf8139bde85",
+      "preview": "Phase: Architecture and Design Description: Identify especially dangerous operations. When the user performs a dangerous operation, send a separate confirmation request to ensure that the user intende"
+    },
+    "cwe-passage:5bf688346e1eaf8ef9563453821b10346fb341bf5e17a817ba98f31f66980a25": {
+      "cwe_id": "CWE-129",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='129']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 50,
+      "content_sha256": "f5f2d4d3c2145ed670c28bb02a3fa58a75b31b65fafa1f4fd3576b536e84c8d6",
+      "preview": "Scope: Integrity Scope: Availability Impact: DoS: Crash, Exit, or Restart Note: Use of an index that is outside the bounds of an array will very likely result in the corruption of relevant memory and "
+    },
+    "cwe-passage:5d1f165ea73fcbf9b532e936d1b0e1cc791e55954bb5834e7f509c018c2948aa": {
+      "cwe_id": "CWE-119",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='119']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 110,
+      "content_sha256": "43b8bb54ed14f9647c29f2678b6aa2bb0097e40ff4b89048dc6ff6910e7faae7",
+      "preview": "Method: Automated Static Analysis Description: This weakness can often be detected using automated static analysis tools. Many modern tools use data flow analysis or constraint-based techniques to min"
+    },
+    "cwe-passage:5d44e133444a9b6f39ddab364eaceadcdf61f3d474a45d55232f6787f3dd58bc": {
+      "cwe_id": "CWE-732",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='732']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 34,
+      "content_sha256": "d616070697e9e36b6b42a5e18e419fae516ef291819dbbcec4385671c3beb8bc",
+      "preview": "Scope: Integrity Scope: Other Impact: Modify Application Data Impact: Other Note: An attacker may be able to destroy or corrupt critical data in the associated resource, such as deletion of records fr"
+    },
+    "cwe-passage:5d45e2ee818e7155cd0ab03e3ca8f335f67a9a10506af3df81aee5c8f38c3d82": {
+      "cwe_id": "CWE-1240",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1240']/Potential_Mitigations/Mitigation[2]",
+      "chunk_index": 0,
+      "words": 35,
+      "content_sha256": "4879f07d6175fd3dee862245b3274503c383a204bc54293f91614f3fcf18b875",
+      "preview": "Phase: Architecture and Design Description: Ensure that the architecture/design uses the strongest-available primitives and algorithms from trusted parties. For example, US government systems require "
+    },
+    "cwe-passage:5ee65475d22493ddad60c00c0456aa54cb06eeb38359536a4fa6c9880cbf4246": {
+      "cwe_id": "CWE-79",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='79']/Potential_Mitigations/Mitigation[12]",
+      "chunk_index": 0,
+      "words": 55,
+      "content_sha256": "3b75bc493e118b7234976084e19e539da1e641d998f52159bf81cf311129deac",
+      "preview": "Phase: Operation Phase: Implementation Strategy: Environment Hardening Description: When using PHP, configure the application so that it does not use register_globals. During implementation, develop t"
+    },
+    "cwe-passage:6150f0e93c85a8d5efee0744e54feaf58eafa3650096412c8ab1948b69250547": {
+      "cwe_id": "CWE-601",
+      "field_name": "description",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='601']/Description[1]",
+      "chunk_index": 0,
+      "words": 22,
+      "content_sha256": "c51a63798ac076927abdb5575dd3606f29f5e4e61930a270b3cba3c93d4e7990",
+      "preview": "The web application accepts a user-controlled input that specifies a link to an external site, and uses that link in a redirect."
+    },
+    "cwe-passage:6194e5f8504fdec28e4c73e541cd1c2f57156bf9ac169ed9fe717c11c1b94a3a": {
+      "cwe_id": "CWE-89",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='89']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 57,
+      "content_sha256": "bfd4a8044bb1a857cf43a4b25e5b5cca1aafd2cf6997f6090a04f4569d7276f7",
+      "preview": "Method: Automated Dynamic Analysis Description: This weakness can be detected using dynamic tools and techniques that interact with the software using large test suites with many diverse inputs, such "
+    },
+    "cwe-passage:62dcaeedb9b2c31267448e8dd60bc98e2dac6b285ce1ab38a49ac2217f7ab59a": {
+      "cwe_id": "CWE-79",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='79']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 40,
+      "content_sha256": "6a5eaf4ab8f91c832ec3f6c37e9d1b8f4d5e84208638059bf069d78995157312",
+      "preview": "Scope: Integrity Scope: Confidentiality Scope: Availability Impact: Execute Unauthorized Code or Commands Note: In some circumstances it may be possible to run arbitrary code on a victim's computer wh"
+    },
+    "cwe-passage:648b2f83c0a8f57496f0843b362f216eeeec3bdaf30c4badf19cefc0040f7b79": {
+      "cwe_id": "CWE-131",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='131']/Detection_Methods/Detection_Method[4]",
+      "chunk_index": 0,
+      "words": 45,
+      "content_sha256": "081afc2fc1ea37d131c8c8f34d4d5bad0823d16c81750ce4b43a43b202b4eaea",
+      "preview": "Method: Manual Analysis Description: Manual analysis can be useful for finding this weakness, but it might not achieve desired code coverage within limited time constraints. This becomes difficult for"
+    },
+    "cwe-passage:649a42df0b80544686c81de13eeb17fc1dc1e181b367f1befa7a8e882cfadb88": {
+      "cwe_id": "CWE-862",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='862']/Detection_Methods/Detection_Method[6]",
+      "chunk_index": 0,
+      "words": 38,
+      "content_sha256": "fee5ca541596c51fecfd5ab92e686d460738af6553caef648f00d802d25bb958",
+      "preview": "Method: Dynamic Analysis with Manual Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Host App"
+    },
+    "cwe-passage:66e3ee5ad1e3af1ff2f0b887c0ecda20adb0bad28e1525cda69f6890a365f688": {
+      "cwe_id": "CWE-306",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='306']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 42,
+      "content_sha256": "14ef8783f4a30a110c4c406c42b2ad0fa93121867eb7e83c52b21dfb908036f9",
+      "preview": "Method: Manual Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Binary / Bytecod"
+    },
+    "cwe-passage:677df82694eeb2da523781e22d724731871b2885d296414283c44169f5835b30": {
+      "cwe_id": "CWE-829",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='829']/Detection_Methods/Detection_Method[5]",
+      "chunk_index": 0,
+      "words": 38,
+      "content_sha256": "87df401901144223b9f81ffac5550e4fa7760bc5a1da041978e1b346d5a40b48",
+      "preview": "Method: Automated Static Analysis - Source Code Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Source code Weakness"
+    },
+    "cwe-passage:686b204193d097d5a4d2a4dff228efc52b775d25fdafa32cf5718aa1944ac54d": {
+      "cwe_id": "CWE-732",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='732']/Detection_Methods/Detection_Method[12]",
+      "chunk_index": 0,
+      "words": 46,
+      "content_sha256": "0000c4e4d5d85d84ccb334447f5f4d3a2e331227e5c801693ed3c2b4b8644d02",
+      "preview": "Method: Manual Static Analysis - Source Code Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Manual Source Code Review (not inspec"
+    },
+    "cwe-passage:6a1f5b0f9465803f7bd48ef75acb464a4544c5ef76115d0b01afd0ff6e3a8696": {
+      "cwe_id": "CWE-367",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='367']/Common_Consequences/Consequence[5]",
+      "chunk_index": 0,
+      "words": 30,
+      "content_sha256": "a8cabfddca64764a6a28ed07b526b87c60bb83c63ccd30731793969abd7ac422",
+      "preview": "Scope: Non-Repudiation Scope: Other Impact: Other Note: In some cases it may be possible to delete files a malicious user might not otherwise have access to, such as log files."
+    },
+    "cwe-passage:6a6ee7ae70102932da308d0dc083e43d733eebdbc28dbcddb5c81452c11444f5": {
+      "cwe_id": "CWE-129",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='129']/Common_Consequences/Consequence[5]",
+      "chunk_index": 0,
+      "words": 72,
+      "content_sha256": "78631e8a92ad231df24f977e5a4f1aec2c40147cb8a950949fda3cb5facf541b",
+      "preview": "Scope: Integrity Scope: Availability Scope: Confidentiality Impact: DoS: Crash, Exit, or Restart Impact: Execute Unauthorized Code or Commands Impact: Read Memory Impact: Modify Memory Note: A single "
+    },
+    "cwe-passage:6d44949c977a66f3467bc1b94ac105cbe027b6b5d71730032e828e4037762786": {
+      "cwe_id": "CWE-22",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='22']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 35,
+      "content_sha256": "67f77d863fae912ec1ce0c286c1d753cdf755dc4ff8e1cb37ee593e84951d2b0",
+      "preview": "Scope: Integrity Scope: Confidentiality Scope: Availability Impact: Execute Unauthorized Code or Commands Note: The attacker may be able to create or overwrite critical files that are used to execute "
+    },
+    "cwe-passage:6fd4c86d5c4374a0d00ceceebb87038d44323d42b79aedebde4445a5e599b741": {
+      "cwe_id": "CWE-362",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='362']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 41,
+      "content_sha256": "0bdab01ff80df137c2b2a0fe99f302206242de9741b36de9fb86b41de28459e6",
+      "preview": "Scope: Confidentiality Scope: Integrity Impact: Read Files or Directories Impact: Read Application Data Note: When a race condition is combined with predictable resource names and loose permissions, i"
+    },
+    "cwe-passage:70e9408fbe3cd3019c09b33518706b21eeed4be4a968adc01856c0cf42ec4baa": {
+      "cwe_id": "CWE-330",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='330']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 120,
+      "content_sha256": "5d6ec0cd856d4e7b759b903c2e56770e9fd2c8764d1340eeb0150427787efed5",
+      "preview": "Scope: Access Control Scope: Other Impact: Bypass Protection Mechanism Impact: Other Note: If product relies on unique, unguessable IDs to identify a resource, an attacker might be able to guess an ID"
+    },
+    "cwe-passage:70f9a74b3aa02f3782848a642237ed89713238d2bdbba3d3d6e16c89c5712b3b": {
+      "cwe_id": "CWE-79",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='79']/Potential_Mitigations/Mitigation[10]",
+      "chunk_index": 0,
+      "words": 49,
+      "content_sha256": "6d5cb57407b2627e720af159f7447e3f85ced8eb89569fe2ed025b06ceb6c5f4",
+      "preview": "Phase: Architecture and Design Strategy: Enforcement by Conversion Description: When the set of acceptable objects, such as filenames or URLs, is limited or known, create a mapping from a set of fixed"
+    },
+    "cwe-passage:738b5ba1580311047e04abd7f9285ce47891d0546b002ee336c4f260ab7f2e76": {
+      "cwe_id": "CWE-862",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='862']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 35,
+      "content_sha256": "64b108001a7dafb94b40585812ad9a8337dbb40719df812ef574754b4817856d",
+      "preview": "Method: Automated Dynamic Analysis Description: Automated dynamic analysis may find many or all possible interfaces that do not require authorization, but manual analysis is required to determine if t"
+    },
+    "cwe-passage:7468a6a779936232e862df20408e9577adb7e5e45cd6c60d3da71959d0001bff": {
+      "cwe_id": "CWE-209",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='209']/Detection_Methods/Detection_Method[4]",
+      "chunk_index": 0,
+      "words": 91,
+      "content_sha256": "7d15f2b36113b40d287e20c030d2cf4d9c9890ec568e59d3ddfd1b648ca6b2f2",
+      "preview": "Method: Manual Dynamic Analysis Description: Identify error conditions that are not likely to occur during normal usage and trigger them. For example, run the program under low memory conditions, run "
+    },
+    "cwe-passage:76d9c504406a774816c62b30afe63dd97ff02d85596f8b6b70ec1681f8ffc241": {
+      "cwe_id": "CWE-119",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='119']/Detection_Methods/Detection_Method[4]",
+      "chunk_index": 0,
+      "words": 58,
+      "content_sha256": "0c4fb752e8e2f2d2894dcb19ec3ea8683dcb8ebf36e98b6e7f92c5546cfa6108",
+      "preview": "Method: Automated Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Binary / Byte"
+    },
+    "cwe-passage:772567aa0103f061e4af6c8c2962490511a3880f97f73a863c108edac15a36bf": {
+      "cwe_id": "CWE-311",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='311']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 104,
+      "content_sha256": "9807351d63cbfee2b94b8342af2f12a7dc59e1d2e9f1788037e726eb9fc189d9",
+      "preview": "Scope: Confidentiality Impact: Read Application Data Note: If the application does not use a secure channel, such as SSL, to exchange sensitive information, it is possible for an attacker with access "
+    },
+    "cwe-passage:7771fedd3b59121076eb7251fb1d56d4f71b0f6956f6f3089f9fb9057e84ba0f": {
+      "cwe_id": "CWE-863",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='863']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 48,
+      "content_sha256": "113d0793bc03b64b5fa08be367dd0067a5eed274b5708e05c37b4810ba043975",
+      "preview": "Scope: Confidentiality Impact: Read Application Data Impact: Read Files or Directories Note: An attacker could bypass intended access restrictions to read sensitive data, either by reading the data di"
+    },
+    "cwe-passage:7b0a1f579fb3f50d4f99fa7d81ad19836f98492a1eb63776f787288bd10d54bf": {
+      "cwe_id": "CWE-73",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='73']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 70,
+      "content_sha256": "741977c0c68ef5a7ee06552e4a11ab015c49287d8ef5a1d3732baa698056a41c",
+      "preview": "Scope: Availability Impact: DoS: Crash, Exit, or Restart Impact: DoS: Resource Consumption (Other) Note: The application can operate on unexpected files. Availability can be violated if the attacker s"
+    },
+    "cwe-passage:7cd49a7c650cf0e2ee76561ecfe45d0ce5895d55031c2a084c3607f2f549b67d": {
+      "cwe_id": "CWE-306",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='306']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 60,
+      "content_sha256": "b112ee37720c4d821e8c84a0e38dd872583056da59a38030e1f079b7b6540676",
+      "preview": "Scope: Access Control Scope: Other Impact: Gain Privileges or Assume Identity Impact: Varies by Context Note: Exposing critical functionality essentially provides an attacker with the privilege level "
+    },
+    "cwe-passage:7cf6f9457e58ffb64afa51940cd63e27e8302a887975722fe419c7dbae8f5b07": {
+      "cwe_id": "CWE-116",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='116']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 31,
+      "content_sha256": "4f510996941080f7ebfeb532fc7e0fabef8c598441710f5b58666aa77d2e47c1",
+      "preview": "Scope: Integrity Impact: Modify Application Data Note: The communications between components can be modified in unexpected ways. Unexpected commands can be executed, bypassing other security mechanism"
+    },
+    "cwe-passage:7db96673a9223504c5d71f943e5fa0c8d6b7c55db45aaa0e41069a50ff2219f5": {
+      "cwe_id": "CWE-20",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='20']/Detection_Methods/Detection_Method[10]",
+      "chunk_index": 0,
+      "words": 48,
+      "content_sha256": "64440cf84590c4d805f64232a6c801e23e6f322ba4dff577d3b7a84d1169f2f2",
+      "preview": "Method: Architecture or Design Review Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Inspection (IEEE 1028 standard) (can apply t"
+    },
+    "cwe-passage:7dfad43a399afccd0f8d02efdefbd068bfb7ff7b84de352791c136e1c0246562": {
+      "cwe_id": "CWE-78",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='78']/Detection_Methods/Detection_Method[4]",
+      "chunk_index": 0,
+      "words": 49,
+      "content_sha256": "65234a376cde53cd64e05bdcd93aa17b5fd9228a7f66ab980d7a42c5072c0906",
+      "preview": "Method: Automated Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Bytecode Weakness Analysis "
+    },
+    "cwe-passage:7e089d7929f1c1f7c4ebc365f80eb34661577727b9b1f4c6c2561c09b40ba9a4": {
+      "cwe_id": "CWE-1422",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1422']/Potential_Mitigations/Mitigation[1]",
+      "chunk_index": 0,
+      "words": 40,
+      "content_sha256": "4ab2f664ee472d660c357678211aaca0ef9bc20cef03e8725389eed1515979b4",
+      "preview": "Phase: Architecture and Design Description: The hardware designer can attempt to prevent transient execution from causing observable discrepancies in specific covert channels. Effectiveness: Limited E"
+    },
+    "cwe-passage:7ec98a57074a2f8fef529161c8150afea4151837292c41489882f65c916d7f61": {
+      "cwe_id": "CWE-1421",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1421']/Potential_Mitigations/Mitigation[2]",
+      "chunk_index": 0,
+      "words": 77,
+      "content_sha256": "6d0048cac098a5c2735bca072cc0f9a72e5834f998aa948b300b23ab48cb9571",
+      "preview": "Phase: Architecture and Design Description: Hardware designers may choose not to share microarchitectural resources that can contain sensitive data, such as fill buffers and store buffers. Effectivene"
+    },
+    "cwe-passage:7f192fe472a7c042d39e6ef2e65cd59fbde2fa74ea4004e3a03227b7f11be7c0": {
+      "cwe_id": "CWE-120",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='120']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 55,
+      "content_sha256": "93817bb8647e6ed2e96743a87af8655d0687f7392b5887f8e87a3b40b06f2dbf",
+      "preview": "Method: Automated Dynamic Analysis Description: This weakness can be detected using dynamic tools and techniques that interact with the software using large test suites with many diverse inputs, such "
+    },
+    "cwe-passage:7fd90c7d7d64fd00df3bce56ecfc14cf62e4992f88f7b700d0ef43417fa08fa0": {
+      "cwe_id": "CWE-1039",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1039']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 35,
+      "content_sha256": "a9a44a31c26c32103e70675639b6906bc47c8bebf15cbf926f2b860e74c9c3a6",
+      "preview": "Scope: Integrity Impact: Bypass Protection Mechanism Note: When the automated recognition is used in a protection mechanism, an attacker may be able to craft inputs that are misinterpreted in a way th"
+    },
+    "cwe-passage:82b1fda86bf09b9ded60d8e6151703d4d3e51b4b6af1254c121984ad759abd5d": {
+      "cwe_id": "CWE-807",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='807']/Detection_Methods/Detection_Method[5]",
+      "chunk_index": 0,
+      "words": 55,
+      "content_sha256": "6cba02395b89ff14c7e299f2227135c09a0b1989b80104b4b70ef560313f8e1d",
+      "preview": "Method: Dynamic Analysis with Manual Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Fuzz Tes"
+    },
+    "cwe-passage:8457deeaf80929b8b5beaf437857c7ac67988555c67406833b40554e3e340005": {
+      "cwe_id": "CWE-190",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='190']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 41,
+      "content_sha256": "2e52a1eaf77c2b05738a6f17304fdb47050d12efaba0d9b5ef69a04014bf3974",
+      "preview": "Scope: Integrity Impact: Modify Memory Note: If the value in question is important to data (as opposed to flow), simple data corruption has occurred. Also, if the overflow/wraparound results in other "
+    },
+    "cwe-passage:84e755d3cb71ddcfc2cca74b4b560df14414e42470b7c7354b1bfc3d40e17e55": {
+      "cwe_id": "CWE-1427",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1427']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 19,
+      "content_sha256": "868bc5acf8f473795ebf7c759ccea8ec787a0cf2dd9437681a84914ed38f1c36",
+      "preview": "Scope: Confidentiality Impact: Read Application Data Note: An attacker might be able to extract sensitive information from the model."
+    },
+    "cwe-passage:84f81f5094128fc02afdc008db56afa61bc17f3983c0e57db7453adb972e42d3": {
+      "cwe_id": "CWE-327",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='327']/Detection_Methods/Detection_Method[5]",
+      "chunk_index": 0,
+      "words": 38,
+      "content_sha256": "6171dd1ee4cccfcd08820f12682a43fe1d9c41e429d9fb7252fc8f27852735e4",
+      "preview": "Method: Dynamic Analysis with Automated Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Web A"
+    },
+    "cwe-passage:85a903d34270112ddf2faa71bc5fab8c62e48dac89142a2579262e6234c44484": {
+      "cwe_id": "CWE-330",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='330']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 49,
+      "content_sha256": "11d7ce5213da37a9bf9f9c3b9fdd97b79dd464276a034fd60062194f3c579cc3",
+      "preview": "Scope: Confidentiality Scope: Other Impact: Other Note: When a protection mechanism relies on random values to restrict access to a sensitive resource, such as a session ID or a seed for generating a "
+    },
+    "cwe-passage:88c1cc7dbbd27abe62347191027726746658554b51d3bcf00192b990deaf5467": {
+      "cwe_id": "CWE-311",
+      "field_name": "description",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='311']/Description[1]",
+      "chunk_index": 0,
+      "words": 13,
+      "content_sha256": "9ed8624744749fea953b23017dccd055d32f6b9aac5a8b09063be088fac4d246",
+      "preview": "The product does not encrypt sensitive or critical information before storage or transmission."
+    },
+    "cwe-passage:895a86918d000386233a4f7e446ca0ba31d61556fafca15222b878d7bf2abf79": {
+      "cwe_id": "CWE-434",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='434']/Potential_Mitigations/Mitigation[11]",
+      "chunk_index": 0,
+      "words": 79,
+      "content_sha256": "2c1654ec0c22cc01d7aab09469811a13fe61e72c47650abe50c109af6338e575",
+      "preview": "Phase: Architecture and Design Phase: Operation Strategy: Environment Hardening Description: Run your code using the lowest privileges that are required to accomplish the necessary tasks [REF-76]. If "
+    },
+    "cwe-passage:8bb7349950ce16b75a4e3c27fbdec6c79aff2a7f1a2745896cfe414491b1dd4a": {
+      "cwe_id": "CWE-1422",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1422']/Potential_Mitigations/Mitigation[3]",
+      "chunk_index": 0,
+      "words": 55,
+      "content_sha256": "bc19de1d3042cdf775c191a46a3a049f8e9bf7a7bcaf35585ef27c35cffa3bdc",
+      "preview": "Phase: Requirements Description: Processor designers may expose instructions or other architectural features that allow software to mitigate the effects of transient execution, but without disabling p"
+    },
+    "cwe-passage:8c4865ecdea5828e863383b65bc0f2f17ec0ec161f04258cb549ca9da5e7e76e": {
+      "cwe_id": "CWE-682",
+      "field_name": "description",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='682']/Description[1]",
+      "chunk_index": 0,
+      "words": 21,
+      "content_sha256": "d7fc11d970b954ebf2929493c5cdd797097796db69fb141e6d7dfe2c3e90db8a",
+      "preview": "The product performs a calculation that generates incorrect or unintended results that are later used in security-critical decisions or resource management."
+    },
+    "cwe-passage:8e9144fdeeef5f9f728217065516750e9826352ef53f37f93d6a4c20eefc00cd": {
+      "cwe_id": "CWE-129",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='129']/Common_Consequences/Consequence[4]",
+      "chunk_index": 0,
+      "words": 53,
+      "content_sha256": "5503c2a3a19b2bdf66ab39f5527674302ddf556d0c88b5c76a8e09a2d88a2141",
+      "preview": "Scope: Integrity Scope: Confidentiality Scope: Availability Impact: Execute Unauthorized Code or Commands Note: If the memory accessible by the attacker can be effectively controlled, it may be possib"
+    },
+    "cwe-passage:8f01f6e37878522e24d9aac5bde424d6a99ce1b70562b79be70beb66d1c70a7f": {
+      "cwe_id": "CWE-327",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='327']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 63,
+      "content_sha256": "c66be8e5f258f51ff83ea1070cac0a76156ac9f792b7bbdd62ff95d5fdbb3550",
+      "preview": "Method: Manual Analysis Description: This weakness can be detected using tools and techniques that require manual (human) analysis, such as penetration testing, threat modeling, and interactive tools "
+    },
+    "cwe-passage:91080fd7dd4c1d2de4dffd99353c599a1b28db9e2119aefad158b77d352c5aee": {
+      "cwe_id": "CWE-78",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='78']/Detection_Methods/Detection_Method[5]",
+      "chunk_index": 0,
+      "words": 38,
+      "content_sha256": "6171dd1ee4cccfcd08820f12682a43fe1d9c41e429d9fb7252fc8f27852735e4",
+      "preview": "Method: Dynamic Analysis with Automated Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Web A"
+    },
+    "cwe-passage:910f0c62296f4c4faa3a30ff6cd4cd65ef9589f3a06e478bfbeea8259948fb0d": {
+      "cwe_id": "CWE-120",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='120']/Detection_Methods/Detection_Method[11]",
+      "chunk_index": 0,
+      "words": 45,
+      "content_sha256": "14ed865b55c08cc3a98de255c694e2485ebe76977e5099c60172a39f5c6fb77f",
+      "preview": "Method: Architecture or Design Review Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Formal Methods / Correct-By-Construction Cos"
+    },
+    "cwe-passage:91f1dd643c6f0177a390d8cfdc5e3859c6e477e1c5cc544e7f0ee9730c00cd60": {
+      "cwe_id": "CWE-352",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='352']/Potential_Mitigations/Mitigation[2]",
+      "chunk_index": 0,
+      "words": 24,
+      "content_sha256": "261a29f930d85392389e600cb0fb63327ff6c83c95f4b62828214f5b7e07ffc1",
+      "preview": "Phase: Implementation Description: Ensure that the application is free of cross-site scripting issues (CWE-79), because most CSRF defenses can be bypassed using attacker-controlled script."
+    },
+    "cwe-passage:9308f144727cd723cbc0d8fd787d23ba0eb0ef6fe5258ca5c618724affe0cf0e": {
+      "cwe_id": "CWE-190",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='190']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 35,
+      "content_sha256": "dc027a30e150073c88a575112abd61d2ec1739813035dd8277f12bf14f4d09b7",
+      "preview": "Method: Automated Static Analysis Description: This weakness can often be detected using automated static analysis tools. Many modern tools use data flow analysis or constraint-based techniques to min"
+    },
+    "cwe-passage:973cf6561f6d241f91906ba15769783b8cfc600304511f8f73ca6a5819caa137": {
+      "cwe_id": "CWE-807",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='807']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 42,
+      "content_sha256": "14ef8783f4a30a110c4c406c42b2ad0fa93121867eb7e83c52b21dfb908036f9",
+      "preview": "Method: Manual Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Binary / Bytecod"
+    },
+    "cwe-passage:98066f3c8487f7f75be539890a3b15ee9bbce0bb530b9f05dc30ced9ab28f50e": {
+      "cwe_id": "CWE-863",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='863']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 36,
+      "content_sha256": "1c236a01b80d9b77c6833e6e1aed455d9ccbe9da5232684d0d8c6f4e0c85560b",
+      "preview": "Scope: Access Control Impact: Gain Privileges or Assume Identity Impact: Bypass Protection Mechanism Note: An attacker could bypass intended access restrictions to gain privileges by modifying or read"
+    },
+    "cwe-passage:98667ec6a94021b8c0c378833d6dd09bff425a88b04be476b4d5b92091eb93ac": {
+      "cwe_id": "CWE-1427",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1427']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 29,
+      "content_sha256": "c4cc9b26e616f712938a7501e4891b466f7f04dbf04394b7bb8165ebd50d3be7",
+      "preview": "Scope: Integrity Impact: Modify Application Data Impact: Execute Unauthorized Code or Commands Note: The extent to which integrity can be impacted is dependent on the LLM application use case."
+    },
+    "cwe-passage:98cf3050d16a5f21dc5223c9b303baaa0693a219ab225d28be72dc153f995b98": {
+      "cwe_id": "CWE-73",
+      "field_name": "description",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='73']/Description[1]",
+      "chunk_index": 0,
+      "words": 19,
+      "content_sha256": "853dbc97de3721c190860b232ee91d8610327c505b046cc784006620d2f566c0",
+      "preview": "The product allows user input to control or influence paths or file names that are used in filesystem operations."
+    },
+    "cwe-passage:99c54cb1feab5fc0d4ba22e0940f8c1903aa07b688fe0618a91635c756104fa7": {
+      "cwe_id": "CWE-1039",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1039']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 32,
+      "content_sha256": "0beb46e4686b2d4a9bf4f97e4975b6c68b603a5a6f500467a13edcdd5bfbc7a1",
+      "preview": "Scope: Availability Impact: DoS: Resource Consumption (Other) Impact: DoS: Instability Note: There could be disruption to the service of the automated recognition system, which could cause further dow"
+    },
+    "cwe-passage:99e6cb08c5a19d72be2f32f2417c0f87fe9517f16ebc2823924606a4f5b1907d": {
+      "cwe_id": "CWE-362",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='362']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 45,
+      "content_sha256": "6e3b98ca0a47a8f5fa5c3e08787d32dd440dd3391c163797190f1816013c9193",
+      "preview": "Method: Black Box Description: Black box methods may be able to identify evidence of race conditions via methods such as multiple simultaneous connections, which may cause the software to become insta"
+    },
+    "cwe-passage:9b0662e9a67b8b3a30c83c0c3eb6d52a9e080ad5ba2ab38eb09b6c043d241a27": {
+      "cwe_id": "CWE-601",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='601']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 111,
+      "content_sha256": "360857fddc0362dc623f9148d2e750a10906cc801a97e73b20ebc04bf1cce76d",
+      "preview": "Scope: Access Control Scope: Confidentiality Scope: Other Impact: Bypass Protection Mechanism Impact: Gain Privileges or Assume Identity Impact: Other Note: By modifying the URL value to a malicious s"
+    },
+    "cwe-passage:9c96cb644f5b0abb590b30a60a8ebe49a1f738113c69c1688ef0752597e178c7": {
+      "cwe_id": "CWE-79",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='79']/Potential_Mitigations/Mitigation[1]",
+      "chunk_index": 0,
+      "words": 60,
+      "content_sha256": "b702dc72b458d45fe20a8dbab624c6373b416d8d6996b41cda72d41007015eb4",
+      "preview": "Phase: Architecture and Design Strategy: Libraries or Frameworks Description: Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weaknes"
+    },
+    "cwe-passage:9d24bcf64080ca5ef4fce4c2defe4152655a1ee84373e5e92e9d844bc7d1a3d3": {
+      "cwe_id": "CWE-306",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='306']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 77,
+      "content_sha256": "eb26b59bb68fe9bf6e28ad0a088288f657f6df893f6ed9220c8bbb577616ca4e",
+      "preview": "Method: Manual Analysis Description: This weakness can be detected using tools and techniques that require manual (human) analysis, such as penetration testing, threat modeling, and interactive tools "
+    },
+    "cwe-passage:9d3b6c6b3ae20dee75b88b1b3f2fd9b23aa75d7fbc19ed51e4fc36012e6d3259": {
+      "cwe_id": "CWE-1039",
+      "field_name": "description",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1039']/Description[1]",
+      "chunk_index": 0,
+      "words": 53,
+      "content_sha256": "75d5ad8f004358d428556ada2da3f52dc3ee971a0c726789cca29437c4b17d2c",
+      "preview": "The product uses an automated mechanism such as machine learning to recognize complex data inputs (e.g. image or audio) as a particular concept or category, but it does not properly detect or handle i"
+    },
+    "cwe-passage:9d4038a0ae7d1ea041ae67c86d0d8991399d1322cc654ec45e9f0af0e7e7aa27": {
+      "cwe_id": "CWE-306",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='306']/Detection_Methods/Detection_Method[5]",
+      "chunk_index": 0,
+      "words": 38,
+      "content_sha256": "fee5ca541596c51fecfd5ab92e686d460738af6553caef648f00d802d25bb958",
+      "preview": "Method: Dynamic Analysis with Manual Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Host App"
+    },
+    "cwe-passage:9f7d7bf7c459231ac0135b48697b939fcf9bdbd1be53418369d67d8e97f6ad26": {
+      "cwe_id": "CWE-285",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='285']/Detection_Methods/Detection_Method[5]",
+      "chunk_index": 0,
+      "words": 38,
+      "content_sha256": "6171dd1ee4cccfcd08820f12682a43fe1d9c41e429d9fb7252fc8f27852735e4",
+      "preview": "Method: Dynamic Analysis with Automated Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Web A"
+    },
+    "cwe-passage:a243d1f886472aec86a934387746efe121751f7f263c64f0ff1381101f6dabad": {
+      "cwe_id": "CWE-209",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='209']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 33,
+      "content_sha256": "7775a21d57899ace921c919385423eaa627b83bd8778d28341f20bc8efb35986",
+      "preview": "Method: Manual Analysis Description: This weakness generally requires domain-specific interpretation using manual analysis. However, the number of potential error conditions may be too large to cover "
+    },
+    "cwe-passage:a263ee24f8ed2472c8a8c6eaf35ffe780e2aba3fa333b730a4d73c8967556173": {
+      "cwe_id": "CWE-119",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='119']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 71,
+      "content_sha256": "1de89859ca18f95eb42b68ee315cb824308345e48bc3804afaa5073f80239df4",
+      "preview": "Method: Automated Dynamic Analysis Description: Use tools that are integrated during compilation to insert runtime error-checking mechanisms related to memory safety errors, such as AddressSanitizer ("
+    },
+    "cwe-passage:a7fa8e517384ad5596c33e982009ad7640f27ad6a761eff720cdf4696f9583fd": {
+      "cwe_id": "CWE-367",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='367']/Common_Consequences/Consequence[4]",
+      "chunk_index": 0,
+      "words": 31,
+      "content_sha256": "2204ae7cb5b5a7fc95c37e6b1e6883252e2f78f0db5a686814f06ebbab9d6129",
+      "preview": "Scope: Non-Repudiation Impact: Hide Activities Note: If a file or other resource is written in this method, as opposed to in a valid way, logging of the activity may not occur."
+    },
+    "cwe-passage:aae8eac6810ff4a26331985819c2999cddf2e276abb96964b13d2600b61c1984": {
+      "cwe_id": "CWE-119",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='119']/Detection_Methods/Detection_Method[10]",
+      "chunk_index": 0,
+      "words": 45,
+      "content_sha256": "14ed865b55c08cc3a98de255c694e2485ebe76977e5099c60172a39f5c6fb77f",
+      "preview": "Method: Architecture or Design Review Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Formal Methods / Correct-By-Construction Cos"
+    },
+    "cwe-passage:ac4ccec48f87ae0804cb3e59fb3352a222b9f5195f4ec5249de73f5db9227431": {
+      "cwe_id": "CWE-79",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='79']/Potential_Mitigations/Mitigation[3]",
+      "chunk_index": 0,
+      "words": 104,
+      "content_sha256": "41638c3d13f52d52c943cdae5dc0ddca539dd24981aa452b1c4b448ef3dd4fc2",
+      "preview": "Phase: Architecture and Design Phase: Implementation Strategy: Attack Surface Reduction Description: Understand all the potential areas where untrusted inputs can enter your software: parameters or ar"
+    },
+    "cwe-passage:ad3fd47ec30db8381f478745d41a553fd81e02cc1ede50e973256f1718b815f0": {
+      "cwe_id": "CWE-89",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='89']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 25,
+      "content_sha256": "be92579dd71b8a8c193009bf11a3c2a318058fe19760edbedaba3a74f0f24a36",
+      "preview": "Scope: Confidentiality Impact: Read Application Data Note: Since SQL databases generally hold sensitive data, loss of confidentiality is a frequent problem with SQL injection vulnerabilities."
+    },
+    "cwe-passage:ad8f31df2f186bdae09b3da9a162a7d2e6e1086baf547c9dfa9ba9091a29c092": {
+      "cwe_id": "CWE-73",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='73']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 49,
+      "content_sha256": "ad83f8453d485067e06f3ddc712cb1a2e7308a4c9e16299ed0b6be85e2d3e2e7",
+      "preview": "Scope: Integrity Scope: Confidentiality Scope: Availability Impact: Modify Files or Directories Impact: Execute Unauthorized Code or Commands Note: The application can operate on unexpected files. Thi"
+    },
+    "cwe-passage:ae72d7bb0f5c210888a417357e69a090b26f224c720215221f7112882171ff7e": {
+      "cwe_id": "CWE-250",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='250']/Detection_Methods/Detection_Method[4]",
+      "chunk_index": 0,
+      "words": 42,
+      "content_sha256": "14ef8783f4a30a110c4c406c42b2ad0fa93121867eb7e83c52b21dfb908036f9",
+      "preview": "Method: Manual Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Binary / Bytecod"
+    },
+    "cwe-passage:b3ace403c135a993fc61a6f5152605c8dd8c2ba4ae452ea1d87fcc141ac81ce4": {
+      "cwe_id": "CWE-807",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='807']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 78,
+      "content_sha256": "83556350f777a958191806ffb93b7cd3e4d960b0ae658b9767a04a35883a9a68",
+      "preview": "Method: Manual Static Analysis Description: Since this weakness does not typically appear frequently within a single software package, manual white box techniques may be able to provide sufficient cod"
+    },
+    "cwe-passage:b49ebfd2db43bf98d396bc11a3c8f5b88355caa3a1f228aa308a62c5fcc4dad0": {
+      "cwe_id": "CWE-330",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='330']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 42,
+      "content_sha256": "14ef8783f4a30a110c4c406c42b2ad0fa93121867eb7e83c52b21dfb908036f9",
+      "preview": "Method: Manual Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Binary / Bytecod"
+    },
+    "cwe-passage:b4fd8273751e098f54ca001f528ad9c99e7673b5d46b18a2811d9208e661752d": {
+      "cwe_id": "CWE-665",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='665']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 40,
+      "content_sha256": "52533ae155de851fca5c91cea1aae6d2ae34bd097f8a1d5887de168368bcbe5d",
+      "preview": "Scope: Access Control Impact: Bypass Protection Mechanism Note: If security-critical decisions rely on a variable having a \"0\" or equivalent value, and the programming language performs this initializ"
+    },
+    "cwe-passage:b67274f1f19e53a097a948f07fb5884b9fc8dbbff4601896694499b4678ed18e": {
+      "cwe_id": "CWE-829",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='829']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 42,
+      "content_sha256": "14ef8783f4a30a110c4c406c42b2ad0fa93121867eb7e83c52b21dfb908036f9",
+      "preview": "Method: Manual Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Binary / Bytecod"
+    },
+    "cwe-passage:b7e0a0903669edd9591d359df094d2110bb4a77b412a0636accb5165d4f3aca2": {
+      "cwe_id": "CWE-116",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='116']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 31,
+      "content_sha256": "dec64e8feb81ed3140bfd3c650415c734c7a2fe5f921262d29574bb7d08ff6f7",
+      "preview": "Scope: Confidentiality Impact: Bypass Protection Mechanism Note: The communications between components can be modified in unexpected ways. Unexpected commands can be executed, bypassing other security"
+    },
+    "cwe-passage:b867854522cd26c7f8e841accccf3acf697ba534eba9f96cffe07abff91811d1": {
+      "cwe_id": "CWE-131",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='131']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 112,
+      "content_sha256": "dc82b3fcde16c75a37d6e0dd7bd303146bfd8c4b3192f83864c9dc51a77fb9d8",
+      "preview": "Method: Automated Static Analysis Description: This weakness can often be detected using automated static analysis tools. Many modern tools use data flow analysis or constraint-based techniques to min"
+    },
+    "cwe-passage:b8efcf56c15d1e670d14be052c1ae0e7a8650335ada4c2e86d65a18568ef5bc6": {
+      "cwe_id": "CWE-798",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='798']/Detection_Methods/Detection_Method[5]",
+      "chunk_index": 0,
+      "words": 52,
+      "content_sha256": "ebe78c4cb3ae6fdcceed0fcf5b8982b073cda8700092b31e4e528a18644aa97f",
+      "preview": "Method: Automated Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Bytecode Weak"
+    },
+    "cwe-passage:badfd607994e529c7095a47bdb5cff302cec20f3ba5bbd972c5eddfaf7ee80ca": {
+      "cwe_id": "CWE-129",
+      "field_name": "description",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='129']/Description[1]",
+      "chunk_index": 0,
+      "words": 34,
+      "content_sha256": "a04649b37f6d4be09f6cd4239f4047c977651c8246120970e95c3fbc668e3ac1",
+      "preview": "The product uses untrusted input when calculating or using an array index, but the product does not validate or incorrectly validates the index to ensure the index references a valid position within t"
+    },
+    "cwe-passage:bc0eab95ec8d7a75b50086b5e591f68e7cca785a683a91c97b51f10888b2b8a3": {
+      "cwe_id": "CWE-798",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='798']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 36,
+      "content_sha256": "c3695ddeb7d1a256006e818a2c7847e655e0055c0a1108eb4c87ef1807057e27",
+      "preview": "Method: Automated Static Analysis Description: Automated white box techniques have been published for detecting hard-coded credentials for incoming authentication, but there is some expert disagreemen"
+    },
+    "cwe-passage:bcd8984640053b67248ff12ce537b5666e7924ab683d1c25c14b9083690d8398": {
+      "cwe_id": "CWE-89",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='89']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 50,
+      "content_sha256": "9e57fac48b4575be02baeb346c936332b58e69f5600e2c82c1bdc53cda4316ef",
+      "preview": "Scope: Authentication Impact: Gain Privileges or Assume Identity Impact: Bypass Protection Mechanism Note: If poor SQL commands are used to check user names and passwords or perform other kinds of aut"
+    },
+    "cwe-passage:bdf8cf89a3ed86e84d79e2402a95ad6c2e63552800970737a9c7f49126ef85e9": {
+      "cwe_id": "CWE-250",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='250']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 63,
+      "content_sha256": "5a024cffa7a9ff6c9731e54377d7523dc7a1a8a5ca83356fc371119c4e0fa010",
+      "preview": "Method: Automated Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Compare binary / bytecode t"
+    },
+    "cwe-passage:be7ff094399c35bd0107bc06620e81884bb1222e5c11115737213b0500e4183e": {
+      "cwe_id": "CWE-22",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='22']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 69,
+      "content_sha256": "d6a0bc6422032dc05bb30e16a0a0aff5670c4facd68f9a27fe514aba114f8dc4",
+      "preview": "Scope: Confidentiality Impact: Read Files or Directories Note: The attacker may be able read the contents of unexpected files and expose sensitive data. If the targeted file is used for a security mec"
+    },
+    "cwe-passage:beaaedf4977ffdcbd6886ff705353218acc25a17bcf52ed3dcae7a7dd53833ac": {
+      "cwe_id": "CWE-1421",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1421']/Potential_Mitigations/Mitigation[1]",
+      "chunk_index": 0,
+      "words": 30,
+      "content_sha256": "b958aad10cce35a1fd23c45d783cc33e027bc452b46ae73ecc7957f6150db5d0",
+      "preview": "Phase: Architecture and Design Description: Hardware designers may choose to engineer the processor's pipeline to prevent architecturally restricted data from being used by operations that can execute"
+    },
+    "cwe-passage:c1d2a261665c4a7816eebe464aa34c124dd1a154accd233448c08f3410ebf6e6": {
+      "cwe_id": "CWE-134",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='134']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 21,
+      "content_sha256": "5396662b108f1c9bf4e6b43f003526241a18a783d1bff3aadc4442898cfa445c",
+      "preview": "Scope: Confidentiality Impact: Read Memory Note: Format string problems allow for information disclosure which can severely simplify exploitation of the program."
+    },
+    "cwe-passage:c3e8c32107637ed4c3f0ceac65465ab9be7aa8f470fbbc0907df15595d5d3f30": {
+      "cwe_id": "CWE-190",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='190']/Common_Consequences/Consequence[4]",
+      "chunk_index": 0,
+      "words": 77,
+      "content_sha256": "d0c411ed7b3268323eb0565e8f169c9c72c2b1718ae7f32e2061b1289aa8dd70",
+      "preview": "Scope: Availability Scope: Other Impact: Alter Execution Logic Impact: DoS: Crash, Exit, or Restart Impact: DoS: Resource Consumption (CPU) Note: If the overflow/wraparound occurs in a loop index vari"
+    },
+    "cwe-passage:c53cdf4ceef7414d750ebdcb7b2eda4a2ddbb18e51b7c446f4bfbd973e5a5ce6": {
+      "cwe_id": "CWE-1427",
+      "field_name": "description",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1427']/Description[1]",
+      "chunk_index": 0,
+      "words": 36,
+      "content_sha256": "520426bd38b791d7eb4238cf187abc6e06c8d9a936e3d4f6976aabf76661e781",
+      "preview": "The product uses externally-provided data to build prompts provided to large language models (LLMs), but the way these prompts are constructed causes the LLM to fail to distinguish between user-suppli"
+    },
+    "cwe-passage:c60e29256679a675f98b920ee218da070b9f2561f1657d37725177614bfb9daa": {
+      "cwe_id": "CWE-862",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='862']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 89,
+      "content_sha256": "3002ea4c7a00a6e8ed94dd3c2a9d5e2b142e24ffa3e1e669ae94ee5173fb77b2",
+      "preview": "Method: Automated Static Analysis Description: Automated static analysis is useful for detecting commonly-used idioms for authorization. A tool may be able to analyze related configuration files, such"
+    },
+    "cwe-passage:c8767c84ffeee2dd013c3ee6b037a9ae2563ed415e66ad434f390429a0bacfce": {
+      "cwe_id": "CWE-862",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='862']/Detection_Methods/Detection_Method[5]",
+      "chunk_index": 0,
+      "words": 38,
+      "content_sha256": "6171dd1ee4cccfcd08820f12682a43fe1d9c41e429d9fb7252fc8f27852735e4",
+      "preview": "Method: Dynamic Analysis with Automated Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Web A"
+    },
+    "cwe-passage:cd3b8e6928788309c0868d9e165aafc40f5f0e8eea77b7becbbd4a9889bfc748": {
+      "cwe_id": "CWE-22",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='22']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 58,
+      "content_sha256": "9154f62d99f4b0e6759a371121adf7c779f0690623d0869908ac9cf7b0704e07",
+      "preview": "Method: Automated Static Analysis Description: Automated techniques can find areas where path traversal weaknesses exist. However, tuning or customization may be required to remove or de-prioritize pa"
+    },
+    "cwe-passage:cd645debee4b1367a8cef40a3c5a3d6b3e701a1ea10fd195478e0bd8fdc7a400": {
+      "cwe_id": "CWE-863",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='863']/Common_Consequences/Consequence[5]",
+      "chunk_index": 0,
+      "words": 46,
+      "content_sha256": "f9c35e76c807994f61dca8fda6a341ba60574641160cfade02e81649856b2241",
+      "preview": "Scope: Availability Impact: DoS: Crash, Exit, or Restart Impact: DoS: Resource Consumption (CPU) Impact: DoS: Resource Consumption (Memory) Impact: DoS: Resource Consumption (Other) Note: An attacker "
+    },
+    "cwe-passage:cd6feab6cc63e09d8a096b7aa00a6bffb757bca21fe16734fa7bffb45ad9eab3": {
+      "cwe_id": "CWE-120",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='120']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 40,
+      "content_sha256": "112945dd61e06f2461e5d13e4bd40248f59dfb24940ca125b4d366f7a02ac740",
+      "preview": "Scope: Availability Impact: Modify Memory Impact: DoS: Crash, Exit, or Restart Impact: DoS: Resource Consumption (CPU) Note: Buffer overflows generally lead to crashes. Other attacks leading to lack o"
+    },
+    "cwe-passage:cd9f8de2b215213146c2a37633f8e618bb313f753b7a109e1e18d2f226a72480": {
+      "cwe_id": "CWE-352",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='352']/Potential_Mitigations/Mitigation[7]",
+      "chunk_index": 0,
+      "words": 70,
+      "content_sha256": "faae4008f9d0fd484a7c995a6316503336dad8fc5cf04d781286372d42581f5a",
+      "preview": "Phase: Implementation Description: Check the HTTP Referer header to see if the request originated from an expected page. This could break legitimate functionality, because users or proxies may have di"
+    },
+    "cwe-passage:ce026c7285c7c8c34ca95c60f91dcdd882115764a8efbd9d47803dd2bcbbd027": {
+      "cwe_id": "CWE-120",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='120']/Detection_Methods/Detection_Method[10]",
+      "chunk_index": 0,
+      "words": 35,
+      "content_sha256": "bca444987c90114289997c1aa1c1fce5622bc8dc91f7f479fd8f22028afea531",
+      "preview": "Method: Automated Static Analysis - Source Code Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Source code Weakness Analyzer - Co"
+    },
+    "cwe-passage:cea2d490ede637bec6b4dc85777b2d06169476886b40e07f31955f2bc642e99f": {
+      "cwe_id": "CWE-1420",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1420']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 53,
+      "content_sha256": "5dc404d2ecea72cb68d991836722937646aee8523263f06e59786f09efaf8174",
+      "preview": "Method: Fuzzing Description: Academic researchers have demonstrated that this weakness can be detected in hardware using software fuzzing tools that treat the underlying hardware as a black box ([REF-"
+    },
+    "cwe-passage:d0d9396a69cab26f51164806b562e43c4eae4348094f3bf40451bf3c47784173": {
+      "cwe_id": "CWE-1422",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1422']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 68,
+      "content_sha256": "b053f4327602f7a65ba0e631f3feec3c8dca9c2198e5c01f470d5ca5094f3ec9",
+      "preview": "Method: Automated Static Analysis Description: A variety of automated static analysis tools can identify potentially exploitable code sequences in software. These tools may perform the analysis on sou"
+    },
+    "cwe-passage:d125f51d9d82e56b6b23c661931425d9dabc311a274cd05cd6be8c678c763da4": {
+      "cwe_id": "CWE-78",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='78']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 48,
+      "content_sha256": "79cb670e91fb428e0deff6644b67b219c6bc3f5ffaccb954c05274667e8a0761",
+      "preview": "Method: Manual Static Analysis Description: Since this weakness does not typically appear frequently within a single software package, manual white box techniques may be able to provide sufficient cod"
+    },
+    "cwe-passage:d1798152ab94d358a34eb524709aac16a9a247b13c228e7946a8f3194767042c": {
+      "cwe_id": "CWE-78",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='78']/Detection_Methods/Detection_Method[6]",
+      "chunk_index": 0,
+      "words": 33,
+      "content_sha256": "b629b87f5130c00a8e6b2fc91798490ed9ff7538adfa0f42b763c3246191aacb",
+      "preview": "Method: Dynamic Analysis with Manual Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Fuzz Tes"
+    },
+    "cwe-passage:d3d8b8de54741e6b27e23f5e30698c339907829f0b3d81b40a3df89277bcbef8": {
+      "cwe_id": "CWE-862",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='862']/Detection_Methods/Detection_Method[4]",
+      "chunk_index": 0,
+      "words": 42,
+      "content_sha256": "14ef8783f4a30a110c4c406c42b2ad0fa93121867eb7e83c52b21dfb908036f9",
+      "preview": "Method: Manual Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Binary / Bytecod"
+    },
+    "cwe-passage:d419818840934b2e61f48102963bca07b07f32ddf2cceb1d366e062936d49a37": {
+      "cwe_id": "CWE-20",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='20']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 37,
+      "content_sha256": "f0f35cc289861dfd17b75d70296f25e53241db5945ee7651c0ffb27d2f2eba8d",
+      "preview": "Scope: Integrity Scope: Confidentiality Scope: Availability Impact: Modify Memory Impact: Execute Unauthorized Code or Commands Note: An attacker could use malicious input to modify data or possibly a"
+    },
+    "cwe-passage:d4a8c5e5abf543454a6717784b1cb7cdfab0e20a023d2e2caad74a8d6774fae8": {
+      "cwe_id": "CWE-1421",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1421']/Potential_Mitigations/Mitigation[12]",
+      "chunk_index": 0,
+      "words": 23,
+      "content_sha256": "f74ed6888db93ded804536d278be04a08cf656ca235267603f2157460813d8a5",
+      "preview": "Phase: Patching and Maintenance Description: This kind of patch may not be feasible or implementable for all processors or all weaknesses. Effectiveness: Limited"
+    },
+    "cwe-passage:d5768fde7f0c6fe535ea801278000a16c5e9accaea9c6354bc5132dd10a65a8e": {
+      "cwe_id": "CWE-829",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='829']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 40,
+      "content_sha256": "e920e91d07ccf082d1f65650c20a6ecdcc6c302d9dce58ea1e079f3a209cc123",
+      "preview": "Method: Automated Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Bytecode Weak"
+    },
+    "cwe-passage:d65cb177251cf30d4c67e684f078e0df0f464657f8fafef38500576619e3cd6b": {
+      "cwe_id": "CWE-352",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='352']/Potential_Mitigations/Mitigation[1]",
+      "chunk_index": 0,
+      "words": 60,
+      "content_sha256": "ab3e60885a6105cdbebf4b4ea0206ce1ad43d8f2affd69e4b7fe264ae62edf2b",
+      "preview": "Phase: Architecture and Design Strategy: Libraries or Frameworks Description: Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weaknes"
+    },
+    "cwe-passage:d6a3b6831c4a880d1fd4b588014311460bd134a238f496344d3bef4b0be53ebc": {
+      "cwe_id": "CWE-20",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='20']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 47,
+      "content_sha256": "309febf9d4776f85c215b525c0e25edce978d97cc1d885db11ed369b9344f011",
+      "preview": "Scope: Availability Impact: DoS: Crash, Exit, or Restart Impact: DoS: Resource Consumption (CPU) Impact: DoS: Resource Consumption (Memory) Note: An attacker could provide unexpected values and cause "
+    },
+    "cwe-passage:d7dba847f10ec6b9ecb07d68a988f26a2c9a12a7454dbe403e948c8d131b2b1b": {
+      "cwe_id": "CWE-434",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='434']/Potential_Mitigations/Mitigation[1]",
+      "chunk_index": 0,
+      "words": 30,
+      "content_sha256": "127c8bfe09540c201fa05904180b7a4543a1ab5fad332771530f049fe45f442e",
+      "preview": "Phase: Architecture and Design Description: Generate a new, unique filename for an uploaded file instead of using the user-supplied filename, so that no external input is used at all.[REF-422] [REF-42"
+    },
+    "cwe-passage:d8ddf5ad20055933038bd8ee854d66a9c74351d429218d9c4e96b889546ce430": {
+      "cwe_id": "CWE-807",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='807']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 79,
+      "content_sha256": "f53e5ac52dbd24dcf8721afb00594fefea03e73dc6456e52c800ee249c50d431",
+      "preview": "Scope: Confidentiality Scope: Access Control Scope: Availability Scope: Other Impact: Bypass Protection Mechanism Impact: Gain Privileges or Assume Identity Impact: Varies by Context Note: Attackers c"
+    },
+    "cwe-passage:d911fd5b4ba5a142a56d1842d370713cb798db9b3a5a3022ab4a81ad02911f47": {
+      "cwe_id": "CWE-798",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='798']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 78,
+      "content_sha256": "331b98451d4a7431d0482a81fd6671c13d79576681f8e04891cc20466400ae1e",
+      "preview": "Method: Manual Static Analysis Description: This weakness may be detectable using manual code analysis. Unless authentication is decentralized and applied throughout the product, there can be sufficie"
+    },
+    "cwe-passage:daee4703711f0df69f489db8e48df95eaf3082b0fa11cc3de4de0926a3d56248": {
+      "cwe_id": "CWE-20",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='20']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 29,
+      "content_sha256": "ba087b7e49282ad3b28342d1f120c73b5c3368da7c0e4537819741c959505d04",
+      "preview": "Method: Manual Static Analysis Description: When custom input validation is required, such as when enforcing business rules, manual analysis is necessary to ensure that the validation is properly impl"
+    },
+    "cwe-passage:dbe4aba3e650a42975cdc732db1d2e7e3b5769ad8d45a73fef19b515ffed9d78": {
+      "cwe_id": "CWE-330",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='330']/Detection_Methods/Detection_Method[4]",
+      "chunk_index": 0,
+      "words": 31,
+      "content_sha256": "ee9b2417943e7fd35a3585097f0a995ec0f87369f3ad973566b3fade18102780",
+      "preview": "Method: Dynamic Analysis with Manual Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Man-in-t"
+    },
+    "cwe-passage:ddcbad550992a6f5d95f51d639a368ff018eb361d8e3ccda10e5aa6da194edad": {
+      "cwe_id": "CWE-209",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='209']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 108,
+      "content_sha256": "a0e39f02c457f9b85cb0dfcec00c041991ce0aba69b5d024fd71771d04badd4d",
+      "preview": "Scope: Confidentiality Impact: Read Application Data Note: Often this will either reveal sensitive information which may be used to launch another, more focused attack or disclose private information "
+    },
+    "cwe-passage:de485fe0b909fb28328fabdc12f92f0b0c7558710b60563e39953c6397552160": {
+      "cwe_id": "CWE-862",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='862']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 92,
+      "content_sha256": "d7c0e0e5c2ccb4d3f03fa72462ec7b9df69ebf5e8c163f4deb0e4da1372e55f2",
+      "preview": "Method: Manual Analysis Description: This weakness can be detected using tools and techniques that require manual (human) analysis, such as penetration testing, threat modeling, and interactive tools "
+    },
+    "cwe-passage:dee18c17d00e7e94167c3407c0d2aba2efbc1c5503362429a691a7743a89f801": {
+      "cwe_id": "CWE-682",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='682']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 30,
+      "content_sha256": "d9078392242318c1400745fd9ce2cdd85f8a7c3920d34856f4ea9000fdd7cfb8",
+      "preview": "Scope: Access Control Impact: Gain Privileges or Assume Identity Note: In the context of privilege or permissions assignment, an incorrect calculation can provide an attacker with access to sensitive "
+    },
+    "cwe-passage:e0f62e2b1be41561c1789c8aad6adb850d18583ae1676e20323adaa0f2bc58f5": {
+      "cwe_id": "CWE-1420",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1420']/Potential_Mitigations/Mitigation[10]",
+      "chunk_index": 0,
+      "words": 77,
+      "content_sha256": "6eb035fa3e98712085a119a0fe99dddf639d7e75976ff5dbdcf7ddfcb07e6e9e",
+      "preview": "Phase: Build and Compilation Description: Use software techniques (including the use of serialization instructions) that are intended to reduce the number of instructions that can be executed transien"
+    },
+    "cwe-passage:e2d1d5fbf1eb203a998137d627b34a1e73da2df34494f6588f100d78d75cf43e": {
+      "cwe_id": "CWE-1240",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1240']/Potential_Mitigations/Mitigation[4]",
+      "chunk_index": 0,
+      "words": 55,
+      "content_sha256": "39e4c2c84cb41afa3d5f4203851383ae4320a3fcc1a586134de22f5860b198b5",
+      "preview": "Phase: Architecture and Design Description: Try not to use cryptographic algorithms in novel ways or with new modes of operation even when you \"know\" it is secure. For example, using SHA-2 chaining to"
+    },
+    "cwe-passage:e356e4630682faa1e078b522223d2251ecb7b7542f161b613ac00a445d87589b": {
+      "cwe_id": "CWE-131",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='131']/Detection_Methods/Detection_Method[5]",
+      "chunk_index": 0,
+      "words": 99,
+      "content_sha256": "9f92027d5e397e7dea1b4e775faa6668e0aaabaeda5dfcf783545846a09d610e",
+      "preview": "Method: Manual Analysis Description: This weakness can be detected using tools and techniques that require manual (human) analysis, such as penetration testing, threat modeling, and interactive tools "
+    },
+    "cwe-passage:e639d4edb94f0578c600d70e611ca88106182e8c20ea7cf21ef68b05f1c0b9eb": {
+      "cwe_id": "CWE-306",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='306']/Detection_Methods/Detection_Method[4]",
+      "chunk_index": 0,
+      "words": 38,
+      "content_sha256": "6171dd1ee4cccfcd08820f12682a43fe1d9c41e429d9fb7252fc8f27852735e4",
+      "preview": "Method: Dynamic Analysis with Automated Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Web A"
+    },
+    "cwe-passage:e6867c90367b4eafbed1732c0f17fe2af1cf0b308a16c5eeb9aba6bc3eafcc5f": {
+      "cwe_id": "CWE-362",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='362']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 23,
+      "content_sha256": "efe7331b4e730392e8b3dfbf81786afbe896fef40b213e5811d8062d39767df5",
+      "preview": "Method: White Box Description: Common idioms are detectable in white box analysis, such as time-of-check-time-of-use (TOCTOU) file operations (CWE-367), or double-checked locking (CWE-609)."
+    },
+    "cwe-passage:e6ee5903c37b81cbf51ced14109ad1243d35bd863bc7f805147d39f195b3ab94": {
+      "cwe_id": "CWE-285",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='285']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 35,
+      "content_sha256": "f2e99e6cde2162188120df918ebad0b236477b0597c859faefae344fcf8960f1",
+      "preview": "Method: Automated Dynamic Analysis Description: Automated dynamic analysis may find many or all possible interfaces that do not require authorization, but manual analysis is required to determine if t"
+    },
+    "cwe-passage:e881ef3697d483d63a30390798ebf5fb602090d9c43187bff69aa4a71afe928c": {
+      "cwe_id": "CWE-1421",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1421']/Potential_Mitigations/Mitigation[11]",
+      "chunk_index": 0,
+      "words": 47,
+      "content_sha256": "e1e18885b48c263e879b28a4980583008a0893fa58218b3d2db8537095a9ee60",
+      "preview": "Phase: Patching and Maintenance Description: The hardware vendor may provide a patch to sanitize the affected shared microarchitectural state when the processor transitions to a different context. Eff"
+    },
+    "cwe-passage:e886351dfb441240b051b5297dd698d6a693b3082028daa89c3a34a2a219e298": {
+      "cwe_id": "CWE-1240",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1240']/Potential_Mitigations/Mitigation[1]",
+      "chunk_index": 0,
+      "words": 42,
+      "content_sha256": "a9c66e7711dfa09dc601a812235d775b4012251e02b49ed74adf683fb0d31f37",
+      "preview": "Phase: Requirements Description: Require compliance with the strongest-available recommendations from trusted parties, and require that compliance must be kept up-to-date, since recommendations evolve"
+    },
+    "cwe-passage:ea8d6dd6359fd85e1a7a4843fa8163fe285534f0c3be6441a52513bb8ef5037f": {
+      "cwe_id": "CWE-863",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='863']/Common_Consequences/Consequence[4]",
+      "chunk_index": 0,
+      "words": 25,
+      "content_sha256": "2c57e1c2da56c4e89968fa97429871f2250a3bb4553c88a4739c13405cd6208f",
+      "preview": "Scope: Confidentiality Scope: Integrity Scope: Availability Impact: Execute Unauthorized Code or Commands Note: An attacker could use elevated privileges to execute unauthorized commands or code."
+    },
+    "cwe-passage:ed148229a545dc16a381b2f8dd462f9d8b23daf4b4c4073f4a6dca882ddf1a41": {
+      "cwe_id": "CWE-250",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='250']/Detection_Methods/Detection_Method[5]",
+      "chunk_index": 0,
+      "words": 48,
+      "content_sha256": "750be5fd4a9fb06a7d749780e658d5cfcf7b2247915e234758f3c5f533fb0be7",
+      "preview": "Method: Dynamic Analysis with Automated Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Host-"
+    },
+    "cwe-passage:ed942b7794174c3a08f677be73b80ec5a0cb3e1bf6dba7aea39e415eebdae935": {
+      "cwe_id": "CWE-327",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='327']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 63,
+      "content_sha256": "400cf1a2615d6a7eef03b5f94478b1e10a7e190c6b00b0e2b2403b2c89c7344f",
+      "preview": "Method: Automated Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Bytecode Weak"
+    },
+    "cwe-passage:edc6aea045e03ce0e227b955f5e975a4345ecfc1579d01c0a95f8c9e6171a2b0": {
+      "cwe_id": "CWE-120",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='120']/Detection_Methods/Detection_Method[1]",
+      "chunk_index": 0,
+      "words": 110,
+      "content_sha256": "43b8bb54ed14f9647c29f2678b6aa2bb0097e40ff4b89048dc6ff6910e7faae7",
+      "preview": "Method: Automated Static Analysis Description: This weakness can often be detected using automated static analysis tools. Many modern tools use data flow analysis or constraint-based techniques to min"
+    },
+    "cwe-passage:efd057fbc486d556e5e6cb48157ac7dca9f51b1d2f99d7da91e873119dbe4bb0": {
+      "cwe_id": "CWE-285",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='285']/Detection_Methods/Detection_Method[3]",
+      "chunk_index": 0,
+      "words": 92,
+      "content_sha256": "d7c0e0e5c2ccb4d3f03fa72462ec7b9df69ebf5e8c163f4deb0e4da1372e55f2",
+      "preview": "Method: Manual Analysis Description: This weakness can be detected using tools and techniques that require manual (human) analysis, such as penetration testing, threat modeling, and interactive tools "
+    },
+    "cwe-passage:f1d254fbf2ddd148c68ac988f819805480e50530c7f2702731dc15c77afd819e": {
+      "cwe_id": "CWE-285",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='285']/Detection_Methods/Detection_Method[6]",
+      "chunk_index": 0,
+      "words": 64,
+      "content_sha256": "021a5c0a0cd45589462b7c65b71f2f1815dd7ea8096d8cf0a5f4fc9fdbe596cc",
+      "preview": "Method: Dynamic Analysis with Manual Results Interpretation Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Host App"
+    },
+    "cwe-passage:f28726fa493ffbe21cf59eb9b0ec474bc1a6ba2cea78abe49182ac9635276ce0": {
+      "cwe_id": "CWE-367",
+      "field_name": "description",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='367']/Description[1]",
+      "chunk_index": 0,
+      "words": 34,
+      "content_sha256": "60c62b2a2caaa62afb20cd9200d387a6028ce975c0ea5277e6747dc948bb019c",
+      "preview": "The product checks the state of a resource before using that resource, but the resource's state can change between the check and the use in a way that invalidates the results of the check."
+    },
+    "cwe-passage:f30ce5684053eda53810be86bc1de81804a02e3569be0821e86897e25c0b7fbc": {
+      "cwe_id": "CWE-1039",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1039']/Common_Consequences/Consequence[4]",
+      "chunk_index": 0,
+      "words": 20,
+      "content_sha256": "32e073dceb839793748bc5e6ba0785ee97c0d88591a8ddc598bb8d2de0a3039c",
+      "preview": "Scope: Other Impact: Varies by Context Note: The consequences depend on how the application applies or integrates the affected algorithm."
+    },
+    "cwe-passage:f377df1483978603ec64651133ac8b51413b7622386a567d04acd746dbf17ba5": {
+      "cwe_id": "CWE-1240",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1240']/Potential_Mitigations/Mitigation[3]",
+      "chunk_index": 0,
+      "words": 60,
+      "content_sha256": "e5d24be1d508786c410ba44ef2cc61cd49bdd27f1f21ac0e446f03d7f93140e0",
+      "preview": "Phase: Architecture and Design Description: Do not develop custom or private cryptographic algorithms. They will likely be exposed to attacks that are well-understood by cryptographers. As with all cr"
+    },
+    "cwe-passage:f38eaa492b8b32098075efdd65151b7bd988ead86f7c190ca0a865c098209645": {
+      "cwe_id": "CWE-367",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='367']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 28,
+      "content_sha256": "f6da3f286bb1ee8c6a605dbd2adf5d28fa20afbe960cd148c324093dccd8161d",
+      "preview": "Scope: Integrity Scope: Other Impact: Other Note: The resource in question, or other resources (through the corrupted one), may be changed in undesirable ways by a malicious user."
+    },
+    "cwe-passage:f68417ab55ae8e7d84eb0ddfb289eed58686193b60f6441cc1bcaa92bef03cab": {
+      "cwe_id": "CWE-327",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='327']/Detection_Methods/Detection_Method[4]",
+      "chunk_index": 0,
+      "words": 42,
+      "content_sha256": "14ef8783f4a30a110c4c406c42b2ad0fa93121867eb7e83c52b21dfb908036f9",
+      "preview": "Method: Manual Static Analysis - Binary or Bytecode Description: According to SOAR [REF-1479], the following detection techniques may be useful: Cost effective for partial coverage: - Binary / Bytecod"
+    },
+    "cwe-passage:f77d8073ad4c6be4bca55f71074365658fff4b10fd8c6cdf7fcd571eb331ed35": {
+      "cwe_id": "CWE-805",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='805']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 40,
+      "content_sha256": "e673771e3caaff48dd20292af3c953dfb6bc81258dd1fab98eb1554cb763825b",
+      "preview": "Scope: Availability Impact: Modify Memory Impact: DoS: Crash, Exit, or Restart Impact: DoS: Resource Consumption (CPU) Note: Buffer overflows generally lead to crashes. Other attacks leading to lack o"
+    },
+    "cwe-passage:f87512e28ed336e2de04b45d0d432a2d4430830b3288f95f33da345319a0efef": {
+      "cwe_id": "CWE-22",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='22']/Detection_Methods/Detection_Method[2]",
+      "chunk_index": 0,
+      "words": 36,
+      "content_sha256": "57947b9d53ca5c660bfb0b54695673c0a563a83da97c698a15df0f2979ebdd5f",
+      "preview": "Method: Manual Static Analysis Description: Manual white box techniques may be able to provide sufficient code coverage and reduction of false positives if all file access operations can be assessed w"
+    },
+    "cwe-passage:f8ce153ad17ad9e598c9181a469ea738665baf659507132f068ab540e757fc8d": {
+      "cwe_id": "CWE-1422",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1422']/Potential_Mitigations/Mitigation[2]",
+      "chunk_index": 0,
+      "words": 51,
+      "content_sha256": "4c8f22846ddce3c4e9152dc15285c5140fcbcc65731393f444b47a2263502288",
+      "preview": "Phase: Requirements Description: Processor designers, system software vendors, or other agents may choose to restrict the ability of unprivileged software to access to high-resolution timers that are "
+    },
+    "cwe-passage:f9769e6583ec56fe35a58e0c8d0577302d90b13d34c22b38c9d35b84c3b4ef82": {
+      "cwe_id": "CWE-1240",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='1240']/Potential_Mitigations/Mitigation[11]",
+      "chunk_index": 0,
+      "words": 45,
+      "content_sha256": "2b622a8f6233f91329089f7641913eb2bef8d941259e00b30cb81f15350004b7",
+      "preview": "Phase: Architecture and Design Phase: Implementation Description: Do not store keys in areas accessible to untrusted agents. Carefully manage and protect the cryptographic keys (see CWE-320). If the k"
+    },
+    "cwe-passage:fa22eefcf39941807260ed5cf09b34b4d29a0603f9f02d4d5f556f44311e5c6c": {
+      "cwe_id": "CWE-190",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='190']/Common_Consequences/Consequence[3]",
+      "chunk_index": 0,
+      "words": 45,
+      "content_sha256": "b0d2a77729072e0006c5a9a47452b32deb2e46e66cd741302139edd922fc1154",
+      "preview": "Scope: Confidentiality Scope: Availability Scope: Access Control Impact: Execute Unauthorized Code or Commands Impact: Bypass Protection Mechanism Note: This weakness can sometimes trigger buffer over"
+    },
+    "cwe-passage:fae88ac1628e8f9a442de1fb884b018e7cea542fa23308deaba6d6cfd231fc76": {
+      "cwe_id": "CWE-131",
+      "field_name": "detection_methods",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='131']/Detection_Methods/Detection_Method[10]",
+      "chunk_index": 0,
+      "words": 45,
+      "content_sha256": "14ed865b55c08cc3a98de255c694e2485ebe76977e5099c60172a39f5c6fb77f",
+      "preview": "Method: Architecture or Design Review Description: According to SOAR [REF-1479], the following detection techniques may be useful: Highly cost effective: - Formal Methods / Correct-By-Construction Cos"
+    },
+    "cwe-passage:fc872b513e9a98fbcd3ebdfcb25e8168147013916f5b832b6137aab85bffefd5": {
+      "cwe_id": "CWE-311",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='311']/Common_Consequences/Consequence[2]",
+      "chunk_index": 0,
+      "words": 109,
+      "content_sha256": "5114d0baadd1ca4822a4018064e4681f5ffe17f76362e398a5d284987b13056f",
+      "preview": "Scope: Confidentiality Scope: Integrity Impact: Modify Application Data Note: Omitting the use of encryption in any program which transfers data over a network of any kind should be considered on par "
+    },
+    "cwe-passage:fd32b6d603340dcc5c70bacaeb9cf5d181a057d9f5f64435e0f4b6e7d61cb2d0": {
+      "cwe_id": "CWE-682",
+      "field_name": "common_consequences",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='682']/Common_Consequences/Consequence[1]",
+      "chunk_index": 0,
+      "words": 32,
+      "content_sha256": "ccc65fcfd2548ac11aac181c7ed199850f7a4596e526b0b907bc645e562d6ec5",
+      "preview": "Scope: Availability Impact: DoS: Crash, Exit, or Restart Note: If the incorrect calculation causes the program to move into an unexpected state, it may lead to a crash or impairment of service."
+    },
+    "cwe-passage:fed2349753ae1581f94c998a54aaf35b712692e69c1350a9187d58e5aa6b1ab7": {
+      "cwe_id": "CWE-434",
+      "field_name": "potential_mitigations",
+      "source_locator": "/Weakness_Catalog/Weaknesses/Weakness[@ID='434']/Potential_Mitigations/Mitigation[5]",
+      "chunk_index": 0,
+      "words": 35,
+      "content_sha256": "71123108aca341832e2eb551f1605c80b4925634cd3584b881bc4570f3d1c684",
+      "preview": "Phase: Architecture and Design Description: Define a very limited set of allowable extensions and only generate filenames that end in these extensions. Consider the possibility of XSS (CWE-79) before "
+    }
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "version": "probe-v1",
+  "purpose": "probe_not_formal_dataset",
+  "note": "40 题探针集，用于判定 MMR 是否值得继续；不属于正式 120 题，不进入开发集 80 / 冻结测试集 40。",
+  "snapshot_id": "cwe:88e4eab3cc54f16611040a0e528d7a128253426e90ee5054327fd28449fee393",
+  "cwe_archive_sha256": "3976f599e5e5200219a3108bb896d06e2a88fbb293369e1883cb423a5e9d7d50",
+  "generator": "scripts/make_probe_skeleton.py",
+  "max_words_per_passage": 120,
+  "chunk_index_assumption": 0,
+  "quota": {
+    "A": 12,
+    "B": 8,
+    "C": 8,
+    "D": 4,
+    "E": 8
+  },
+  "filled": {
+    "records": 40
+  },
+  "files": {
+    "skeleton": "skeleton.jsonl",
+    "passage_index": "passage_index.json"
+  },
+  "file_sha256": {
+    "skeleton.jsonl": "6c4ed100e482a12965d66816eff094d03f17b8ca630d2255a696a3a1e9fa5e07",
+    "passage_index.json": "f1cbbe4540989b5eefe0aa169db9ec1d6b82462882a28b820563d7d3cf0980b5"
+  },
+  "entries": [
+    {
+      "question_id": "probe-001",
+      "cwe_id": "CWE-73",
+      "template": "A"
+    },
+    {
+      "question_id": "probe-002",
+      "cwe_id": "CWE-116",
+      "template": "A"
+    },
+    {
+      "question_id": "probe-003",
+      "cwe_id": "CWE-129",
+      "template": "A"
+    },
+    {
+      "question_id": "probe-004",
+      "cwe_id": "CWE-134",
+      "template": "A"
+    },
+    {
+      "question_id": "probe-005",
+      "cwe_id": "CWE-311",
+      "template": "A"
+    },
+    {
+      "question_id": "probe-006",
+      "cwe_id": "CWE-367",
+      "template": "A"
+    },
+    {
+      "question_id": "probe-007",
+      "cwe_id": "CWE-601",
+      "template": "A"
+    },
+    {
+      "question_id": "probe-008",
+      "cwe_id": "CWE-665",
+      "template": "A"
+    },
+    {
+      "question_id": "probe-009",
+      "cwe_id": "CWE-682",
+      "template": "A"
+    },
+    {
+      "question_id": "probe-010",
+      "cwe_id": "CWE-805",
+      "template": "A"
+    },
+    {
+      "question_id": "probe-011",
+      "cwe_id": "CWE-1039",
+      "template": "A"
+    },
+    {
+      "question_id": "probe-012",
+      "cwe_id": "CWE-1427",
+      "template": "A"
+    },
+    {
+      "question_id": "probe-013",
+      "cwe_id": "CWE-20",
+      "template": "B"
+    },
+    {
+      "question_id": "probe-014",
+      "cwe_id": "CWE-22",
+      "template": "B"
+    },
+    {
+      "question_id": "probe-015",
+      "cwe_id": "CWE-89",
+      "template": "B"
+    },
+    {
+      "question_id": "probe-016",
+      "cwe_id": "CWE-120",
+      "template": "B"
+    },
+    {
+      "question_id": "probe-017",
+      "cwe_id": "CWE-190",
+      "template": "B"
+    },
+    {
+      "question_id": "probe-018",
+      "cwe_id": "CWE-362",
+      "template": "B"
+    },
+    {
+      "question_id": "probe-019",
+      "cwe_id": "CWE-732",
+      "template": "B"
+    },
+    {
+      "question_id": "probe-020",
+      "cwe_id": "CWE-863",
+      "template": "B"
+    },
+    {
+      "question_id": "probe-021",
+      "cwe_id": "CWE-78",
+      "template": "C"
+    },
+    {
+      "question_id": "probe-022",
+      "cwe_id": "CWE-119",
+      "template": "C"
+    },
+    {
+      "question_id": "probe-023",
+      "cwe_id": "CWE-131",
+      "template": "C"
+    },
+    {
+      "question_id": "probe-024",
+      "cwe_id": "CWE-250",
+      "template": "C"
+    },
+    {
+      "question_id": "probe-025",
+      "cwe_id": "CWE-285",
+      "template": "C"
+    },
+    {
+      "question_id": "probe-026",
+      "cwe_id": "CWE-327",
+      "template": "C"
+    },
+    {
+      "question_id": "probe-027",
+      "cwe_id": "CWE-798",
+      "template": "C"
+    },
+    {
+      "question_id": "probe-028",
+      "cwe_id": "CWE-862",
+      "template": "C"
+    },
+    {
+      "question_id": "probe-029",
+      "cwe_id": "CWE-352",
+      "template": "D"
+    },
+    {
+      "question_id": "probe-030",
+      "cwe_id": "CWE-434",
+      "template": "D"
+    },
+    {
+      "question_id": "probe-031",
+      "cwe_id": "CWE-1240",
+      "template": "D"
+    },
+    {
+      "question_id": "probe-032",
+      "cwe_id": "CWE-1421",
+      "template": "D"
+    },
+    {
+      "question_id": "probe-033",
+      "cwe_id": "CWE-79",
+      "template": "E"
+    },
+    {
+      "question_id": "probe-034",
+      "cwe_id": "CWE-209",
+      "template": "E"
+    },
+    {
+      "question_id": "probe-035",
+      "cwe_id": "CWE-306",
+      "template": "E"
+    },
+    {
+      "question_id": "probe-036",
+      "cwe_id": "CWE-330",
+      "template": "E"
+    },
+    {
+      "question_id": "probe-037",
+      "cwe_id": "CWE-807",
+      "template": "E"
+    },
+    {
+      "question_id": "probe-038",
+      "cwe_id": "CWE-829",
+      "template": "E"
+    },
+    {
+      "question_id": "probe-039",
+      "cwe_id": "CWE-1420",
+      "template": "E"
+    },
+    {
+      "question_id": "probe-040",
+      "cwe_id": "CWE-1422",
+      "template": "E"
+    }
+  ],
+  "generated_at_utc": "2026-11-23T06:20:42+00:00"
+}
