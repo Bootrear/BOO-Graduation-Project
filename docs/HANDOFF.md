@@ -5,7 +5,7 @@
 - 分支：`step1/dataset-optimization`，远端 `origin/step1/dataset-optimization`。
 - 本轮 R01 开始时 HEAD：`16fc82aa57bd67684eaad182654bd9f9bfb5b3a3`，开始时工作区除保护文件外干净；`install.sh` 原有未跟踪且保持未改动。
 - 新增独立检索实验，不修改原 DPR 主线、baseline 配置、原评测代码/文件、DPR 向量索引或冻结 MMR 公式。变更及算法契约见 [RETRIEVAL_EXPERIMENTS.md](RETRIEVAL_EXPERIMENTS.md)。
-- R01 主提交：`56208ff358d7196e8c7aa2698c3f1e0634adfc0c`。本轮文档收尾写入时 HEAD 为该提交；其后续文档提交哈希按要求在提交后用 `git rev-parse HEAD` 记录。主提交尚待推送并核验。
+- R01 主提交：`56208ff358d7196e8c7aa2698c3f1e0634adfc0c`；文档收尾提交：`28277b2d1c2c4277ee32c5979a207d4930409c87`。推送后 `git fetch origin step1/dataset-optimization`、`git rev-parse HEAD`、`git rev-parse origin/step1/dataset-optimization` 与 `git ls-remote --heads origin step1/dataset-optimization` 均核验为 `28277b2d1c2c4277ee32c5979a207d4930409c87`。本次核验收尾文档写入时 HEAD 与最近已核验提交均为该哈希。
 
 ## R01 交付内容
 
@@ -32,9 +32,9 @@
 
 复核发现并修正 `historical_check` 的判定：现同时区分候选/选择结构一致和 Reader logit 在 1e-6 内一致；对应测试避免浅拷贝造成的假阳性。最终完整重跑刷新 manifest 的源码哈希。
 
-## 唯一下一步
+## 阶段状态
 
-唯一下一步是提交本次文档收尾，再推送当前分支、fetch 并用 `git rev-parse` 与 `git ls-remote` 核验远端包含 R01 主提交及文档提交。实验 manifest `status=completed`、12 个组合全部在 `completed_runs`、逐题均成功、DPR replay 三个 N 均 matched；全套测试和受保护哈希检查通过。`install.sh` 仍为原有未跟踪文件，不纳入提交。
+R01 已完成、提交并推送核验。实验 manifest `status=completed`、12 个组合全部在 `completed_runs`、逐题均成功、DPR replay 三个 N 均 matched；全套测试和受保护哈希检查通过。`install.sh` 仍为原有未跟踪文件，不纳入提交。
 
 最终完成后，无新的实现工作。下一阶段是否人工复核标注或拓展正式评测，待用户指定；不可把本机机器草稿结果当作正式测试。
 
@@ -54,4 +54,4 @@ git rev-parse origin/step1/dataset-optimization
 git ls-remote --heads origin step1/dataset-optimization
 ```
 
-更新时间：2026-11-24T10:24:31+08:00（北京时间）。
+更新时间：2026-11-24T10:26:16+08:00（北京时间）。
