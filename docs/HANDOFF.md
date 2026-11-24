@@ -59,6 +59,11 @@ py scripts/apply_probe_annotations.py
 
 校验必须 0 失败；核对 `git diff data/annotations/probe-v1/manifest.json` 的哈希已刷新，
 再跑门禁三指标（Evidence Recall@5、池内平均两两余弦、两策略 selected_order 差异题数）。
+GPU 机器上的完整命令、N/λ 扫描与判读规则见 [实验运行手册](EXPERIMENT_RUNBOOK.md)。
+
+**已有一次 CPU 预演结果（不可用于论文）**：40 题 MMR 与 Top-K 全平（Recall@5 均 0.200），
+检索天花板 0.275，必选证据检索中位排名 23、Reader 池内中位排名 4 —— 瓶颈在检索而非筛选。
+脚本 `scripts/eval_probe.py`、`scripts/eval_retrieval.py` 已入库，结果在本地 `outputs/`（未提交）。
 
 环境侧前置：本机尚无 `models/`、`data/processed/` 与索引，需先按 `docs/DEPLOYMENT.md`
 经本地代理下载 DPR 三模型并重建 5748 段索引；首次预处理后运行

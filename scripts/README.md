@@ -13,6 +13,8 @@
 | make_probe_skeleton.py | 生成 probe-v1 的 40 题标注骨架与候选段落索引（确定性，仅标准库 + 项目解析器） |
 | apply_probe_annotations.py | 把 `draft.v1.json` 合并进骨架，严格校验后写出 `qa.v1.jsonl` 并刷新清单哈希 |
 | verify_probe_ids.py | 首次预处理后用真实 `passages.jsonl` 核对 probe-v1 的 `passage_id` |
+| eval_retrieval.py | 纯检索诊断：必选证据的排名分布与 Recall@N 曲线（不跑 Reader） |
+| eval_probe.py | 门禁评测：同一候选池下 Reader Top-5 与 MMR 的 Evidence Recall@5、冗余度、配对 bootstrap；支持 `--n` / `--lam` 覆盖 |
 | validate_raw_data.py | 旧完整起始快照校验（含 NVD/CAPEC/ATT&CK/KEV），不属于本基线必需资源 |
 
 `make_probe_skeleton.py` 只读 `data/raw/cwe/cwec_v4.20.xml.zip`，输出
