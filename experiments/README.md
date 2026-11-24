@@ -2,6 +2,10 @@
 
 当前仅制定实验协议，尚无正式运行结果。主线依据[开题报告](../docs/开题报告_整理版.md)，不预设 MMR 或增强模式必然更好。
 
+新增 R01 探索性检索对照：`python scripts/compare_retrieval.py --device cuda` 按顺序比较
+DPR、BM25+DPR、子问题 DPR、CWE 条目检索。与下方正式实验协议区分，方法、输出和
+机器草稿标注限制见[检索四方案说明](../docs/RETRIEVAL_EXPERIMENTS.md)。
+
 ## 两组受控对照
 
 | 实验 | 变化项 | 固定项 |

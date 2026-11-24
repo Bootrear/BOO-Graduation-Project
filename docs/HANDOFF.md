@@ -1,85 +1,57 @@
 # 跨会话交接
 
-恢复顺序：AGENTS.md → BASELINE_SPEC.md → IMPLEMENTATION_PLAN.md → PROGRESS.md → 本文件；再核查 git status、branch、log。
+## 当前仓库状态
 
-## 当前分支和提交
+- 分支：`step1/dataset-optimization`，远端 `origin/step1/dataset-optimization`。
+- 本轮 R01 开始时 HEAD：`16fc82aa57bd67684eaad182654bd9f9bfb5b3a3`，开始时工作区除保护文件外干净；`install.sh` 原有未跟踪且保持未改动。
+- 新增独立检索实验，不修改原 DPR 主线、baseline 配置、原评测代码/文件、DPR 向量索引或冻结 MMR 公式。变更及算法契约见 [RETRIEVAL_EXPERIMENTS.md](RETRIEVAL_EXPERIMENTS.md)。
+- 本文写入时 HEAD 仍为 R01 起始提交；当前文档提交自身哈希需在提交后用 `git rev-parse HEAD` 获取。本次目标分支尚无新实验提交，需按项目要求提交、推送、fetch 并核验。
 
-- **当前分支**：`step1/dataset-optimization`（基于 `baseline/cwe-dpr-reader-mmr` 的 `ebd1f48` 新建，用于探针集数据集优化）。
-- 上游基线分支：`baseline/cwe-dpr-reader-mmr`；origin=`https://github.com/Bootrear/BOO-Graduation-Project.git`。
-- 本分支首次提交的自身哈希在提交后以 `git rev-parse HEAD` 获取，不预先填写。
-- 写入时 HEAD / 最近远端核验提交：`402abef6e87a50a775b17b9cb14d095b4b69f3c1`（P10），fetch/ls-remote一致。
-- 本轮已核验：P06 `86e5ed400759bd198822c8cc2eb8e5339251a4ae`；P07 `7ec81b5250e71cb0f59a8e6e388857d820826b0b`；P08 `b28b783ac1686a9cbae4c2d7f849b99c84ae4786`；P09 `dff54ee097884a9112b9e2e40bfc6f6c219ea774`；P10如上。
-- P10验收提交已推送核验；本次清理修改写入时 HEAD 为 `b78a9970f21c9b8479ef134caa3ea8d41096ce8d`。清理提交为 `9a055b2`；其后的失败记录提交为 `e01a59375bcc125e88c5358cc089aac929a0dee2`。首次推送因 `gnutls_handshake() failed: The TLS connection was non-properly terminated` 失败；随后重试成功，远端已核验包含 `e01a59375bcc125e88c5358cc089aac929a0dee2`。
+## R01 交付内容
 
-## 本阶段目标与结论
+- `src/cyber_qa/experiments/retrieval.py`：保留基线 DPR 的独立 BM25+DPR RRF、规则子问题 DPR RRF、预测 CWE 条目内排序+全库保底。
+- `src/cyber_qa/experiments/comparison.py`：逐题共享 Reader/Top-K/MMR/普通回答，宏/微指标、分组、配对 bootstrap、失败记账与历史基线核对。
+- `scripts/compare_retrieval.py`：一键四方案，默认 N=20/50/100，每次建立新输出目录，复制只读旧基线，逐题 JSONL 与汇总 JSON/CSV/Markdown。
+- `tests/test_retrieval_experiments.py`：20 项实验边界、检索隔离、指标及 CLI 回归。
+- `docs/RETRIEVAL_EXPERIMENTS.md` 及 README/导航/计划/进度：命令、算法参数、控制变量、结果与限制。
+- 用户要求的远端更新前置 Git 状态：当前分支起始 HEAD=`16fc82aa57bd67684eaad182654bd9f9bfb5b3a3`，`origin/step1/dataset-optimization` 同步；无远端新提交。
 
-**STEP1（进行中，卡在人工复核）**：解决"原 12 题冒烟集无法分辨 MMR 与 Reader Top-K"的评测集缺陷。
-已交付 `data/annotations/probe-v1/`：40 题骨架 + 机器起草的 `qa.v1.jsonl`
-（模板 A12/B8/C8/D4/E8，40 个不同 CWE，72 条 gold fact，8 条单段题带 `answer_span`）。
-标注人 `deepseek-auto-draft`、`status=auto_drafted_needs_human_review`、`reviewer=null`。
-**未经人工复核，未跑模型，无任何有效性结论。**
+## 验证与真实实验
 
-每次提交的时间、任务名称与主要内容记入 `docs/COMMIT_LOG.md`，新提交在表末追加一行。
+- `.venv/bin/python -m pytest -q tests/test_retrieval_experiments.py`：`20 passed`。
+- `.venv/bin/python -m pytest -q`：`155 passed in 5.18s`。
+- `compileall`、比较脚本 `--help`、`git diff --check`：通过。
+- `.venv/bin/python scripts/compare_retrieval.py --device cuda --output outputs/retrieval-comparison-v1-final`：完成 480/480，manifest 为 `completed`，12 组×40 题均成功。第二次运行与首轮非计时汇总完全相同。
+- 每个 N 的 DPR replay 为 `matched`；候选池、gold ID、Top-K/MMR 顺序与历史逐题一致，Reader logit 最大差异为 0，logit 容差字段也通过。
+- 最终运行 stdout/stderr：`outputs/retrieval-comparison-v1-final.log`。所有 outputs 被 gitignore；旧 `probe-eval-N20/50/100.json`、原 eval 脚本、`docs/theprompt.md` 与 `install.sh` SHA-256 在实现前后保持不变。
+- 已完成首轮结果的核心表已写进 PROGRESS；探针 40 题全部 `auto_drafted_needs_human_review`。结论仅作探索性诊断，不能声称答案准确率或正式算法有效性。
 
-P00–P10普通问答基线代码、单元、真实模型、真实端到端和部署复现均已完成技术验收。随后已清理与当前基线无关的早期选择器兼容层；清理后的回归套件为135项，12题全流程、独立新进程重载、全量预处理/建库/查询结果保持不变。
+## 已知实测与限制
 
-**语义质量不足，不是已校准产品**：指定支持passage仅4/12召回、两策略均3/12选中；所有正常答案语义充分性为not_assessed。Codex逐条检查原文与实际输出，未声称独立人工复核。正式120题/调优/校准/增强模式/自动更新属于后续范围。
+最终运行仍为四方案×N20/50/100 共 480 题全部成功；新 DPR 与历史 20/50/100 的 pool、Top-K/MMR 顺序逐题相同，Reader relevance 最大差值为 0。混合检索将 Recall@N 从 DPR 的 27.50/43.75/50.00% 提高到 73.75/85.00/91.25%，而 MMR Recall@5 为 38.75/33.75/22.50%；CWE 层级 Recall@N 为 40/60/70%，MMR Recall@5 为 26.25/22.50/26.25%；子问题 Recall@N 为 30/45/52.5%，MMR Recall@5 为 20/21.25/25%。差异与 CI 的完整数字、全覆盖率与方法限制见 PROGRESS 和运行产物。单段/多段与普通答案语义正确性不可从未复核标签推出。
 
-## 已修改文件
+复核发现并修正 `historical_check` 的判定：现同时区分候选/选择结构一致和 Reader logit 在 1e-6 内一致；对应测试避免浅拷贝造成的假阳性。最终完整重跑刷新 manifest 的源码哈希。
 
-本次清理：删除早期选择器实现、测试、配置、合成脚本、旧数据类及其导出；更新 AGENTS.md、README.md、CONTRIBUTIONS.md、配置/脚本/模块说明、BASELINE_SPEC.md、IMPLEMENTATION_PLAN.md、READER.md、RUNTIME.md、SELECTION.md、研究范围、PROGRESS.md、HANDOFF.md，并将包级选择导出切换为 MMR。
+## 唯一下一步
 
-install.sh保持未跟踪且未改动；docs/theprompt.md原始字节保留。data/raw、data/processed、models、outputs中的权重/原始数据/索引/日志/第二个虚拟环境均忽略，不提交。
+核验已完成：最终 manifest `status=completed`、12 个组合全部在 `completed_runs`、逐题均成功、DPR replay 三个 N 均 matched；全套测试和受保护哈希检查通过。唯一下一步是复查暂存 diff，只加入本轮相关源代码、测试、文档（不加入 outputs/ 模型/原始数据，也不加入 install.sh），创建阶段提交、推送当前分支并 fetch/ls-remote 核验远端包含提交。
 
-## 已运行命令及结果
+最终完成后，无新的实现工作。下一阶段是否人工复核标注或拓展正式评测，待用户指定；不可把本机机器草稿结果当作正式测试。
 
-1. `.venv/bin/python -m cyber_qa preprocess --raw data/raw/cwe/cwec_v4.20.xml.zip --output data/processed/cwe-replay`：退出0，5748段，7.674s。
-2. `.venv/bin/python -m cyber_qa build-index --snapshot data/processed/cwe-replay --output data/processed/dpr-index-replay --device cuda --batch-size 32`：退出0，5748×768；编码/写入8.882s，加载3.213s。
-3. `.venv/bin/python -m cyber_qa query --snapshot data/processed/cwe-replay --index data/processed/dpr-index-replay --question 'What are examples of hard-coded credentials?' --strategy both --device cuda --output outputs/p10-query.json`：退出0；候选/分数/两策略答案与P09 smoke-12精确一致。
-4. `python -m venv outputs/p10-venv` → 新环境 `pip install -r requirements-inference.txt` → `pip install -e . --no-deps` → `pip check`：全部成功，无冲突；复用pip缓存及已核验本地模型/原始数据，未继承site-packages。
-5. `outputs/p10-venv/bin/python -m pytest -q`：历史 P10 验收为 137 passed；本次清理后 `.venv/bin/python -m pytest -q` 为 135 passed，无skip。
-6. `outputs/p10-venv/bin/python scripts/check_baseline_smoke.py --snapshot data/processed/cwe-replay --index data/processed/dpr-index-replay --device cuda --output outputs/p10-fresh-smoke`：12题与独立子进程重载全部通过，质量统计不变。
-7. 新环境依次运行CLI preprocess/build-index/query到 outputs/p10-clean-snapshot、p10-clean-index、p10-clean-query.json：全部退出0；JSONL/向量/映射哈希与原产物一致，查询结果精确一致。
-8. compileall、pip check、修改文档本地链接、git diff --check、theprompt原始SHA-256/BASELINE_SPEC原文一致性均通过。各阶段单元/真实验证与失败修复见PROGRESS时间线。
-
-## 当前失败或阻塞
-
-无本轮技术/资源阻塞。未验证CPU/其他GPU/其他操作系统、无缓存全量外网下载、稳定性能或正式质量指标。已测Linux x86_64/Python3.12/RTX4090；第二环境安装共享pip缓存和本地资源。保护网络配置未改写。
-
-## 下一步应执行的唯一具体动作
-
-人工复核 `data/annotations/probe-v1/draft.v1.json` 的 40 题：问句是否确实需要所选证据、
-每条 `gold_facts[].text` 是否在 `supported_by` 所指段落里有直接依据、多段题两段证据语义是否
-过分类似。复核后把 `draft.v1.json` 的 `review_status` 与
-`scripts/apply_probe_annotations.py` 的 `STATUS`/`ANNOTATOR`/`reviewer` 一起改掉并重跑：
+## 恢复检查命令
 
 ```bash
-py scripts/apply_probe_annotations.py
-```
-
-校验必须 0 失败；核对 `git diff data/annotations/probe-v1/manifest.json` 的哈希已刷新，
-再跑门禁三指标（Evidence Recall@5、池内平均两两余弦、两策略 selected_order 差异题数）。
-GPU 机器上的完整命令、N/λ 扫描与判读规则见 [实验运行手册](EXPERIMENT_RUNBOOK.md)。
-
-**已有一次 CPU 预演结果（不可用于论文）**：40 题 MMR 与 Top-K 全平（Recall@5 均 0.200），
-检索天花板 0.275，必选证据检索中位排名 23、Reader 池内中位排名 4 —— 瓶颈在检索而非筛选。
-脚本 `scripts/eval_probe.py`、`scripts/eval_retrieval.py` 已入库，结果在本地 `outputs/`（未提交）。
-
-环境侧前置：本机尚无 `models/`、`data/processed/` 与索引，需先按 `docs/DEPLOYMENT.md`
-经本地代理下载 DPR 三模型并重建 5748 段索引；首次预处理后运行
-`py scripts/verify_probe_ids.py --passages data/processed/cwe-v1/passages.jsonl`
-核对骨架里的 `passage_id`。
-
-## 提交与恢复
-
-```bash
-git push origin baseline/cwe-dpr-reader-mmr
-git fetch origin baseline/cwe-dpr-reader-mmr
+git status --short
+git branch -vv
+git log -1 --format=fuller
+.venv/bin/python -m pytest -q
+cat outputs/retrieval-comparison-v1-final/manifest.json
+cat outputs/retrieval-comparison-v1-final/comparison.md
+git push origin step1/dataset-optimization
+git fetch origin step1/dataset-optimization
 git rev-parse HEAD
-git rev-parse origin/baseline/cwe-dpr-reader-mmr
-git ls-remote --heads origin baseline/cwe-dpr-reader-mmr
+git rev-parse origin/step1/dataset-optimization
+git ls-remote --heads origin step1/dataset-optimization
 ```
 
-首次P06提交因本机Git身份缺失失败，已沿用历史Codex/codex@localhost，以单次 `git -c user.name=Codex -c user.email=codex@localhost commit ...` 解决，未修改全局配置。推送失败保留本地提交并记录准确哈希/原因/恢复命令，不强推。
-
-更新时间：2026-11-17T15:09:52+08:00。
+更新时间：2026-11-24T10:19:58+08:00（北京时间）。

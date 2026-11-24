@@ -15,6 +15,7 @@
 | verify_probe_ids.py | 首次预处理后用真实 `passages.jsonl` 核对 probe-v1 的 `passage_id` |
 | eval_retrieval.py | 纯检索诊断：必选证据的排名分布与 Recall@N 曲线（不跑 Reader） |
 | eval_probe.py | 门禁评测：同一候选池下 Reader Top-5 与 MMR 的 Evidence Recall@5、冗余度、配对 bootstrap；支持 `--n` / `--lam` 覆盖 |
+| compare_retrieval.py | 一键按顺序运行 DPR、混合检索、子问题检索、CWE 条目检索，默认 N=20/50/100；保留历史结果，输出 JSON/CSV/Markdown 对比；见[四方案实验说明](../docs/RETRIEVAL_EXPERIMENTS.md) |
 | validate_raw_data.py | 旧完整起始快照校验（含 NVD/CAPEC/ATT&CK/KEV），不属于本基线必需资源 |
 
 `make_probe_skeleton.py` 只读 `data/raw/cwe/cwec_v4.20.xml.zip`，输出

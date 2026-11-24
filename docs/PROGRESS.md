@@ -1,7 +1,7 @@
 # 第一阶段基线进度
 
 总体状态：**P00–P10 代码与技术验收完成；答案质量不足、尚未校准。**
-当前阶段：P10 部署重放/文档审计及阶段提交推送核验均完成；本轮P00–P10无未完成工程阶段。
+当前阶段：原 P00–P10 完成。用户追加 R01 四方案检索对照，代码、单元验证、本地真实模型实验及最终结果核验完成；提交/推送收尾中。
 时间使用 Asia/Shanghai（UTC+08:00）；历史时间不补造。下方时间线中的“未实现/待验证”为该阶段当时状态。
 
 ## 已完成且验证通过
@@ -31,7 +31,7 @@
 
 ## 正在进行
 
-- 无进行中的工程阶段。本次仅补记P10推送核验；该收尾文档提交自身哈希以git rev-parse HEAD获取，并再次推送核验。
+- R01 检索四方案对照、两次完整真实运行均完成，最终输出源码哈希对应最终代码；现更新本进度/交接后提交推送。探针题仍为机器起草、40/40 未人工复核；结果是探索性诊断，不是质量验收或论文结论。
 
 ## 待完成（后续范围，不冒称本轮完成）
 
@@ -41,7 +41,7 @@
 
 ## 受阻
 
-无未解决的本轮资源或技术验证阻塞；历史缺pytest/CWE/完整权重/独立torch问题均已解除。质量不足已公开记账，不以技术验收掩盖，也不私自调参。推送状态见HANDOFF。
+无未解决的本轮资源或技术验证阻塞；历史缺pytest/CWE/完整权重/独立torch问题均已解除。质量不足已公开记账，不以技术验收掩盖，也不私自调参。R01 探针集标签尚未人工复核，所以不把 exact passage Recall 当作语义答案质量；40题也不足以代表总体。推送状态见HANDOFF。
 
 ## 本轮文件变更记录
 
@@ -57,8 +57,36 @@
 | README.md、src/cyber_qa/README.md、scripts/README.md、configs/README.md、docs/README.md | 最新入口和模块导航，替换过时规划状态 |
 | docs/RETRIEVAL.md、RUNTIME.md、PROGRESS.md、HANDOFF.md | 区分历史状态与最终状态、北京时间时间线与恢复 |
 | 早期选择器兼容层及关联说明 | 已删除实现、测试、配置、脚本和旧导出；主线仅保留 MMR |
+| src/cyber_qa/experiments/retrieval.py、comparison.py、__init__.py；scripts/compare_retrieval.py | R01 独立 DPR/BM25 混合/子问题/CWE 条目检索；共用 Reader/Top-K/MMR/答案，逐题 JSONL、对照 JSON/CSV/Markdown、模型与产物 provenance |
+| tests/test_retrieval_experiments.py | R01 BM25/RRF/查询隔离、候选预算、分数与向量保留、条目全局保底、汇总、失败处理、历史结果只读和 CLI 回归 |
+| docs/RETRIEVAL_EXPERIMENTS.md；README.md、docs/README.md、scripts/README.md、experiments/README.md、IMPLEMENTATION_PLAN.md | 一键命令、固定项/算法/参数、输出契约、指标与标注限制 |
 
 install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5ae3c7c81886b0551caabc9fc2c61ac2b3093ad596533735。原始数据、模型、大索引、环境与日志全部忽略。早期P00–P05文件及用途见各阶段Git历史/文档。
+
+## R01：DPR 与三个独立检索实验
+
+**实现和隔离**：保留既有 `DPRIndex.search`、向量索引、`eval_probe.py` 和 `probe-eval-N*.json`；新入口 `scripts/compare_retrieval.py` 依次比较 `dpr`、`hybrid`、`subquery`、`hierarchical`，默认 N=20/50/100。混合为段落 BM25 + DPR 等权 RRF；子问题为原问题+受限规则拆分的 DPR 查询+RRF；层级为问题/语料预测 CWE 条目、条目内 75% 候选配额+全局 DPR 保底。四组共用问题、真实 CWE 快照、同一原 DPR 向量、Reader、K=5、λ=.5、同一 Top-K/MMR 和答案装配；每题每方法只跑一遍 Reader。检索代码接口不读取 `record_ids`、intent 或 gold 字段。所有 N/算法参数均未调优。
+
+**验证分账**：新增 20 项独立实验测试通过；全套 `.venv/bin/python -m pytest -q` 为 `155 passed in 5.18s`；`compileall`、脚本 `--help`、`git diff --check` 通过。最终真实运行 `.venv/bin/python scripts/compare_retrieval.py --device cuda --output outputs/retrieval-comparison-v1-final` 完成 40×4×3=480 题方法流程，12 组零失败；CUDA RTX 4090、Python 3.12.11、DPR/Reader 权重在本机。新运行 DPR 的候选池、Top-K/MMR 选择与旧 N20/50/100 逐题一致，Reader relevance logit 最大差异为 0；旧结果复制并以 SHA-256 归档。独立复验指标与前次运行完全相同（排除计时字段）。模型/索引/数据及 outputs 仍未提交。
+
+| N | 方法 | 必选证据 Recall@N | 全必选证据入池题率 | Top-K Recall@5 | MMR Recall@5 | Top-K 全覆盖 | MMR 全覆盖 |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| 20 | DPR | 27.50% | 12.50% | 20.00% | 20.00% | 7.50% | 7.50% |
+| 20 | BM25 + DPR | 73.75% | 55.00% | 37.50% | 38.75% | 15.00% | 17.50% |
+| 20 | 子问题 DPR | 30.00% | 12.50% | 21.25% | 20.00% | 7.50% | 5.00% |
+| 20 | CWE 条目级 | 40.00% | 22.50% | 23.75% | 26.25% | 5.00% | 7.50% |
+| 50 | DPR | 43.75% | 27.50% | 22.50% | 21.25% | 10.00% | 5.00% |
+| 50 | BM25 + DPR | 85.00% | 72.50% | 32.50% | 33.75% | 15.00% | 12.50% |
+| 50 | 子问题 DPR | 45.00% | 25.00% | 23.75% | 21.25% | 7.50% | 5.00% |
+| 50 | CWE 条目级 | 60.00% | 55.00% | 22.50% | 22.50% | 7.50% | 7.50% |
+| 100 | DPR | 50.00% | 32.50% | 20.00% | 21.25% | 2.50% | 5.00% |
+| 100 | BM25 + DPR | 91.25% | 85.00% | 25.00% | 22.50% | 5.00% | 5.00% |
+| 100 | 子问题 DPR | 52.50% | 40.00% | 21.25% | 25.00% | 5.00% | 10.00% |
+| 100 | CWE 条目级 | 70.00% | 67.50% | 26.25% | 26.25% | 7.50% | 10.00% |
+
+**有限观察**：混合方案在三个 N 上均提高精确 passage Recall@N，配对 question bootstrap 95%区间分别为 +46.25pp `[+32.50,+60.00]`、+41.25pp `[+28.75,+53.75]`、+41.25pp `[+28.75,+53.75]`；最终 MMR Recall 相对 DPR 分别为 +18.75pp `[+5.00,+33.75]`、+12.50pp `[0,+25.00]`、+1.25pp `[-11.25,+13.75]`。因此新增 gold 入池未稳定转化为最终证据收益。子问题方案整体改善小且区间跨零；CWE 层级在 N=100 入池有 +20pp `[+11.25,+28.75]`，筛选收益仍不确定。MMR vs Top-K 的差异小、各方法的配对区间大多跨零。本探针40题为 `auto_drafted_needs_human_review`，所有 gold/候选/问题未经人工核验；指标为标注 passage ID / gold fact support availability，不评判实际答案正确性。不得调参结论化或作为论文测试结果。
+
+**实验产物（outputs 忽略且未提交）**：`outputs/retrieval-comparison-v1-final/manifest.json`、`comparison.md/.csv/.json`、12 个方法 JSON/JSONL 和原有三个基线文件的只读副本。目录内记录 40 题及最终源码哈希、索引/模型元数据、实际权重 SHA-256、环境、参数、分阶段时间和逐题候选/Reader/MMR/答案。完整判读见 `docs/RETRIEVAL_EXPERIMENTS.md`。校验断言：manifest completed、12 组×40 题均成功、三种 DPR replay matched/分数 delta 0；第二次真实运行汇总（不含耗时）与第一次逐项相同。
 
 ## STEP1：探针集数据集优化（probe-v1，尚未标注）
 
@@ -147,3 +175,5 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 - 2026-11-23T14:21:33+08:00：新增 STEP1 探针集数据集优化分支 `step1/dataset-optimization`（基于 `ebd1f48`）。本次为纯数据分析与标注脚手架，未下载权重、未建索引、未跑模型：完成 CWE 字段覆盖诊断（969 条目，946 个可用单段以上多字段条目）、`passage_id` 公式离线复算（对既有 12 条冒烟标注 12/12 逐字节一致）、多段题候选筛选（176 个条目满足竞争度条件），并生成 `data/annotations/probe-v1/` 的 40 题骨架（模板 A12/B8/C8/D4/E8，40 个不同 CWE，219 个候选段落索引）。`question` 与 `gold_facts` 留空待人工标注。同日修复工作区 Windows 权限缺陷（补当前用户完整控制权限，备份见工作区外 acl-recovery 目录），并通过本地代理 `127.0.0.1:7877` 完成远端 fetch 与基线分支落地。
 
 - 2026-11-23T14:37:57+08:00：为 STEP1 的 40 题补齐 `question` 与 `gold_facts` 机器草稿。新增 `draft.v1.json` 与合并校验脚本 `apply_probe_annotations.py`，产出 `qa.v1.jsonl`：40 条记录、72 条 gold fact、32 条多段题、8 条单段题带 `answer_span`；脚本严格校验必选/补充证据均在候选池、fact 的 `supported_by` 合法、多段题 fact 覆盖全部必选证据、单段题 quote 与原文逐字符一致（含跨行匹配），全部通过。标注人记为 `deepseek-auto-draft`、状态 `auto_drafted_needs_human_review`、`reviewer=null`，**未经人工复核**。同时新增 `docs/COMMIT_LOG.md` 提交记录表（记录时间、任务名称、主要内容），并修正候选池按字段设限的缺陷（此前模板 C 的 8 道题候选池全为 `detection_methods`）。
+
+- 2026-11-24T10:12:29+08:00：开始 R01 独立检索实验实现；Git HEAD=`16fc82aa57bd67684eaad182654bd9f9bfb5b3a3`，分支 `step1/dataset-optimization`，远端跟踪分支同步，工作区仅有受保护 `install.sh`。新增独立实验包/一键比较 CLI 和20项回归；首次测试 fixture 篡改不可变 Passage 导致 10 项 setup error，改用合法原对象后 `.venv/bin/python -m pytest -q tests/test_retrieval_experiments.py` 为 `20 passed`；全套 `155 passed in 5.18s`，help/compileall/diff-check 通过。CUDA RTX4090 两轮真实运行各完成 480 条流程，第二轮与第一轮非计时汇总一致；原 DPR 与历史 N20/50/100 选择、Reader 分数逐项匹配。结果见 R01 表、[检索四方案实验](RETRIEVAL_EXPERIMENTS.md)及 `outputs/retrieval-comparison-v1-final/`。测试/最终源码哈希验证完成，阶段提交/推送/远端核验待执行。

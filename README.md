@@ -34,6 +34,15 @@ python -m venv .venv
 
 ## 固定规则与模块
 
+检索改进的独立对照入口（保留现有基线；默认 N=20/50/100，按顺序跑四种方案）：
+
+```bash
+.venv/bin/python scripts/compare_retrieval.py --device cuda
+```
+
+输出到新的 `outputs/retrieval-comparison-<UTC>/`，先查看 `comparison.md`，另有 CSV 和逐题 JSON。
+方法定义、参数和指标边界见[检索四方案实验](docs/RETRIEVAL_EXPERIMENTS.md)。
+
 | 模块 | 实现与说明 |
 | --- | --- |
 | 数据 | 仅 CWE 4.20 Weakness，5 类字段，5748 段；稳定 SHA-256 ID、真实时间依据和来源定位；[契约](docs/CWE_CONTRACT.md) |

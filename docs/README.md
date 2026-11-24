@@ -10,6 +10,7 @@
 | [交接](HANDOFF.md) | Git 状态、执行证据、失败和唯一下一步 |
 | [提交记录](COMMIT_LOG.md) | 每次提交的时间、任务名称与主要内容；新提交在表末追加一行 |
 | [实验运行手册](EXPERIMENT_RUNBOOK.md) | GPU 机器上重跑 STEP1 探针集门禁的完整命令、判读规则与失败处理 |
+| [检索四方案对照](RETRIEVAL_EXPERIMENTS.md) | 保留 DPR，独立比较混合检索、子问题检索、CWE 条目检索；一键运行与结果说明 |
 | [原始任务输入](theprompt.md) | 用户给定的完整原始需求 |
 | [环境记录](RUNTIME.md) | 独立环境、依赖与资源验证 |
 | [CWE 契约](CWE_CONTRACT.md) | 实际支持格式、字段映射、稳定 ID 和真实解析统计 |
