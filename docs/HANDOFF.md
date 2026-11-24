@@ -5,7 +5,7 @@
 - 分支：`step1/dataset-optimization`，远端 `origin/step1/dataset-optimization`。
 - 本轮 R01 开始时 HEAD：`16fc82aa57bd67684eaad182654bd9f9bfb5b3a3`，开始时工作区除保护文件外干净；`install.sh` 原有未跟踪且保持未改动。
 - 新增独立检索实验，不修改原 DPR 主线、baseline 配置、原评测代码/文件、DPR 向量索引或冻结 MMR 公式。变更及算法契约见 [RETRIEVAL_EXPERIMENTS.md](RETRIEVAL_EXPERIMENTS.md)。
-- 本文写入时 HEAD 仍为 R01 起始提交；当前文档提交自身哈希需在提交后用 `git rev-parse HEAD` 获取。本次目标分支尚无新实验提交，需按项目要求提交、推送、fetch 并核验。
+- R01 主提交：`56208ff358d7196e8c7aa2698c3f1e0634adfc0c`。本轮文档收尾写入时 HEAD 为该提交；其后续文档提交哈希按要求在提交后用 `git rev-parse HEAD` 记录。主提交尚待推送并核验。
 
 ## R01 交付内容
 
@@ -34,7 +34,7 @@
 
 ## 唯一下一步
 
-核验已完成：最终 manifest `status=completed`、12 个组合全部在 `completed_runs`、逐题均成功、DPR replay 三个 N 均 matched；全套测试和受保护哈希检查通过。唯一下一步是复查暂存 diff，只加入本轮相关源代码、测试、文档（不加入 outputs/ 模型/原始数据，也不加入 install.sh），创建阶段提交、推送当前分支并 fetch/ls-remote 核验远端包含提交。
+唯一下一步是提交本次文档收尾，再推送当前分支、fetch 并用 `git rev-parse` 与 `git ls-remote` 核验远端包含 R01 主提交及文档提交。实验 manifest `status=completed`、12 个组合全部在 `completed_runs`、逐题均成功、DPR replay 三个 N 均 matched；全套测试和受保护哈希检查通过。`install.sh` 仍为原有未跟踪文件，不纳入提交。
 
 最终完成后，无新的实现工作。下一阶段是否人工复核标注或拓展正式评测，待用户指定；不可把本机机器草稿结果当作正式测试。
 
@@ -54,4 +54,4 @@ git rev-parse origin/step1/dataset-optimization
 git ls-remote --heads origin step1/dataset-optimization
 ```
 
-更新时间：2026-11-24T10:19:58+08:00（北京时间）。
+更新时间：2026-11-24T10:24:31+08:00（北京时间）。

@@ -1,7 +1,7 @@
 # 第一阶段基线进度
 
 总体状态：**P00–P10 代码与技术验收完成；答案质量不足、尚未校准。**
-当前阶段：原 P00–P10 完成。用户追加 R01 四方案检索对照，代码、单元验证、本地真实模型实验及最终结果核验完成；提交/推送收尾中。
+当前阶段：原 P00–P10 完成。用户追加 R01 四方案检索对照，代码、单元验证、本地真实模型实验及最终结果核验完成；主提交已创建，文档收尾提交与推送核验中。
 时间使用 Asia/Shanghai（UTC+08:00）；历史时间不补造。下方时间线中的“未实现/待验证”为该阶段当时状态。
 
 ## 已完成且验证通过
@@ -31,7 +31,7 @@
 
 ## 正在进行
 
-- R01 检索四方案对照、两次完整真实运行均完成，最终输出源码哈希对应最终代码；现更新本进度/交接后提交推送。探针题仍为机器起草、40/40 未人工复核；结果是探索性诊断，不是质量验收或论文结论。
+- R01 检索四方案对照、两次完整真实运行均完成，最终输出源码哈希对应最终代码；主提交 `56208ff358d7196e8c7aa2698c3f1e0634adfc0c` 已创建，文档收尾提交与推送核验中。探针题仍为机器起草、40/40 未人工复核；结果是探索性诊断，不是质量验收或论文结论。
 
 ## 待完成（后续范围，不冒称本轮完成）
 
@@ -176,4 +176,4 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 
 - 2026-11-23T14:37:57+08:00：为 STEP1 的 40 题补齐 `question` 与 `gold_facts` 机器草稿。新增 `draft.v1.json` 与合并校验脚本 `apply_probe_annotations.py`，产出 `qa.v1.jsonl`：40 条记录、72 条 gold fact、32 条多段题、8 条单段题带 `answer_span`；脚本严格校验必选/补充证据均在候选池、fact 的 `supported_by` 合法、多段题 fact 覆盖全部必选证据、单段题 quote 与原文逐字符一致（含跨行匹配），全部通过。标注人记为 `deepseek-auto-draft`、状态 `auto_drafted_needs_human_review`、`reviewer=null`，**未经人工复核**。同时新增 `docs/COMMIT_LOG.md` 提交记录表（记录时间、任务名称、主要内容），并修正候选池按字段设限的缺陷（此前模板 C 的 8 道题候选池全为 `detection_methods`）。
 
-- 2026-11-24T10:12:29+08:00：开始 R01 独立检索实验实现；Git HEAD=`16fc82aa57bd67684eaad182654bd9f9bfb5b3a3`，分支 `step1/dataset-optimization`，远端跟踪分支同步，工作区仅有受保护 `install.sh`。新增独立实验包/一键比较 CLI 和20项回归；首次测试 fixture 篡改不可变 Passage 导致 10 项 setup error，改用合法原对象后 `.venv/bin/python -m pytest -q tests/test_retrieval_experiments.py` 为 `20 passed`；全套 `155 passed in 5.18s`，help/compileall/diff-check 通过。CUDA RTX4090 两轮真实运行各完成 480 条流程，第二轮与第一轮非计时汇总一致；原 DPR 与历史 N20/50/100 选择、Reader 分数逐项匹配。结果见 R01 表、[检索四方案实验](RETRIEVAL_EXPERIMENTS.md)及 `outputs/retrieval-comparison-v1-final/`。测试/最终源码哈希验证完成，阶段提交/推送/远端核验待执行。
+- 2026-11-24T10:12:29+08:00：开始 R01 独立检索实验实现；Git HEAD=`16fc82aa57bd67684eaad182654bd9f9bfb5b3a3`，分支 `step1/dataset-optimization`，远端跟踪分支同步，工作区仅有受保护 `install.sh`。新增独立实验包/一键比较 CLI 和20项回归；首次测试 fixture 篡改不可变 Passage 导致 10 项 setup error，改用合法原对象后 `.venv/bin/python -m pytest -q tests/test_retrieval_experiments.py` 为 `20 passed`；全套 `155 passed in 5.18s`，help/compileall/diff-check 通过。CUDA RTX4090 两轮真实运行各完成 480 条流程，第二轮与第一轮非计时汇总一致；原 DPR 与历史 N20/50/100 选择、Reader 分数逐项匹配。结果见 R01 表、[检索四方案实验](RETRIEVAL_EXPERIMENTS.md)及 `outputs/retrieval-comparison-v1-final/`。主提交 `56208ff358d7196e8c7aa2698c3f1e0634adfc0c` 已创建，文档收尾提交/推送/远端核验待执行。
