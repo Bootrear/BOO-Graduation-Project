@@ -189,7 +189,7 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 | --- | --- | --- |
 | 阶段 0 恢复与自检 | 已完成 | 已读取指定文档；`docs/theprompt_2.md` 存在且由 `92b1543` 引入；本地/跟踪/远端 `step1/dataset-optimization` 哈希一致 |
 | STEP2 分支 | 已完成 | `step2/crosslingual-rag` 已创建并推送；初始三值核验均为 `92b154328849fe8951d53ab7186521ef88a7e73a` |
-| STEP2 恢复规格与阶段计划 | 文档待本阶段提交 | `BASELINE_SPEC_V2.md`、STEP2 计划和本节内容已写入工作区，尚未提交/推送 |
+| STEP2 恢复规格与阶段计划 | 已完成且验证通过 | `BASELINE_SPEC_V2.md`、STEP2 计划、进度、交接和导航提交 `f6d68e8`；`git diff --check`/staged check 通过，远端三值核验一致 |
 
 ### 已实现但尚未真实验证
 
@@ -198,7 +198,7 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 
 ### 正在进行
 
-- STEP2-DOC：恢复文档已编辑，正在执行 `git diff --check`、链接/冻结资产审计、提交和远端三值核验。
+- STEP2-DOC：恢复文档已提交推送并完成远端三值核验；本收尾文档提交更新确切哈希与唯一下一步。
 
 ### 待完成
 
@@ -232,4 +232,5 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 - 2026-11-26T15:37:33+08:00：远端提交 `92b1543` 引入 `docs/theprompt_2.md`，本地同步确认。
 - 2026-11-26T16:02:42+08:00：阶段 0 环境自检记录完成；发现受保护 `install.sh`、CUDA 不可用和 STEP2 模型未下载。
 - 2026-11-26T16:04:57+08:00：创建并推送 `step2/crosslingual-rag`，初始 HEAD 为 `92b154328849fe8951d53ab7186521ef88a7e73a`。
-- 2026-11-26T16:19:25+08:00：完成 STEP2 v2 规格和小阶段计划；`git diff --check` 与 staged diff 检查通过，确认 v1/R01 冻结文件哈希保持不变，准备提交。
+- 2026-11-26T16:19:25+08:00：完成 STEP2 v2 规格和小阶段计划；`git diff --check` 与 staged diff 检查通过，确认 v1/R01 冻结文件哈希保持不变；提交 `f6d68e8`。
+- 2026-11-26T16:20:58+08:00：`f6d68e86286a53c6517e69a50815b1fd87977c84` 已推送；fetch 后本地 HEAD、`origin/step2/crosslingual-rag` 与 `git ls-remote` 三值一致。

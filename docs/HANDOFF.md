@@ -61,8 +61,9 @@ git ls-remote --heads origin step1/dataset-optimization
 ### 当前分支与提交
 
 - 分支：`step2/crosslingual-rag`，远端：`origin/step2/crosslingual-rag`。
-- 本 STEP2 文档阶段写入交接时的 HEAD：`92b154328849fe8951d53ab7186521ef88a7e73a`；该提交已由分支创建时的 `git push`、`git rev-parse` 和 `git ls-remote` 三值核验。
-- 包含本次交接文件的提交哈希无法在文件自身写入；提交后用 `git rev-parse HEAD` 获取，并在下一次交接更新中记录。不得把写入时 HEAD 冒称为新提交哈希。
+- STEP2-DOC 提交：`f6d68e86286a53c6517e69a50815b1fd87977c84`，时间 `2026-11-26T16:19:25+08:00`。
+- `git push -u origin step2/crosslingual-rag`、`git fetch origin step2/crosslingual-rag` 后，`git rev-parse HEAD`、`git rev-parse origin/step2/crosslingual-rag` 与 `git ls-remote --heads origin step2/crosslingual-rag` 均为 `f6d68e86286a53c6517e69a50815b1fd87977c84`。
+- 本收尾提交会更新交接文件；提交后其 HEAD 使用 `git rev-parse HEAD` 获取，不在内容中自引用。
 
 ### 本阶段目标
 
@@ -76,7 +77,7 @@ git ls-remote --heads origin step1/dataset-optimization
 - `docs/PROGRESS.md`：追加 STEP2 五类状态、文件用途和北京时间时间线。
 - `docs/HANDOFF.md`：追加本 STEP2 交接信息。
 - `docs/README.md`：新增 v2 规格导航。
-- `docs/COMMIT_LOG.md`：将追加本阶段提交表行。
+- `docs/COMMIT_LOG.md`：回填 STEP2-DOC 提交短哈希并追加远端核验提交行。
 
 ### 已运行命令及结果
 
@@ -86,7 +87,7 @@ git ls-remote --heads origin step1/dataset-optimization
 - `git branch -vv`、`git remote -v`、`git log --oneline -5`：分支/远端/最近历史已登记。
 - `git switch -c step2/crosslingual-rag && git push -u origin step2/crosslingual-rag`：成功。
 - 阶段 0 硬件/资源检查：磁盘约 27G 可用；torch `2.9.1+cu128`；`torch.cuda.is_available()` 为 `False`；`nvidia-smi -L` 无 GPU 行；`models/` 只有 DPR；`data/processed` 已有 v1 快照和索引。
-- `git diff --check` 与 `git diff --cached --check` 均通过；staged diff 仅含七个 STEP2 文档文件，冻结文件 SHA-256 与审计前一致。文档尚未提交。
+- `git diff --check`、`git diff --cached --check` 通过；冻结文件 SHA-256 未变化；STEP2-DOC 提交已推送且三值核验一致。本收尾提交尚未创建。
 
 ### 当前失败或阻塞
 
@@ -96,4 +97,4 @@ git ls-remote --heads origin step1/dataset-optimization
 
 ### 下一步应执行的唯一具体动作
 
-完成本次暂存前审计后提交并推送 STEP2-DOC 文档；推送后获取本地 HEAD、远端跟踪分支及 `ls-remote` 三值，若一致则在下一次交接更新中写入新提交哈希并记下核验结果。
+开始 STEP2-P0A：核查两个固定 Qwen 模型仓库的上游 revision、权重文件大小/SHA-256 与 tokenizer 元数据，并据此实现独立资源校验/获取契约；若无法获得可真实推理的硬件或服务，只完成可验证的上游资源部分并如实保持后续推理受阻。
