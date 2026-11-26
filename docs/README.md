@@ -12,6 +12,7 @@
 | [实验运行手册](EXPERIMENT_RUNBOOK.md) | GPU 机器上重跑 STEP1 探针集门禁的完整命令、判读规则与失败处理 |
 | [检索四方案对照](RETRIEVAL_EXPERIMENTS.md) | 保留 DPR，独立比较混合检索、子问题检索、CWE 条目检索；一键运行与结果说明 |
 | [原始任务输入](theprompt.md) | 用户给定的完整原始需求 |
+| [STEP2 工作单](theprompt_2.md) | 交给远端实现会话的跨语言免翻译路线要求、约束、门禁与提交规范 |
 | [环境记录](RUNTIME.md) | 独立环境、依赖与资源验证 |
 | [CWE 契约](CWE_CONTRACT.md) | 实际支持格式、字段映射、稳定 ID 和真实解析统计 |
 
