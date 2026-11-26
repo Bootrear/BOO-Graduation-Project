@@ -19,3 +19,4 @@
 | 6 | 2026-11-24T10:25:41 | docs(retrieval): record experiment commit and handoff | 更新 R01 实验主提交哈希及阶段交接状态，记录四方案实验已完成、提交待推送。 | `28277b2` |
 | 7 | 2026-11-24T10:26:16 | docs(retrieval): record remote verification | 补记 R01 两个提交的远端推送与哈希核验结果；详见 HANDOFF。 | `a4dcc92` |
 | 8 | 2026-11-26T15:37:33 | docs(step2): add the STEP2 cross-lingual route work order | 新增 `docs/theprompt_2.md`：交给远端实现会话使用的 STEP2 工作单，规定跨语言免翻译路线（Qwen3-Embedding-0.6B 检索 + 保留 MMR 筛选 + Qwen2.5-7B-Instruct 中文作答）、不可违反的 9 条约束、P0–P4 门禁指标、验证与完成定义、每次提交追加本表的规范、阻塞与诚实要求、明确不做的事。本提交只新增文档并补填第 7 行哈希，未改动任何代码、配置或实验产物。 | 见下 |
+| 9 | 2026-11-26T16:19:25 | docs(step2): establish cross-session recovery baseline | 新建 `BASELINE_SPEC_V2.md`；追加 STEP2 小阶段计划、进度五类状态、交接记录和规格导航；在 v1 规格顶部增加 v2 链接；记录阶段 0 的分支、资源和 CUDA 自检结果。未修改代码、模型、数据、索引或输出产物。 | 见下 |

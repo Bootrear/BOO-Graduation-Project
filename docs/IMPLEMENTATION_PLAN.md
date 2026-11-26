@@ -113,6 +113,82 @@
 
 大模型增强模式、自动数据更新、正式 120 题（开发 80/冻结测试 40）核验集、仅开发集 λ 调优、正式实验；变更归一化/相似度必须升级配置并重评 λ。
 
+## STEP2：跨语言免翻译路线（新分支 `step2/crosslingual-rag`）
+
+依据：[STEP2 完整规格](BASELINE_SPEC_V2.md) 与 [工作单](theprompt_2.md)。下列阶段各自只交付一个可以独立验证并提交的小边界；不得修改冻结的 baseline-v1/R01 资产。每阶段结束按本文件顶部闭环更新进度、交接和提交日志。
+
+### STEP2-DOC：恢复机制与规格冻结
+
+- 目标：使后续会话只靠仓库文档能恢复 STEP2 约束、门禁和下一步。
+- 依赖：分支 `step2/crosslingual-rag` 已创建并推送；已完整读取 STEP2 输入。
+- 产物：`BASELINE_SPEC_V2.md`、v1 顶部导航、此 STEP2 阶段计划、五类进度、六项交接、提交记录与文档导航。
+- 验收命令与预期：`git diff --check` 成功；规格覆盖公式/字段/边界/门禁；链接目标存在；原始 `docs/theprompt.md` 与 STEP1/R01 历史不变；仅相关文档入提交。
+- 提交建议：`docs(step2): establish cross-session recovery baseline`。
+- 停止边界：不下载模型、不改配置/代码、不运行新功能。
+
+### STEP2-P0A：真实资源与模型来源核查
+
+- 目标：核实运行环境、上游不可变 revision/权重元数据、资源容量和服务访问方式。
+- 依赖：STEP2-DOC 已推送；可访问模型上游及可用于真实推理的硬件/服务。
+- 产物：新增 STEP2 专属模型/资源清单和获取校验代码；记录上游声明长度/SHA-256、实测摘要、revision、软件环境。不得修改 `requirements-inference.txt`。
+- 验收命令与预期：专属资源检查脚本对完整下载报告上游哈希匹配；截断/错误摘要拒绝；模型标识与 tokenizer revision 固定；`pytest` 对资源边界通过。若环境不支持，记录精确阻塞并停在此阶段。
+- 提交建议：`feat(step2): verify pinned crosslingual model resources`。
+- 停止边界：未通过真实上游权重验证不得编码或建库，不接受本地自记哈希。
+
+### STEP2-P0B：跨语言索引构建与加载契约
+
+- 目标：对固定 CWE 5748 段以 Qwen3-Embedding-0.6B 建立可校验向量索引。
+- 依赖：P0A 资源完整且模型可以真实加载；已有固定 CWE 快照可复现。
+- 产物：独立索引模块/CLI/manifest、原向量与 passage_id 映射、保存重载检查。
+- 验收命令与预期：真实编码 5748 段；检查维度、有限/非零向量、快照兼容和所有哈希；新进程加载成功且检索次序/分数稳定；索引不入库。
+- 提交建议：`feat(step2): build and validate multilingual embedding index`。
+- 停止边界：真实索引未保存重载通过，不开始 P1 指标或 MMR 适配。
+
+### STEP2-P1：双语检索门禁
+
+- 目标：同题同快照对比跨语言检索和英文 DPR 历史基线。
+- 依赖：P0B 通过；平行题集生成器已校验字段不变性与未复核标记。
+- 产物：独立评测入口及逐题输出，按语言/N 记录 Recall@N、池内平均余弦与中英等价性。
+- 验收命令与预期：新旧脚本 `--help` 通过；真实中英各 40 题或按工作单实际完整题集运行；英文各 N 不低于历史的 90%；等价性目标 ≥0.85。低于 0.60 明确停止 P2/P3；0.60–0.85 暂停并提交差距分析。
+- 提交建议：`test(step2): evaluate bilingual retrieval gate`。
+- 停止边界：P1 门禁不满足时不运行 P2/P3；探针只作探索性诊断。
+
+### STEP2-P2A：检索分数适配的 MMR
+
+- 目标：显式将 Qwen 检索分数与同空间段落向量传入既有 MMR 逐轮逻辑。
+- 依赖：P1 通过；证明可在不修改冻结 MMR 文件前提下复用 `select_mmr()`。
+- 产物：新适配器、新配置版本、检索 Top-K/MMR 逐轮记录。
+- 验收命令与预期：边界与回归测试覆盖空池、K=0、不足 K、单候选、全同分、NaN/Inf、零向量、lambda 两端；lambda=1 与检索 Top-K 完全一致；增量与参考逐轮顺序/分数一致；两冗余尺度均可计算。
+- 提交建议：`feat(step2): adapt retrieval relevance to shared MMR selector`。
+- 停止边界：若既有接口无法满足显式分数契约，停止并提交接口适配提案，不改冻结文件。
+
+### STEP2-P2B：双语筛选比较与尺度扫描
+
+- 目标：同候选池比较中英文 Top-K/MMR，并对 lambda 和两种冗余尺度留档。
+- 依赖：P2A 单元验证通过且 P1 门禁通过。
+- 产物：指标脚本和忽略的逐题/汇总产物，含 Recall@5、全覆盖、Hit、胜负、冗余、分歧及配对 bootstrap 95% CI。
+- 验收命令与预期：真实中文/英文评测均完成；lambda 从 0 到 1；lambda=1 选择完全一致；未显著时报告无显著差异；不得把 40 题结果写成论文结论。
+- 提交建议：`test(step2): compare bilingual MMR and retrieval top-k`。
+- 停止边界：仅开发语义可用于参数选择；若 P1 门禁失败不进入本阶段。
+
+### STEP2-P3：中文生成与引用校验
+
+- 目标：完成至少 10 个中文问题的真实生成链路及确定性引用检查。
+- 依赖：P2B 输出齐全；固定 Qwen2.5-7B-Instruct revision 与服务端模型核验可用。
+- 产物：专属 LLM 客户端、固定 prompt/config、句子切分/引用校验器、新查询 CLI、结构化结果。
+- 验收命令与预期：中文原问直接检索，无翻译调用；temperature=0/top_p=1/max_tokens 固定；逐句编号存在且范围合法；报告有效引用、无引用陈述与词面弱支持；至少 10 条人工抽查记录；响应标识和 token/延迟/prompt 哈希可查。
+- 提交建议：`feat(step2): answer Chinese queries with validated citations`。
+- 停止边界：引用校验确定性失败时不得静默修答案或称链路通过；资源失败记录为阻塞。
+
+### STEP2-P4：文档、旧路径回归与交付审计
+
+- 目标：整理复现命令、四门禁结果、限制和跨会话状态，确认英文路径未破坏。
+- 依赖：P0–P3 的实际状态均已记账（失败阶段也可保留为未完成，不得改判通过）。
+- 产物：路线文档、PROGRESS/HANDOFF、README 与 scripts/data 导航更新。
+- 验收命令与预期：`.venv/bin/python -m pytest -q`、`.venv/bin/python -m compileall -q src scripts`、`git diff --check` 成功；新旧 CLI help、索引/模型加载核查及旧评测脚本检查有结果；推送及远端三值哈希一致。
+- 提交建议：`docs(step2): record verified route and acceptance status`。
+- 停止边界：真实链路未通过不得标整体验收；环境/门禁阻塞保留唯一具体恢复动作。
+
 ## 中断、推送失败与恢复
 
 - 一个阶段的验证来不及完成：先保存可运行状态，运行可完成的最小检查；更新 HANDOFF 的唯一下一步，例如一条具体失败测试命令；提交 `checkpoint(Pxx): incomplete - ...`。

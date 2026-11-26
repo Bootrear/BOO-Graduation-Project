@@ -178,3 +178,58 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 
 - 2026-11-24T10:12:29+08:00：开始 R01 独立检索实验实现；Git HEAD=`16fc82aa57bd67684eaad182654bd9f9bfb5b3a3`，分支 `step1/dataset-optimization`，远端跟踪分支同步，工作区仅有受保护 `install.sh`。新增独立实验包/一键比较 CLI 和20项回归；首次测试 fixture 篡改不可变 Passage 导致 10 项 setup error，改用合法原对象后 `.venv/bin/python -m pytest -q tests/test_retrieval_experiments.py` 为 `20 passed`；全套 `155 passed in 5.18s`，help/compileall/diff-check 通过。CUDA RTX4090 两轮真实运行各完成 480 条流程，第二轮与第一轮非计时汇总一致；原 DPR 与历史 N20/50/100 选择、Reader 分数逐项匹配。结果见 R01 表、[检索四方案实验](RETRIEVAL_EXPERIMENTS.md)及 `outputs/retrieval-comparison-v1-final/`。主提交 `56208ff358d7196e8c7aa2698c3f1e0634adfc0c` 已创建，文档收尾提交/推送/远端核验待执行。
 - 2026-11-24T10:26:16+08:00：R01 主提交 `56208ff358d7196e8c7aa2698c3f1e0634adfc0c` 与文档提交 `28277b2d1c2c4277ee32c5979a207d4930409c87` 已推送至 `origin/step1/dataset-optimization`；fetch 后本地 HEAD、origin 跟踪分支及 `ls-remote` 哈希一致。唯一未跟踪文件仍为受保护的 `install.sh`。
+
+## STEP2：跨语言免翻译路线（`step2/crosslingual-rag`）
+
+依据：[STEP2 完整规格](BASELINE_SPEC_V2.md) 和 [STEP2 工作单](theprompt_2.md)。本节只记录 STEP2，不改变 P00–P10/R01 历史状态；所有真实结果须与代码、单元测试、真实模型推理、真实端到端分别记账。
+
+### 已完成且验证通过
+
+| 项目 | 状态 | 证据 |
+| --- | --- | --- |
+| 阶段 0 恢复与自检 | 已完成 | 已读取指定文档；`docs/theprompt_2.md` 存在且由 `92b1543` 引入；本地/跟踪/远端 `step1/dataset-optimization` 哈希一致 |
+| STEP2 分支 | 已完成 | `step2/crosslingual-rag` 已创建并推送；初始三值核验均为 `92b154328849fe8951d53ab7186521ef88a7e73a` |
+| STEP2 恢复规格与阶段计划 | 文档待本阶段提交 | `BASELINE_SPEC_V2.md`、STEP2 计划和本节内容已写入工作区，尚未提交/推送 |
+
+### 已实现但尚未真实验证
+
+- STEP2 代码、模型资源、索引、平行题集、评测和中文生成尚未实现；因此没有任何真实模型推理或真实端到端通过声明。
+- 规格定义了 Qwen3-Embedding-0.6B 检索、同空间余弦 MMR、Qwen2.5-7B-Instruct 中文回答、引用校验和字段契约；未实测的 revision、权重摘要、输入预算、服务端标识均未冻结为事实。
+
+### 正在进行
+
+- STEP2-DOC：恢复文档已编辑，正在执行 `git diff --check`、链接/冻结资产审计、提交和远端三值核验。
+
+### 待完成
+
+- STEP2-P0A：获取并用上游 LFS 大小/SHA-256 核验两个模型，记录 revision、tokenizer、依赖和运行环境。
+- STEP2-P0B：用真实 Qwen3-Embedding-0.6B 为固定 5748 段建立并重载校验跨语言索引。
+- STEP2-P1：中文/英文检索 Recall@N、中英等价性、池内余弦和门禁判读。
+- STEP2-P2：显式检索相关性适配既有 MMR、两种冗余尺度、lambda 扫描及配对 CI。
+- STEP2-P3：至少 10 题中文生成、编号引用校验和人工事实抽查。
+- STEP2-P4：路线文档、部署复现、英文 v1 回归和最终审计。
+
+### 受阻
+
+- 阶段 0 实测：`.venv/bin/python -c "import torch;print(torch.__version__, torch.cuda.is_available())"` 输出 `2.9.1+cu128 False`；`nvidia-smi -L` 未列出 GPU。内存约 4 GiB、磁盘可用约 27 GiB，当前不满足本地真实 Qwen 索引/7B 推理条件。
+- `models/` 只发现 DPR 资源目录，未发现 STEP2 两个模型；不能用模拟模型、合成数据或本地自记哈希替代真实验证。
+- 受保护未跟踪文件 `install.sh` 保留不动、不暂存、不提交。
+
+### STEP2 文件变更记录（本阶段）
+
+| 文件 | 用途 |
+| --- | --- |
+| `docs/BASELINE_SPEC_V2.md` | 完整 STEP2 公式、字段契约、边界、提示词、门禁、结论口径和资源阻塞 |
+| `docs/BASELINE_SPEC.md` | 顶部仅增加 v2 规格链接，保留 v1 冻结内容 |
+| `docs/IMPLEMENTATION_PLAN.md` | 追加 STEP2-DOC、P0A/P0B、P1、P2A/P2B、P3、P4 小阶段 |
+| `docs/PROGRESS.md` | 本 STEP2 五类状态、文件清单、验证和时间线 |
+| `docs/HANDOFF.md` | 本阶段分支、命令证据、阻塞和唯一下一步 |
+| `docs/README.md` | 增加 STEP2 v2 规格导航 |
+| `docs/COMMIT_LOG.md` | 追加本阶段提交记录，哈希按规则留待后续补填 |
+
+### STEP2 实际时间线（Asia/Shanghai）
+
+- 2026-11-26T15:37:33+08:00：远端提交 `92b1543` 引入 `docs/theprompt_2.md`，本地同步确认。
+- 2026-11-26T16:02:42+08:00：阶段 0 环境自检记录完成；发现受保护 `install.sh`、CUDA 不可用和 STEP2 模型未下载。
+- 2026-11-26T16:04:57+08:00：创建并推送 `step2/crosslingual-rag`，初始 HEAD 为 `92b154328849fe8951d53ab7186521ef88a7e73a`。
+- 2026-11-26T16:19:25+08:00：完成 STEP2 v2 规格和小阶段计划；`git diff --check` 与 staged diff 检查通过，确认 v1/R01 冻结文件哈希保持不变，准备提交。

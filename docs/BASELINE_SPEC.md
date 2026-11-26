@@ -1,5 +1,7 @@
 # 第一阶段基线完整规格（冻结依据）
 
+STEP2 跨语言路线的新增规格见 [BASELINE_SPEC_V2.md](BASELINE_SPEC_V2.md)；本文件的 v1 契约保持冻结。
+
 规格版本：baseline-spec-v1。来源：[theprompt.md](theprompt.md)。
 本文件完整保存来源正文，不以摘要替代公式、字段契约、边界条件或验收要求。
 下方原文保留区仅统一文本读取后的换行；源文件保持原样并随本阶段提交。

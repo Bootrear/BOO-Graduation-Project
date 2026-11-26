@@ -55,3 +55,45 @@ git ls-remote --heads origin step1/dataset-optimization
 ```
 
 更新时间：2026-11-24T10:26:16+08:00（北京时间）。
+
+## STEP2 当前交接
+
+### 当前分支与提交
+
+- 分支：`step2/crosslingual-rag`，远端：`origin/step2/crosslingual-rag`。
+- 本 STEP2 文档阶段写入交接时的 HEAD：`92b154328849fe8951d53ab7186521ef88a7e73a`；该提交已由分支创建时的 `git push`、`git rev-parse` 和 `git ls-remote` 三值核验。
+- 包含本次交接文件的提交哈希无法在文件自身写入；提交后用 `git rev-parse HEAD` 获取，并在下一次交接更新中记录。不得把写入时 HEAD 冒称为新提交哈希。
+
+### 本阶段目标
+
+完成 STEP2-DOC：冻结跨语言免翻译规格、拆分可恢复小阶段、记录阶段 0 自检结果，并先提交推送恢复文档；不实现模型或新代码。
+
+### 已修改文件
+
+- `docs/BASELINE_SPEC_V2.md`：新增 STEP2 完整规格，包含跨语言余弦、Rel/Sim 归一化、MMR、索引/候选/作答/引用字段、边界、提示词、平行题集与 P0–P4 门禁。
+- `docs/BASELINE_SPEC.md`：顶部新增 v2 链接，v1 原文未重写。
+- `docs/IMPLEMENTATION_PLAN.md`：追加 STEP2-DOC、P0A/P0B、P1、P2A/P2B、P3、P4。
+- `docs/PROGRESS.md`：追加 STEP2 五类状态、文件用途和北京时间时间线。
+- `docs/HANDOFF.md`：追加本 STEP2 交接信息。
+- `docs/README.md`：新增 v2 规格导航。
+- `docs/COMMIT_LOG.md`：将追加本阶段提交表行。
+
+### 已运行命令及结果
+
+- `git fetch origin && git switch step1/dataset-optimization && git pull --ff-only`：首次 pull 遇 TLS 中断，重试后 `Already up to date`。
+- `test -f docs/theprompt_2.md`、`git show 92b1543 -- docs/theprompt_2.md`：通过，文件由 `92b1543` 引入。
+- `git status --short`：仅有受保护未跟踪 `install.sh`。
+- `git branch -vv`、`git remote -v`、`git log --oneline -5`：分支/远端/最近历史已登记。
+- `git switch -c step2/crosslingual-rag && git push -u origin step2/crosslingual-rag`：成功。
+- 阶段 0 硬件/资源检查：磁盘约 27G 可用；torch `2.9.1+cu128`；`torch.cuda.is_available()` 为 `False`；`nvidia-smi -L` 无 GPU 行；`models/` 只有 DPR；`data/processed` 已有 v1 快照和索引。
+- `git diff --check` 与 `git diff --cached --check` 均通过；staged diff 仅含七个 STEP2 文档文件，冻结文件 SHA-256 与审计前一致。文档尚未提交。
+
+### 当前失败或阻塞
+
+- 本机没有可见 NVIDIA GPU，内存约 4 GiB；STEP2 Qwen3/Qwen2.5 真实索引和 7B 推理不能在此环境宣称通过。
+- STEP2 两个模型资源尚未获取，必须等待可用 GPU/服务和上游资源访问；不能用模拟模型或本地自记哈希替代。
+- `install.sh` 是已有保护项，必须保持未跟踪，不得清理或提交。
+
+### 下一步应执行的唯一具体动作
+
+完成本次暂存前审计后提交并推送 STEP2-DOC 文档；推送后获取本地 HEAD、远端跟踪分支及 `ls-remote` 三值，若一致则在下一次交接更新中写入新提交哈希并记下核验结果。
