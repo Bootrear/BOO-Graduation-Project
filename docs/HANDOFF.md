@@ -106,7 +106,8 @@ git ls-remote --heads origin step1/dataset-optimization
 - 分支：`step2/crosslingual-rag`，跟踪 `origin/step2/crosslingual-rag`。这是恢复时已存在的分支，本次从 `step1/dataset-optimization` 切换并确认 `git pull --ff-only` 为 `Already up to date`；没有重复创建分支。
 - P0A/P0B 主提交 `758e5cf9cf15e2ceb5d33769f8cfda34ca4051ef` 已推送；`git fetch origin step2/crosslingual-rag` 后本地 HEAD、`origin/step2/crosslingual-rag` 和 `git ls-remote --heads origin step2/crosslingual-rag` 三值均为该哈希。
 - P1A 提交 `2d8c1975086adecf338b84f219d22a2f601e7020` 已推送；`git fetch origin step2/crosslingual-rag` 后本地 HEAD、`origin/step2/crosslingual-rag` 与 `git ls-remote --heads origin step2/crosslingual-rag` 三值均为该哈希。
-- 本次远端核验文档收尾提交创建前 HEAD：`2d8c1975086adecf338b84f219d22a2f601e7020`；本次文档提交自身哈希提交后用 `git rev-parse HEAD` 获取并再次核验。
+- P1B 门禁提交 `4cedbcaf46d6a03b771d54826ff0b9bc1cf576e3` 已推送；`git fetch origin step2/crosslingual-rag` 后本地 HEAD、`origin/step2/crosslingual-rag` 与 `git ls-remote --heads origin step2/crosslingual-rag` 三值均为该哈希。
+- 本次门禁核验文档收尾提交创建前 HEAD：`4cedbcaf46d6a03b771d54826ff0b9bc1cf576e3`；本次文档提交自身哈希提交后用 `git rev-parse HEAD` 获取并再次核验。
 
 ### 本阶段目标
 
@@ -149,6 +150,7 @@ git ls-remote --heads origin step1/dataset-optimization
 - `.venv/bin/python -m pytest -q tests/test_crosslingual_gate.py tests/test_chinese_probe.py tests/test_crosslingual_index.py`：`22 passed`；评测 CLI `--help`、compileall 通过。
 - `.venv/bin/python scripts/eval_crosslingual_retrieval.py --english data/annotations/probe-v1/qa.v1.jsonl --chinese data/annotations/probe-v1-zh/qa.v1.zh.jsonl --index data/processed/crosslingual-index-v2-final --snapshot data/processed/cwe-v1 --model-dir models/crosslingual/Qwen--Qwen3-Embedding-0.6B/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3 --output outputs/crosslingual-gate-v2 --device cuda --n 20 50 100`：退出 0，英语/中文各 40 题真实直接编码；Recall@20/50/100 英语 `.650/.725/.8125`，中文 `.5875/.6875/.775`；中英等价性 `.9371428571`；门禁 verdict `retrieval_gate_pass_exploratory_only`。英文 DPR 历史基线 `.275/.4375/.5` 的 90%线 `.2475/.39375/.45` 均超过。平均池余弦英语 `.6364/.6188/.5986`、中文 `.6306/.6151/.5981`，低于历史对照 `.857`。详细逐题结果只在忽略的 `outputs/crosslingual-gate-v2/`。
 - `.venv/bin/python -m pytest -q`：`184 passed in 5.04s`；`compileall` 和 `git diff --check` 通过。
+- P1B 实际输出保存在 `outputs/crosslingual-gate-v2/summary.json` 与 `per_question.jsonl`，均在忽略的 outputs 中，不提交模型/索引/运行结果。
 - 恢复文档提交 `69676b4265cb19622ba7625961ac6ede46b0d9b1` 已推送；首次 fetch 遇 TLS 握手中断，重试后 `HEAD`、跟踪分支与 `ls-remote` 三值一致。
 - 首次 Git 提交因未设置 author identity 失败；重试使用 `Codex <codex@localhost>` 的单次 `git -c` 参数，未修改全局 Git 配置。
 
@@ -161,4 +163,4 @@ git ls-remote --heads origin step1/dataset-optimization
 
 进入 STEP2-P2A：新增 v2 配置/适配器，显式从 Qwen 检索余弦一次性归一化完整候选池相关性，并用 Qwen 同空间段向量生成 Sim；默认对所有非对角 Sim_raw pair 值池内 min-max。用适配器显式构造现有 `PreparedPool` 并调用冻结的 `select_mmr()`，不得改写 `selection/mmr.py`。测试空池、K=0、不足 K、单候选、全同分、NaN/Inf、零向量、lambda 两端、lambda=1 Top-K 完全一致及 Sim 增量等价；本步不扫描真实题集，也不改英文 baseline-v1。
 
-更新时间：2026-11-27T10:48:51+08:00（北京时间）。
+更新时间：2026-11-27T10:57:00+08:00（北京时间）。
