@@ -198,3 +198,37 @@ git ls-remote --heads origin step1/dataset-optimization
 进入 STEP2-P2B：新增评测脚本，读取现有索引和中英平行探针，对同一批真实 Qwen3 检索候选池比较 Retrieval Top-K 与 MMR；扫描 lambda=0 到 1，并在默认 pool-minmax 与 raw Sim 下记录逐题结果、Recall@5/全覆盖/Hit/冗余/分歧及配对 bootstrap 95% CI。先只完成评测实现和可验证的脚本/指标测试，再按阶段计划运行真实双语评测；不得把未复核 40 题写成论文结论。
 
 更新时间：2026-11-27T11:10:00+08:00（北京时间）。
+
+## STEP2-P2B 交接（2026-11-27）
+
+### 当前分支与最新已核验提交
+
+- 分支：`step2/crosslingual-rag`，远端为 `origin/step2/crosslingual-rag`。
+- 最近已核验提交：`9c900eead351567eb95f9b4ef89c0559f7c10960`（P2A 远端核验文档提交）。P2B 当前改动尚未提交；对应远端三值在 P2A 记录中一致。
+
+### 本阶段目标与已修改文件
+
+- 目标：在同一真实检索候选池上，对中英 Top-K/MMR 比较两种相似度尺度和 lambda 0.0–1.0，并报告配对 bootstrap CI。
+- `src/cyber_qa/experiments/crosslingual_mmr_eval.py`：新增逐题指标、lambda/scale 汇总及确定性配对 bootstrap。
+- `scripts/eval_crosslingual_mmr.py`：新增真实双语评测 CLI；直接编码原问题、加载固定 Qwen3 与索引。
+- `tests/test_crosslingual_mmr_eval.py`：新增评测统计、lambda=1 选择一致和空选择序列化测试。
+- `docs/PROGRESS.md`、`docs/HANDOFF.md`、`docs/COMMIT_LOG.md`：记录阶段实测、边界与提交。
+- `outputs/crosslingual-mmr-v2/`：真实逐题/汇总结果，受 `.gitignore` 排除，不提交。
+
+### 已运行命令及结果
+
+- `.venv/bin/python scripts/eval_crosslingual_mmr.py --english data/annotations/probe-v1/qa.v1.jsonl --chinese data/annotations/probe-v1-zh/qa.v1.zh.jsonl --index data/processed/crosslingual-index-v2-final --snapshot data/processed/cwe-v1 --model-dir models/crosslingual/Qwen--Qwen3-Embedding-0.6B/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3 --output outputs/crosslingual-mmr-v2 --device cuda --n 20 --k 5`：退出 0；真实 Qwen3 英/中各 40 题；11 个 lambda × 两个 Sim 尺度；每个语言/尺度的 lambda=1 与 Top-K 逐题同序。
+- lambda=.5 英文 pool-minmax Recall@5 `.450` vs Top-K `.4375`，paired diff `.0125`，95% CI `[-.0753,.1000]`；英文 raw `.475` vs `.4375`，diff `.0375`，CI `[-.025,.100]`。中文 pool-minmax `.4125` vs `.4625`，diff `-.050`，CI `[-.125,.0125]`；中文 raw `.4375` vs `.4625`，diff `-.025`，CI `[-.0625,0]`。没有任一结果支持 MMR 的正向显著优势；不能声称优于 Top-K。40 题机器译稿未复核，所有结论仅探索性。
+- `.venv/bin/python -m pytest -q tests/test_crosslingual_mmr_eval.py`：`3 passed`；`.venv/bin/python -m pytest -q`：`194 passed in 4.97s`。
+- `.venv/bin/python scripts/eval_crosslingual_mmr.py --help`、`.venv/bin/python -m compileall -q src scripts`、`git diff --check`：通过。
+- 首次真实 CLI 运行在将索引额外元数据直接传给 `Passage` 时失败（`embedding_truncated` 非 dataclass 字段）；适配器已改为按 `Passage` 契约字段筛选，回归通过，后续真实运行退出 0。没有当前失败/阻塞。
+
+### 当前失败或阻塞
+
+- 无当前代码/资源阻塞。探针题未人工复核，结果不得用于论文结论或调优测试集。
+
+### 下一步应执行的唯一具体动作
+
+进入 STEP2-P3：实现独立中文问答 CLI/模块，使用本地 Qwen3 对中文原问题直接检索，不调用翻译器；调用 P2A MMR 选证据；加载本地 pinned Qwen2.5-7B-Instruct 生成中文答案；实现确定性逐句编号/范围/词面弱支持校验。先做纯函数回归与 CLI help，再用至少 10 个中文探针真实端到端运行并记录逐条抽查事实；题集未人工复核的限制必须保留。
+
+更新时间：2026-11-27T11:15:00+08:00（北京时间）。

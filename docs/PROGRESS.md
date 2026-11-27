@@ -197,22 +197,23 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 | P1A 中文平行题集派生 | 通过（机器翻译，未人工复核） | 固定 Qwen2.5-7B 实际生成 40 道中文问题；验证 ID、source question SHA-256、所有非 question 字段逐值不变；源英文 JSONL SHA-256 保持不变 |
 | P1B 双语检索门禁 | 达到探索性门槛 | 40 组中英对应题真实 Qwen3 检索 N=20/50/100；英文 Recall@N=0.650/0.725/0.8125，均高于 DPR 90%门槛；中英等价性 0.9371；均值两两余弦 0.599–0.636（DPR 对照 0.857）；按工作单可进入 P2，数据仍未人工复核 |
 | P2A 检索相关性 MMR 适配器 | 单元与集成回归通过 | 新增独立 v2 配置/适配器，显式把检索余弦映射到冻结 `PreparedPool` 并调用 `select_mmr()`；新增 7 项适配器测试，覆盖边界、尺度、坏值、lambda=1 和增量/参考逐轮等价 |
+| P2B 双语筛选扫描 | 探索性真实评测完成 | RTX 4090 上真实 Qwen3 对英/中各 40 题直接编码，N=20/K=5，11 个 lambda × 两种 Sim 尺度；完整逐题结果和配对 bootstrap 95% CI 在忽略的 `outputs/crosslingual-mmr-v2/`。lambda=1 两种语言/尺度均与 Top-K 顺序完全一致 |
 
 ### 已实现但尚未真实验证
 
 - P0A 模型资源已按上游 LFS 大小/SHA-256 核验；两模型本地 tokenizer/model 加载通过，Qwen3 与 7B 均完成真实模型推理探针。P0B 的索引代码、回归和真实 5748 段建库/重载也已完成。
 - P2A 适配器代码和单元测试已通过；尚未在真实 Qwen3 检索候选池上执行双语筛选实验，也未完成 P2B 的 lambda 扫描/配对 CI。P3 完整中文回答/引用校验仍未完成；真实短生成探针不等同于真实端到端验收。
 - P1B 评测实现已通过 6 项专属指标测试和 40×2 真实检索；数字仍来自未人工复核的探索性题集。
+- P2B 真实模型推理/筛选已运行，但题集仍为机器翻译未复核的 40 题 probe；所有数字只能作为探索性诊断，不能作论文测试结论。
 - 规格定义了 Qwen3-Embedding-0.6B 检索、同空间余弦 MMR、Qwen2.5-7B-Instruct 中文回答、引用校验和字段契约；未实测的 revision、权重摘要、输入预算、服务端标识均未冻结为事实。
 - P0A/P0B/P1A/P1B 实现及其阶段专属验证完成；完整中文 RAG 端到端验收尚未运行，英文/中文问题检索门禁数字只作未复核探针上的探索性诊断。
 
 ### 正在进行
 
-- STEP2-P2B：开始实现双语 MMR/Top-K 评测工具和验证；P2A 的代码/单元验证完成，真实候选池扫描尚未运行。
+- STEP2-P3：实现中文原问直连 Qwen3 检索、MMR、Qwen2.5-7B 中文作答及确定性引用校验；P2B 仅支持探索性观察，不据此声称 MMR 优于 Top-K。
 
 ### 待完成
 
-- STEP2-P2B：完成评测工具后，在真实 Qwen3 候选池上执行双语 MMR/Top-K 比较、两种冗余尺度、lambda 扫描与配对 bootstrap CI。
 - STEP2-P3：至少 10 题中文生成、编号引用校验和人工事实抽查。
 - STEP2-P4：路线文档、部署复现、英文 v1 回归和最终审计。
 
@@ -245,6 +246,7 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 | `src/cyber_qa/experiments/crosslingual_gate.py`、`scripts/eval_crosslingual_retrieval.py`、`tests/test_crosslingual_gate.py` | 独立中英直接编码检索 Recall@N/英文 DPR 90%门槛/等价性/池内两两余弦评测 |
 | `src/cyber_qa/selection/crosslingual_mmr.py`、`tests/test_crosslingual_mmr.py` | 显式将检索分数和 Qwen 同空间向量适配到冻结 MMR 选择器；覆盖 min-max/raw 冗余尺度和边界回归 |
 | `configs/crosslingual-rag.v2.json` | STEP2 `crosslingual-rag-v2` 默认参数配置，lambda 保持 untuned |
+| `src/cyber_qa/experiments/crosslingual_mmr_eval.py`、`scripts/eval_crosslingual_mmr.py`、`tests/test_crosslingual_mmr_eval.py` | 同池双语 Retrieval Top-K/MMR 指标、lambda/冗余尺度扫描、配对 bootstrap CI 及真实运行 CLI |
 
 ### STEP2 实际时间线（Asia/Shanghai）
 
@@ -266,3 +268,4 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 - 2026-11-27T10:55:00+08:00：P1B 检索门禁提交 `4cedbcaf46d6a03b771d54826ff0b9bc1cf576e3` 已推送并完成三值核验。
 - 2026-11-27T11:05:00+08:00：P2A 新增 crosslingual MMR adapter/config 和 7 项测试；专属测试 `7 passed`、全套 `191 passed`，compileall 与 `git diff --check` 通过。仅单元/参考等价验证，未执行真实题集筛选。
 - 2026-11-27T11:10:00+08:00：P2A 提交 `5d89c3cbe9e650dace94bbd3bb9b486e4343329c` 已推送并完成本地 HEAD、跟踪分支与 `ls-remote` 三值核验。
+- 2026-11-27T11:10–11:15+08:00：P2B 在 RTX 4090 对英语/中文各 40 题真实 Qwen3 编码，并在同一 Top-20 候选池运行 K=5、lambda 0.0–1.0（步长 0.1）和 pool-minmax/raw 两尺度。lambda=1 时两语言/两尺度顺序均与 Top-K 完全一致。lambda=0.5 时英文 pool-minmax MMR Recall@5=.450 vs Top-K .4375，配对差=.0125，95% CI [-.0753,.1000]；英文 raw .475 vs .4375，差=.0375，CI [-.025,.100]；中文 pool-minmax .4125 vs .4625，差=-.050，CI [-.125,.0125]；中文 raw .4375 vs .4625，差=-.025，CI [-.0625,0]。四个区间均不支持正向显著优势；数据未经人工复核，仅探索性。选中冗余低于 Top-K（λ=.5）；全套测试 194 passed。
