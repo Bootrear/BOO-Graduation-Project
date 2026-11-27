@@ -31,4 +31,5 @@
 | 18 | 2026-11-27T10:57:00 | docs(step2): record P1B remote verification | 记录 P1B 提交 `4cedbca` 的远端推送与三值哈希核验，并把唯一下一步更新为 P2A 适配既有 MMR。 | `a3bb949` |
 | 19 | 2026-11-27T11:05:00 | feat(step2): adapt retrieval relevance to shared MMR selector | 新增 `crosslingual-rag-v2` MMR 配置与适配器，提供检索相关性归一化、pool-minmax/raw 冗余矩阵并调用冻结 `select_mmr()`；新增 7 项测试；全套测试 191 passed。 | `5d89c3c` |
 | 20 | 2026-11-27T11:10:00 | docs(step2): record P2A remote verification | 记录 P2A 提交 `5d89c3c` 已推送且本地 HEAD、跟踪分支与 `ls-remote` 三值一致；登记 STEP2-P2B 为唯一下一步。 | `9c900ee` |
-| 21 | 2026-11-27T11:15:00 | test(step2): compare bilingual MMR and retrieval top-k | 新增双语 MMR/Top-K 评测 CLI、两种 Sim 尺度和 11 档 lambda 配对评测及 bootstrap CI；真实 Qwen3 中英各 40 题运行完成，lambda=1 均与 Top-K 顺序一致；全套测试 194 passed。 | 见下 |
+| 21 | 2026-11-27T11:15:00 | test(step2): compare bilingual MMR and retrieval top-k | 新增双语 MMR/Top-K 评测 CLI、两种 Sim 尺度和 11 档 lambda 配对评测及 bootstrap CI；真实 Qwen3 中英各 40 题运行完成，lambda=1 均与 Top-K 顺序一致；全套测试 194 passed。 | `9a99364` |
+| 22 | 2026-11-27T11:17:00 | docs(step2): record P2B remote verification | 记录 P2B 提交 `9a99364` 推送后本地 HEAD、跟踪分支与 `ls-remote` 三值一致，并确认下一步为 STEP2-P3 中文回答与引用校验。 | 见下 |

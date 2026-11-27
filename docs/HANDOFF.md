@@ -204,7 +204,8 @@ git ls-remote --heads origin step1/dataset-optimization
 ### 当前分支与最新已核验提交
 
 - 分支：`step2/crosslingual-rag`，远端为 `origin/step2/crosslingual-rag`。
-- 最近已核验提交：`9c900eead351567eb95f9b4ef89c0559f7c10960`（P2A 远端核验文档提交）。P2B 当前改动尚未提交；对应远端三值在 P2A 记录中一致。
+- P2B 主提交 `9a99364064c97a07de8b4a4f661805b087e6640d` 已推送；推送后本地 HEAD、跟踪分支与 `git ls-remote` 三值均为该哈希。
+- 本次文档收尾提交创建前 HEAD：`9a99364064c97a07de8b4a4f661805b087e6640d`；此处为最近一次远端核验哈希。
 
 ### 本阶段目标与已修改文件
 
@@ -231,4 +232,4 @@ git ls-remote --heads origin step1/dataset-optimization
 
 进入 STEP2-P3：实现独立中文问答 CLI/模块，使用本地 Qwen3 对中文原问题直接检索，不调用翻译器；调用 P2A MMR 选证据；加载本地 pinned Qwen2.5-7B-Instruct 生成中文答案；实现确定性逐句编号/范围/词面弱支持校验。先做纯函数回归与 CLI help，再用至少 10 个中文探针真实端到端运行并记录逐条抽查事实；题集未人工复核的限制必须保留。
 
-更新时间：2026-11-27T11:15:00+08:00（北京时间）。
+更新时间：2026-11-27T11:17:00+08:00（北京时间）。
