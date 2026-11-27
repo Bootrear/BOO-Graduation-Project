@@ -170,7 +170,8 @@ git ls-remote --heads origin step1/dataset-optimization
 ### 当前分支与提交
 
 - 分支：`step2/crosslingual-rag`，跟踪 `origin/step2/crosslingual-rag`。
-- 本阶段文档/代码提交前 HEAD：`a3bb9497ee9fa323d7ac9a1863719e4bee2dfc3d`，该提交已完成前一阶段远端三值核验。本阶段提交哈希提交后以 `git rev-parse HEAD` 记录。
+- P2A 代码提交 `5d89c3cbe9e650dace94bbd3bb9b486e4343329c` 已推送；`git fetch origin step2/crosslingual-rag` 后本地 HEAD、`origin/step2/crosslingual-rag` 和 `git ls-remote --heads origin step2/crosslingual-rag` 三值均为该哈希。
+- 本次远端核验文档提交创建前 HEAD：`5d89c3cbe9e650dace94bbd3bb9b486e4343329c`；文档提交自身哈希将在提交后更新到 HANDOFF。
 
 ### 本阶段目标与已修改文件
 
@@ -196,4 +197,4 @@ git ls-remote --heads origin step1/dataset-optimization
 
 进入 STEP2-P2B：新增评测脚本，读取现有索引和中英平行探针，对同一批真实 Qwen3 检索候选池比较 Retrieval Top-K 与 MMR；扫描 lambda=0 到 1，并在默认 pool-minmax 与 raw Sim 下记录逐题结果、Recall@5/全覆盖/Hit/冗余/分歧及配对 bootstrap 95% CI。先只完成评测实现和可验证的脚本/指标测试，再按阶段计划运行真实双语评测；不得把未复核 40 题写成论文结论。
 
-更新时间：2026-11-27T11:05:00+08:00（北京时间）。
+更新时间：2026-11-27T11:10:00+08:00（北京时间）。
