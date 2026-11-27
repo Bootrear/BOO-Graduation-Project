@@ -104,7 +104,8 @@ git ls-remote --heads origin step1/dataset-optimization
 ### 当前分支与提交
 
 - 分支：`step2/crosslingual-rag`，跟踪 `origin/step2/crosslingual-rag`。这是恢复时已存在的分支，本次从 `step1/dataset-optimization` 切换并确认 `git pull --ff-only` 为 `Already up to date`；没有重复创建分支。
-- 本次文档更新写入时 HEAD：`50c89def6dc7d80375f8803d4d0df37687618a95`；最近已核验的远端提交同为该哈希。后续提交哈希以实际 `git rev-parse HEAD` 和远端三值核验补记。
+- P0A/P0B 主提交 `758e5cf9cf15e2ceb5d33769f8cfda34ca4051ef` 已推送；`git fetch origin step2/crosslingual-rag` 后本地 HEAD、`origin/step2/crosslingual-rag` 和 `git ls-remote --heads origin step2/crosslingual-rag` 三值均为该哈希。
+- 本次远端核验文档收尾提交创建前 HEAD：`758e5cf9cf15e2ceb5d33769f8cfda34ca4051ef`；本次文档提交自身哈希提交后用 `git rev-parse HEAD` 获取并再次核验。
 
 ### 本阶段目标
 
@@ -153,4 +154,4 @@ git ls-remote --heads origin step1/dataset-optimization
 
 进入 STEP2-P1A：新增中文平行题集生成器及校验测试，仅从 probe-v1 复制记录并翻译 `question`，其余源标注逐值保持不变，添加机器翻译/未复核状态；验证题数、ID、字段不变性、非空中文文本和 source question SHA-256。该阶段不运行检索门禁、不改原 `qa.v1.jsonl`。
 
-更新时间：2026-11-27T10:31:44+08:00（北京时间）。
+更新时间：2026-11-27T10:33:30+08:00（北京时间）。

@@ -251,3 +251,4 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 - 2026-11-27T10:14:31+08:00：Qwen3 实际 CUDA 推理返回中文查询/英文段落 1024 维归一化向量；同一时间点记录 tokenizer 和资源核验完成。
 - 2026-11-27T10:21–10:26+08:00：Qwen2.5-7B bfloat16 加载 RTX 4090 并完成 80 token 贪心生成探针。探针输出有限且符合中文/编号 prompt 结构，未做语义质量验收。
 - 2026-11-27T10:30:12+08:00：使用真实 Qwen3 对 CWE 4.20 的 5748 段构建最终原始向量索引：1024维、float32、cosine、0 段超长截断；向量 SHA-256=`734393d803ed2a31de8c39a17f09e69b61462191d34d27009e3337f39c8b9fa2`。新进程校验哈希/快照/revision 后，中英文 SQL injection 查询均召回 CWE-89 description。最终全套 `.venv/bin/python -m pytest -q`=`169 passed in 4.82s`；`compileall` 与 `git diff --check` 通过。P1 评测尚未运行。
+- 2026-11-27T10:33:30+08:00：P0A/P0B 主提交 `758e5cf9cf15e2ceb5d33769f8cfda34ca4051ef` 已推送；fetch 后本地 HEAD、`origin/step2/crosslingual-rag` 与 `git ls-remote` 三值一致。
