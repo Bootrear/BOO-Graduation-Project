@@ -255,4 +255,5 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 - 2026-11-27T10:30:12+08:00：使用真实 Qwen3 对 CWE 4.20 的 5748 段构建最终原始向量索引：1024维、float32、cosine、0 段超长截断；向量 SHA-256=`734393d803ed2a31de8c39a17f09e69b61462191d34d27009e3337f39c8b9fa2`。新进程校验哈希/快照/revision 后，中英文 SQL injection 查询均召回 CWE-89 description。最终全套 `.venv/bin/python -m pytest -q`=`169 passed in 4.82s`；`compileall` 与 `git diff --check` 通过。P1 评测尚未运行。
 - 2026-11-27T10:33:30+08:00：P0A/P0B 主提交 `758e5cf9cf15e2ceb5d33769f8cfda34ca4051ef` 已推送；fetch 后本地 HEAD、`origin/step2/crosslingual-rag` 与 `git ls-remote` 三值一致。
 - 2026-11-27T10:38:00+08:00：P0A/P0B 远端核验文档提交 `eaafe9b1c199f13a58517834ec9688c3a6c535ac` 已推送并三值核验。
-- 2026-11-27T10:38–10:39+08:00：固定 Qwen2.5-7B-Instruct 在 CUDA 上逐题翻译 probe-v1 40 道问题，生成 `data/annotations/probe-v1-zh/qa.v1.zh.jsonl`。9 项 P1A 单元测试通过；对 40 条做真实产物字段/hash 校验通过。源 `qa.v1.jsonl` SHA-256=`bdc2999481cf8680ecfa5cc2ba621947f41bade931e7e23057d54ec3ceca7ebf`，无文件差异；人工复核未做。P1A 文件和状态记录待提交推送。
+- 2026-11-27T10:38–10:39+08:00：固定 Qwen2.5-7B-Instruct 在 CUDA 上逐题翻译 probe-v1 40 道问题，生成 `data/annotations/probe-v1-zh/qa.v1.zh.jsonl`。9 项 P1A 单元测试通过；对 40 条做真实产物字段/hash 校验通过。源 `qa.v1.jsonl` SHA-256=`bdc2999481cf8680ecfa5cc2ba621947f41bade931e7e23057d54ec3ceca7ebf`，无文件差异；人工复核未做。
+- 2026-11-27T10:45:00+08:00：P1A 提交 `2d8c1975086adecf338b84f219d22a2f601e7020` 推送并完成三值远端核验。

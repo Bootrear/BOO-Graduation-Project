@@ -105,7 +105,8 @@ git ls-remote --heads origin step1/dataset-optimization
 
 - 分支：`step2/crosslingual-rag`，跟踪 `origin/step2/crosslingual-rag`。这是恢复时已存在的分支，本次从 `step1/dataset-optimization` 切换并确认 `git pull --ff-only` 为 `Already up to date`；没有重复创建分支。
 - P0A/P0B 主提交 `758e5cf9cf15e2ceb5d33769f8cfda34ca4051ef` 已推送；`git fetch origin step2/crosslingual-rag` 后本地 HEAD、`origin/step2/crosslingual-rag` 和 `git ls-remote --heads origin step2/crosslingual-rag` 三值均为该哈希。
-- 本次远端核验文档收尾提交创建前 HEAD：`758e5cf9cf15e2ceb5d33769f8cfda34ca4051ef`；本次文档提交自身哈希提交后用 `git rev-parse HEAD` 获取并再次核验。
+- P1A 提交 `2d8c1975086adecf338b84f219d22a2f601e7020` 已推送；`git fetch origin step2/crosslingual-rag` 后本地 HEAD、`origin/step2/crosslingual-rag` 与 `git ls-remote --heads origin step2/crosslingual-rag` 三值均为该哈希。
+- 本次远端核验文档收尾提交创建前 HEAD：`2d8c1975086adecf338b84f219d22a2f601e7020`；本次文档提交自身哈希提交后用 `git rev-parse HEAD` 获取并再次核验。
 
 ### 本阶段目标
 
@@ -157,4 +158,4 @@ git ls-remote --heads origin step1/dataset-optimization
 
 进入 STEP2-P1B：新增独立双语检索评测脚本，加载 `data/processed/crosslingual-index-v2-final`，对 probe-v1 40 组相同题 ID 的英文原问和中文平行问直接编码检索 N=20/50/100；计算逐题必选证据 Recall@N、英文 DPR 90%门槛、中英等价性和池内平均两两余弦。逐题与汇总结果写入 `outputs/`，报告门禁判读后再决定是否进入 P2/P3。
 
-更新时间：2026-11-27T10:39:14+08:00（北京时间）。
+更新时间：2026-11-27T10:43:02+08:00（北京时间）。
