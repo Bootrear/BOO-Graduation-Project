@@ -1,0 +1,13 @@
+{
+  "version": "crosslingual-rag-v2",
+  "models": {
+    "embedding": {
+      "model_id": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+    },
+    "generation": {
+      "model_id": "Qwen/Qwen2.5-7B-Instruct",
+      "revision": "a09a35458c702b33eeacc393d103063234e8bc28"
+    }
+  }
+}

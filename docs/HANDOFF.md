@@ -112,33 +112,36 @@ git ls-remote --heads origin step1/dataset-optimization
 
 ### 已修改文件
 
-- `docs/BASELINE_SPEC_V2.md`：将 2026-11-27 硬件/磁盘/Torch 自检作为新快照追加，保留 2026-11-26 的历史环境记录。
-- `docs/PROGRESS.md`：修正当前 P0A 状态，登记未跟踪文件、当前环境和时间线；没有把历史 R01 或未验证事项改记为通过。
-- `docs/HANDOFF.md`：追加本次恢复的分支、精确状态、命令结果、失败/阻塞与唯一下一步。
-- `docs/COMMIT_LOG.md`：按要求追加本阶段提交记录；提交哈希遵循“见下”规则。
-- 未暂存或改写 `configs/crosslingual-models.v2.json`、`scripts/check_crosslingual_resources.py`、`tests/test_crosslingual_resources.py`、`install.sh`。
+- `docs/BASELINE_SPEC_V2.md`：追加 2026-11-27 硬件/磁盘/CUDA 实测，保留 11-26 历史快照。
+- `docs/PROGRESS.md`：区分 P0A 元数据验证、单元测试、尚未完成的 7B 权重获取和未执行的模型推理。
+- `docs/HANDOFF.md`：记录 P0A 命令结果、下载中断、当前远端核验和唯一下一步。
+- `docs/COMMIT_LOG.md`：补录恢复文档提交并追加 P0A checkpoint 行。
+- `configs/crosslingual-models.v2.json`：记录两个模型 ID 与不可变 Hugging Face revision。
+- `scripts/check_crosslingual_resources.py`：查 Hugging Face 上游 LFS 元数据、核对本地字节数/SHA-256，增加固定 revision 下载入口。
+- `tests/test_crosslingual_resources.py`：验证上游身份/LFS 元数据、本地哈希及固定 revision 下载参数。
+- `requirements-crosslingual.txt`：单独固定 `huggingface_hub==0.36.2`。
+- `install.sh` 未修改且未纳入提交；模型目录保持忽略。
 
 ### 已运行命令及结果
 
-- `git switch step2/crosslingual-rag && git pull --ff-only`：成功；该分支已存在且与远端一致。
-- `git status --short`：仅列出四个未跟踪文件：三个上述 P0A 文件和受保护的 `install.sh`；均未清理或暂存。
-- `git branch -vv`：当前分支为 `step2/crosslingual-rag`，起始 HEAD/远端为 `50c89def6dc7d80375f8803d4d0df37687618a95`。
-- `git remote -v`：origin fetch/push 均指向配置的 GitHub 仓库。
-- `git log -1 --format=fuller`：最近提交为 `docs(step2): record recovery baseline remote verification`，时间 `2026-11-26T16:23:27+08:00`。
-- `nvidia-smi`：NVIDIA GeForce RTX 4090，24GB 显存；无运行进程。
-- `df -h .`：50G 文件系统，可用 25G。
-- `.venv/bin/python -c "import torch;print(torch.__version__, torch.cuda.is_available())"`：`2.9.1+cu128 True`。
-- `ls models/dpr data/processed data/annotations/probe-v1`：DPR 模型目录、`cwe-v1`/`dpr-index-v1` 及探针文件存在；没有列出 STEP2 模型目录。
-- 已读取三个未跟踪 P0A 文件；内容包括固定 revision 配置及 Hugging Face LFS 元数据/本地 SHA-256 检查草稿，尚未运行其测试或执行真实上游检查。
-- 首次 `git commit` 因本地未设置 author identity 失败；后续提交使用历史提交身份 `Codex <codex@localhost>` 的单次 `git -c user.name=... -c user.email=...` 参数，不改全局配置。
+- `git switch step2/crosslingual-rag && git pull --ff-only`：成功；分支已存在且当时与远端一致。
+- 阶段 0 自检：RTX 4090 24GB、磁盘可用 25G、Torch `2.9.1+cu128 True`；`models/dpr`、`cwe-v1`、`dpr-index-v1` 存在。
+- `.venv/bin/python -m pytest -q tests/test_crosslingual_resources.py`：先 `5 passed`，补充下载路径回归后 `7 passed`。
+- `.venv/bin/python scripts/check_crosslingual_resources.py --config configs/crosslingual-models.v2.json --model-root models/crosslingual`：退出 0。两个 Hugging Face revision 身份匹配；Embedding 模型权重和 tokenizer 文件均匹配上游大小/SHA-256；7B 四个分片上游大小/摘要已读取，本地缺失。
+- `.venv/bin/python scripts/check_crosslingual_resources.py --help`：退出 0，`--download` 帮助显示正常。
+- `.venv/bin/python scripts/check_crosslingual_resources.py --config configs/crosslingual-models.v2.json --model-root models/crosslingual --download`：已启动后按用户要求中断，退出 130；只留下约 512MB 的两个 `.incomplete` 分片缓存，未有完整 7B 权重。当前无下载进程。
+- `git check-ignore -v models/crosslingual/Qwen--Qwen2.5-7B-Instruct`：命中 `.gitignore:21:models/`。
+- 恢复文档提交 `69676b4265cb19622ba7625961ac6ede46b0d9b1` 已推送；首次 fetch 遇 TLS 握手中断，重试后 `HEAD`、跟踪分支与 `ls-remote` 三值一致。
+- 首次 Git 提交因未设置 author identity 失败；重试使用 `Codex <codex@localhost>` 的单次 `git -c` 参数，未修改全局 Git 配置。
 
 ### 当前失败或阻塞
 
-- 当前 GPU 不再是阻塞。Qwen 上游访问、两模型权重下载/核验、tokenizer 加载及真实模型推理仍未验证；不能将配置中的 revision 视为权重已验证。
-- 三个 P0A 文件为未跟踪状态；保留它们，但本次只提交上述文档路径。`install.sh` 是保护项，始终不提交。
+- Qwen2.5-7B 权重尚未完整获取。用户先尝试 ModelScope；ModelScope revision 与 Hugging Face 固定 commit 的对应关系还未确认。
+- ModelScope 下载完成后必须运行本地检查器，四个分片字节数和 SHA-256 全部匹配配置所指向的 Hugging Face pinned revision 才能记为资源校验通过。
+- Qwen3 的本地 LFS 文件已验证，但尚未执行真实 embedding 模型加载/建索引；7B 生成模型未加载/推理。
 
 ### 下一步应执行的唯一具体动作
 
-先运行 `.venv/bin/python -m pytest -q tests/test_crosslingual_resources.py` 验证现有 P0A 校验器草稿；测试结果记录后，再用 `scripts/check_crosslingual_resources.py` 对配置中的两个不可变 revision 查询上游 LFS 元数据并检查本地模型文件状态。不得下载或提交模型前先核对容量与上游文件清单。
+用户完成魔搭下载后，运行 `.venv/bin/python scripts/check_crosslingual_resources.py --config configs/crosslingual-models.v2.json --model-root models/crosslingual`；仅当 Qwen2.5-7B 四个分片实测字节数与 SHA-256 全部匹配上游 pinned revision 元数据，才继续 P0A 模型加载验证。
 
-更新时间：2026-11-27T09:40:38+08:00（北京时间）。
+更新时间：2026-11-27T09:54:24+08:00（北京时间）。

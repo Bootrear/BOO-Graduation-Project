@@ -1,0 +1,2 @@
+# STEP2 model snapshot acquisition; kept separate from the frozen DPR inference set.
+huggingface_hub==0.36.2

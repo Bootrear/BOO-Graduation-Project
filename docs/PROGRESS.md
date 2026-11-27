@@ -190,16 +190,18 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 | 阶段 0 恢复与自检 | 已完成 | 已读取指定文档；`docs/theprompt_2.md` 存在且由 `92b1543` 引入；本地/跟踪/远端 `step1/dataset-optimization` 哈希一致 |
 | STEP2 分支 | 已完成 | `step2/crosslingual-rag` 已创建并推送；初始三值核验均为 `92b154328849fe8951d53ab7186521ef88a7e73a` |
 | STEP2 恢复规格与阶段计划 | 已完成且验证通过 | `BASELINE_SPEC_V2.md`、STEP2 计划、进度、交接和导航提交 `f6d68e8`；`git diff --check`/staged check 通过，远端三值核验一致 |
+| P0A 上游模型元数据核查 | 部分完成且验证通过 | 两个固定 Hugging Face revision 返回身份匹配；Qwen3 LFS 权重与 tokenizer 文件实测大小/SHA-256 匹配；Qwen2.5-7B 上游列出 4 个权重分片、合计 15,231,271,888 字节 |
+| P0A 资源校验器回归 | 通过 | `.venv/bin/python -m pytest -q tests/test_crosslingual_resources.py`：`7 passed`；未覆盖真实模型推理 |
 
 ### 已实现但尚未真实验证
 
-- STEP2 代码、模型资源、索引、平行题集、评测和中文生成尚未实现；因此没有任何真实模型推理或真实端到端通过声明。
+- STEP2 检查器/配置已实现并通过 7 项单元测试；完整模型获取、跨语言索引、平行题集、评测和中文生成仍未完成，因此没有任何真实模型推理或真实端到端通过声明。
 - 规格定义了 Qwen3-Embedding-0.6B 检索、同空间余弦 MMR、Qwen2.5-7B-Instruct 中文回答、引用校验和字段契约；未实测的 revision、权重摘要、输入预算、服务端标识均未冻结为事实。
-- 本次恢复时发现三个与 P0A 相关的未跟踪文件：`configs/crosslingual-models.v2.json`、`scripts/check_crosslingual_resources.py`、`tests/test_crosslingual_resources.py`。文件内容包含模型 revision 与上游 LFS 元数据校验草稿；截至本记录尚未运行测试、访问上游核验或提交，均保留原样。
+- 当前已新增 STEP2 资源配置、上游 LFS 校验/下载选项与独立依赖文件；均将在 P0A 检查点提交。Qwen3 本地 LFS 文件已验证；Qwen2.5-7B 尚未下载完成，故无真实生成模型加载/推理结果。
 
 ### 正在进行
 
-- STEP2-P0A：审查并验证恢复时发现的资源清单/校验器草稿，实测固定 revision 的上游权重元数据与本地资源状态。真实模型推理尚未开始。
+- STEP2-P0A：校验器、固定 revision 的上游元数据查询和单元测试已通过；Qwen2.5-7B 获取被用户要求暂停，等待从 ModelScope 下载后核对文件哈希。真实模型推理尚未开始。
 
 ### 待完成
 
@@ -213,8 +215,9 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 ### 受阻
 
 - 2026-11-26 的历史自检曾显示 CUDA 不可用、磁盘约 27G；该环境快照不代表当前环境。本次 2026-11-27 自检显示 RTX 4090、CUDA 可用、磁盘可用 25G，因此目前没有硬件阻塞。
-- `models/dpr/` 存在，但尚未确认 STEP2 两个 Qwen 模型已下载或通过上游权重核验；在上游核验和真实加载前不宣称资源/推理通过。
-- 受保护未跟踪文件 `install.sh` 以及上述三个 STEP2 未跟踪文件均保留，不清理、不暂存到本次文档提交。
+- `models/crosslingual/Qwen--Qwen3-Embedding-0.6B/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3/` 的 `model.safetensors`（1,191,586,416 字节，SHA-256 `0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd`）与 `tokenizer.json`（11,423,705 字节，SHA-256 `def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a`）均匹配上游。
+- Qwen2.5-7B 固定 revision `a09a35458c702b33eeacc393d103063234e8bc28` 的 4 个上游分片合计 15,231,271,888 字节。Hugging Face 下载按用户要求中断；该次留下约 512MB 两个 `.incomplete` 文件，已忽略且可续传。当前可用磁盘 25G；没有真实生成模型加载/推理结果。
+- 受保护未跟踪文件 `install.sh` 保留不动；STEP2 配置/脚本/测试/依赖是本次 P0A 提交内容，模型与临时下载缓存不提交。
 
 ### STEP2 文件变更记录（本阶段）
 
@@ -227,6 +230,10 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 | `docs/HANDOFF.md` | 本阶段分支、命令证据、阻塞和唯一下一步 |
 | `docs/README.md` | 增加 STEP2 v2 规格导航 |
 | `docs/COMMIT_LOG.md` | 追加本阶段提交记录，哈希按规则留待后续补填 |
+| `configs/crosslingual-models.v2.json` | 两个模型的固定 revision 配置 |
+| `scripts/check_crosslingual_resources.py` | 查询 Hugging Face revision/LFS 元数据、可选下载快照、实测本地文件 SHA-256 |
+| `tests/test_crosslingual_resources.py` | 上游身份、LFS 元数据、本地哈希、固定 revision 下载参数回归 |
+| `requirements-crosslingual.txt` | 单独固定资源获取依赖 `huggingface_hub==0.36.2` |
 
 ### STEP2 实际时间线（Asia/Shanghai）
 
@@ -236,3 +243,4 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 - 2026-11-26T16:19:25+08:00：完成 STEP2 v2 规格和小阶段计划；`git diff --check` 与 staged diff 检查通过，确认 v1/R01 冻结文件哈希保持不变；提交 `f6d68e8`。
 - 2026-11-26T16:20:58+08:00：`f6d68e86286a53c6517e69a50815b1fd87977c84` 已推送；fetch 后本地 HEAD、`origin/step2/crosslingual-rag` 与 `git ls-remote` 三值一致。
 - 2026-11-27T09:40:38+08:00：第二次会话恢复检查；切换到已有 STEP2 分支 `step2/crosslingual-rag`，其起始 HEAD/远端均为 `50c89def6dc7d80375f8803d4d0df37687618a95`。工作区有三个 P0A 相关未跟踪文件及受保护 `install.sh`。`nvidia-smi` 显示 RTX 4090 24GB，磁盘可用 25G，Torch `2.9.1+cu128` 且 CUDA 可用；Qwen 模型目录仍待核验。
+- 2026-11-27T09:56:15+08:00：P0A 校验器测试 `7 passed`；真实查询两个 Hugging Face revision 的 LFS metadata。Qwen3 权重与 tokenizer SHA-256 匹配；Qwen2.5-7B 四个权重分片合计 15.231GB、当前本地缺失。用户要求暂停 Hugging Face 下载以尝试 ModelScope；下载命令退出 130，未完成缓存保留。未运行模型推理。P0A 检查点提交 `checkpoint(STEP2): incomplete - 7B weights pending ModelScope download`。
