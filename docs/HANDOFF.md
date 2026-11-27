@@ -146,16 +146,19 @@ git ls-remote --heads origin step1/dataset-optimization
 - `.venv/bin/python -m pytest -q`：`169 passed in 4.82s`；`.venv/bin/python -m compileall -q src scripts` 和 `git diff --check` 均通过。
 - `.venv/bin/python -m pytest -q tests/test_chinese_probe.py`：`9 passed in 1.41s`；平行题 CLI help 与 compileall 通过。
 - `.venv/bin/python scripts/make_chinese_probe.py --input data/annotations/probe-v1/qa.v1.jsonl --output data/annotations/probe-v1-zh/qa.v1.zh.jsonl --model-dir models/crosslingual/Qwen--Qwen2.5-7B-Instruct/a09a35458c702b33eeacc393d103063234e8bc28 --device cuda --max-new-tokens 96`：退出 0，真实 Qwen2.5-7B 翻译 40/40 条。实际产物 `validate_parallel` 全字段检查通过；英文源 SHA-256=`bdc2999481cf8680ecfa5cc2ba621947f41bade931e7e23057d54ec3ceca7ebf`，源文件没有差异。翻译题未经人工复核。
+- `.venv/bin/python -m pytest -q tests/test_crosslingual_gate.py tests/test_chinese_probe.py tests/test_crosslingual_index.py`：`22 passed`；评测 CLI `--help`、compileall 通过。
+- `.venv/bin/python scripts/eval_crosslingual_retrieval.py --english data/annotations/probe-v1/qa.v1.jsonl --chinese data/annotations/probe-v1-zh/qa.v1.zh.jsonl --index data/processed/crosslingual-index-v2-final --snapshot data/processed/cwe-v1 --model-dir models/crosslingual/Qwen--Qwen3-Embedding-0.6B/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3 --output outputs/crosslingual-gate-v2 --device cuda --n 20 50 100`：退出 0，英语/中文各 40 题真实直接编码；Recall@20/50/100 英语 `.650/.725/.8125`，中文 `.5875/.6875/.775`；中英等价性 `.9371428571`；门禁 verdict `retrieval_gate_pass_exploratory_only`。英文 DPR 历史基线 `.275/.4375/.5` 的 90%线 `.2475/.39375/.45` 均超过。平均池余弦英语 `.6364/.6188/.5986`、中文 `.6306/.6151/.5981`，低于历史对照 `.857`。详细逐题结果只在忽略的 `outputs/crosslingual-gate-v2/`。
+- `.venv/bin/python -m pytest -q`：`184 passed in 5.04s`；`compileall` 和 `git diff --check` 通过。
 - 恢复文档提交 `69676b4265cb19622ba7625961ac6ede46b0d9b1` 已推送；首次 fetch 遇 TLS 握手中断，重试后 `HEAD`、跟踪分支与 `ls-remote` 三值一致。
 - 首次 Git 提交因未设置 author identity 失败；重试使用 `Codex <codex@localhost>` 的单次 `git -c` 参数，未修改全局 Git 配置。
 
 ### 当前失败或阻塞
 
-- P0A/P0B/P1A 资源、模型/索引实测和中文题集机器派生均通过；P1B 中英检索门禁、P2 MMR、P3 ≥10 题回答/引用校验仍待实现和验证。中文题集未经人工复核，不可用于论文测试结论。当前无已知硬件阻塞。
+- P0A/P0B/P1A 实测通过，P1B 按探索性探针指标达到工作单门槛；P2 MMR 与 P3 ≥10 题回答/引用校验仍待实现和验证。中文题集未经人工复核，P1 数字不能作为论文结论。当前无已知硬件阻塞。
 - 磁盘剩余约 11GB；后续 P1/P2 输出应继续写入被忽略的 `outputs/`，不得复制模型或索引。
 
 ### 下一步应执行的唯一具体动作
 
-进入 STEP2-P1B：新增独立双语检索评测脚本，加载 `data/processed/crosslingual-index-v2-final`，对 probe-v1 40 组相同题 ID 的英文原问和中文平行问直接编码检索 N=20/50/100；计算逐题必选证据 Recall@N、英文 DPR 90%门槛、中英等价性和池内平均两两余弦。逐题与汇总结果写入 `outputs/`，报告门禁判读后再决定是否进入 P2/P3。
+进入 STEP2-P2A：新增 v2 配置/适配器，显式从 Qwen 检索余弦一次性归一化完整候选池相关性，并用 Qwen 同空间段向量生成 Sim；默认对所有非对角 Sim_raw pair 值池内 min-max。用适配器显式构造现有 `PreparedPool` 并调用冻结的 `select_mmr()`，不得改写 `selection/mmr.py`。测试空池、K=0、不足 K、单候选、全同分、NaN/Inf、零向量、lambda 两端、lambda=1 Top-K 完全一致及 Sim 增量等价；本步不扫描真实题集，也不改英文 baseline-v1。
 
-更新时间：2026-11-27T10:43:02+08:00（北京时间）。
+更新时间：2026-11-27T10:48:51+08:00（北京时间）。

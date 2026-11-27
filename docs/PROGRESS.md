@@ -195,22 +195,23 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 | P0A 两模型本地加载/推理探针 | 通过 | Qwen3 CUDA 产生 2×1024 有限归一化向量；Qwen2.5-7B-Instruct bfloat16 成功加载到 RTX 4090 并完成 80-token 贪心生成；单条探针不代表 P3 端到端验收 |
 | P0B Qwen3 CWE 向量索引 | 通过 | 真实编码 5748 段、1024 维 float32、0 截断；索引哈希保存并从新进程重载；中文/英文 SQL injection 查询都召回 CWE-89 description |
 | P1A 中文平行题集派生 | 通过（机器翻译，未人工复核） | 固定 Qwen2.5-7B 实际生成 40 道中文问题；验证 ID、source question SHA-256、所有非 question 字段逐值不变；源英文 JSONL SHA-256 保持不变 |
+| P1B 双语检索门禁 | 达到探索性门槛 | 40 组中英对应题真实 Qwen3 检索 N=20/50/100；英文 Recall@N=0.650/0.725/0.8125，均高于 DPR 90%门槛；中英等价性 0.9371；均值两两余弦 0.599–0.636（DPR 对照 0.857）；按工作单可进入 P2，数据仍未人工复核 |
 
 ### 已实现但尚未真实验证
 
 - P0A 模型资源已按上游 LFS 大小/SHA-256 核验；两模型本地 tokenizer/model 加载通过，Qwen3 与 7B 均完成真实模型推理探针。P0B 的索引代码、回归和真实 5748 段建库/重载也已完成。
-- P1 双语检索门禁、P2 MMR 适配、P3 至少 10 题完整中文回答/引用校验仍未完成；真实短生成探针不等同于真实端到端验收。
+- P2 MMR 适配、P3 至少 10 题完整中文回答/引用校验仍未完成；真实短生成探针不等同于真实端到端验收。
+- P1B 评测实现已通过 7 项专属指标测试和 40×2 真实检索；P2 MMR 两种 Sim 尺度、lambda 扫描/CI 尚未真实验证。
 - 规格定义了 Qwen3-Embedding-0.6B 检索、同空间余弦 MMR、Qwen2.5-7B-Instruct 中文回答、引用校验和字段契约；未实测的 revision、权重摘要、输入预算、服务端标识均未冻结为事实。
 - P0A/P0B 模块和单元回归已实现；真实 Qwen3 编码、真实 7B 短生成、真实索引构建/重载均通过。仍未通过任何 P1 双语 Recall 门禁或完整中文 RAG 端到端验收。
 
 ### 正在进行
 
-- STEP2-P1B：实现并运行 40 组英文/中文平行题 Qwen3 检索，核对 Recall@N 与中英等价性门禁。
+- STEP2-P2A：适配既有 `select_mmr()`，显式使用 Qwen 检索相关性和同空间冗余，默认候选池 min-max Sim；增加 lambda=1 Top-K 等价及边界测试。P1B 探索性门禁通过，允许进入此阶段。
 
 ### 待完成
 
-- STEP2-P1：中文/英文检索 Recall@N、中英等价性、池内余弦和门禁判读。
-- STEP2-P2：显式检索相关性适配既有 MMR、两种冗余尺度、lambda 扫描及配对 CI。
+- STEP2-P2B：双语 MMR/Top-K 比较、两种冗余尺度、lambda 扫描与配对 bootstrap CI。
 - STEP2-P3：至少 10 题中文生成、编号引用校验和人工事实抽查。
 - STEP2-P4：路线文档、部署复现、英文 v1 回归和最终审计。
 
@@ -240,6 +241,7 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 | `src/cyber_qa/crosslingual_resources.py`、`scripts/build_crosslingual_index.py`、`src/cyber_qa/retrieval/crosslingual.py` | P0B Qwen3 同模型编码、原始向量持久化、manifest 哈希/兼容检查和 cosine 召回 |
 | `tests/test_crosslingual_index.py` | 索引维度/有限性/零向量、文件篡改、兼容性与余弦检索回归 |
 | `src/cyber_qa/experiments/chinese_probe.py`、`scripts/make_chinese_probe.py`、`tests/test_chinese_probe.py`、`data/annotations/probe-v1-zh/` | 离线生成中文机器翻译平行题，校验题 ID/非 question 字段/source hash；产物明确未人工复核 |
+| `src/cyber_qa/experiments/crosslingual_gate.py`、`scripts/eval_crosslingual_retrieval.py`、`tests/test_crosslingual_gate.py` | 独立中英直接编码检索 Recall@N/英文 DPR 90%门槛/等价性/池内两两余弦评测 |
 
 ### STEP2 实际时间线（Asia/Shanghai）
 
@@ -257,3 +259,4 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 - 2026-11-27T10:38:00+08:00：P0A/P0B 远端核验文档提交 `eaafe9b1c199f13a58517834ec9688c3a6c535ac` 已推送并三值核验。
 - 2026-11-27T10:38–10:39+08:00：固定 Qwen2.5-7B-Instruct 在 CUDA 上逐题翻译 probe-v1 40 道问题，生成 `data/annotations/probe-v1-zh/qa.v1.zh.jsonl`。9 项 P1A 单元测试通过；对 40 条做真实产物字段/hash 校验通过。源 `qa.v1.jsonl` SHA-256=`bdc2999481cf8680ecfa5cc2ba621947f41bade931e7e23057d54ec3ceca7ebf`，无文件差异；人工复核未做。
 - 2026-11-27T10:45:00+08:00：P1A 提交 `2d8c1975086adecf338b84f219d22a2f601e7020` 推送并完成三值远端核验。
+- 2026-11-27T10:47–10:48+08:00：真实 P1B 评测在 RTX4090 完成英文/中文 40×2 直接 Qwen3 查询，N=20/50/100。英语 Recall=0.650/0.725/0.8125，中文=0.5875/0.6875/0.775，等价性=0.9371428571；英文三档均超过 DPR 历史门槛 90%。平均候选池余弦英语=0.6364/0.6188/0.5986、中文=0.6306/0.6151/0.5981，相比 DPR 0.857 更低。评测 verdict=`retrieval_gate_pass_exploratory_only`；机器标注未复核，不推论总体质量。专属/全套测试分别 22 项、184 项通过。
