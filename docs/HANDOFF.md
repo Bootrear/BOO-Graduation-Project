@@ -125,6 +125,7 @@ git ls-remote --heads origin step1/dataset-optimization
 - `src/cyber_qa/retrieval/crosslingual.py`、`src/cyber_qa/retrieval/__init__.py`：Qwen3 last-token 编码、索引文件写入/哈希/加载校验、同空间 cosine 检索。
 - `scripts/build_crosslingual_index.py`：真实快照索引构建 CLI。
 - `tests/test_crosslingual_index.py`：索引兼容性、哈希篡改、非法向量和排序回归。
+- `src/cyber_qa/experiments/chinese_probe.py`、`scripts/make_chinese_probe.py`、`tests/test_chinese_probe.py`、`data/annotations/probe-v1-zh/README.md` 与 `qa.v1.zh.jsonl`：用固定 Qwen2.5-7B 离线派生中文问题平行集，核对所有非 question 字段/source hash，标为机器翻译且未人工复核。
 - `install.sh` 未修改且未纳入提交；模型目录保持忽略。
 
 ### 已运行命令及结果
@@ -142,16 +143,18 @@ git ls-remote --heads origin step1/dataset-optimization
 - `.venv/bin/python scripts/build_crosslingual_index.py --snapshot data/processed/cwe-v1 --model-dir models/crosslingual/Qwen--Qwen3-Embedding-0.6B/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3 --config configs/crosslingual-models.v2.json --output data/processed/crosslingual-index-v2-final --device cuda --batch-size 16`：退出 0，真实编码 5748 段、1024维 float32，0 段截断；最终 `vectors_sha256=734393d803ed2a31de8c39a17f09e69b61462191d34d27009e3337f39c8b9fa2`，索引目录被 `.gitignore` 排除。较早的 `crosslingual-index-v2` 是归一化试建产物，后续只使用 `crosslingual-index-v2-final` 原始向量索引。
 - 新进程调用 `load_index` 通过文件哈希、snapshot 和 model revision 检查；再用真实 Qwen3 对英文 `What causes SQL injection?` 和中文 `SQL 注入是如何产生的？` 查询，Top-3 都包含 CWE-89 description；未计作 P1 Recall 门禁。
 - `.venv/bin/python -m pytest -q`：`169 passed in 4.82s`；`.venv/bin/python -m compileall -q src scripts` 和 `git diff --check` 均通过。
+- `.venv/bin/python -m pytest -q tests/test_chinese_probe.py`：`9 passed in 1.41s`；平行题 CLI help 与 compileall 通过。
+- `.venv/bin/python scripts/make_chinese_probe.py --input data/annotations/probe-v1/qa.v1.jsonl --output data/annotations/probe-v1-zh/qa.v1.zh.jsonl --model-dir models/crosslingual/Qwen--Qwen2.5-7B-Instruct/a09a35458c702b33eeacc393d103063234e8bc28 --device cuda --max-new-tokens 96`：退出 0，真实 Qwen2.5-7B 翻译 40/40 条。实际产物 `validate_parallel` 全字段检查通过；英文源 SHA-256=`bdc2999481cf8680ecfa5cc2ba621947f41bade931e7e23057d54ec3ceca7ebf`，源文件没有差异。翻译题未经人工复核。
 - 恢复文档提交 `69676b4265cb19622ba7625961ac6ede46b0d9b1` 已推送；首次 fetch 遇 TLS 握手中断，重试后 `HEAD`、跟踪分支与 `ls-remote` 三值一致。
 - 首次 Git 提交因未设置 author identity 失败；重试使用 `Codex <codex@localhost>` 的单次 `git -c` 参数，未修改全局 Git 配置。
 
 ### 当前失败或阻塞
 
-- P0A/P0B 的资源与模型/索引实测通过；P1 中英检索门禁、P2 MMR、P3 ≥10 题回答/引用校验仍待实现和验证。当前无已知硬件阻塞。
+- P0A/P0B/P1A 资源、模型/索引实测和中文题集机器派生均通过；P1B 中英检索门禁、P2 MMR、P3 ≥10 题回答/引用校验仍待实现和验证。中文题集未经人工复核，不可用于论文测试结论。当前无已知硬件阻塞。
 - 磁盘剩余约 11GB；后续 P1/P2 输出应继续写入被忽略的 `outputs/`，不得复制模型或索引。
 
 ### 下一步应执行的唯一具体动作
 
-进入 STEP2-P1A：新增中文平行题集生成器及校验测试，仅从 probe-v1 复制记录并翻译 `question`，其余源标注逐值保持不变，添加机器翻译/未复核状态；验证题数、ID、字段不变性、非空中文文本和 source question SHA-256。该阶段不运行检索门禁、不改原 `qa.v1.jsonl`。
+进入 STEP2-P1B：新增独立双语检索评测脚本，加载 `data/processed/crosslingual-index-v2-final`，对 probe-v1 40 组相同题 ID 的英文原问和中文平行问直接编码检索 N=20/50/100；计算逐题必选证据 Recall@N、英文 DPR 90%门槛、中英等价性和池内平均两两余弦。逐题与汇总结果写入 `outputs/`，报告门禁判读后再决定是否进入 P2/P3。
 
-更新时间：2026-11-27T10:33:30+08:00（北京时间）。
+更新时间：2026-11-27T10:39:14+08:00（北京时间）。
