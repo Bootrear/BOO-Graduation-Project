@@ -120,6 +120,10 @@ git ls-remote --heads origin step1/dataset-optimization
 - `scripts/check_crosslingual_resources.py`：查 Hugging Face 上游 LFS 元数据、核对本地字节数/SHA-256，增加固定 revision 下载入口。
 - `tests/test_crosslingual_resources.py`：验证上游身份/LFS 元数据、本地哈希及固定 revision 下载参数。
 - `requirements-crosslingual.txt`：单独固定 `huggingface_hub==0.36.2`。
+- `src/cyber_qa/crosslingual_resources.py`：抽取共享 Hugging Face pinned revision 上游 LFS 元数据核验逻辑。
+- `src/cyber_qa/retrieval/crosslingual.py`、`src/cyber_qa/retrieval/__init__.py`：Qwen3 last-token 编码、索引文件写入/哈希/加载校验、同空间 cosine 检索。
+- `scripts/build_crosslingual_index.py`：真实快照索引构建 CLI。
+- `tests/test_crosslingual_index.py`：索引兼容性、哈希篡改、非法向量和排序回归。
 - `install.sh` 未修改且未纳入提交；模型目录保持忽略。
 
 ### 已运行命令及结果
@@ -131,17 +135,22 @@ git ls-remote --heads origin step1/dataset-optimization
 - `.venv/bin/python scripts/check_crosslingual_resources.py --help`：退出 0，`--download` 帮助显示正常。
 - `.venv/bin/python scripts/check_crosslingual_resources.py --config configs/crosslingual-models.v2.json --model-root models/crosslingual --download`：已启动后按用户要求中断，退出 130；只留下约 512MB 的两个 `.incomplete` 分片缓存，未有完整 7B 权重。当前无下载进程。
 - `git check-ignore -v models/crosslingual/Qwen--Qwen2.5-7B-Instruct`：命中 `.gitignore:21:models/`。
+- 7B 模型已由用户从 ModelScope 获取；资源检查器实测四个 `model-0000*-of-00004.safetensors` 字节数/SHA-256 全部与 Hugging Face pinned revision 上游 LFS 元数据一致，Qwen3 权重与 tokenizer 也一致。
+- 两套 tokenizer 用 Transformers `4.57.1`、`local_files_only=True` 加载成功；Qwen3 的真实 CUDA 试编码输出 2×1024 有限单位向量。Qwen2.5-7B `bfloat16` 在 RTX 4090 加载成功并完成 80-token 贪心生成探针（不是 P3 端到端或质量验收）。
+- `.venv/bin/python -m pytest -q tests/test_crosslingual_index.py tests/test_crosslingual_resources.py`：`14 passed`；构建器 `--help` 和相关 `compileall` 通过。
+- `.venv/bin/python scripts/build_crosslingual_index.py --snapshot data/processed/cwe-v1 --model-dir models/crosslingual/Qwen--Qwen3-Embedding-0.6B/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3 --config configs/crosslingual-models.v2.json --output data/processed/crosslingual-index-v2-final --device cuda --batch-size 16`：退出 0，真实编码 5748 段、1024维 float32，0 段截断；最终 `vectors_sha256=734393d803ed2a31de8c39a17f09e69b61462191d34d27009e3337f39c8b9fa2`，索引目录被 `.gitignore` 排除。较早的 `crosslingual-index-v2` 是归一化试建产物，后续只使用 `crosslingual-index-v2-final` 原始向量索引。
+- 新进程调用 `load_index` 通过文件哈希、snapshot 和 model revision 检查；再用真实 Qwen3 对英文 `What causes SQL injection?` 和中文 `SQL 注入是如何产生的？` 查询，Top-3 都包含 CWE-89 description；未计作 P1 Recall 门禁。
+- `.venv/bin/python -m pytest -q`：`169 passed in 4.82s`；`.venv/bin/python -m compileall -q src scripts` 和 `git diff --check` 均通过。
 - 恢复文档提交 `69676b4265cb19622ba7625961ac6ede46b0d9b1` 已推送；首次 fetch 遇 TLS 握手中断，重试后 `HEAD`、跟踪分支与 `ls-remote` 三值一致。
 - 首次 Git 提交因未设置 author identity 失败；重试使用 `Codex <codex@localhost>` 的单次 `git -c` 参数，未修改全局 Git 配置。
 
 ### 当前失败或阻塞
 
-- Qwen2.5-7B 权重尚未完整获取。用户先尝试 ModelScope；ModelScope revision 与 Hugging Face 固定 commit 的对应关系还未确认。
-- ModelScope 下载完成后必须运行本地检查器，四个分片字节数和 SHA-256 全部匹配配置所指向的 Hugging Face pinned revision 才能记为资源校验通过。
-- Qwen3 的本地 LFS 文件已验证，但尚未执行真实 embedding 模型加载/建索引；7B 生成模型未加载/推理。
+- P0A/P0B 的资源与模型/索引实测通过；P1 中英检索门禁、P2 MMR、P3 ≥10 题回答/引用校验仍待实现和验证。当前无已知硬件阻塞。
+- 磁盘剩余约 11GB；后续 P1/P2 输出应继续写入被忽略的 `outputs/`，不得复制模型或索引。
 
 ### 下一步应执行的唯一具体动作
 
-用户完成魔搭下载后，运行 `.venv/bin/python scripts/check_crosslingual_resources.py --config configs/crosslingual-models.v2.json --model-root models/crosslingual`；仅当 Qwen2.5-7B 四个分片实测字节数与 SHA-256 全部匹配上游 pinned revision 元数据，才继续 P0A 模型加载验证。
+进入 STEP2-P1A：新增中文平行题集生成器及校验测试，仅从 probe-v1 复制记录并翻译 `question`，其余源标注逐值保持不变，添加机器翻译/未复核状态；验证题数、ID、字段不变性、非空中文文本和 source question SHA-256。该阶段不运行检索门禁、不改原 `qa.v1.jsonl`。
 
-更新时间：2026-11-27T09:54:24+08:00（北京时间）。
+更新时间：2026-11-27T10:31:44+08:00（北京时间）。

@@ -22,4 +22,5 @@
 | 9 | 2026-11-26T16:19:25 | docs(step2): establish cross-session recovery baseline | 新建 `BASELINE_SPEC_V2.md`；追加 STEP2 小阶段计划、进度五类状态、交接记录和规格导航；在 v1 规格顶部增加 v2 链接；记录阶段 0 的分支、资源和 CUDA 自检结果。未修改代码、模型、数据、索引或输出产物。 | `f6d68e8` |
 | 10 | 2026-11-26T16:23:27 | docs(step2): record recovery baseline remote verification | 记录 STEP2-DOC 提交 `f6d68e8` 已推送，以及本地 HEAD、跟踪分支与 `ls-remote` 三值一致；把下一步更新为 P0A 上游资源核验。 | 见下 |
 | 11 | 2026-11-27T09:43:00 | docs(step2): refresh recovery state for resumed P0A | 更新 STEP2 当前硬件/磁盘/CUDA 自检记录、P0A 未跟踪文件状态和跨会话唯一下一步；保留 2026-11-26 历史环境记录。 | `69676b4` |
-| 12 | 2026-11-27T09:58:00 | checkpoint(STEP2): incomplete - 7B weights pending ModelScope download | 新增独立 Qwen revision/LFS 校验与下载入口、资源配置和 7 项测试；记录 Qwen3 本地 LFS 校验结果、Qwen2.5-7B 上游分片元数据及被中断的下载状态。未提交模型文件。 | 见下 |
+| 12 | 2026-11-27T09:58:00 | checkpoint(STEP2): incomplete - 7B weights pending ModelScope download | 新增独立 Qwen revision/LFS 校验与下载入口、资源配置和 7 项测试；记录 Qwen3 本地 LFS 校验结果、Qwen2.5-7B 上游分片元数据及被中断的下载状态。未提交模型文件。 | `6beb923` |
+| 13 | 2026-11-27T10:35:00 | feat(step2): build and validate crosslingual Qwen index | 增加 Qwen3 原始向量索引编码/持久化/兼容校验/余弦检索及回归测试；真实构建 5748×1024 索引并在新进程验证中英文查询；记录两个模型真实推理探针。全套测试 169 passed；未提交权重、索引或 outputs。 | 见下 |

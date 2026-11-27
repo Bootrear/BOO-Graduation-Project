@@ -7,7 +7,8 @@ from pathlib import Path
 
 import pytest
 
-from scripts.check_crosslingual_resources import download_snapshot, inspect_local, upstream_manifest
+from scripts.check_crosslingual_resources import download_snapshot, inspect_local
+from cyber_qa.crosslingual_resources import upstream_manifest
 
 
 class Response(io.BytesIO):

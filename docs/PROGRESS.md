@@ -190,24 +190,25 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 | 阶段 0 恢复与自检 | 已完成 | 已读取指定文档；`docs/theprompt_2.md` 存在且由 `92b1543` 引入；本地/跟踪/远端 `step1/dataset-optimization` 哈希一致 |
 | STEP2 分支 | 已完成 | `step2/crosslingual-rag` 已创建并推送；初始三值核验均为 `92b154328849fe8951d53ab7186521ef88a7e73a` |
 | STEP2 恢复规格与阶段计划 | 已完成且验证通过 | `BASELINE_SPEC_V2.md`、STEP2 计划、进度、交接和导航提交 `f6d68e8`；`git diff --check`/staged check 通过，远端三值核验一致 |
-| P0A 上游模型元数据核查 | 部分完成且验证通过 | 两个固定 Hugging Face revision 返回身份匹配；Qwen3 LFS 权重与 tokenizer 文件实测大小/SHA-256 匹配；Qwen2.5-7B 上游列出 4 个权重分片、合计 15,231,271,888 字节 |
+| P0A 上游模型元数据核查 | 通过 | 两个固定 Hugging Face revision 返回身份匹配；Qwen3 与 Qwen2.5-7B 全部上游 LFS 文件逐项实测大小/SHA-256 匹配，7B 文件经 ModelScope 获取 |
 | P0A 资源校验器回归 | 通过 | `.venv/bin/python -m pytest -q tests/test_crosslingual_resources.py`：`7 passed`；未覆盖真实模型推理 |
+| P0A 两模型本地加载/推理探针 | 通过 | Qwen3 CUDA 产生 2×1024 有限归一化向量；Qwen2.5-7B-Instruct bfloat16 成功加载到 RTX 4090 并完成 80-token 贪心生成；单条探针不代表 P3 端到端验收 |
+| P0B Qwen3 CWE 向量索引 | 通过 | 真实编码 5748 段、1024 维 float32、0 截断；索引哈希保存并从新进程重载；中文/英文 SQL injection 查询都召回 CWE-89 description |
 
 ### 已实现但尚未真实验证
 
-- STEP2 检查器/配置已实现并通过 7 项单元测试；完整模型获取、跨语言索引、平行题集、评测和中文生成仍未完成，因此没有任何真实模型推理或真实端到端通过声明。
+- P0A 模型资源已按上游 LFS 大小/SHA-256 核验；两模型本地 tokenizer/model 加载通过，Qwen3 与 7B 均完成真实模型推理探针。P0B 的索引代码、回归和真实 5748 段建库/重载也已完成。
+- 双语评测、MMR 适配、配对题集、至少 10 题完整中文回答/引用校验仍未完成；真实短生成探针不等同于真实端到端验收。
 - 规格定义了 Qwen3-Embedding-0.6B 检索、同空间余弦 MMR、Qwen2.5-7B-Instruct 中文回答、引用校验和字段契约；未实测的 revision、权重摘要、输入预算、服务端标识均未冻结为事实。
-- 当前已新增 STEP2 资源配置、上游 LFS 校验/下载选项与独立依赖文件；均将在 P0A 检查点提交。Qwen3 本地 LFS 文件已验证；Qwen2.5-7B 尚未下载完成，故无真实生成模型加载/推理结果。
+- P0A/P0B 模块和单元回归已实现；真实 Qwen3 编码、真实 7B 短生成、真实索引构建/重载均通过。仍未通过任何 P1 双语 Recall 门禁或完整中文 RAG 端到端验收。
 
 ### 正在进行
 
-- STEP2-P0A：校验器、固定 revision 的上游元数据查询和单元测试已通过；Qwen2.5-7B 获取被用户要求暂停，等待从 ModelScope 下载后核对文件哈希。真实模型推理尚未开始。
+- STEP2-P0A/P0B：P0A资源与真实模型探针、P0B索引构建及新进程重载均完成；记录与提交收尾。
 
 ### 待完成
 
-- STEP2-P0A：获取并用上游 LFS 大小/SHA-256 核验两个模型，记录 revision、tokenizer、依赖和运行环境。
-- STEP2-P0B：用真实 Qwen3-Embedding-0.6B 为固定 5748 段建立并重载校验跨语言索引。
-- STEP2-P1：中文/英文检索 Recall@N、中英等价性、池内余弦和门禁判读。
+- STEP2-P1：生成逐字段不变的机器翻译中文平行题集；中文/英文检索 Recall@N、中英等价性、池内余弦和门禁判读。
 - STEP2-P2：显式检索相关性适配既有 MMR、两种冗余尺度、lambda 扫描及配对 CI。
 - STEP2-P3：至少 10 题中文生成、编号引用校验和人工事实抽查。
 - STEP2-P4：路线文档、部署复现、英文 v1 回归和最终审计。
@@ -216,8 +217,9 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 
 - 2026-11-26 的历史自检曾显示 CUDA 不可用、磁盘约 27G；该环境快照不代表当前环境。本次 2026-11-27 自检显示 RTX 4090、CUDA 可用、磁盘可用 25G，因此目前没有硬件阻塞。
 - `models/crosslingual/Qwen--Qwen3-Embedding-0.6B/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3/` 的 `model.safetensors`（1,191,586,416 字节，SHA-256 `0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd`）与 `tokenizer.json`（11,423,705 字节，SHA-256 `def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a`）均匹配上游。
-- Qwen2.5-7B 固定 revision `a09a35458c702b33eeacc393d103063234e8bc28` 的 4 个上游分片合计 15,231,271,888 字节。Hugging Face 下载按用户要求中断；该次留下约 512MB 两个 `.incomplete` 文件，已忽略且可续传。当前可用磁盘 25G；没有真实生成模型加载/推理结果。
-- 受保护未跟踪文件 `install.sh` 保留不动；STEP2 配置/脚本/测试/依赖是本次 P0A 提交内容，模型与临时下载缓存不提交。
+- Qwen2.5-7B Hugging Face 上游四分片核验通过；魔搭下载文件均与 pinned revision 的大小/SHA-256 匹配。Hugging Face 遗留 `.incomplete` 缓存不可作模型文件，保留在被忽略目录；当前磁盘剩余约 11G。
+- 不存在当前 P0A/P0B 硬件或资源阻塞。GPU/transformers 结果只适用于当前 RTX 4090/Linux/Python 环境。
+- 受保护未跟踪文件 `install.sh` 保留不动；模型、索引及运行产物均未提交。
 
 ### STEP2 文件变更记录（本阶段）
 
@@ -234,6 +236,8 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 | `scripts/check_crosslingual_resources.py` | 查询 Hugging Face revision/LFS 元数据、可选下载快照、实测本地文件 SHA-256 |
 | `tests/test_crosslingual_resources.py` | 上游身份、LFS 元数据、本地哈希、固定 revision 下载参数回归 |
 | `requirements-crosslingual.txt` | 单独固定资源获取依赖 `huggingface_hub==0.36.2` |
+| `src/cyber_qa/crosslingual_resources.py`、`scripts/build_crosslingual_index.py`、`src/cyber_qa/retrieval/crosslingual.py` | P0B Qwen3 同模型编码、原始向量持久化、manifest 哈希/兼容检查和 cosine 召回 |
+| `tests/test_crosslingual_index.py` | 索引维度/有限性/零向量、文件篡改、兼容性与余弦检索回归 |
 
 ### STEP2 实际时间线（Asia/Shanghai）
 
@@ -243,4 +247,7 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 - 2026-11-26T16:19:25+08:00：完成 STEP2 v2 规格和小阶段计划；`git diff --check` 与 staged diff 检查通过，确认 v1/R01 冻结文件哈希保持不变；提交 `f6d68e8`。
 - 2026-11-26T16:20:58+08:00：`f6d68e86286a53c6517e69a50815b1fd87977c84` 已推送；fetch 后本地 HEAD、`origin/step2/crosslingual-rag` 与 `git ls-remote` 三值一致。
 - 2026-11-27T09:40:38+08:00：第二次会话恢复检查；切换到已有 STEP2 分支 `step2/crosslingual-rag`，其起始 HEAD/远端均为 `50c89def6dc7d80375f8803d4d0df37687618a95`。工作区有三个 P0A 相关未跟踪文件及受保护 `install.sh`。`nvidia-smi` 显示 RTX 4090 24GB，磁盘可用 25G，Torch `2.9.1+cu128` 且 CUDA 可用；Qwen 模型目录仍待核验。
-- 2026-11-27T09:56:15+08:00：P0A 校验器测试 `7 passed`；真实查询两个 Hugging Face revision 的 LFS metadata。Qwen3 权重与 tokenizer SHA-256 匹配；Qwen2.5-7B 四个权重分片合计 15.231GB、当前本地缺失。用户要求暂停 Hugging Face 下载以尝试 ModelScope；下载命令退出 130，未完成缓存保留。未运行模型推理。P0A 检查点提交 `checkpoint(STEP2): incomplete - 7B weights pending ModelScope download`。
+- 2026-11-27T10:14:31+08:00：ModelScope 下载的 Qwen2.5-7B 四分片通过 pinned revision 上游大小/SHA-256 校验；两个模型 tokenizer 加载成功。
+- 2026-11-27T10:14:31+08:00：Qwen3 实际 CUDA 推理返回中文查询/英文段落 1024 维归一化向量；同一时间点记录 tokenizer 和资源核验完成。
+- 2026-11-27T10:21–10:26+08:00：Qwen2.5-7B bfloat16 加载 RTX 4090 并完成 80 token 贪心生成探针。探针输出有限且符合中文/编号 prompt 结构，未做语义质量验收。
+- 2026-11-27T10:30:12+08:00：使用真实 Qwen3 对 CWE 4.20 的 5748 段构建最终原始向量索引：1024维、float32、cosine、0 段超长截断；向量 SHA-256=`734393d803ed2a31de8c39a17f09e69b61462191d34d27009e3337f39c8b9fa2`。新进程校验哈希/快照/revision 后，中英文 SQL injection 查询均召回 CWE-89 description。最终全套 `.venv/bin/python -m pytest -q`=`169 passed in 4.82s`；`compileall` 与 `git diff --check` 通过。P1 评测尚未运行。

@@ -144,10 +144,19 @@
 - 提交建议：`feat(step2): build and validate multilingual embedding index`。
 - 停止边界：真实索引未保存重载通过，不开始 P1 指标或 MMR 适配。
 
+### STEP2-P1A：中文平行题集生成
+
+- 目标：从冻结的英文 probe-v1 逐题生成中文 question 平行稿，评测元数据原样保留。
+- 依赖：P0A/P0B 完成；取得翻译方案的模型/工具与可复现运行信息。机器翻译只用于离线题集派生，禁止进入在线查询链路。
+- 产物：新版本中文 JSONL、独立生成器和字段不变性验证；标记 `machine_translated_needs_human_review`、`reviewer=null`、源问题 SHA-256。
+- 验收命令与预期：针对性 pytest；记录数/唯一题 ID 与英文集一致；`gold_facts`、证据 ID、source snapshot 及全部非 question 字段逐值相同；中文 question 非空，原文件字节不变。
+- 提交建议：`feat(step2): create unreviewed Chinese probe parallel set`。
+- 停止边界：无明确模型/工具来源时不伪称“已翻译”；不运行检索门禁，不人工复核题集。
+
 ### STEP2-P1：双语检索门禁
 
 - 目标：同题同快照对比跨语言检索和英文 DPR 历史基线。
-- 依赖：P0B 通过；平行题集生成器已校验字段不变性与未复核标记。
+- 依赖：P0B 和 P1A 通过。
 - 产物：独立评测入口及逐题输出，按语言/N 记录 Recall@N、池内平均余弦与中英等价性。
 - 验收命令与预期：新旧脚本 `--help` 通过；真实中英各 40 题或按工作单实际完整题集运行；英文各 N 不低于历史的 90%；等价性目标 ≥0.85。低于 0.60 明确停止 P2/P3；0.60–0.85 暂停并提交差距分析。
 - 提交建议：`test(step2): evaluate bilingual retrieval gate`。
