@@ -164,3 +164,36 @@ git ls-remote --heads origin step1/dataset-optimization
 进入 STEP2-P2A：新增 v2 配置/适配器，显式从 Qwen 检索余弦一次性归一化完整候选池相关性，并用 Qwen 同空间段向量生成 Sim；默认对所有非对角 Sim_raw pair 值池内 min-max。用适配器显式构造现有 `PreparedPool` 并调用冻结的 `select_mmr()`，不得改写 `selection/mmr.py`。测试空池、K=0、不足 K、单候选、全同分、NaN/Inf、零向量、lambda 两端、lambda=1 Top-K 完全一致及 Sim 增量等价；本步不扫描真实题集，也不改英文 baseline-v1。
 
 更新时间：2026-11-27T10:57:00+08:00（北京时间）。
+
+## STEP2-P2A 交接（2026-11-27）
+
+### 当前分支与提交
+
+- 分支：`step2/crosslingual-rag`，跟踪 `origin/step2/crosslingual-rag`。
+- 本阶段文档/代码提交前 HEAD：`a3bb9497ee9fa323d7ac9a1863719e4bee2dfc3d`，该提交已完成前一阶段远端三值核验。本阶段提交哈希提交后以 `git rev-parse HEAD` 记录。
+
+### 本阶段目标与已修改文件
+
+- 目标：把 Qwen 检索余弦和同空间向量显式适配到既有 `PreparedPool`/`select_mmr()`，不修改冻结 `src/cyber_qa/selection/mmr.py`。
+- `src/cyber_qa/selection/crosslingual_mmr.py`：新增 `crosslingual-rag-v2` 配置对象、完整候选池检索相关性归一化、Qwen 冗余构造及既有 MMR 调用适配；支持默认池内 min-max 与 raw 两种 Sim 尺度。
+- `configs/crosslingual-rag.v2.json`：记录 v2 默认参数，`lambda_weight=0.5` 且 `untuned`。
+- `tests/test_crosslingual_mmr.py`：7 项测试覆盖空池、K=0、不足 K、单候选、全同分、NaN/Inf、零向量、归一化溢出、lambda=1 Top-K 等价、两种 Sim 尺度及增量/逐轮参考等价。
+- `docs/PROGRESS.md`、`docs/HANDOFF.md`、`docs/COMMIT_LOG.md`：本阶段验证分类、交接信息和提交记录。
+
+### 已运行命令及结果
+
+- `.venv/bin/python -m pytest -q tests/test_crosslingual_mmr.py`：`7 passed`。
+- `.venv/bin/python -m pytest -q`：`191 passed in 4.85s`。
+- `.venv/bin/python -m compileall -q src scripts`：退出 0。
+- `git diff --check`：通过。
+- 本阶段验证为适配器单元/选择器参考实现回归；没有执行真实模型/真实题集筛选，真实推理和真实端到端状态不变。
+
+### 当前失败或阻塞
+
+- 无代码或硬件阻塞。P1 探针题未经人工复核，后续结果仍只能作为探索性诊断；磁盘/模型索引约束沿用上文记录。
+
+### 下一步应执行的唯一具体动作
+
+进入 STEP2-P2B：新增评测脚本，读取现有索引和中英平行探针，对同一批真实 Qwen3 检索候选池比较 Retrieval Top-K 与 MMR；扫描 lambda=0 到 1，并在默认 pool-minmax 与 raw Sim 下记录逐题结果、Recall@5/全覆盖/Hit/冗余/分歧及配对 bootstrap 95% CI。先只完成评测实现和可验证的脚本/指标测试，再按阶段计划运行真实双语评测；不得把未复核 40 题写成论文结论。
+
+更新时间：2026-11-27T11:05:00+08:00（北京时间）。

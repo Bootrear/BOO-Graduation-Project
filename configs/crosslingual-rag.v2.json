@@ -1,0 +1,12 @@
+{
+  "version": "crosslingual-rag-v2",
+  "candidate_count": 20,
+  "max_passages": 5,
+  "lambda_weight": 0.5,
+  "parameter_status": "untuned",
+  "epsilon": 1e-12,
+  "relevance_normalization": "retrieval_cosine_pool_minmax_once",
+  "similarity": "qwen_cosine_nonnegative_pool_minmax",
+  "tie_break": "retrieval_score_desc_rank_asc_passage_id_asc",
+  "invalid_score_policy": "fail_query"
+}

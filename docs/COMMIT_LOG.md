@@ -28,4 +28,5 @@
 | 15 | 2026-11-27T10:45:00 | feat(step2): create unreviewed Chinese probe parallel set | 新增离线 Qwen2.5-7B 中文问题派生 CLI、字段/source hash 校验及 9 项回归；生成 40 条机器翻译平行记录并保留原英文标注字段。题集未经人工复核；源 `qa.v1.jsonl` 未修改。 | `2d8c197` |
 | 16 | 2026-11-27T10:47:00 | docs(step2): record P1A remote verification | 记录 P1A 提交 `2d8c197` 已推送以及本地、远端跟踪分支、`ls-remote` 三值一致；指定下一步为 STEP2-P1B 双语检索门禁。 | `c5a9c4c` |
 | 17 | 2026-11-27T10:55:00 | test(step2): measure bilingual retrieval gate | 新增独立直接编码双语检索指标/门禁 CLI 和测试；真实中英各 40 题 N=20/50/100 检索，记录 Recall@N、等价性、两两余弦与判读，逐题结果保存在忽略的 outputs。 | `4cedbca` |
-| 18 | 2026-11-27T10:57:00 | docs(step2): record P1B remote verification | 记录 P1B 提交 `4cedbca` 的远端推送与三值哈希核验，并把唯一下一步更新为 P2A 适配既有 MMR。 | 见下 |
+| 18 | 2026-11-27T10:57:00 | docs(step2): record P1B remote verification | 记录 P1B 提交 `4cedbca` 的远端推送与三值哈希核验，并把唯一下一步更新为 P2A 适配既有 MMR。 | `a3bb949` |
+| 19 | 2026-11-27T11:05:00 | feat(step2): adapt retrieval relevance to shared MMR selector | 新增 `crosslingual-rag-v2` MMR 配置与适配器，提供检索相关性归一化、pool-minmax/raw 冗余矩阵并调用冻结 `select_mmr()`；新增 7 项测试；全套测试 191 passed。 | 见下 |
