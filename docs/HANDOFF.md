@@ -98,3 +98,47 @@ git ls-remote --heads origin step1/dataset-optimization
 ### 下一步应执行的唯一具体动作
 
 开始 STEP2-P0A：核查两个固定 Qwen 模型仓库的上游 revision、权重文件大小/SHA-256 与 tokenizer 元数据，并据此实现独立资源校验/获取契约；若无法获得可真实推理的硬件或服务，只完成可验证的上游资源部分并如实保持后续推理受阻。
+
+## STEP2 当前恢复记录（2026-11-27，取代上方旧环境快照作为当前状态）
+
+### 当前分支与提交
+
+- 分支：`step2/crosslingual-rag`，跟踪 `origin/step2/crosslingual-rag`。这是恢复时已存在的分支，本次从 `step1/dataset-optimization` 切换并确认 `git pull --ff-only` 为 `Already up to date`；没有重复创建分支。
+- 本次文档更新写入时 HEAD：`50c89def6dc7d80375f8803d4d0df37687618a95`；最近已核验的远端提交同为该哈希。后续提交哈希以实际 `git rev-parse HEAD` 和远端三值核验补记。
+
+### 本阶段目标
+
+- 刷新阶段 0 环境记录，保留现有 STEP2 恢复文档和 P0A 草稿；然后按计划核验资源清单/校验器及两个固定模型的上游元数据。
+
+### 已修改文件
+
+- `docs/BASELINE_SPEC_V2.md`：将 2026-11-27 硬件/磁盘/Torch 自检作为新快照追加，保留 2026-11-26 的历史环境记录。
+- `docs/PROGRESS.md`：修正当前 P0A 状态，登记未跟踪文件、当前环境和时间线；没有把历史 R01 或未验证事项改记为通过。
+- `docs/HANDOFF.md`：追加本次恢复的分支、精确状态、命令结果、失败/阻塞与唯一下一步。
+- `docs/COMMIT_LOG.md`：按要求追加本阶段提交记录；提交哈希遵循“见下”规则。
+- 未暂存或改写 `configs/crosslingual-models.v2.json`、`scripts/check_crosslingual_resources.py`、`tests/test_crosslingual_resources.py`、`install.sh`。
+
+### 已运行命令及结果
+
+- `git switch step2/crosslingual-rag && git pull --ff-only`：成功；该分支已存在且与远端一致。
+- `git status --short`：仅列出四个未跟踪文件：三个上述 P0A 文件和受保护的 `install.sh`；均未清理或暂存。
+- `git branch -vv`：当前分支为 `step2/crosslingual-rag`，起始 HEAD/远端为 `50c89def6dc7d80375f8803d4d0df37687618a95`。
+- `git remote -v`：origin fetch/push 均指向配置的 GitHub 仓库。
+- `git log -1 --format=fuller`：最近提交为 `docs(step2): record recovery baseline remote verification`，时间 `2026-11-26T16:23:27+08:00`。
+- `nvidia-smi`：NVIDIA GeForce RTX 4090，24GB 显存；无运行进程。
+- `df -h .`：50G 文件系统，可用 25G。
+- `.venv/bin/python -c "import torch;print(torch.__version__, torch.cuda.is_available())"`：`2.9.1+cu128 True`。
+- `ls models/dpr data/processed data/annotations/probe-v1`：DPR 模型目录、`cwe-v1`/`dpr-index-v1` 及探针文件存在；没有列出 STEP2 模型目录。
+- 已读取三个未跟踪 P0A 文件；内容包括固定 revision 配置及 Hugging Face LFS 元数据/本地 SHA-256 检查草稿，尚未运行其测试或执行真实上游检查。
+- 首次 `git commit` 因本地未设置 author identity 失败；后续提交使用历史提交身份 `Codex <codex@localhost>` 的单次 `git -c user.name=... -c user.email=...` 参数，不改全局配置。
+
+### 当前失败或阻塞
+
+- 当前 GPU 不再是阻塞。Qwen 上游访问、两模型权重下载/核验、tokenizer 加载及真实模型推理仍未验证；不能将配置中的 revision 视为权重已验证。
+- 三个 P0A 文件为未跟踪状态；保留它们，但本次只提交上述文档路径。`install.sh` 是保护项，始终不提交。
+
+### 下一步应执行的唯一具体动作
+
+先运行 `.venv/bin/python -m pytest -q tests/test_crosslingual_resources.py` 验证现有 P0A 校验器草稿；测试结果记录后，再用 `scripts/check_crosslingual_resources.py` 对配置中的两个不可变 revision 查询上游 LFS 元数据并检查本地模型文件状态。不得下载或提交模型前先核对容量与上游文件清单。
+
+更新时间：2026-11-27T09:40:38+08:00（北京时间）。

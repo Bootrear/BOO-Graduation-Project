@@ -195,10 +195,11 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 
 - STEP2 代码、模型资源、索引、平行题集、评测和中文生成尚未实现；因此没有任何真实模型推理或真实端到端通过声明。
 - 规格定义了 Qwen3-Embedding-0.6B 检索、同空间余弦 MMR、Qwen2.5-7B-Instruct 中文回答、引用校验和字段契约；未实测的 revision、权重摘要、输入预算、服务端标识均未冻结为事实。
+- 本次恢复时发现三个与 P0A 相关的未跟踪文件：`configs/crosslingual-models.v2.json`、`scripts/check_crosslingual_resources.py`、`tests/test_crosslingual_resources.py`。文件内容包含模型 revision 与上游 LFS 元数据校验草稿；截至本记录尚未运行测试、访问上游核验或提交，均保留原样。
 
 ### 正在进行
 
-- STEP2-DOC：恢复文档已提交推送并完成远端三值核验；本收尾文档提交更新确切哈希与唯一下一步。
+- STEP2-P0A：审查并验证恢复时发现的资源清单/校验器草稿，实测固定 revision 的上游权重元数据与本地资源状态。真实模型推理尚未开始。
 
 ### 待完成
 
@@ -211,9 +212,9 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 
 ### 受阻
 
-- 阶段 0 实测：`.venv/bin/python -c "import torch;print(torch.__version__, torch.cuda.is_available())"` 输出 `2.9.1+cu128 False`；`nvidia-smi -L` 未列出 GPU。内存约 4 GiB、磁盘可用约 27 GiB，当前不满足本地真实 Qwen 索引/7B 推理条件。
-- `models/` 只发现 DPR 资源目录，未发现 STEP2 两个模型；不能用模拟模型、合成数据或本地自记哈希替代真实验证。
-- 受保护未跟踪文件 `install.sh` 保留不动、不暂存、不提交。
+- 2026-11-26 的历史自检曾显示 CUDA 不可用、磁盘约 27G；该环境快照不代表当前环境。本次 2026-11-27 自检显示 RTX 4090、CUDA 可用、磁盘可用 25G，因此目前没有硬件阻塞。
+- `models/dpr/` 存在，但尚未确认 STEP2 两个 Qwen 模型已下载或通过上游权重核验；在上游核验和真实加载前不宣称资源/推理通过。
+- 受保护未跟踪文件 `install.sh` 以及上述三个 STEP2 未跟踪文件均保留，不清理、不暂存到本次文档提交。
 
 ### STEP2 文件变更记录（本阶段）
 
@@ -234,3 +235,4 @@ install.sh未改动/未提交；theprompt.md原始SHA-256仍为80dff079148170ee5
 - 2026-11-26T16:04:57+08:00：创建并推送 `step2/crosslingual-rag`，初始 HEAD 为 `92b154328849fe8951d53ab7186521ef88a7e73a`。
 - 2026-11-26T16:19:25+08:00：完成 STEP2 v2 规格和小阶段计划；`git diff --check` 与 staged diff 检查通过，确认 v1/R01 冻结文件哈希保持不变；提交 `f6d68e8`。
 - 2026-11-26T16:20:58+08:00：`f6d68e86286a53c6517e69a50815b1fd87977c84` 已推送；fetch 后本地 HEAD、`origin/step2/crosslingual-rag` 与 `git ls-remote` 三值一致。
+- 2026-11-27T09:40:38+08:00：第二次会话恢复检查；切换到已有 STEP2 分支 `step2/crosslingual-rag`，其起始 HEAD/远端均为 `50c89def6dc7d80375f8803d4d0df37687618a95`。工作区有三个 P0A 相关未跟踪文件及受保护 `install.sh`。`nvidia-smi` 显示 RTX 4090 24GB，磁盘可用 25G，Torch `2.9.1+cu128` 且 CUDA 可用；Qwen 模型目录仍待核验。

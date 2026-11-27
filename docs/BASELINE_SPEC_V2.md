@@ -213,3 +213,7 @@ git diff --check
 ### 已知阻塞（2026-11-26）
 
 本机只读自检得到 torch `2.9.1+cu128`、`torch.cuda.is_available() == False`；`nvidia-smi` 未显示 GPU；物理内存约 4 GiB、磁盘可用约 27 GiB。`models/` 目前只有 DPR 目录，未发现 STEP2 两个模型目录。该环境不满足真实模型推理/索引的当前证据条件。先准备可用 CUDA/显存与模型上游访问，再执行 P0；不得用模拟模型替代。
+
+### 复核状态（2026-11-27）
+
+上述 2026-11-26 记录是当日环境快照，不代表后续会话环境。本次复核的 `nvidia-smi` 显示 NVIDIA GeForce RTX 4090、24GB 显存；`.venv/bin/python -c "import torch;print(torch.__version__, torch.cuda.is_available())"` 输出 `2.9.1+cu128 True`，`df -h .` 显示可用 25G。`models/dpr/` 存在；STEP2 Qwen 模型的实际文件、上游 LFS 核验与加载状态仍未确认。该机器状态解除此前的 GPU 不可用阻塞，但不代表模型资源或推理门禁通过。

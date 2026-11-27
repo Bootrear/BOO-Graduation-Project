@@ -21,3 +21,4 @@
 | 8 | 2026-11-26T15:37:33 | docs(step2): add the STEP2 cross-lingual route work order | 新增 `docs/theprompt_2.md`：交给远端实现会话使用的 STEP2 工作单，规定跨语言免翻译路线（Qwen3-Embedding-0.6B 检索 + 保留 MMR 筛选 + Qwen2.5-7B-Instruct 中文作答）、不可违反的 9 条约束、P0–P4 门禁指标、验证与完成定义、每次提交追加本表的规范、阻塞与诚实要求、明确不做的事。本提交只新增文档并补填第 7 行哈希，未改动任何代码、配置或实验产物。 | 见下 |
 | 9 | 2026-11-26T16:19:25 | docs(step2): establish cross-session recovery baseline | 新建 `BASELINE_SPEC_V2.md`；追加 STEP2 小阶段计划、进度五类状态、交接记录和规格导航；在 v1 规格顶部增加 v2 链接；记录阶段 0 的分支、资源和 CUDA 自检结果。未修改代码、模型、数据、索引或输出产物。 | `f6d68e8` |
 | 10 | 2026-11-26T16:23:27 | docs(step2): record recovery baseline remote verification | 记录 STEP2-DOC 提交 `f6d68e8` 已推送，以及本地 HEAD、跟踪分支与 `ls-remote` 三值一致；把下一步更新为 P0A 上游资源核验。 | 见下 |
+| 11 | 2026-11-27T09:43:00 | docs(step2): refresh recovery state for resumed P0A | 更新 STEP2 当前硬件/磁盘/CUDA 自检记录、P0A 未跟踪文件状态和跨会话唯一下一步；保留 2026-11-26 历史环境记录。 | 见下 |
